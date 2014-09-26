@@ -55,6 +55,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Platforms\Android\AndroidScreen.cs" />
+    <Compile Include="Platforms\Android\AndroidScreenFactory.cs" />
     <Compile Include="Platforms\Component.cs" />
     <Compile Include="Platforms\Ios\IosScreen.cs" />
     <Compile Include="RemoteDriver.cs" />
@@ -71,9 +73,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Platforms\Android\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
