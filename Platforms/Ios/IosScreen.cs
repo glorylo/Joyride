@@ -123,6 +123,77 @@ namespace Joyride.Platforms.Ios
             driver.Tap(pointBehindKeyboard);
         }
 
+        protected string BuildTableCellXpath(string text, TextCompare compare, string parentElement = null)
+        {
+            string parentXpath = "";
+            if (parentElement != null)
+            {
+                parentXpath = GetElementXPathSelector(parentElement);
+
+                if (parentXpath == null)
+                    throw new NoSuchElementException("Unable to find parent element: " + parentElement);
+            }
+
+            var xpath = "(" + parentXpath + "//UIATableCell/UIAStaticText[";
+            switch (compare)
+            {
+                case TextCompare.StartsWith:
+                    xpath = xpath + "starts-with(@name, '" + text + "')])[1]/..";
+                    break;
+
+                case TextCompare.Containing:
+                    xpath = xpath + "contains(@name, '" + text + "')])[1]/..";
+                    break;
+                case TextCompare.Equals:
+                    xpath = xpath + "@name='" + text + "'])[1]/..";
+                    break;
+
+                default:
+                    throw new NotImplementedException("Other text compares are not implemented");
+            }
+            return xpath;
+        }
+
+        public virtual Screen TapTableCellWithText(string text, TextCompare compare, bool precise = true, string parentElement = null, int timeoutSecs = RemoteDriver.DefaultWaitSeconds)
+        {
+            var xpath = BuildTableCellXpath(text, compare, parentElement);
+            var tableCell = Driver.FindElement(By.XPath(xpath), timeoutSecs);
+
+            if (tableCell == null)
+                throw new NotFoundException("Unable to find table cell with :  " + text);
+
+            if (precise)
+                ((AppiumDriver)Driver).PreciseTap(tableCell);
+            else
+                tableCell.Click();
+
+            return this;
+        }
+
+        public virtual void ScrollToTableCellWithText(Direction direction, string text, TextCompare compare, int maxRetries = 30, string parentElement = null)
+        {
+            var xpath = BuildTableCellXpath(text, compare, parentElement);
+
+            var element = Driver.FindElement(By.XPath(xpath), 3);
+
+
+            if (element.IsPresent() && element.Displayed)
+                return;
+
+            var numRetries = 0;
+
+            while (numRetries <= maxRetries)
+            {
+                ((AppiumDriver)Driver).Scroll(direction);
+                element = Driver.FindElement(By.XPath(xpath), 3);
+                if (element.IsPresent() && element.Displayed)
+                    return;
+
+                numRetries++;
+            }
+            throw new NoSuchElementException("Unable to find table cell with xpath: " + xpath);
+        }
+
 
     }
 }
