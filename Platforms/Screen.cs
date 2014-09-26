@@ -71,7 +71,7 @@ namespace Joyride.Platforms
             throw new NoSuchElementException("item not found in collection " + collectionName);
         }
 
-        public void PinchToZoom(Direction direction, double scale = 1.0)
+        public virtual void PinchToZoom(Direction direction, double scale = 1.0)
         {
             Driver.PinchToZoom(direction, scale);
         }
