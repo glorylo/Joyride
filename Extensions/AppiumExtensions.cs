@@ -40,6 +40,7 @@ namespace Joyride.Extensions
             driver.SetContext(NativeAppContext);
         }
 
+
         public static void Tap(this AppiumDriver driver, Point location)
         {
             new TouchAction(driver).Press(location.X, location.Y).Perform();
@@ -240,5 +241,6 @@ namespace Joyride.Extensions
             var directionToSwipe = ConvertDirectionToSwipe(direction);
             driver.Swipe(element, directionToSwipe, durationMilliSecs);
         }
+
     }
 }

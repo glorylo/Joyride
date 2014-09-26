@@ -12,14 +12,14 @@ namespace Joyride.Platforms.Ios
     {
         protected static ScreenFactory ScreenFactory = new IosScreenFactory();
 
-        public virtual bool HasLabelContainingText(string labelText, int timeoutSecs = RemoteDriver.DefaultWaitSeconds)
+        public virtual bool HasLabelContainingText(string labelText, int timeoutSecs = DefaultWaitSeconds)
         {
             var xpath = "//UIAStaticText[contains(@label,'" + labelText + "')]";
             var element = Driver.FindElement(By.XPath(xpath), timeoutSecs);
             return (element != null);
         }
 
-        public virtual bool HasLabelContainingText(string collectionName, int index, string labelText, int timeoutSecs = RemoteDriver.DefaultWaitSeconds)
+        public virtual bool HasLabelContainingText(string collectionName, int index, string labelText, int timeoutSecs = DefaultWaitSeconds)
         {
             var element = GetElementInCollectionAt(collectionName, index);
             var texts = element.FindElements(By.ClassName("UIAStaticText"), timeoutSecs);
@@ -59,7 +59,7 @@ namespace Joyride.Platforms.Ios
             throw new Exception("Unable to extra current page from:  " + value);
         }
 
-        public bool HasNavigationBarTitled(string title, int timeoutSecs = RemoteDriver.DefaultWaitSeconds)
+        public bool HasNavigationBarTitled(string title, int timeoutSecs = DefaultWaitSeconds)
         {
             var xpath = "//UIANavigationBar[1]/UIAStaticText[@name='" + title + "']";
             var element = Driver.FindElement(By.XPath(xpath), timeoutSecs);
@@ -154,7 +154,7 @@ namespace Joyride.Platforms.Ios
             return xpath;
         }
 
-        public virtual Screen TapTableCellWithText(string text, TextCompare compare, bool precise = true, string parentElement = null, int timeoutSecs = RemoteDriver.DefaultWaitSeconds)
+        public virtual Screen TapTableCellWithText(string text, TextCompare compare, bool precise = true, string parentElement = null, int timeoutSecs = DefaultWaitSeconds)
         {
             var xpath = BuildTableCellXpath(text, compare, parentElement);
             var tableCell = Driver.FindElement(By.XPath(xpath), timeoutSecs);

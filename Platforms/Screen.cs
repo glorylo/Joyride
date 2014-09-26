@@ -9,7 +9,7 @@ namespace Joyride.Platforms
 {
     abstract public class Screen : Component
     {
-        abstract public bool IsOnScreen(int timeOutSecs = RemoteDriver.DefaultWaitSeconds);
+        abstract public bool IsOnScreen(int timeOutSecs = DefaultWaitSeconds);
         public virtual Screen Tap(string elementName, bool precise = false)
         {
             IWebElement element = FindElement(elementName);
@@ -57,7 +57,7 @@ namespace Joyride.Platforms
 
         public virtual Screen TapInCollection(string collectionName, Predicate<IWebElement> predicate)
         {
-            var collection = FindElements(collectionName, RemoteDriver.DefaultWaitSeconds);
+            var collection = FindElements(collectionName, DefaultWaitSeconds);
 
             if (collection == null)
                 throw new NoSuchElementException("Cannot find collection:  " + collectionName);

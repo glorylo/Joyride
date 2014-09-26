@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using Joyride.Extensions;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.PageObjects;
 
@@ -12,6 +13,7 @@ namespace Joyride.Platforms
 {
     abstract public class Component
     {
+        public const int DefaultWaitSeconds = RemoteDriver.DefaultWaitSeconds;
         abstract public string Name { get; }
         protected RemoteWebDriver Driver { get { return RemoteDriver.GetInstance(); } }
         protected IWebElement FindElement(string elementName)
@@ -86,7 +88,7 @@ namespace Joyride.Platforms
 
         public int SizeOf(string collectionName)
         {
-            var collection = FindElements(collectionName, RemoteDriver.DefaultWaitSeconds);
+            var collection = FindElements(collectionName, DefaultWaitSeconds);
 
             if (collection == null)
                 throw new NoSuchElementException("Cannot find collection:  " + collectionName);
@@ -111,7 +113,7 @@ namespace Joyride.Platforms
 
         protected IWebElement GetElementInCollectionAt(string collectionName, int index, bool last=false)
         {
-            var collection = FindElements(collectionName, RemoteDriver.DefaultWaitSeconds);
+            var collection = FindElements(collectionName, DefaultWaitSeconds);
 
             if (collection == null)
                 throw new NoSuchElementException("Cannot find collection:  " + collectionName);
@@ -146,7 +148,7 @@ namespace Joyride.Platforms
             return element.GetAttribute(attributeName).Trim();
         }
 
-        public bool ElementIsVisible(string elementName, int timeoutSecs=RemoteDriver.DefaultWaitSeconds)
+        public bool ElementIsVisible(string elementName, int timeoutSecs=DefaultWaitSeconds)
         {
             var element = FindElement(elementName, timeoutSecs);
 
@@ -156,7 +158,7 @@ namespace Joyride.Platforms
             return element.Displayed;
         }
 
-        public bool ElementIsPresent(string elementName, int timeoutSecs = RemoteDriver.DefaultWaitSeconds)
+        public bool ElementIsPresent(string elementName, int timeoutSecs = DefaultWaitSeconds)
         {
             var element = FindElement(elementName, timeoutSecs);
             return (element != null);
