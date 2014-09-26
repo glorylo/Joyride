@@ -129,14 +129,6 @@ namespace Joyride.Extensions
             return foundElement;
         }
 
-        public static void ClickDoneToHideKeyboard(this RemoteWebDriver driver, string buttonName="Done")
-        {
-            var element = driver.FindElement(By.XPath("//UIAToolbar/UIAButton[@name='" + buttonName+ "']"), 3);
-
-            if (element != null)
-                element.Click();
-        }
-
         public static void WaitFor(this RemoteWebDriver driver, TimeSpan timeSpan)
         {
             Thread.Sleep(timeSpan);

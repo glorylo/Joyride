@@ -76,34 +76,6 @@ namespace Joyride.Platforms
             ((AppiumDriver)Driver).PinchToZoom(direction, scale);
         }
         
-        protected void EnterTextWebView(string elementName, string text, string doneButton = "Done")
-        {
-
-            //TODO:  need to refix this.  should first find element before accessing tap and should handle exceptions better
-            var driver = (AppiumDriver)Driver;
-
-            var element = FindElement(elementName);
-            if (element == null)
-                throw new NoSuchElementException("Unable to find element " + elementName);
-
-            element.Click();
-            element.Clear();
-
-            int repeat = element.Text.Count();
-            string backspaces = "";
-
-            for (int i = 0; i < repeat; i++)
-            {
-                backspaces += Keys.Backspace;
-            }
-
-            if (repeat > 0)
-                driver.Keyboard.SendKeys(backspaces);
-
-            driver.Keyboard.SendKeys(text);
-            driver.ClickDoneToHideKeyboard(doneButton);
-        }
-
         /*
                 protected string ClearElementWithBackspaces(IWebElement element)
                 {
@@ -111,18 +83,19 @@ namespace Joyride.Platforms
 
                     return backspaces.Length > 0 ? backspaces : "";
                 }
-        */ 
+
+        */
 
         public virtual void EnterText(string elementName, string text)
         {
-            IWebElement element = FindElement(elementName);
+            var element = FindElement(elementName);
 
             if (element == null)
                 throw new NoSuchElementException("Cannot find element:  " + elementName);
 
             element.Click();
             element.Clear();
-            element.SendKeys(text);
+            element.SendKeys(text);            
         }
 
         public virtual void SetCheckbox(string elementName, bool enabled = true)
