@@ -20,7 +20,7 @@ namespace Joyride.Platforms
             if (!precise)
                 element.Click();
             else
-                ((AppiumDriver)Driver).PreciseTap(element);
+                Driver.PreciseTap(element);
 
             return this;
         }
@@ -32,7 +32,7 @@ namespace Joyride.Platforms
             if (element == null)
                 throw new NoSuchElementException("Cannot find element:  " + elementName);
 
-            ((AppiumDriver)Driver).DoubleTap(element);
+            Driver.DoubleTap(element);
             return this;
         }
 
@@ -43,7 +43,7 @@ namespace Joyride.Platforms
             if (element == null)
                 throw new NoSuchElementException("Cannot find element:  " + elementName);
 
-            ((AppiumDriver)Driver).TapAndHold(element, seconds);
+            Driver.TapAndHold(element, seconds);
             return this;
 
         }
@@ -65,7 +65,7 @@ namespace Joyride.Platforms
 
             foreach (var item in collection.Where(item => predicate(item)))
             {
-                ((AppiumDriver)Driver).PreciseTap(item);
+                Driver.PreciseTap(item);
                 return this;
             }
             throw new NoSuchElementException("item not found in collection " + collectionName);
@@ -73,7 +73,7 @@ namespace Joyride.Platforms
 
         public void PinchToZoom(Direction direction, double scale = 1.0)
         {
-            ((AppiumDriver)Driver).PinchToZoom(direction, scale);
+            Driver.PinchToZoom(direction, scale);
         }
         
         /*
@@ -114,7 +114,7 @@ namespace Joyride.Platforms
         // only works in webview currently
         public virtual void SelectOption(string elementName, string value)
         {
-            ((AppiumDriver)Driver).DoActionInWebView(() =>
+            Driver.DoActionInWebView(() =>
             {
                 var selectElement = FindElement(elementName);
                 if (selectElement == null)
@@ -129,7 +129,7 @@ namespace Joyride.Platforms
         public virtual string GetSelectedOption(string elementName)
         {
             string selected = null;
-            ((AppiumDriver)Driver).DoActionInWebView(() =>
+            Driver.DoActionInWebView(() =>
             {
                 var selectElement = FindElement(elementName);
                 if (selectElement == null)
@@ -143,7 +143,7 @@ namespace Joyride.Platforms
 
         public virtual Screen Scroll(Direction direction, long durationMilliSecs = 500)
         {
-            ((AppiumDriver)Driver).Scroll(direction, durationMilliSecs);
+            Driver.Scroll(direction, durationMilliSecs);
             return this;
         }
 
@@ -152,13 +152,13 @@ namespace Joyride.Platforms
             var element = FindElement(elementName);
             if (element == null)
                 throw new NoSuchElementException("Cannot find element:  " + elementName);
-            ((AppiumDriver)Driver).Scroll(element, direction, durationMilliSecs);
+            Driver.Scroll(element, direction, durationMilliSecs);
             return this;
         }
 
         public virtual Screen Swipe(Direction direction, long durationMilliSecs = 500)
         {
-            ((AppiumDriver)Driver).Swipe(direction, durationMilliSecs);
+            Driver.Swipe(direction, durationMilliSecs);
             return this;
         }
 
@@ -167,7 +167,7 @@ namespace Joyride.Platforms
             var element = FindElement(elementName);
             if (element == null)
                 throw new NoSuchElementException("Cannot find element:  " + elementName);
-            ((AppiumDriver)Driver).Swipe(element, direction, durationMilliSecs);
+            Driver.Swipe(element, direction, durationMilliSecs);
             return this;
         }
 
@@ -181,7 +181,7 @@ namespace Joyride.Platforms
 
             while (numRetries <= maxRetries)
             {
-                ((AppiumDriver)Driver).Scroll(direction, durationMilliSecs);
+                Driver.Scroll(direction, durationMilliSecs);
                 element = FindElement(elementName, 3);
                 if (element.IsPresent() && element.Displayed)
                     return this;
@@ -194,7 +194,7 @@ namespace Joyride.Platforms
         public string GetSourceWebView()
         {
             string source = null;
-            ((AppiumDriver)Driver).DoActionInWebView(() => { source = GetSource(); });
+            Driver.DoActionInWebView(() => { source = GetSource(); });
             return source;
         }
 

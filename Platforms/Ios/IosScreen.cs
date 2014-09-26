@@ -117,10 +117,9 @@ namespace Joyride.Platforms.Ios
 
         public void HideKeyboard()
         {
-            Size windowSize = RemoteDriver.ScreenSize;
+            Size windowSize = RemoteMobileDriver.ScreenSize;
             var pointBehindKeyboard = new Point(windowSize.Width / 2, windowSize.Height / 3);
-            var driver = (AppiumDriver)Driver;
-            driver.Tap(pointBehindKeyboard);
+            Driver.Tap(pointBehindKeyboard);
         }
 
         protected string BuildTableCellXpath(string text, TextCompare compare, string parentElement = null)
@@ -163,7 +162,7 @@ namespace Joyride.Platforms.Ios
                 throw new NotFoundException("Unable to find table cell with :  " + text);
 
             if (precise)
-                ((AppiumDriver)Driver).PreciseTap(tableCell);
+                Driver.PreciseTap(tableCell);
             else
                 tableCell.Click();
 
@@ -184,7 +183,7 @@ namespace Joyride.Platforms.Ios
 
             while (numRetries <= maxRetries)
             {
-                ((AppiumDriver)Driver).Scroll(direction);
+                Driver.Scroll(direction);
                 element = Driver.FindElement(By.XPath(xpath), 3);
                 if (element.IsPresent() && element.Displayed)
                     return;

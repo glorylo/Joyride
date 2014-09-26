@@ -13,9 +13,9 @@ namespace Joyride.Platforms
 {
     abstract public class Component
     {
-        public const int DefaultWaitSeconds = RemoteDriver.DefaultWaitSeconds;
+        public const int DefaultWaitSeconds = RemoteMobileDriver.DefaultWaitSeconds;
         abstract public string Name { get; }
-        protected RemoteWebDriver Driver { get { return RemoteDriver.GetInstance(); } }
+        protected AppiumDriver Driver { get { return RemoteMobileDriver.GetInstance(); } }
         protected IWebElement FindElement(string elementName)
         {
             IWebElement element = null;

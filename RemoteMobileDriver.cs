@@ -6,12 +6,16 @@ using OpenQA.Selenium.Remote;
 
 namespace Joyride
 {
-    public static class RemoteDriver
+    public static class RemoteMobileDriver
     {
-        private static RemoteWebDriver _driver;
+
+        //TODO: Consider abstracting driver if there are new players in this space out there.  
+        //Currently there is not other driver doing remote selenium interface for mobile.  
+        //Simplicity of design wins out here.
+        private static AppiumDriver _driver;
         public const int DefaultWaitSeconds = 30;
         public static int CommandTimeOutSeconds { get; set; }
-        private static Size? _screenSize = null;
+        private static Size? _screenSize;
         public static bool EnableCustomWaits { get; set; }
         public static Size ScreenSize
         {
@@ -34,7 +38,7 @@ namespace Joyride
             }
         }
 
-        static RemoteDriver()
+        static RemoteMobileDriver()
         {
             CommandTimeOutSeconds = DefaultWaitSeconds;
             EnableCustomWaits = true;
@@ -60,7 +64,7 @@ namespace Joyride
             SetTimeout(DefaultWaitSeconds);
         }
 
-        static public RemoteWebDriver GetInstance()
+        static public AppiumDriver GetInstance()
         {
             return _driver;
         }

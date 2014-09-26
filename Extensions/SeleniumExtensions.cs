@@ -13,51 +13,51 @@ namespace Joyride.Extensions
     {
         public static void DoActionWithTimeout(this RemoteWebDriver driver, int timeoutSecs, Action action)
         {
-            RemoteDriver.SetTimeout(timeoutSecs);
+            RemoteMobileDriver.SetTimeout(timeoutSecs);
             action();
-            RemoteDriver.SetDefaultWait();
+            RemoteMobileDriver.SetDefaultWait();
         }
 
         public static IWebElement FindElement(this IWebElement parentElement, By by, int timeoutSecs)
         {
             IWebElement element = null;
-            RemoteDriver.SetTimeout(timeoutSecs);
+            RemoteMobileDriver.SetTimeout(timeoutSecs);
             try {
                 element = parentElement.FindElement(by);    
             }
             catch (Exception) { return null; }
             
-            RemoteDriver.SetDefaultWait();
+            RemoteMobileDriver.SetDefaultWait();
             return element;
         }
 
         public static ReadOnlyCollection<IWebElement> FindElements(this IWebElement parentElement, By by, int timeoutSecs)
         {
             ReadOnlyCollection<IWebElement> elements = null;
-            RemoteDriver.SetTimeout(timeoutSecs);
+            RemoteMobileDriver.SetTimeout(timeoutSecs);
             try
             {
                 elements = parentElement.FindElements(by);
             }
             catch (Exception) { return null; }
 
-            RemoteDriver.SetDefaultWait();
+            RemoteMobileDriver.SetDefaultWait();
             return elements;
         }
 
         public static IWebElement FindElement(this RemoteWebDriver driver, By by, int timeoutSecs)
         {
-            RemoteDriver.SetTimeout(timeoutSecs);
+            RemoteMobileDriver.SetTimeout(timeoutSecs);
             var element = driver.FindElementWithMethod(new Func<By, IWebElement>(driver.FindElement), by);
-            RemoteDriver.SetDefaultWait();
+            RemoteMobileDriver.SetDefaultWait();
             return element;
         }
 
         public static ReadOnlyCollection<IWebElement> FindElements(this RemoteWebDriver driver, By by, int timeoutSecs)
         {
-            RemoteDriver.SetTimeout(timeoutSecs);
+            RemoteMobileDriver.SetTimeout(timeoutSecs);
             var elements = driver.FindElementsWithMethod(new Func<By, ReadOnlyCollection<IWebElement>>(driver.FindElements), by);
-            RemoteDriver.SetDefaultWait();
+            RemoteMobileDriver.SetDefaultWait();
             return elements;
         }
 
@@ -76,18 +76,18 @@ namespace Joyride.Extensions
         public static IWebElement FindElementWithMethod(this RemoteWebDriver driver, int timeoutSecs,
             Delegate findMethod, params object[] args)
         {
-            RemoteDriver.SetTimeout(timeoutSecs);
+            RemoteMobileDriver.SetTimeout(timeoutSecs);
             var element = driver.FindElementWithMethod(findMethod, args);
-            RemoteDriver.SetDefaultWait();
+            RemoteMobileDriver.SetDefaultWait();
             return element;
         }
 
         public static ReadOnlyCollection<IWebElement> FindElementsWithMethod(this RemoteWebDriver driver, int timeoutSecs,
             Delegate findMethod, params object[] args)
         {
-            RemoteDriver.SetTimeout(timeoutSecs);
+            RemoteMobileDriver.SetTimeout(timeoutSecs);
             var elements = driver.FindElementsWithMethod(findMethod, args);
-            RemoteDriver.SetDefaultWait();
+            RemoteMobileDriver.SetDefaultWait();
             return elements;
         }
 
@@ -111,9 +111,9 @@ namespace Joyride.Extensions
         public static bool ElementExists(this RemoteWebDriver driver, int timeoutSecs, Delegate findMethod,
             params object[] arguments)
         {
-            RemoteDriver.SetTimeout(timeoutSecs);
+            RemoteMobileDriver.SetTimeout(timeoutSecs);
             var foundElement = driver.FindElementWithMethod(findMethod, arguments);
-            RemoteDriver.SetDefaultWait();
+            RemoteMobileDriver.SetDefaultWait();
             return (foundElement != null);
         }
 

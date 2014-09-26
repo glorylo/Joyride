@@ -59,7 +59,7 @@
     <Compile Include="Platforms\Android\AndroidScreenFactory.cs" />
     <Compile Include="Platforms\Component.cs" />
     <Compile Include="Platforms\Ios\IosScreen.cs" />
-    <Compile Include="RemoteDriver.cs" />
+    <Compile Include="RemoteMobileDriver.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Extensions\AppiumExtensions.cs" />
     <Compile Include="Extensions\ScreenObjectExtensions.cs" />

@@ -145,7 +145,7 @@ namespace Joyride.Extensions
 
         public static void Swipe(this AppiumDriver driver, Direction direction, long durationMilliSecs=500)
         {
-            Swipe(driver, direction, RemoteDriver.ScreenSize, durationMilliSecs);
+            Swipe(driver, direction, RemoteMobileDriver.ScreenSize, durationMilliSecs);
         }
 
         public static void Swipe(this AppiumDriver driver, IWebElement element, Direction direction, long durationMilliSecs = 500)
@@ -158,7 +158,7 @@ namespace Joyride.Extensions
         {
             var size = element.Size;
             var lowerRight = new Point(element.Location.X + size.Width, element.Location.Y + size.Height);
-            var windowSize = RemoteDriver.ScreenSize;
+            var windowSize = RemoteMobileDriver.ScreenSize;
 
             if (lowerRight.X > windowSize.Width || lowerRight.Y > windowSize.Height)
                 size = new Size(windowSize.Width - element.Location.X, windowSize.Height - element.Location.Y);
@@ -170,7 +170,7 @@ namespace Joyride.Extensions
             if (scale > 1.0 || scale < 0)
                 throw new ArgumentOutOfRangeException("Zoom only scales to 0.0 - 1.0.  Scale of " + scale + " is out of range.");
             
-            var windowSize = RemoteDriver.ScreenSize;
+            var windowSize = RemoteMobileDriver.ScreenSize;
             var windowCenter = new Point(windowSize.Width / 2, windowSize.Height / 2);
             var upperLeft = new Point(windowCenter.X - windowSize.Width / 4, windowCenter.Y - windowSize.Height / 4);
             var bottomRight = new Point(windowCenter.X + windowSize.Width / 4, windowCenter.Y + windowSize.Height / 4);
