@@ -10,7 +10,7 @@ namespace Joyride
     {
 
         //TODO: Consider abstracting driver if there are new players in this space out there.  
-        //Currently there is not other driver doing remote selenium interface for mobile.  
+        //Currently there is no other driver doing remote selenium interface for mobile.  
         //Simplicity of design wins out here.
         private static AppiumDriver _driver;
         public const int DefaultWaitSeconds = 30;
