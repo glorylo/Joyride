@@ -65,38 +65,6 @@ namespace Joyride.Platforms.Ios
             return (element != null);
         }
 
-        protected IWebElement FindModalDialog(string text = null, bool title = true, int timeoutSecs = 5)
-        {
-            const string xpath = "//UIAAlert[@visible='true']";
-
-            if (text == null)
-                return Driver.FindElement(By.XPath(xpath), timeoutSecs);
-
-            string xpathContainsText;
-
-            //TODO: For alerts the name attribute is actually populated but not the label.  
-            if (title)
-                xpathContainsText =
-                    "//UIAAlert[@visible='true' and contains(@name, '" + text + "')]";
-            else
-                xpathContainsText = "//UIAAlert[@visible='true']//UIAStaticText[contains(@label, '" + text + "')]";
-
-            return Driver.FindElement(By.XPath(xpathContainsText), timeoutSecs);
-        }
-
-        public virtual Screen AcceptModalDialog(bool accept = true, bool title = true, string alertText = null, int timeoutSecs = 5)
-        {
-            var dialog = FindModalDialog(alertText, title, timeoutSecs: timeoutSecs);
-
-            if (dialog != null)
-            {
-                if (accept)
-                    Driver.SwitchTo().Alert().Accept();
-                else
-                    Driver.SwitchTo().Alert().Dismiss();
-            }
-            return this;
-        }
 
         public String TitleFromNavigationBar(int timeoutSecs = 5)
         {
@@ -107,11 +75,6 @@ namespace Joyride.Platforms.Ios
                 throw new NoSuchElementException("Unable to find the navigation bar with static text");
 
             return element.Text;
-        }
-
-        public bool HasModalDialog(string dialogText, bool title = true, int timeOutSecs = 5)
-        {
-            return (FindModalDialog(dialogText, title, timeOutSecs) != null);
         }
 
 
