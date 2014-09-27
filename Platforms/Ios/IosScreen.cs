@@ -74,11 +74,12 @@ namespace Joyride.Platforms.Ios
 
             string xpathContainsText;
 
+            //TODO: For alerts the name attribute is actually populated but not the label.  
             if (title)
                 xpathContainsText =
                     "//UIAAlert[@visible='true' and contains(@name, '" + text + "')]";
             else
-                xpathContainsText = "//UIAAlert[@visible='true']//UIAStaticText[contains(@name, '" + text + "')]";
+                xpathContainsText = "//UIAAlert[@visible='true']//UIAStaticText[contains(@label, '" + text + "')]";
 
             return Driver.FindElement(By.XPath(xpathContainsText), timeoutSecs);
         }
