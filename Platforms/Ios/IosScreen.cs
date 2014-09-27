@@ -137,14 +137,14 @@ namespace Joyride.Platforms.Ios
             switch (compare)
             {
                 case TextCompare.StartsWith:
-                    xpath = xpath + "starts-with(@name, '" + text + "')])[1]/..";
+                    xpath = xpath + "starts-with(@label, '" + text + "')])[1]/..";
                     break;
 
                 case TextCompare.Containing:
-                    xpath = xpath + "contains(@name, '" + text + "')])[1]/..";
+                    xpath = xpath + "contains(@label, '" + text + "')])[1]/..";
                     break;
                 case TextCompare.Equals:
-                    xpath = xpath + "@name='" + text + "'])[1]/..";
+                    xpath = xpath + "@label='" + text + "'])[1]/..";
                     break;
 
                 default:
