@@ -12,7 +12,7 @@ namespace Joyride.Platforms.Ios
     {
         protected static ScreenFactory ScreenFactory = new IosScreenFactory();
 
-        public virtual bool HasLabelContainingText(string labelText, int timeoutSecs = DefaultWaitSeconds)
+        public bool HasLabelContainingText(string labelText, int timeoutSecs = DefaultWaitSeconds)
         {
             var xpath = "//UIAStaticText[contains(@label,'" + labelText + "')]";
             var element = Driver.FindElement(By.XPath(xpath), timeoutSecs);
@@ -31,7 +31,7 @@ namespace Joyride.Platforms.Ios
             return (textWithLabelText != null);
         }
 
-        public virtual void SetSlider(string elementName, int percentage)
+        public void SetSlider(string elementName, int percentage)
         {
             if ((percentage < 0) || (percentage > 100))
                 throw new IndexOutOfRangeException("Slider can only accept values 1-100.  Requested: " + percentage);
@@ -45,7 +45,7 @@ namespace Joyride.Platforms.Ios
             slider.SendKeys(actualValue.ToString());
         }
 
-        public virtual int CurrentPageOnIndictator(string elementName)
+        public int CurrentPageOnIndictator(string elementName)
         {
             var value = GetElementAttribute(elementName, "value");
             if (value == null)
@@ -60,7 +60,7 @@ namespace Joyride.Platforms.Ios
 
         public bool HasNavigationBarTitled(string title, int timeoutSecs = DefaultWaitSeconds)
         {
-            var xpath = "//UIANavigationBar[1]/UIAStaticText[@name='" + title + "']";
+            var xpath = "//UIANavigationBar[1]/UIAStaticText[@label='" + title + "']";
             var element = Driver.FindElement(By.XPath(xpath), timeoutSecs);
             return (element != null);
         }
