@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using Joyride.Extensions;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Remote;
 
@@ -14,29 +15,8 @@ namespace Joyride
         //Simplicity of design wins out here.
         private static AppiumDriver _driver;
         public const int DefaultWaitSeconds = 30;
-        public static int CommandTimeOutSeconds { get; set; }
-        private static Size? _screenSize;
+        public static int CommandTimeOutSeconds { get; set; }       
         public static bool EnableCustomWaits { get; set; }
-        public static Size ScreenSize
-        {
-            get
-            {
-                if (_screenSize != null)
-                    return (Size) _screenSize;
-                _screenSize = _driver.Manage().Window.Size;
-                return (Size) _screenSize;
-            }
-        }
-
-        public static Point CenterLocation
-        {
-            get
-            {
-                var centerX = ScreenSize.Width/2;
-                var centerY = ScreenSize.Height/2;
-                return new Point(centerX, centerY);
-            }
-        }
 
         static RemoteMobileDriver()
         {

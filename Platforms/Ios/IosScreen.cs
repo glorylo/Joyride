@@ -31,7 +31,6 @@ namespace Joyride.Platforms.Ios
             return (textWithLabelText != null);
         }
 
-
         public virtual void SetSlider(string elementName, int percentage)
         {
             if ((percentage < 0) || (percentage > 100))
@@ -117,7 +116,7 @@ namespace Joyride.Platforms.Ios
 
         public void HideKeyboard()
         {
-            Size windowSize = RemoteMobileDriver.ScreenSize;
+            var windowSize = Driver.ScreenSize();
             var pointBehindKeyboard = new Point(windowSize.Width / 2, windowSize.Height / 3);
             Driver.Tap(pointBehindKeyboard);
         }
