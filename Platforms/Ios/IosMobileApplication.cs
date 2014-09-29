@@ -19,7 +19,7 @@ namespace Joyride.Platforms.Ios
 
         public virtual void Launch()
         {
-            //Driver.LaunchApp();
+            Driver.LaunchApp();
         }
 
         public virtual void Close()
