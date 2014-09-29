@@ -110,7 +110,6 @@ namespace Joyride.Platforms
                 element.Click();
         }
 
-
         // only works in webview currently
         public virtual void SelectOption(string elementName, string value)
         {
