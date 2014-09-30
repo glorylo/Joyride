@@ -71,21 +71,12 @@ namespace Joyride.Platforms
             throw new NoSuchElementException("item not found in collection " + collectionName);
         }
 
-        public virtual void PinchToZoom(Direction direction, double scale = 1.0)
+        public virtual Screen PinchToZoom(Direction direction, double scale = 1.0)
         {
             Driver.PinchToZoom(direction, scale);
+            return this;
         }
         
-        /*
-                protected string ClearElementWithBackspaces(IWebElement element)
-                {
-                    var backspaces = new string(Convert.ToChar(Keys.Backspace), element.GetAttribute("value").Count());
-
-                    return backspaces.Length > 0 ? backspaces : "";
-                }
-
-        */
-
         public virtual void EnterText(string elementName, string text)
         {
             var element = FindElement(elementName);
