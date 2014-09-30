@@ -41,7 +41,8 @@ namespace Joyride.Platforms.Ios
 
         protected T CastScreen<T>() where T : class
         {
-            if (!typeof(T).IsInterface || !typeof(T).IsSubclassOf(typeof(IosScreen)))
+
+            if (!typeof(T).IsInterface && !typeof(T).IsSubclassOf(typeof(IosScreen)))
                 throw new Exception("Unable to cast screen to type:  " + typeof(T));
 
             dynamic anyScreenOrInterface = CurrentScreen;
