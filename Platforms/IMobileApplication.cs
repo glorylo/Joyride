@@ -8,7 +8,7 @@ namespace Joyride.Platforms
 {
     public interface IMobileApplication
     {
-        String BundleId { get;  }
+        String Identifier { get;  }
         Screen CurrentScreen { get; }
         void Launch();
         void Close();

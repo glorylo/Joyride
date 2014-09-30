@@ -61,6 +61,7 @@
     <Compile Include="Platforms\IMobileApplication.cs" />
     <Compile Include="Platforms\Ios\IosMobileApplication.cs" />
     <Compile Include="Platforms\Ios\IosScreen.cs" />
+    <Compile Include="Platforms\MobileApplication.cs" />
     <Compile Include="Platforms\ITouchGestures.cs" />
     <Compile Include="Platforms\IWebViewActions.cs" />
     <Compile Include="RemoteMobileDriver.cs" />
