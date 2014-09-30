@@ -77,7 +77,7 @@ namespace Joyride.Platforms
             return this;
         }
         
-        public virtual void EnterText(string elementName, string text)
+        public virtual Screen EnterText(string elementName, string text)
         {
             var element = FindElement(elementName);
 
@@ -86,10 +86,11 @@ namespace Joyride.Platforms
 
             element.Click();
             element.Clear();
-            element.SendKeys(text);            
+            element.SendKeys(text);
+            return this;
         }
 
-        public virtual void SetCheckbox(string elementName, bool enabled = true)
+        public virtual Screen SetCheckbox(string elementName, bool enabled = true)
         {
             var element = FindElement(elementName);
 
@@ -99,10 +100,12 @@ namespace Joyride.Platforms
             var selected = element.Selected;
             if ((enabled && !selected) || (!enabled && selected))
                 element.Click();
+
+            return this;
         }
 
         // only works in webview currently
-        public virtual void SelectOption(string elementName, string value)
+        public virtual Screen SelectOption(string elementName, string value)
         {
             Driver.DoActionInWebView(() =>
             {
@@ -113,6 +116,7 @@ namespace Joyride.Platforms
                 var selector = new SelectElement(selectElement);
                 selector.SelectByText(value);
             });
+            return this;
         }
 
         // only works in webview currently
