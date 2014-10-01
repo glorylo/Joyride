@@ -31,7 +31,7 @@ namespace Joyride.Platforms.Ios
             return (textWithLabelText != null);
         }
 
-        public void SetSlider(string elementName, int percentage)
+        public Screen DragSlider(string elementName, int percentage)
         {
             if ((percentage < 0) || (percentage > 100))
                 throw new IndexOutOfRangeException("Slider can only accept values 1-100.  Requested: " + percentage);
@@ -43,6 +43,7 @@ namespace Joyride.Platforms.Ios
 
             var actualValue = (double)percentage / 100;
             slider.SendKeys(actualValue.ToString());
+            return this;
         }
 
         public int CurrentPageOnIndictator(string elementName)

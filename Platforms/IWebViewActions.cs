@@ -4,6 +4,5 @@ namespace Joyride.Platforms
     {
         Screen SelectOption(string elementName, string value);
         string GetSelectedOption(string elementName);
-        string GetSourceWebView();
     }
 }

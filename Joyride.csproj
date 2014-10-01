@@ -55,12 +55,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Platforms\Android\AndroidMobileApplication.cs" />
     <Compile Include="Platforms\Android\AndroidScreen.cs" />
     <Compile Include="Platforms\Android\AndroidScreenFactory.cs" />
     <Compile Include="Platforms\Component.cs" />
+    <Compile Include="Platforms\IFormActions.cs" />
     <Compile Include="Platforms\IMobileApplication.cs" />
     <Compile Include="Platforms\Ios\IosMobileApplication.cs" />
     <Compile Include="Platforms\Ios\IosScreen.cs" />
+    <Compile Include="Platforms\IScreen.cs" />
     <Compile Include="Platforms\MobileApplication.cs" />
     <Compile Include="Platforms\ITouchGestures.cs" />
     <Compile Include="Platforms\IWebViewActions.cs" />

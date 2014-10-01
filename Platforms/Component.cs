@@ -6,7 +6,6 @@ using System.Reflection;
 using Joyride.Extensions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
-using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.PageObjects;
 
 namespace Joyride.Platforms

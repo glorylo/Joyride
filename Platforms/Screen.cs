@@ -7,7 +7,7 @@ using OpenQA.Selenium.Support.UI;
 
 namespace Joyride.Platforms
 {
-    abstract public class Screen : Component
+    abstract public class Screen : Component, IScreen
     {
         abstract public bool IsOnScreen(int timeOutSecs = DefaultWaitSeconds);
         public virtual Screen Tap(string elementName, bool precise = false)
