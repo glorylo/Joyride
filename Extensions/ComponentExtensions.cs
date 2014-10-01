@@ -2,7 +2,7 @@
 
 namespace Joyride.Extensions
 {
-    static public class ScreenObjectExtensions
+    static public class ComponentExtensions
     {
         static public string ToPascalCase(this string text)
         {
