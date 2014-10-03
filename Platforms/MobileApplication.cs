@@ -6,9 +6,9 @@ namespace Joyride.Platforms
 {
     public abstract class MobileApplication : IMobileApplication
     {
-        protected Screen Screen;
+        protected Screen CurrentScreen;
         abstract public string Identifier { get; }
-        public Screen CurrentScreen { get { return Screen; }}
+        public Screen Screen { get { return CurrentScreen; }}
         protected AppiumDriver Driver { get { return RemoteMobileDriver.GetInstance(); } }
 
         public virtual void Launch()
@@ -24,11 +24,11 @@ namespace Joyride.Platforms
         public virtual void Do<T>(Func<T, Screen> func) where T : class
         {
             var anyScreenOrInterface = CastScreen<T>();
-            var beforeTransition = Screen;
-            Screen = func(anyScreenOrInterface);
+            var beforeTransition = CurrentScreen;
+            CurrentScreen = func(anyScreenOrInterface);
 
-            if (Screen != beforeTransition)
-                Trace.WriteLine("Current Screen '" + beforeTransition.Name + "' transition to '" + Screen.Name + "'");
+            if (CurrentScreen != beforeTransition)
+                Trace.WriteLine("Current Screen '" + beforeTransition.Name + "' transition to '" + CurrentScreen.Name + "'");
         }
 
         public virtual void Do<T>(Action<T> func) where T : class
@@ -41,9 +41,9 @@ namespace Joyride.Platforms
         {
             if (!typeof(T).IsInterface)
                 if (!typeof(Screen).IsAssignableFrom(typeof(T)))
-                    throw new Exception("Unable to cast screen from type '" + CurrentScreen.GetType() + " to type:  " + typeof(T));
+                    throw new Exception("Unable to cast screen from type '" + Screen.GetType() + " to type:  " + typeof(T));
 
-            dynamic anyScreenOrInterface = CurrentScreen;
+            dynamic anyScreenOrInterface = Screen;
             return (T) anyScreenOrInterface;
         }
     }
