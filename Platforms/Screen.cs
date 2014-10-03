@@ -84,7 +84,6 @@ namespace Joyride.Platforms
             if (element == null)
                 throw new NoSuchElementException("Cannot find element:  " + elementName);
 
-            element.Click();
             element.Clear();
             element.SendKeys(text);
             return this;

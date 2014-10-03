@@ -12,6 +12,19 @@ namespace Joyride.Platforms.Ios
     {
         protected static ScreenFactory ScreenFactory = new IosScreenFactory();
 
+        public override Screen EnterText(string elementName, string text)
+        {
+            var element = FindElement(elementName);
+
+            if (element == null)
+                throw new NoSuchElementException("Cannot find element:  " + elementName);
+
+            element.Click();
+            element.Clear();
+            element.SendKeys(text);
+            return this;
+        }
+
         public bool HasLabelContainingText(string labelText, int timeoutSecs = DefaultWaitSeconds)
         {
             var xpath = "//UIAStaticText[contains(@label,'" + labelText + "')]";
