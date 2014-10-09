@@ -20,6 +20,19 @@ namespace Joyride.Platforms.Ios
             return (Screen)Activator.CreateInstance(t);
         }
 
+        public override IModalDialog CreateModalDialog<T>()
+        {
+            if (!typeof(T).IsSubclassOf(typeof(IosModalDialog)))
+                throw new Exception("Unable to create modal dialog of type:  " + typeof(T));
+            return new T();
+        }
+
+        public override IModalDialog CreateModalDialog(Type t)
+        {
+            if (!t.IsSubclassOf(typeof(IosModalDialog)))
+                throw new Exception("Unable to create modal dialog of type:  " + t);
+            return (IModalDialog)Activator.CreateInstance(t);
+        }
     }
 
 }

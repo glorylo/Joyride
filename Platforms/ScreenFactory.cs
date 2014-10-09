@@ -7,6 +7,10 @@ namespace Joyride
     abstract public class ScreenFactory
     {
         abstract public T CreateScreen<T>() where T : Screen, new();
-        public abstract Screen CreateScreen(Type t);
+        abstract public Screen CreateScreen(Type t);
+
+        public abstract IModalDialog CreateModalDialog<T>() where T : IModalDialog, new();
+        public abstract IModalDialog CreateModalDialog(Type t);
+
     }
 }
