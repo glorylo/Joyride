@@ -24,8 +24,12 @@ namespace Joyride
             EnableCustomWaits = true;
         }
         
+        //TODO: unlikely to fix but not thread safe
         static public void Initialize(Uri hostUri, DesiredCapabilities capabilities)
         {
+            if (_driver != null)
+                throw new Exception("Unable to create multiple instances of appium driver");
+
             _driver = new AppiumDriver(hostUri, capabilities);
             _driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(DefaultWaitSeconds));
         }
