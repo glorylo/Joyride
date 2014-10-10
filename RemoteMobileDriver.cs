@@ -56,6 +56,7 @@ namespace Joyride
         static public void CleanUp()
         {
             _driver.Quit();
+            _driver = null;
         }
 
     }
