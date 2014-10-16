@@ -15,10 +15,10 @@ namespace Joyride.Platforms
         Screen TapInCollection(string collectionName, int oridinal = 1, bool last = false);
         Screen TapInCollection(string collectionName, Predicate<IWebElement> predicate);
         Screen PinchToZoom(Direction direction, double scale = 1.0);
-        Screen Scroll(Direction direction, long durationMilliSecs = 500);
-        Screen Scroll(string elementName, Direction direction, long durationMilliSecs = 500);
-        Screen Swipe(Direction direction, long durationMilliSecs = 500);
-        Screen Swipe(string elementName, Direction direction, long durationMilliSecs = 500);
-        Screen ScrollUntil(string elementName, Direction direction, long durationMilliSecs = 500, int maxRetries = 30);
+        Screen Scroll(Direction direction, double scale=1.0, long durationMilliSecs = 500);
+        Screen Scroll(string elementName, Direction direction, double scale=1.0, long durationMilliSecs = 500);
+        Screen Swipe(Direction direction, double scale=1.0, long durationMilliSecs = 500);
+        Screen Swipe(string elementName, Direction direction, double scale=1.0, long durationMilliSecs = 500);
+        Screen ScrollUntil(string elementName, Direction direction, double scale=1.0, long durationMilliSecs = 500, int maxRetries = 30);
     }
 }

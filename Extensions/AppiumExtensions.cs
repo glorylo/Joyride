@@ -119,7 +119,7 @@ namespace Joyride.Extensions
         }
 
         public static void Swipe(this AppiumDriver driver, Direction direction, Size dimension,
-            long durationMilliSecs = 500, int originX=0, int originY=0)
+             double scale=1.0, long durationMilliSecs = 500, int originX=0, int originY=0)
         {
             var center = new Point(originX + dimension.Width / 2, originY + dimension.Height / 2);
             var startDeltaX = dimension.Width / 5;
@@ -130,22 +130,22 @@ namespace Joyride.Extensions
             switch (direction)
             {
                 case Direction.Left:
-                    endDeltaX *= -1;
+                    endDeltaX = (int) (endDeltaX  * -1 * scale);
                     startDeltaY = endDeltaY = 0;
                     break;
 
                 case Direction.Right:
-                    startDeltaX *= -1;
+                    startDeltaX = (int) (startDeltaX * -1 * scale);
                     startDeltaY = endDeltaY = 0;
                     break;
 
                 case Direction.Up:
-                    endDeltaY *= -1;
+                    endDeltaY = (int) (endDeltaY  * -1 * scale);
                     startDeltaX = endDeltaX = 0;
                     break;
 
                 case Direction.Down:
-                    startDeltaY *= -1;
+                    startDeltaY = (int) (startDeltaY * -1 * scale);
                     startDeltaX = endDeltaX = 0;
                     break;
 
@@ -160,15 +160,15 @@ namespace Joyride.Extensions
                 .Release().Perform();
         }
 
-        public static void Swipe(this AppiumDriver driver, Direction direction, long durationMilliSecs=500)
+        public static void Swipe(this AppiumDriver driver, Direction direction, double scale=1.0, long durationMilliSecs=500)
         {
-            Swipe(driver, direction, driver.ScreenSize(), durationMilliSecs);
+            Swipe(driver, direction, driver.ScreenSize(), scale, durationMilliSecs);
         }
 
-        public static void Swipe(this AppiumDriver driver, IWebElement element, Direction direction, long durationMilliSecs = 500)
+        public static void Swipe(this AppiumDriver driver, IWebElement element, Direction direction, double scale = 1.0, long durationMilliSecs = 500)
         {
             var size = CalculateVisibleElementSize(driver, element);
-            Swipe(driver, direction, size, durationMilliSecs, element.Location.X, element.Location.Y);
+            Swipe(driver, direction, size, scale, durationMilliSecs, element.Location.X, element.Location.Y);
         }
 
         private static Size CalculateVisibleElementSize(AppiumDriver driver, IWebElement element)
@@ -247,16 +247,16 @@ namespace Joyride.Extensions
             return directionToSwipe;
         }
 
-        public static void Scroll(this AppiumDriver driver, Direction direction, long durationMilliSecs = 500)
+        public static void Scroll(this AppiumDriver driver, Direction direction, double scale=1.0, long durationMilliSecs = 2000)
         {
             var directionToSwipe = ConvertDirectionToSwipe(direction);
-            driver.Swipe(directionToSwipe, durationMilliSecs);
+            driver.Swipe(directionToSwipe, scale, durationMilliSecs);
         }
 
-        public static void Scroll(this AppiumDriver driver, IWebElement element, Direction direction, long durationMilliSecs = 500)
+        public static void Scroll(this AppiumDriver driver, IWebElement element, Direction direction, double scale = 1.0, long durationMilliSecs = 500)
         {
             var directionToSwipe = ConvertDirectionToSwipe(direction);
-            driver.Swipe(element, directionToSwipe, durationMilliSecs);
+            driver.Swipe(element, directionToSwipe, scale, durationMilliSecs);
         }
 
     }

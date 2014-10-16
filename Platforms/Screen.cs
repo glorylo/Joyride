@@ -134,37 +134,37 @@ namespace Joyride.Platforms
             return selected;
         }
 
-        public virtual Screen Scroll(Direction direction, long durationMilliSecs = 500)
+        public virtual Screen Scroll(Direction direction, double scale=1.0, long durationMilliSecs = 500)
         {
-            Driver.Scroll(direction, durationMilliSecs);
+            Driver.Scroll(direction, scale, durationMilliSecs);
             return this;
         }
 
-        public virtual Screen Scroll(string elementName, Direction direction, long durationMilliSecs = 500)
-        {
-            var element = FindElement(elementName);
-            if (element == null)
-                throw new NoSuchElementException("Cannot find element:  " + elementName);
-            Driver.Scroll(element, direction, durationMilliSecs);
-            return this;
-        }
-
-        public virtual Screen Swipe(Direction direction, long durationMilliSecs = 500)
-        {
-            Driver.Swipe(direction, durationMilliSecs);
-            return this;
-        }
-
-        public virtual Screen Swipe(string elementName, Direction direction, long durationMilliSecs = 500)
+        public virtual Screen Scroll(string elementName, Direction direction, double scale=1.0, long durationMilliSecs = 500)
         {
             var element = FindElement(elementName);
             if (element == null)
                 throw new NoSuchElementException("Cannot find element:  " + elementName);
-            Driver.Swipe(element, direction, durationMilliSecs);
+            Driver.Scroll(element, direction, scale, durationMilliSecs);
             return this;
         }
 
-        public virtual Screen ScrollUntil(string elementName, Direction direction, long durationMilliSecs = 500, int maxRetries = 30)
+        public virtual Screen Swipe(Direction direction, double scale=1.0, long durationMilliSecs = 500)
+        {
+            Driver.Swipe(direction, scale, durationMilliSecs);
+            return this;
+        }
+
+        public virtual Screen Swipe(string elementName, Direction direction, double scale=1.0, long durationMilliSecs = 500)
+        {
+            var element = FindElement(elementName);
+            if (element == null)
+                throw new NoSuchElementException("Cannot find element:  " + elementName);
+            Driver.Swipe(element, direction, scale, durationMilliSecs);
+            return this;
+        }
+
+        public virtual Screen ScrollUntil(string elementName, Direction direction, double scale=1.0, long durationMilliSecs = 500, int maxRetries = 30)
         {
             var element = FindElement(elementName, 3);
 
@@ -174,7 +174,7 @@ namespace Joyride.Platforms
 
             while (numRetries <= maxRetries)
             {
-                Driver.Scroll(direction, durationMilliSecs);
+                Driver.Scroll(direction, scale, durationMilliSecs);
                 element = FindElement(elementName, 3);
                 if (element.IsPresent() && element.Displayed)
                     return this;

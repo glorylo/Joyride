@@ -16,8 +16,10 @@ namespace Joyride.Platforms.Android
 
             //Appium clears it regardless of this being called or not.
             //element.Clear();
+            element.Click();
             element.SendKeys(text);
-            Driver.Navigate().Back();
+            Driver.HideKeyboard();
+            //Driver.Navigate().Back();
             return this;
         }
     }
