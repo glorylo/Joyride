@@ -55,6 +55,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\TextCompareExtensions.cs" />
     <Compile Include="Platforms\Android\AndroidMobileApplication.cs" />
     <Compile Include="Platforms\Android\AndroidModalDialog.cs" />
     <Compile Include="Platforms\Android\AndroidScreen.cs" />
