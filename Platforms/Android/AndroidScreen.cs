@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.ObjectModel;
+using Joyride.Extensions;
 using OpenQA.Selenium;
 
 namespace Joyride.Platforms.Android
@@ -25,31 +26,31 @@ namespace Joyride.Platforms.Android
             return this;
         }
 
-        public virtual bool HasLabel(string label, TextCompare compareType)
+        public virtual bool HasLabel(string label, TextCompare compareType, int timeoutSecs = DefaultWaitSeconds)
         {
-            return HasText(label, compareType) || HasContentDesc(label, compareType);
+            return HasText(label, compareType, timeoutSecs) || HasContentDesc(label, compareType, timeoutSecs);
         }
 
-        protected bool HasContentDesc(string label, TextCompare compareType)
+        protected bool HasContentDesc(string label, TextCompare compareType, int timeoutSecs=DefaultWaitSeconds)
         {
             ReadOnlyCollection<IWebElement> texts = null;
             switch (compareType)
             {
                 case TextCompare.Equals:
-                    texts = Driver.FindElementsByAndroidUIAutomator(@"new UiSelector().description(""" + label + @""")");
+                    texts = Driver.FindElementsByAndroidUIAutomator(@"new UiSelector().description(""" + label + @""")", timeoutSecs);
                     break;
 
                 case TextCompare.StartsWith:
                     texts =
-                        Driver.FindElementsByAndroidUIAutomator(@"new UiSelector().descriptionStartsWith(""" + label + @""")");
+                        Driver.FindElementsByAndroidUIAutomator(@"new UiSelector().descriptionStartsWith(""" + label + @""")", timeoutSecs);
                     break;
 
                 case TextCompare.Matching:
-                    texts = Driver.FindElementsByAndroidUIAutomator(@"new UiSelector().descriptionMatches(""" + label + @""")");
+                    texts = Driver.FindElementsByAndroidUIAutomator(@"new UiSelector().descriptionMatches(""" + label + @""")", timeoutSecs);
                     break;
 
                 case TextCompare.Containing:
-                    texts = Driver.FindElementsByAndroidUIAutomator(@"new UiSelector().descriptionContains(""" + label + @""")");
+                    texts = Driver.FindElementsByAndroidUIAutomator(@"new UiSelector().descriptionContains(""" + label + @""")", timeoutSecs);
                     break;
                 default:
                     throw new NotImplementedException("Not implemented compare type: " + compareType);
@@ -61,26 +62,26 @@ namespace Joyride.Platforms.Android
             return false;
         }
 
-        protected bool HasText(string label, TextCompare compareType)
+        protected bool HasText(string label, TextCompare compareType, int timeoutSecs = DefaultWaitSeconds)
         {
             ReadOnlyCollection<IWebElement> texts = null;
             switch (compareType)
             {
                 case TextCompare.Equals:
-                    texts = Driver.FindElementsByAndroidUIAutomator(@"new UiSelector().text(""" + label + @""")");
+                    texts = Driver.FindElementsByAndroidUIAutomator(@"new UiSelector().text(""" + label + @""")", timeoutSecs);
                     break;
 
                 case TextCompare.StartsWith:
                     texts =
-                        Driver.FindElementsByAndroidUIAutomator(@"new UiSelector().textStartsWith(""" + label + @""")");
+                        Driver.FindElementsByAndroidUIAutomator(@"new UiSelector().textStartsWith(""" + label + @""")", timeoutSecs);
                     break;
 
                 case TextCompare.Matching:
-                    texts = Driver.FindElementsByAndroidUIAutomator(@"new UiSelector().textMatches(""" + label + @""")");
+                    texts = Driver.FindElementsByAndroidUIAutomator(@"new UiSelector().textMatches(""" + label + @""")", timeoutSecs);
                     break;
 
                 case TextCompare.Containing:
-                    texts = Driver.FindElementsByAndroidUIAutomator(@"new UiSelector().textContains(""" + label + @""")");
+                    texts = Driver.FindElementsByAndroidUIAutomator(@"new UiSelector().textContains(""" + label + @""")", timeoutSecs);
                     break;
                 default:
                     throw new NotImplementedException("Not implemented compare type: " + compareType);

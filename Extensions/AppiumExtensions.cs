@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
@@ -258,6 +259,23 @@ namespace Joyride.Extensions
             var directionToSwipe = ConvertDirectionToSwipe(direction);
             driver.Swipe(element, directionToSwipe, scale, durationMilliSecs);
         }
+
+        public static IWebElement FindElementByAndroidUIAutomator(this AppiumDriver driver, string selector, int timeoutSecs)
+        {
+            RemoteMobileDriver.SetTimeout(timeoutSecs);
+            var element = driver.FindElementWithMethod(new Func<string, IWebElement>(driver.FindElementByAndroidUIAutomator), selector);
+            RemoteMobileDriver.SetDefaultWait();
+            return element;
+        }
+
+        public static ReadOnlyCollection<IWebElement> FindElementsByAndroidUIAutomator(this AppiumDriver driver, string selector, int timeoutSecs)
+        {
+            RemoteMobileDriver.SetTimeout(timeoutSecs);
+            var elements = driver.FindElementsWithMethod(new Func<string, ReadOnlyCollection<IWebElement>>(driver.FindElementsByAndroidUIAutomator), selector);
+            RemoteMobileDriver.SetDefaultWait();
+            return elements;
+        }
+
 
     }
 }
