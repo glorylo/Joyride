@@ -279,6 +279,9 @@ namespace Joyride.Extensions
 
         public static bool ElementWithinBounds(this AppiumDriver driver, IWebElement element)
         {
+            if (element == null)
+                return false;
+
             var screenSize = driver.ScreenSize();
 
             // element out of bounds
