@@ -277,5 +277,24 @@ namespace Joyride.Extensions
         }
 
 
+        public static bool ElementWithinBounds(this AppiumDriver driver, IWebElement element)
+        {
+            var screenSize = driver.ScreenSize();
+
+            // element out of bounds
+            if ((element.Location.X < 0) || (element.Location.X > screenSize.Width)) 
+                return false;
+
+            if ((element.Location.Y < 0) || (element.Location.Y > screenSize.Height))
+                return false;
+
+            if ((element.Location.X + element.Size.Width  > screenSize.Width) ||
+                (element.Location.Y + element.Size.Height > screenSize.Height))
+                return false;
+
+            return true;
+        }
+
+
     }
 }
