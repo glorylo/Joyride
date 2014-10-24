@@ -76,7 +76,8 @@ namespace Joyride.Platforms
             Driver.PinchToZoom(direction, scale);
             return this;
         }
-        
+
+      
         public virtual Screen EnterText(string elementName, string text)
         {
             var element = FindElement(elementName);
