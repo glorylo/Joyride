@@ -93,5 +93,7 @@ namespace Joyride.Platforms.Android
             return false;
         }
 
+        public abstract Screen GoBack();
+
     }
 }
