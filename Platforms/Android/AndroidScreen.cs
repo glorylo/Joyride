@@ -10,6 +10,13 @@ namespace Joyride.Platforms.Android
     {
         protected static ScreenFactory ScreenFactory = new AndroidScreenFactory();
 
+        public void HideKeyboard()
+        {
+            // suppress any odd appium errors
+            try { Driver.HideKeyboard(); }
+            catch { } 
+        }
+
         public override Screen EnterText(string elementName, string text)
         {
             var element = FindElement(elementName);
