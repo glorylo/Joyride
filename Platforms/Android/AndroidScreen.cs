@@ -29,34 +29,33 @@ namespace Joyride.Platforms.Android
             element.Click();
             element.SendKeys(text);
             Driver.HideKeyboard();
-            //Driver.Navigate().Back();
             return this;
         }
 
-        public virtual bool HasLabel(string label, TextCompare compareType, int timeoutSecs = DefaultWaitSeconds)
+        public virtual bool HasLabel(string label, CompareType compareType, int timeoutSecs = DefaultWaitSeconds)
         {
             return HasText(label, compareType, timeoutSecs) || HasContentDesc(label, compareType, timeoutSecs);
         }
 
-        protected bool HasContentDesc(string label, TextCompare compareType, int timeoutSecs=DefaultWaitSeconds)
+        protected bool HasContentDesc(string label, CompareType compareType, int timeoutSecs=DefaultWaitSeconds)
         {
             ReadOnlyCollection<IWebElement> texts = null;
             switch (compareType)
             {
-                case TextCompare.Equals:
+                case CompareType.Equals:
                     texts = Driver.FindElementsByAndroidUIAutomator(@"new UiSelector().description(""" + label + @""")", timeoutSecs);
                     break;
 
-                case TextCompare.StartsWith:
+                case CompareType.StartsWith:
                     texts =
                         Driver.FindElementsByAndroidUIAutomator(@"new UiSelector().descriptionStartsWith(""" + label + @""")", timeoutSecs);
                     break;
 
-                case TextCompare.Matching:
+                case CompareType.Matching:
                     texts = Driver.FindElementsByAndroidUIAutomator(@"new UiSelector().descriptionMatches(""" + label + @""")", timeoutSecs);
                     break;
 
-                case TextCompare.Containing:
+                case CompareType.Containing:
                     texts = Driver.FindElementsByAndroidUIAutomator(@"new UiSelector().descriptionContains(""" + label + @""")", timeoutSecs);
                     break;
                 default:
@@ -69,25 +68,25 @@ namespace Joyride.Platforms.Android
             return false;
         }
 
-        protected bool HasText(string label, TextCompare compareType, int timeoutSecs = DefaultWaitSeconds)
+        protected bool HasText(string label, CompareType compareType, int timeoutSecs = DefaultWaitSeconds)
         {
             ReadOnlyCollection<IWebElement> texts = null;
             switch (compareType)
             {
-                case TextCompare.Equals:
+                case CompareType.Equals:
                     texts = Driver.FindElementsByAndroidUIAutomator(@"new UiSelector().text(""" + label + @""")", timeoutSecs);
                     break;
 
-                case TextCompare.StartsWith:
+                case CompareType.StartsWith:
                     texts =
                         Driver.FindElementsByAndroidUIAutomator(@"new UiSelector().textStartsWith(""" + label + @""")", timeoutSecs);
                     break;
 
-                case TextCompare.Matching:
+                case CompareType.Matching:
                     texts = Driver.FindElementsByAndroidUIAutomator(@"new UiSelector().textMatches(""" + label + @""")", timeoutSecs);
                     break;
 
-                case TextCompare.Containing:
+                case CompareType.Containing:
                     texts = Driver.FindElementsByAndroidUIAutomator(@"new UiSelector().textContains(""" + label + @""")", timeoutSecs);
                     break;
                 default:

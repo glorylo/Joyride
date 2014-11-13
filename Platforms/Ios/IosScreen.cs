@@ -34,7 +34,7 @@ namespace Joyride.Platforms.Ios
 
         public virtual bool HasLabelContainingText(string collectionName, int index, string labelText, int timeoutSecs = DefaultWaitSeconds)
         {
-            var element = GetElementInCollectionAt(collectionName, index);
+            var element = GetElementInCollection(collectionName, index);
             var texts = element.FindElements(By.ClassName("UIAStaticText"), timeoutSecs);
 
             if (texts.Count == 0)

@@ -6,26 +6,26 @@ namespace Joyride.Extensions
 {
     public static class TextCompareExtensions
     {
-        public static bool CompareWith(this string yourString, string compareWithString, TextCompare compareType)
+        public static bool CompareWith(this string yourString, string compareWithString, CompareType compareType)
         {
             switch (compareType)
             {
-                case TextCompare.Equals:
+                case CompareType.Equals:
                     return yourString == compareWithString;
 
-                case TextCompare.NotEqual:
+                case CompareType.NotEqual:
                     return yourString != compareWithString;
 
-                case TextCompare.StartsWith:
+                case CompareType.StartsWith:
                     return yourString.StartsWith(compareWithString);
 
-                case TextCompare.EndsWith:
+                case CompareType.EndsWith:
                     return yourString.EndsWith(compareWithString);
 
-                case TextCompare.Containing:
+                case CompareType.Containing:
                     return yourString.Contains(compareWithString);
 
-                case TextCompare.Matching:
+                case CompareType.Matching:
                     var match = Regex.Match(yourString, compareWithString);
                     return match.Success;
 
@@ -34,6 +34,11 @@ namespace Joyride.Extensions
 
             }
 
+        }
+
+        public static CompareType ToCompareType(this string yourString)
+        {
+            return (CompareType)Enum.Parse(typeof(CompareType), yourString.Replace(" ", string.Empty), true);
         }
 
 

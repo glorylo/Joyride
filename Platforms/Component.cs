@@ -48,19 +48,19 @@ namespace Joyride.Platforms
             return null;
         }
 
-        protected ReadOnlyCollection<IWebElement> FindElements(string elementName)
+        protected ReadOnlyCollection<IWebElement> FindElements(string collectionName)
         {
             ReadOnlyCollection<IWebElement> elements = null;
             MemberInfo member = GetType()
-                .GetMember(elementName.ToPascalCase(), BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault();
+                .GetMember(collectionName.ToPascalCase(), BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault();
             if (member == null)
-                throw new NoSuchElementException(elementName + " is not found");
+                throw new NoSuchElementException(collectionName + " is not found");
 
             var property = member as PropertyInfo;
             if (property != null)
             {
                 elements = (ReadOnlyCollection<IWebElement>)property.GetValue(this, null);
-                Trace.WriteLine("Found property with elementName:  " + elementName);
+                Trace.WriteLine("Found property with collection:  " + collectionName);
                 return elements;
             }
 
@@ -68,16 +68,16 @@ namespace Joyride.Platforms
             if (field != null)
             {
                 elements = (ReadOnlyCollection<IWebElement>)field.GetValue(this);
-                Trace.WriteLine("Found field with elementName:  " + elementName);
+                Trace.WriteLine("Found field with collection:  " + collectionName);
                 return elements;
             }
-            Trace.WriteLine("Unable to find collection with name:  " + elementName);
+            Trace.WriteLine("Unable to find collection with name:  " + collectionName);
             return null;
         }
 
-        protected ReadOnlyCollection<IWebElement> FindElements(string elementName, int timeoutSecs)
+        protected ReadOnlyCollection<IWebElement> FindElements(string collectionName, int timeoutSecs)
         {
-            return Driver.FindElementsWithMethod(timeoutSecs, new Func<string, ReadOnlyCollection<IWebElement>>(FindElements), elementName);
+            return Driver.FindElementsWithMethod(timeoutSecs, new Func<string, ReadOnlyCollection<IWebElement>>(FindElements), collectionName);
         }
 
         protected IWebElement FindElement(string elementName, int timeoutSecs)
@@ -110,7 +110,7 @@ namespace Joyride.Platforms
             return (attribValue == null) ? null : attribValue.Trim();
         }
 
-        protected IWebElement GetElementInCollectionAt(string collectionName, int index, bool last=false)
+        protected IWebElement GetElementInCollection(string collectionName, int index, bool last=false)
         {
             var collection = FindElements(collectionName, DefaultWaitSeconds);
 
@@ -131,13 +131,28 @@ namespace Joyride.Platforms
             }
             return collection.Last();
         }
+
+        protected IWebElement GetElementInCollection(string collectionName, string text, CompareType compareType)
+        {
+            var collection = FindElements(collectionName, DefaultWaitSeconds);
+            if (collection == null)
+                return null;
+
+            return collection.FirstOrDefault(e => e.Text.CompareWith(text, compareType));
+        }
+
+        public bool HasTextInCollection(string collectionName, string text, CompareType compareType)
+        {
+            var theElement = GetElementInCollection(collectionName, text, compareType);
+            return (theElement != null);
+        }
         
         public string GetElementAttribute(string collectionName, int index, string attributeName)
         {
             IWebElement element;
             try
             {
-                element = GetElementInCollectionAt(collectionName, index);
+                element = GetElementInCollection(collectionName, index);
             }
             catch (NoSuchElementException e)
             {

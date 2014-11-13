@@ -11,7 +11,7 @@ namespace Joyride
         Out
     }
 
-    public enum TextCompare
+    public enum CompareType
     {
         StartsWith,
         EndsWith,

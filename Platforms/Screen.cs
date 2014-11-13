@@ -50,7 +50,7 @@ namespace Joyride.Platforms
 
         public virtual Screen TapInCollection(string collectionName, int oridinal = 1, bool last = false)
         {
-            var element = GetElementInCollectionAt(collectionName, oridinal, last);
+            var element = GetElementInCollection(collectionName, oridinal, last);
             element.Click();
             return this;
         }
