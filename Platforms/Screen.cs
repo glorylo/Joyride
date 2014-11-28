@@ -48,10 +48,14 @@ namespace Joyride.Platforms
 
         }
 
-        public virtual Screen TapInCollection(string collectionName, int oridinal = 1, bool last = false)
+        public virtual Screen TapInCollection(string collectionName, int oridinal = 1, bool last = false, bool precise = false)
         {
             var element = GetElementInCollection(collectionName, oridinal, last);
-            element.Click();
+            
+            if (!precise)
+                element.Click();
+            else
+                Driver.PreciseTap(element);
             return this;
         }
 
