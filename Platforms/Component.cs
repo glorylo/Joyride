@@ -110,6 +110,19 @@ namespace Joyride.Platforms
             return (attribValue == null) ? null : attribValue.Trim();
         }
 
+        protected IWebElement GetElementInCollection(ReadOnlyCollection<IWebElement> collection , int index, bool last = false)
+        {
+            var zeroBasedIndex = index - 1;
+
+            if (!last)
+            {
+                if ((zeroBasedIndex < 0) || (zeroBasedIndex >= collection.Count))
+                    throw new NoSuchElementException("Unable to get collection on index " + zeroBasedIndex);
+                return collection.ElementAt(zeroBasedIndex);
+            }
+            return collection.Last();            
+        }
+
         protected IWebElement GetElementInCollection(string collectionName, int index, bool last=false)
         {
             var collection = FindElements(collectionName, DefaultWaitSeconds);
@@ -117,19 +130,17 @@ namespace Joyride.Platforms
             if (collection == null)
                 throw new NoSuchElementException("Cannot find collection:  " + collectionName);
 
-            var zeroBasedIndex = index - 1;
-
             if (collection.Count == 0)
                 throw new NoSuchElementException("Collection (" + collectionName + ") contains no items");
 
-            if (!last)
-            {
-                if ((zeroBasedIndex < 0) || (zeroBasedIndex >= collection.Count))
-                    throw new NoSuchElementException("Unable to get collection (" + collectionName + ") on index " +
-                                                     zeroBasedIndex);
-                return collection.ElementAt(zeroBasedIndex);
+            IWebElement element;
+            try  {
+                element = GetElementInCollection(collection, index, last);
             }
-            return collection.Last();
+            catch (NoSuchElementException) {
+                throw new NoSuchElementException("Unable to get collection (" + collectionName + ") on index " + index);
+            }
+            return element;
         }
 
         protected IWebElement GetElementInCollection(string collectionName, string text, CompareType compareType)
