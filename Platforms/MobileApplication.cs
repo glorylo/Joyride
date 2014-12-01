@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using Joyride.Extensions;
 using OpenQA.Selenium.Appium;
 
 namespace Joyride.Platforms
@@ -7,6 +8,7 @@ namespace Joyride.Platforms
     public abstract class MobileApplication : IMobileApplication
     {
         protected Screen CurrentScreen;
+        protected int TransitionDelayMs = 0;
         abstract public string Identifier { get; }
         public Screen Screen { get { return CurrentScreen; }}
         protected AppiumDriver Driver { get { return RemoteMobileDriver.GetInstance(); } }
@@ -28,7 +30,11 @@ namespace Joyride.Platforms
             CurrentScreen = func(anyScreenOrInterface);
 
             if (CurrentScreen != beforeTransition)
+            {
                 Trace.WriteLine("Current Screen '" + beforeTransition.Name + "' transition to '" + CurrentScreen.Name + "'");
+                if (TransitionDelayMs > 0)
+                    Driver.WaitFor(TimeSpan.FromMilliseconds(TransitionDelayMs));
+            }
         }
 
         public virtual void Do<T>(Action<T> func) where T : class
