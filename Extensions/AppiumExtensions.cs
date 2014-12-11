@@ -4,10 +4,12 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.MultiTouch;
+using OpenQA.Selenium.Support.Extensions;
 
 namespace Joyride.Extensions
 {
@@ -298,6 +300,19 @@ namespace Joyride.Extensions
             return true;
         }
 
+        public static void CaptureScreenshot(this AppiumDriver driver, string pathAndFilename, ImageFormat format)
+        {
+            try
+            {
+                var screenshot = driver.TakeScreenshot();
+                screenshot.SaveAsFile(pathAndFilename, format);
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine("Unexpected error in saving screenshot to: " + pathAndFilename);
+                Trace.Write("Stacktrace:  " + e.StackTrace);
+            }
+        }
 
     }
 }
