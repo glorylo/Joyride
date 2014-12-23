@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 
 namespace Joyride.Platforms
 {
+    //not used
     public interface ITappable
     {
         Screen Tap(string elementName, bool precise = false);

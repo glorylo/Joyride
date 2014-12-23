@@ -111,14 +111,23 @@ namespace Joyride.Extensions
             driver.ExecuteScript("mobile: scrollTo", args);   
         }
 
-        public static void TapAndHold(this AppiumDriver driver, IWebElement element, int seconds)
+        public static void TapAndHold(this AppiumDriver driver, IWebElement element, int seconds, bool precise=false)
         {
-            var center = element.GetCenter();
-            new TouchAction(driver)
-                .Press(center.X, center.Y)
-                .Wait(seconds * 1000)
-                .Release()
-                .Perform();           
+            if (precise)
+            {
+                var center = element.GetCenter();
+                new TouchAction(driver)
+                    .Press(center.X, center.Y)
+                    .Wait(seconds*1000)
+                    .Release();
+            }
+            else
+            {
+                new TouchAction(driver)
+                    .Press(element)
+                    .Wait(seconds * 1000)
+                    .Release();
+            }
         }
 
         public static void Swipe(this AppiumDriver driver, Direction direction, Size dimension,
@@ -156,10 +165,14 @@ namespace Joyride.Extensions
                     throw new InvalidEnumArgumentException("Invalid direction:  " + direction);
             }
 
+            var startX = center.X + startDeltaX;
+            var startY = center.Y + startDeltaY;
+            var endX = startX + endDeltaX;
+            var endY = startY + endDeltaY;
             new TouchAction(driver)
-                .Press(center.X + startDeltaX, center.Y + startDeltaY)
+                .Press(startX, startY)
                 .Wait(durationMilliSecs)
-                .MoveTo(center.X + endDeltaX, center.Y + endDeltaY)
+                .MoveTo(endX, endY)
                 .Release().Perform();
         }
 

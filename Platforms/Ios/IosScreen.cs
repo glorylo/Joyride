@@ -12,6 +12,17 @@ namespace Joyride.Platforms.Ios
     {
         protected static ScreenFactory ScreenFactory = new IosScreenFactory();
 
+        public override Screen TapAndHold(string elementName, int seconds)
+        {
+            IWebElement element = FindElement(elementName);
+
+            if (element == null)
+                throw new NoSuchElementException("Cannot find element:  " + elementName);
+
+            Driver.TapAndHold(element, seconds, true);
+            return this;
+        }
+
         public override Screen EnterText(string elementName, string text)
         {
             var element = FindElement(elementName);
