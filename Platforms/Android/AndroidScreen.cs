@@ -3,6 +3,7 @@ using System;
 using System.Collections.ObjectModel;
 using Joyride.Extensions;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Appium.MultiTouch;
 
 namespace Joyride.Platforms.Android
 {
@@ -27,6 +28,28 @@ namespace Joyride.Platforms.Android
             Driver.TapAndHold(element, seconds, true);
             return this;
 
+        }
+
+         public override Screen DoubleTap(string elementName)
+        {
+            var element = FindElement(elementName);
+
+            if (element == null)
+                throw new NoSuchElementException("Cannot find element:  " + elementName);
+
+
+            var point = element.GetCenter();
+            //new TouchAction(Driver).Tap(point.X, point.Y, 2).Perform();           
+            new TouchAction(Driver)
+                 .Press(point.X, point.Y)
+                 .Wait(50)
+                 .Release()
+                 .Wait(100)
+                 .Press(point.X, point.X)
+                 .Wait(50)
+                 .Release().
+                 Perform();
+            return this;
         }
 
         public override Screen EnterText(string elementName, string text)
