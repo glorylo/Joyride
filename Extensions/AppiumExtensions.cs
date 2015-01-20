@@ -119,14 +119,16 @@ namespace Joyride.Extensions
                 new TouchAction(driver)
                     .Press(center.X, center.Y)
                     .Wait(seconds*1000)
-                    .Release();
+                    .Release()
+                    .Perform();
             }
             else
             {
                 new TouchAction(driver)
                     .Press(element)
-                    .Wait(seconds * 1000)
-                    .Release();
+                    .Wait(seconds*1000)
+                    .Release()
+                    .Perform();
             }
         }
 
