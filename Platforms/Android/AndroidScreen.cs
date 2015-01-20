@@ -59,9 +59,8 @@ namespace Joyride.Platforms.Android
             if (element == null)
                 throw new NoSuchElementException("Cannot find element:  " + elementName);
 
-            //Appium clears it regardless of this being called or not.
-            //element.Clear();
             element.Click();
+            element.Clear();
             element.SendKeys(text);
             Driver.HideKeyboard();
             return this;
