@@ -3,6 +3,7 @@ using System;
 using System.Collections.ObjectModel;
 using Joyride.Extensions;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Appium.MultiTouch;
 
 namespace Joyride.Platforms.Android
@@ -10,6 +11,7 @@ namespace Joyride.Platforms.Android
     abstract public class AndroidScreen : Screen
     {
         protected static ScreenFactory ScreenFactory = new AndroidScreenFactory();
+        protected static new AndroidDriver Driver = (AndroidDriver) RemoteMobileDriver.GetInstance();
 
         public void HideKeyboard()
         {

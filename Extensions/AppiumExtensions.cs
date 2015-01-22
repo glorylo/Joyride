@@ -8,6 +8,7 @@ using System.Drawing.Imaging;
 using System.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
+using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Appium.MultiTouch;
 using OpenQA.Selenium.Support.Extensions;
 
@@ -39,13 +40,13 @@ namespace Joyride.Extensions
             var contextCount = 1;
             var retries = 0;
 
-            var contexts = driver.GetContexts();
+            var contexts = driver.Contexts;
             contextCount = contexts.Count;
 
             while ((contextCount == 1) && (retries <= maxRetries))
             {
                 driver.WaitFor(TimeSpan.FromSeconds(2));
-                contexts = driver.GetContexts();
+                contexts = driver.Contexts;
                 contextCount = contexts.Count;
                 retries++;
                 Trace.WriteLine("Unable to switch to web context.  Retries:  " + retries);
@@ -55,9 +56,9 @@ namespace Joyride.Extensions
                 throw new Exception("Unable to switch to webview");
 
             var webViewContext = contexts.Last();
-            driver.SetContext(webViewContext);
+            driver.Context  = webViewContext;
             action();
-            driver.SetContext(NativeAppContext);
+            driver.Context = NativeAppContext;
         }
 
 
@@ -276,23 +277,6 @@ namespace Joyride.Extensions
             var directionToSwipe = ConvertDirectionToSwipe(direction);
             driver.Swipe(element, directionToSwipe, scale, durationMilliSecs);
         }
-
-        public static IWebElement FindElementByAndroidUIAutomator(this AppiumDriver driver, string selector, int timeoutSecs)
-        {
-            RemoteMobileDriver.SetTimeout(timeoutSecs);
-            var element = driver.FindElementWithMethod(new Func<string, IWebElement>(driver.FindElementByAndroidUIAutomator), selector);
-            RemoteMobileDriver.SetDefaultWait();
-            return element;
-        }
-
-        public static ReadOnlyCollection<IWebElement> FindElementsByAndroidUIAutomator(this AppiumDriver driver, string selector, int timeoutSecs)
-        {
-            RemoteMobileDriver.SetTimeout(timeoutSecs);
-            var elements = driver.FindElementsWithMethod(new Func<string, ReadOnlyCollection<IWebElement>>(driver.FindElementsByAndroidUIAutomator), selector);
-            RemoteMobileDriver.SetDefaultWait();
-            return elements;
-        }
-
 
         public static bool ElementWithinBounds(this AppiumDriver driver, IWebElement element)
         {

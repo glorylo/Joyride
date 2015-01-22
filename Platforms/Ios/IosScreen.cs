@@ -5,12 +5,14 @@ using System.Text.RegularExpressions;
 using Joyride.Extensions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
+using OpenQA.Selenium.Appium.iOS;
 
 namespace Joyride.Platforms.Ios
 {
     abstract public class IosScreen : Screen
     {
         protected static ScreenFactory ScreenFactory = new IosScreenFactory();
+        protected static new IOSDriver Driver = (IOSDriver) RemoteMobileDriver.GetInstance();
 
         public override Screen TapAndHold(string elementName, int seconds)
         {

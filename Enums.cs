@@ -1,6 +1,12 @@
 ﻿
 namespace Joyride
 {
+    public enum Platform
+    {
+        Android,
+        Ios
+    }
+    
     public enum Direction
     {
         Left,
