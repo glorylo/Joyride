@@ -64,7 +64,7 @@ namespace Joyride.Platforms.Android
             element.Click();
             element.Clear();
             element.SendKeys(text);
-            Driver.HideKeyboard();
+            HideKeyboard();
             // allow time to render the other half of the screen
             Driver.WaitFor(TimeSpan.FromMilliseconds(500));
             return this;
