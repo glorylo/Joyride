@@ -10,6 +10,19 @@ namespace Joyride.Platforms
     abstract public class Screen : Component, IScreen
     {
         abstract public bool IsOnScreen(int timeOutSecs = DefaultWaitSeconds);
+
+        protected void TapInWebview(string elementName)
+        {
+            Driver.DoActionInWebView(() =>
+            {
+                var element = FindElement(elementName);
+                if (element == null)
+                    throw new NoSuchElementException("Cannot find element:  " + elementName);
+
+                element.Click();
+            });
+        }
+
         public virtual Screen Tap(string elementName, bool precise = false)
         {
             IWebElement element = FindElement(elementName);
