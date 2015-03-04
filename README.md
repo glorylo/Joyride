@@ -6,8 +6,17 @@ Joyride is cross platform mobile "pageobjects" framework to interact with screen
 
 Joyride.Specflow is the Behaviour Driven Development (BDD) layer that supplies a stock of useful actions such as tap and entering text, etc.  
 
+# Dependencies
 
-# Getting Started
+* Appium.WebDriver
+* Selenium.WebDriver
+* Selenium.Support
+* Newtonsoft.Json
+* NUnit
+* SpecFlow
+* SpecFlow.NUnit
+
+# Usage
 1. Create a new project in Visual Studio
 1. Add Joyride and Joyride.Specflow as references
 1. Modify your app.config from specflows default.
