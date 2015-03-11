@@ -51,7 +51,7 @@ namespace Joyride.Specflow.Steps
             Context.MobileApp.Do<Screen>(s => s.SelectOption(dropDownList, extractedValue));
         }
        
-        [Given(@"I (check|check) the ""([^""]*)"" checkbox")]
+        [Given(@"I (uncheck|check) the ""([^""]*)"" checkbox")]
         [When(@"I (uncheck|check) the ""([^""]*)"" checkbox")]
         public void WhenICheckSomeCheckbox(string checkOrUnchecked, string checkboxName)
         {
