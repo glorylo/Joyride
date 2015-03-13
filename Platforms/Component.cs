@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
@@ -70,7 +69,10 @@ namespace Joyride.Platforms
             {
                 elements = (IList<IWebElement>)field.GetValue(this);
                 Trace.WriteLine("Found field with collection:  " + collectionName);
-                return elements;
+
+                // able to access elements
+                if (elements.GetEnumerator().MoveNext())
+                   return elements;
             }
             Trace.WriteLine("Unable to find collection with name:  " + collectionName);
             return null;
@@ -86,18 +88,19 @@ namespace Joyride.Platforms
             return Driver.FindElementWithMethod(timeoutSecs, new Func<string, IWebElement>(FindElement), elementName);
         }
 
-        public int SizeOf(string collectionName)
+        public int SizeOf(string collectionName, int timeoutSecs=DefaultWaitSeconds)
         {
-            var collection = FindElements(collectionName, DefaultWaitSeconds);
+            var collection = FindElements(collectionName, timeoutSecs);
 
             if (collection == null)
-                throw new NoSuchElementException("Cannot find collection:  " + collectionName);
-            return collection.Count;
+                return 0;   
+
+            return collection.Count;            
         }
 
-        public bool IsEmpty(string collectionName)
+        public bool IsEmpty(string collectionName, int timeoutSecs = DefaultWaitSeconds)
         {
-            return (SizeOf(collectionName) == 0);
+            return (SizeOf(collectionName, timeoutSecs) == 0);
         }
 
         public string GetElementAttribute(string elementName, string attributeName)
