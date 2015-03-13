@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
@@ -48,9 +49,9 @@ namespace Joyride.Platforms
             return null;
         }
 
-        protected ReadOnlyCollection<IWebElement> FindElements(string collectionName)
+        protected IList<IWebElement> FindElements(string collectionName)
         {
-            ReadOnlyCollection<IWebElement> elements = null;
+            IList<IWebElement> elements = null;
             MemberInfo member = GetType()
                 .GetMember(collectionName.ToPascalCase(), BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault();
             if (member == null)
@@ -59,7 +60,7 @@ namespace Joyride.Platforms
             var property = member as PropertyInfo;
             if (property != null)
             {
-                elements = (ReadOnlyCollection<IWebElement>)property.GetValue(this, null);
+                elements = (IList<IWebElement>)property.GetValue(this, null);
                 Trace.WriteLine("Found property with collection:  " + collectionName);
                 return elements;
             }
@@ -67,7 +68,7 @@ namespace Joyride.Platforms
             var field = member as FieldInfo;
             if (field != null)
             {
-                elements = (ReadOnlyCollection<IWebElement>)field.GetValue(this);
+                elements = (IList<IWebElement>)field.GetValue(this);
                 Trace.WriteLine("Found field with collection:  " + collectionName);
                 return elements;
             }
@@ -75,9 +76,9 @@ namespace Joyride.Platforms
             return null;
         }
 
-        protected ReadOnlyCollection<IWebElement> FindElements(string collectionName, int timeoutSecs)
+        protected IList<IWebElement> FindElements(string collectionName, int timeoutSecs)
         {
-            return Driver.FindElementsWithMethod(timeoutSecs, new Func<string, ReadOnlyCollection<IWebElement>>(FindElements), collectionName);
+            return Driver.FindElementsWithMethod(timeoutSecs, new Func<string, IList<IWebElement>>(FindElements), collectionName);
         }
 
         protected IWebElement FindElement(string elementName, int timeoutSecs)
@@ -110,7 +111,7 @@ namespace Joyride.Platforms
             return (attribValue == null) ? null : attribValue.Trim();
         }
 
-        protected IWebElement GetElementInCollection(ReadOnlyCollection<IWebElement> collection , int index, bool last = false)
+        protected IWebElement GetElementInCollection(IList<IWebElement> collection , int index, bool last = false)
         {
             var zeroBasedIndex = index - 1;
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Reflection;
@@ -31,9 +32,9 @@ namespace Joyride.Extensions
             return element;
         }
 
-        public static ReadOnlyCollection<IWebElement> FindElements(this IWebElement parentElement, By by, int timeoutSecs)
+        public static IList<IWebElement> FindElements(this IWebElement parentElement, By by, int timeoutSecs)
         {
-            ReadOnlyCollection<IWebElement> elements = null;
+            IList<IWebElement> elements = null;
             RemoteMobileDriver.SetTimeout(timeoutSecs);
             try
             {
@@ -53,10 +54,10 @@ namespace Joyride.Extensions
             return element;
         }
 
-        public static ReadOnlyCollection<IWebElement> FindElements(this RemoteWebDriver driver, By by, int timeoutSecs)
+        public static IList<IWebElement> FindElements(this RemoteWebDriver driver, By by, int timeoutSecs)
         {
             RemoteMobileDriver.SetTimeout(timeoutSecs);
-            var elements = driver.FindElementsWithMethod(new Func<By, ReadOnlyCollection<IWebElement>>(driver.FindElements), by);
+            var elements = driver.FindElementsWithMethod(new Func<By, IList<IWebElement>>(driver.FindElements), by);
             RemoteMobileDriver.SetDefaultWait();
             return elements;
         }
@@ -82,7 +83,7 @@ namespace Joyride.Extensions
             return element;
         }
 
-        public static ReadOnlyCollection<IWebElement> FindElementsWithMethod(this RemoteWebDriver driver, int timeoutSecs,
+        public static IList<IWebElement> FindElementsWithMethod(this RemoteWebDriver driver, int timeoutSecs,
             Delegate findMethod, params object[] args)
         {
             RemoteMobileDriver.SetTimeout(timeoutSecs);
@@ -91,12 +92,12 @@ namespace Joyride.Extensions
             return elements;
         }
 
-        public static ReadOnlyCollection<IWebElement> FindElementsWithMethod(this RemoteWebDriver driver, Delegate findMethod,
+        public static IList<IWebElement> FindElementsWithMethod(this RemoteWebDriver driver, Delegate findMethod,
             params object[] arguments)
         {
-            ReadOnlyCollection<IWebElement> elements = null;
+            IList<IWebElement> elements = null;
             try {
-                elements = ScreenHelper.InvokeMethod(findMethod, arguments) as ReadOnlyCollection<IWebElement>;
+                elements = ScreenHelper.InvokeMethod(findMethod, arguments) as IList<IWebElement>;
             }
             catch (Exception) { return null; }
             return elements;

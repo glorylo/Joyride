@@ -1,5 +1,7 @@
 ﻿
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Joyride.Extensions;
 using OpenQA.Selenium;
@@ -78,7 +80,7 @@ namespace Joyride.Platforms.Android
 
         protected bool HasContentDesc(string label, CompareType compareType, int timeoutSecs=DefaultWaitSeconds)
         {
-            ReadOnlyCollection<IWebElement> texts = null;
+            IList<IWebElement> texts = null;
             switch (compareType)
             {
                 case CompareType.Equals:
@@ -109,7 +111,7 @@ namespace Joyride.Platforms.Android
 
         protected bool HasText(string label, CompareType compareType, int timeoutSecs = DefaultWaitSeconds)
         {
-            ReadOnlyCollection<IWebElement> texts = null;
+            IList<IWebElement> texts = null;
             switch (compareType)
             {
                 case CompareType.Equals:
