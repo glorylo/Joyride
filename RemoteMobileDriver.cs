@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Drawing;
-using Joyride.Extensions;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Appium.iOS;

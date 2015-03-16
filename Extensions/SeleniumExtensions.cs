@@ -38,9 +38,12 @@ namespace Joyride.Extensions
 
         public static void DoActionWithTimeout(this RemoteWebDriver driver, int timeoutSecs, Action action)
         {
-            RemoteMobileDriver.SetTimeout(timeoutSecs);
-            action();
-            RemoteMobileDriver.SetDefaultWait();
+            lock (ThisLock)
+            {
+                RemoteMobileDriver.SetTimeout(timeoutSecs);
+                action();
+                RemoteMobileDriver.SetDefaultWait();
+            }
         }
 
         public static IWebElement FindElement(this IWebElement parentElement, By by, int timeoutSecs)
