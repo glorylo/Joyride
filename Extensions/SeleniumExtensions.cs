@@ -11,19 +11,28 @@ namespace Joyride.Extensions
 {
     public static class SeleniumExtensions
     {
+        private static readonly Object ThisLock = new object();
         private static IWebElement FindElementWithTimeout(Func<IWebElement> func, int timeoutSecs)
         {
-            RemoteMobileDriver.SetTimeout(timeoutSecs);
-            var element = func();
-            RemoteMobileDriver.SetDefaultWait();
+            IWebElement element = null;
+            lock (ThisLock)
+            {
+                RemoteMobileDriver.SetTimeout(timeoutSecs);
+                element = func();
+                RemoteMobileDriver.SetDefaultWait();                
+            }
             return element;
         }
 
-        private static IList<IWebElement> FindElemenstWithTimeout(Func<IList<IWebElement>> func, int timeoutSecs)
+        private static IList<IWebElement> FindElementsWithTimeout(Func<IList<IWebElement>> func, int timeoutSecs)
         {
-            RemoteMobileDriver.SetTimeout(timeoutSecs);
-            var elements = func();
-            RemoteMobileDriver.SetDefaultWait();
+            IList<IWebElement> elements = null;
+            lock (ThisLock)
+            {
+                RemoteMobileDriver.SetTimeout(timeoutSecs);
+                elements = func();
+                RemoteMobileDriver.SetDefaultWait();
+            }
             return elements;
         }
 
@@ -49,7 +58,7 @@ namespace Joyride.Extensions
 
         public static IList<IWebElement> FindElements(this IWebElement parentElement, By by, int timeoutSecs)
         {
-            return FindElemenstWithTimeout(() =>
+            return FindElementsWithTimeout(() =>
             {
                 IList<IWebElement> elements = null;
                 try  {
@@ -67,7 +76,7 @@ namespace Joyride.Extensions
 
         public static IList<IWebElement> FindElements(this RemoteWebDriver driver, By by, int timeoutSecs)
         {
-            return FindElemenstWithTimeout(() => driver.FindElementsWithMethod(new Func<By, IList<IWebElement>>(driver.FindElements), by), timeoutSecs);
+            return FindElementsWithTimeout(() => driver.FindElementsWithMethod(new Func<By, IList<IWebElement>>(driver.FindElements), by), timeoutSecs);
         }
 
         public static IWebElement FindElementWithMethod(this RemoteWebDriver driver, Delegate findMethod,
@@ -90,7 +99,7 @@ namespace Joyride.Extensions
         public static IList<IWebElement> FindElementsWithMethod(this RemoteWebDriver driver, int timeoutSecs,
             Delegate findMethod, params object[] args)
         {
-            return FindElemenstWithTimeout(() => driver.FindElementsWithMethod(findMethod, args), timeoutSecs);
+            return FindElementsWithTimeout(() => driver.FindElementsWithMethod(findMethod, args), timeoutSecs);
         }
 
         public static IList<IWebElement> FindElementsWithMethod(this RemoteWebDriver driver, Delegate findMethod,
