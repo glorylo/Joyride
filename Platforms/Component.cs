@@ -18,10 +18,7 @@ namespace Joyride.Platforms
         protected IWebElement FindElement(string elementName)
         {
             IWebElement element = null;
-            MemberInfo member = GetType()
-                .GetMember(elementName.ToPascalCase(), BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault();
-            if (member == null)
-                throw new NoSuchElementException(elementName + " is not found");
+            var member = GetMemberInfo(elementName);
 
             var property = member as PropertyInfo;
             if (property != null)
@@ -48,13 +45,19 @@ namespace Joyride.Platforms
             return null;
         }
 
+        protected MemberInfo GetMemberInfo(string elementName)
+        {
+            MemberInfo member = GetType()
+                .GetMember(elementName.ToPascalCase(), BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault();
+            if (member == null)
+                throw new NoSuchElementException(elementName + " is not found");
+            return member;
+        }
+
         protected IList<IWebElement> FindElements(string collectionName)
         {
             IList<IWebElement> elements = null;
-            MemberInfo member = GetType()
-                .GetMember(collectionName.ToPascalCase(), BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault();
-            if (member == null)
-                throw new NoSuchElementException(collectionName + " is not found");
+            MemberInfo member = GetMemberInfo(collectionName);
 
             var property = member as PropertyInfo;
             if (property != null)
