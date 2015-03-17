@@ -98,8 +98,8 @@ namespace Joyride.Platforms.Android
                 default:
                     throw new NotImplementedException("Other text compares are not implemented");
             }
-            var element = FindElementWithinCollection(collectionName, xpath);
-            return (element != null);
+            var tuple = FindElementWithinCollection(collectionName, xpath);
+            return (tuple != null);
         }
 
         protected bool HasContentDesc(string label, CompareType compareType, int timeoutSecs=DefaultWaitSeconds)

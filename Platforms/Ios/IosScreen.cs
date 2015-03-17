@@ -59,8 +59,8 @@ namespace Joyride.Platforms.Ios
                 default:
                     throw new NotImplementedException("Other text compares are not implemented");
             }
-            var element = FindElementWithinCollection(collectionName, xpath);
-            return (element != null);
+            var tuple = FindElementWithinCollection(collectionName, xpath);
+            return (tuple != null);
         }
 
 
