@@ -211,6 +211,7 @@ namespace Joyride.Platforms
             return attribute.Using;
         }
         
+        //TODO: remove this method
         [Obsolete("This method is no longer supported. Use GetElementFindBySelector")]
         protected string GetElementXPathSelector(string elementName)
         {
@@ -225,7 +226,7 @@ namespace Joyride.Platforms
             return attrib.Using;
         }
 
-        protected IWebElement FindElementWithinCollection(string collectionName, string relativeXpath)
+        protected IWebElement FindElementWithinCollection(string collectionName, string relativeXpath, int timeoutSecs=5)
         {
             var attribute = GetElementFindByAttribute(collectionName);
 
@@ -239,7 +240,7 @@ namespace Joyride.Platforms
             for (var i=1; i <= size; i++)
             {
                 var xpath = "(" + parentXpath + ")[" + i + "]" + relativeXpath;
-                var element = Driver.FindElement(By.XPath(xpath));
+                var element = Driver.FindElement(By.XPath(xpath), timeoutSecs);
                 if (element != null)
                     return element;
             }

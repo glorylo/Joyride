@@ -78,6 +78,30 @@ namespace Joyride.Platforms.Android
             return HasText(label, compareType, timeoutSecs) || HasContentDesc(label, compareType, timeoutSecs);
         }
 
+        public virtual bool HasLabelInCollection(string collectionName, string label, CompareType compareType)
+        {
+            var xpath = "//*";
+            switch (compareType)
+            {
+                case CompareType.StartsWith:
+                    xpath += "[starts-with(@text, '" + label + "')]";
+                    break;
+
+                case CompareType.Containing:
+                    xpath += "[contains(@text, '" + label + "')]";
+                    break;
+                    
+                case CompareType.Equals:
+                    xpath += "[@text='" + label + "')]";
+                    break;
+
+                default:
+                    throw new NotImplementedException("Other text compares are not implemented");
+            }
+            var element = FindElementWithinCollection(collectionName, xpath);
+            return (element != null);
+        }
+
         protected bool HasContentDesc(string label, CompareType compareType, int timeoutSecs=DefaultWaitSeconds)
         {
             IList<IWebElement> texts = null;
