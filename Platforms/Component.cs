@@ -15,6 +15,16 @@ namespace Joyride.Platforms
         public const int DefaultWaitSeconds = RemoteMobileDriver.DefaultWaitSeconds;
         abstract public string Name { get; }
         static protected AppiumDriver Driver { get { return RemoteMobileDriver.GetInstance(); } }
+
+        protected MemberInfo GetMemberInfo(string elementOrCollectionName)
+        {
+            MemberInfo member = GetType()
+                .GetMember(elementOrCollectionName.ToPascalCase(), BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault();
+            if (member == null)
+                throw new NoSuchElementException(elementOrCollectionName + " is not defined on: " + Name);
+            return member;
+        }
+
         protected IWebElement FindElement(string elementName)
         {
             IWebElement element = null;
@@ -45,15 +55,6 @@ namespace Joyride.Platforms
             return null;
         }
 
-        protected MemberInfo GetMemberInfo(string elementName)
-        {
-            MemberInfo member = GetType()
-                .GetMember(elementName.ToPascalCase(), BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault();
-            if (member == null)
-                throw new NoSuchElementException(elementName + " is not found");
-            return member;
-        }
-
         protected IList<IWebElement> FindElements(string collectionName)
         {
             IList<IWebElement> elements = null;
@@ -76,8 +77,7 @@ namespace Joyride.Platforms
                 // able to access elements
                 if (elements.GetEnumerator().MoveNext())
                    return elements;
-            }
-            Trace.WriteLine("Unable to find collection with name:  " + collectionName);
+            }            
             return null;
         }
 
@@ -97,7 +97,6 @@ namespace Joyride.Platforms
 
             if (collection == null)
                 return 0;   
-
             return collection.Count;            
         }
 
@@ -196,6 +195,23 @@ namespace Joyride.Platforms
             return (element != null);
         }
 
+        protected FindsByAttribute GetElementFindByAttribute(string elementOrCollectionName)
+        {
+            var member = GetMemberInfo(elementOrCollectionName);
+            if (member == null)
+                return null;
+            return member.GetCustomAttribute<FindsByAttribute>();
+        }
+
+        protected string GetElementFindBySelector(string elementOrCollectionName)
+        {
+            var attribute = GetElementFindByAttribute(elementOrCollectionName);
+            if (attribute == null)
+                return null;
+            return attribute.Using;
+        }
+        
+        [Obsolete("This method is no longer supported. Use GetElementFindBySelector")]
         protected string GetElementXPathSelector(string elementName)
         {
             var field = GetType().GetField(elementName.ToPascalCase(), BindingFlags.NonPublic | BindingFlags.Instance);
@@ -207,6 +223,27 @@ namespace Joyride.Platforms
             if (attrib.How != How.XPath)
                 return null;
             return attrib.Using;
+        }
+
+        protected IWebElement FindElementWithinCollection(string collectionName, string relativeXpath)
+        {
+            var attribute = GetElementFindByAttribute(collectionName);
+
+            if (attribute == null || attribute.How != How.XPath)
+                throw new ArgumentException("Only collection with find by xpath selector is supported.  Ensure the collection, " + collectionName + ", is using xpath");
+
+            var parentXpath = attribute.Using;
+            var size = SizeOf(collectionName);
+
+            // xpath is 1-based index
+            for (var i=1; i <= size; i++)
+            {
+                var xpath = "(" + parentXpath + ")[" + i + "]" + relativeXpath;
+                var element = Driver.FindElement(By.XPath(xpath));
+                if (element != null)
+                    return element;
+            }
+            return null;
         }
 
         public string GetElementText(string elementName)
