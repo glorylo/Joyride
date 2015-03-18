@@ -53,7 +53,7 @@ namespace Joyride.Platforms.Ios
                     break;
 
                 case CompareType.Equals:
-                    xpath += "[@label='" + label + "')]";
+                    xpath += "[@label='" + label + "']";
                     break;
 
                 default:

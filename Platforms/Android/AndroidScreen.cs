@@ -90,7 +90,7 @@ namespace Joyride.Platforms.Android
                     break;
                     
                 case CompareType.Equals:
-                    xpath += "[@text='" + label + "')]";
+                    xpath += "[@text='" + label + "']";
                     break;
 
                 default:
