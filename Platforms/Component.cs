@@ -226,31 +226,20 @@ namespace Joyride.Platforms
             return attrib.Using;
         }
 
-        protected Tuple<IWebElement, int, string> FindElementWithinCollection(string collectionName, string relativeXpath, int timeoutSecs=5)
-        {
-
-            var attribute = GetElementFindByAttribute(collectionName);
-
-            if (attribute == null || attribute.How != How.XPath)
-                throw new ArgumentException("Only collection with find by xpath selector is supported.  Ensure the collection, " + collectionName + ", is using xpath");
-
-            var parentXpath = attribute.Using;
-            
+        protected Tuple<IWebElement, int, string, string> FindElementWithinCollection(string collectionName, string relativeXpath, int timeoutSecs = 5)
+        {           
             var size = SizeOf(collectionName);
-
             // xpath is 1-based index
-            for (var i=1; i <= size; i++)
+            for (var i = 1; i <= size; i++)
             {
-                var parentElementXpath = "(" + parentXpath + ")[" + i + "]";
-                var xpath = parentElementXpath + relativeXpath;
-                var element = Driver.FindElement(By.XPath(xpath), timeoutSecs);
-                if (element != null)
-                    return Tuple.Create(element, i, parentElementXpath);
+                var tuple = FindElementWithinCollection(collectionName, i, relativeXpath, timeoutSecs);
+                if (tuple != null)
+                    return tuple;
             }
             return null;
         }
 
-        protected Tuple<IWebElement, string> FindElementWithinCollection(string collectionName, int index, string relativeXpath, int timeoutSecs = 5)
+        protected Tuple<IWebElement, int, string, string> FindElementWithinCollection(string collectionName, int index, string relativeXpath, int timeoutSecs = 5)
         {
             var attribute = GetElementFindByAttribute(collectionName);
 
@@ -258,17 +247,19 @@ namespace Joyride.Platforms
                 throw new ArgumentException("Only collection with find by xpath selector is supported.  Ensure the collection, " + collectionName + ", is using xpath");
 
             var parentXpath = attribute.Using;
-            var size = SizeOf(collectionName);
-
-            if (index < 0 || index > size) 
-                throw new IndexOutOfRangeException("The index to the collection (" + collectionName + ") is out of range: " + index);
-
             var parentElementXpath = "(" + parentXpath + ")[" + index + "]";
             var xpath = parentElementXpath + relativeXpath;
             var element = Driver.FindElement(By.XPath(xpath), timeoutSecs);
-            return (element == null) ? null : Tuple.Create(element, parentElementXpath);
+            return (element == null) ? null : Tuple.Create(element, index, element.Text, parentElementXpath);
         }
-        
+
+        protected string GetTextFromElementWithinCollection(string collectionName, string relativeXpath,
+            int timeoutSecs = 5)
+        {
+            var tuple = FindElementWithinCollection(collectionName, relativeXpath, timeoutSecs);
+            return tuple == null ? null : tuple.Item3;
+        }
+
         public string GetElementText(string elementName)
         {
             var element = FindElement(elementName);
