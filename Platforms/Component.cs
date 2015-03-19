@@ -253,10 +253,10 @@ namespace Joyride.Platforms
             return (element == null) ? null : Tuple.Create(element, index, element.Text, parentElementXpath);
         }
 
-        protected string GetTextFromElementWithinCollection(string collectionName, string relativeXpath,
+        protected string GetTextFromElementWithinCollection(string collectionName, int index, string relativeXpath,
             int timeoutSecs = 5)
         {
-            var tuple = FindElementWithinCollection(collectionName, relativeXpath, timeoutSecs);
+            var tuple = FindElementWithinCollection(collectionName, index, relativeXpath, timeoutSecs);
             return tuple == null ? null : tuple.Item3;
         }
 
