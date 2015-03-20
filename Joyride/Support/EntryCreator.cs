@@ -35,9 +35,14 @@ namespace Joyride.Support
             ProcessValue = processText;
         }
 
+        protected string GetElementText(int index, string xpath)
+        {
+            return Component.GetTextFromElementWithinCollection(CollectionName, index, xpath);
+        }
+
         protected virtual IDictionary<string, object> AddProperty(IDictionary<string, object> dictonary, int index, string xpath, string key)
         {
-            var text = Component.GetTextFromElementWithinCollection(CollectionName, index, xpath);
+            var text = GetElementText(index, xpath);
             if (text != null)
             {
                 Trace.WriteLine("Found property, " + key + ", with value: " + text);
