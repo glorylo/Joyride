@@ -14,34 +14,34 @@ namespace Joyride.Support
     /// </summary>
     public class EntryCreator
     {
-        private readonly Component _component;        
-        private readonly IDictionary<string, string> _elementMap;
-        private readonly string _collectionName;
-        private readonly ProcessValue _processValue;
+        protected Component Component { get; private set; }        
+        protected IDictionary<string, string> ElementMap { get;  private set; }
+        protected string CollectionName { get;  private set; }
+        protected ProcessValue ProcessValue { get; private set; }
 
         public EntryCreator(Component component, string collectionName, IDictionary<string, string> elementMap)
         {
-            _component = component;
-            _elementMap = elementMap;
-            _collectionName = collectionName;
-            _processValue = (key, text) => text;
+            Component = component;
+            ElementMap = elementMap;
+            CollectionName = collectionName;
+            ProcessValue = (key, text) => text;
         }
 
         public EntryCreator(Component component, string collectionName, IDictionary<string, string> elementMap, ProcessValue processText)
         {
-            _component = component;
-            _elementMap = elementMap;
-            _collectionName = collectionName;
-            _processValue = processText;
+            Component = component;
+            ElementMap = elementMap;
+            CollectionName = collectionName;
+            ProcessValue = processText;
         }
 
-        private IDictionary<string, object> AddProperty(IDictionary<string, object> dictonary, int index, string xpath, string key)
+        protected virtual IDictionary<string, object> AddProperty(IDictionary<string, object> dictonary, int index, string xpath, string key)
         {
-            var text = _component.GetTextFromElementWithinCollection(_collectionName, index, xpath);
+            var text = Component.GetTextFromElementWithinCollection(CollectionName, index, xpath);
             if (text != null)
             {
                 Trace.WriteLine("Found property, " + key + ", with value: " + text);
-                var finalValue = _processValue(key, text);
+                var finalValue = ProcessValue(key, text);
                 Trace.WriteLine("Processed property (" + key + ") with value: " + finalValue);
                 dictonary.Add(key, finalValue);
             }
@@ -51,10 +51,10 @@ namespace Joyride.Support
             return dictonary;
         }
 
-        public IDictionary<string, object> GetNextEntry(int index)
+        public virtual IDictionary<string, object> GetNextEntry(int index)
         {
             var dictionary = new ExpandoObject() as IDictionary<string, object>;
-            return _elementMap.Aggregate(dictionary, (current, e) => AddProperty(current, index, e.Value, e.Key));
+            return ElementMap.Aggregate(dictionary, (current, e) => AddProperty(current, index, e.Value, e.Key));
         }
     }
 }
