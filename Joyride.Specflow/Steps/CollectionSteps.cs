@@ -11,6 +11,11 @@ namespace Joyride.Specflow.Steps
     [Binding]
     public class CollectionSteps
     {
+        #region Given/Whens
+
+        #endregion
+
+        #region #Thens
         [Then(@"there (should|should not) exists ""([^""]*)"" within the collection ""([^""]*)""")]
         public void ThenIShouldSeeProperty(string shouldOrShouldNot, string property, string collectionName)
         {
@@ -70,7 +75,7 @@ namespace Joyride.Specflow.Steps
                     Assert.IsFalse(conditionsMeet);
             });
         }
-
+        #endregion
 
     }
 }

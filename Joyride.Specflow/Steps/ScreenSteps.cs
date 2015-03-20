@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using Joyride.Extensions;
 using Joyride.Platforms;
-using Joyride.Specflow.Extensions;
 using Joyride.Specflow.Support;
 using NUnit.Framework;
 using TechTalk.SpecFlow;
