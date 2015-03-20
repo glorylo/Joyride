@@ -270,7 +270,7 @@ namespace Joyride.Platforms
             return element.Text;
         }
 
-        protected bool ElementExists(string elementName, int timeoutSecs=10)
+        internal protected bool ElementExists(string elementName, int timeoutSecs=10)
         {            
             return Driver.ElementExists(timeoutSecs, new Func<string, IWebElement>(FindElement), elementName);
         }

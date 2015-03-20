@@ -100,7 +100,7 @@ namespace Joyride.Platforms.Android
             return (tuple != null);
         }
 
-        protected bool HasContentDesc(string label, CompareType compareType, int timeoutSecs=DefaultWaitSeconds)
+        internal protected bool HasContentDesc(string label, CompareType compareType, int timeoutSecs=DefaultWaitSeconds)
         {
             IList<IWebElement> texts = null;
             switch (compareType)
@@ -131,7 +131,7 @@ namespace Joyride.Platforms.Android
             return false;
         }
 
-        protected bool HasText(string label, CompareType compareType, int timeoutSecs = DefaultWaitSeconds)
+        internal protected bool HasText(string label, CompareType compareType, int timeoutSecs = DefaultWaitSeconds)
         {
             IList<IWebElement> texts = null;
             switch (compareType)
