@@ -86,6 +86,7 @@
     <Compile Include="Platforms\Ios\IosScreenFactory.cs" />
     <Compile Include="Platforms\Screen.cs" />
     <Compile Include="Platforms\ScreenFactory.cs" />
+    <Compile Include="Support\EntryCreator.cs" />
     <Compile Include="Support\ScreenHelper.cs" />
   </ItemGroup>
   <ItemGroup>

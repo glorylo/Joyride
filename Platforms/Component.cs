@@ -16,7 +16,7 @@ namespace Joyride.Platforms
         abstract public string Name { get; }
         static protected AppiumDriver Driver { get { return RemoteMobileDriver.GetInstance(); } }
 
-        protected MemberInfo GetMemberInfo(string elementOrCollectionName)
+        internal protected MemberInfo GetMemberInfo(string elementOrCollectionName)
         {
             MemberInfo member = GetType()
                 .GetMember(elementOrCollectionName.ToPascalCase(), BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault();
@@ -25,7 +25,7 @@ namespace Joyride.Platforms
             return member;
         }
 
-        protected IWebElement FindElement(string elementName)
+        internal protected IWebElement FindElement(string elementName)
         {
             IWebElement element = null;
             var member = GetMemberInfo(elementName);
@@ -55,7 +55,7 @@ namespace Joyride.Platforms
             return null;
         }
 
-        protected IList<IWebElement> FindElements(string collectionName)
+        internal protected IList<IWebElement> FindElements(string collectionName)
         {
             IList<IWebElement> elements = null;
             MemberInfo member = GetMemberInfo(collectionName);
@@ -81,12 +81,12 @@ namespace Joyride.Platforms
             return null;
         }
 
-        protected IList<IWebElement> FindElements(string collectionName, int timeoutSecs)
+        internal protected IList<IWebElement> FindElements(string collectionName, int timeoutSecs)
         {
             return Driver.FindElementsWithMethod(timeoutSecs, new Func<string, IList<IWebElement>>(FindElements), collectionName);
         }
 
-        protected IWebElement FindElement(string elementName, int timeoutSecs)
+        internal protected IWebElement FindElement(string elementName, int timeoutSecs)
         {
             return Driver.FindElementWithMethod(timeoutSecs, new Func<string, IWebElement>(FindElement), elementName);
         }
@@ -116,7 +116,7 @@ namespace Joyride.Platforms
             return (attribValue == null) ? null : attribValue.Trim();
         }
 
-        protected IWebElement GetElementInCollection(IList<IWebElement> collection , int index, bool last = false)
+        internal protected IWebElement GetElementInCollection(IList<IWebElement> collection, int index, bool last = false)
         {
             var zeroBasedIndex = index - 1;
 
@@ -129,7 +129,7 @@ namespace Joyride.Platforms
             return collection.Last();            
         }
 
-        protected IWebElement GetElementInCollection(string collectionName, int index, bool last=false)
+        internal protected IWebElement GetElementInCollection(string collectionName, int index, bool last = false)
         {
             var collection = FindElements(collectionName, DefaultWaitSeconds);
 
@@ -149,7 +149,7 @@ namespace Joyride.Platforms
             return element;
         }
 
-        protected IWebElement GetElementInCollection(string collectionName, string text, CompareType compareType)
+        internal protected IWebElement GetElementInCollection(string collectionName, string text, CompareType compareType)
         {
             var collection = FindElements(collectionName, DefaultWaitSeconds);
             if (collection == null)
@@ -195,7 +195,7 @@ namespace Joyride.Platforms
             return (element != null);
         }
 
-        protected FindsByAttribute GetElementFindByAttribute(string elementOrCollectionName)
+        internal protected FindsByAttribute GetElementFindByAttribute(string elementOrCollectionName)
         {
             var member = GetMemberInfo(elementOrCollectionName);
             if (member == null)
@@ -203,7 +203,7 @@ namespace Joyride.Platforms
             return member.GetCustomAttribute<FindsByAttribute>();
         }
 
-        protected string GetElementFindBySelector(string elementOrCollectionName)
+        internal protected string GetElementFindBySelector(string elementOrCollectionName)
         {
             var attribute = GetElementFindByAttribute(elementOrCollectionName);
             if (attribute == null)
@@ -213,7 +213,7 @@ namespace Joyride.Platforms
         
         //TODO: remove this method
         [Obsolete("This method is no longer supported. Use GetElementFindBySelector")]
-        protected string GetElementXPathSelector(string elementName)
+        internal protected string GetElementXPathSelector(string elementName)
         {
             var field = GetType().GetField(elementName.ToPascalCase(), BindingFlags.NonPublic | BindingFlags.Instance);
 
@@ -226,7 +226,7 @@ namespace Joyride.Platforms
             return attrib.Using;
         }
 
-        protected Tuple<IWebElement, int, string, string> FindElementWithinCollection(string collectionName, string relativeXpath, int timeoutSecs = 5)
+        internal protected Tuple<IWebElement, int, string, string> FindElementWithinCollection(string collectionName, string relativeXpath, int timeoutSecs = 5)
         {           
             var size = SizeOf(collectionName);
             // xpath is 1-based index
@@ -239,7 +239,7 @@ namespace Joyride.Platforms
             return null;
         }
 
-        protected Tuple<IWebElement, int, string, string> FindElementWithinCollection(string collectionName, int index, string relativeXpath, int timeoutSecs = 5)
+        internal protected Tuple<IWebElement, int, string, string> FindElementWithinCollection(string collectionName, int index, string relativeXpath, int timeoutSecs = 5)
         {
             var attribute = GetElementFindByAttribute(collectionName);
 
@@ -253,7 +253,7 @@ namespace Joyride.Platforms
             return (element == null) ? null : Tuple.Create(element, index, element.Text, parentElementXpath);
         }
 
-        protected string GetTextFromElementWithinCollection(string collectionName, int index, string relativeXpath,
+        internal protected string GetTextFromElementWithinCollection(string collectionName, int index, string relativeXpath,
             int timeoutSecs = 5)
         {
             var tuple = FindElementWithinCollection(collectionName, index, relativeXpath, timeoutSecs);
