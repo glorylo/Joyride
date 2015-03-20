@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Dynamic;
 using System.Linq;
@@ -58,6 +59,9 @@ namespace Joyride.Support
 
         public virtual IDictionary<string, object> GetNextEntry(int index)
         {
+            if (index < 1) 
+                throw new IndexOutOfRangeException("Index is 1-based. Expect index to be greater than 0.  Got index value of: " + index);
+
             var dictionary = new ExpandoObject() as IDictionary<string, object>;
             return ElementMap.Aggregate(dictionary, (current, e) => AddProperty(current, index, e.Value, e.Key));
         }
