@@ -27,7 +27,7 @@ namespace Joyride.Support
             _processValue = processText;
         }
 
-        private IDictionary<string, object> AddEntryProperty(IDictionary<string, object> dictonary, string collectionName, int index, string xpath, string key)
+        private IDictionary<string, object> AddProperty(IDictionary<string, object> dictonary, string collectionName, int index, string xpath, string key)
         {
             var text = _component.GetTextFromElementWithinCollection(collectionName, index, xpath);
             if (text != null)
@@ -46,7 +46,7 @@ namespace Joyride.Support
         public IDictionary<string, object> GetNextEntry(string collectionName, int index)
         {
             IDictionary<string, object> dictionary = new Dictionary<string, object>();
-            return _elementMap.Aggregate(dictionary, (current, e) => AddEntryProperty(current, collectionName, index, e.Value, e.Key));
+            return _elementMap.Aggregate(dictionary, (current, e) => AddProperty(current, collectionName, index, e.Value, e.Key));
         }
     }
 }
