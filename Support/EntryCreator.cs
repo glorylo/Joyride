@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using Joyride.Platforms;
 
 namespace Joyride.Support
@@ -45,10 +46,7 @@ namespace Joyride.Support
         public IDictionary<string, object> GetNextEntry(string collectionName, int index)
         {
             IDictionary<string, object> dictionary = new Dictionary<string, object>();
-            foreach (var e in _elementMap)
-                dictionary = AddEntryProperty(dictionary, collectionName, index, e.Value, e.Key);
-
-            return dictionary;
+            return _elementMap.Aggregate(dictionary, (current, e) => AddEntryProperty(current, collectionName, index, e.Value, e.Key));
         }
     }
 }
