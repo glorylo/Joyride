@@ -7,7 +7,7 @@ using Joyride.Platforms;
 
 namespace Joyride.Support
 {
-    public delegate object ProcessValue(string key, string value);
+    public delegate object ProcessKeyValue(string key, string value);
 
     /// <summary>
     /// Utility class to create entries off from a collection.  Provide the component, the collection and a element map (property, relative xpath pairs)
@@ -18,22 +18,22 @@ namespace Joyride.Support
         protected Component Component { get; private set; }        
         protected IDictionary<string, string> ElementMap { get;  private set; }
         protected string CollectionName { get;  private set; }
-        protected ProcessValue ProcessValue { get; private set; }
+        public ProcessKeyValue ProcessKeyValue { get; set; }
 
         public EntryCreator(Component component, string collectionName, IDictionary<string, string> elementMap)
         {
             Component = component;
             ElementMap = elementMap;
             CollectionName = collectionName;
-            ProcessValue = (key, text) => text;
+            ProcessKeyValue = (key, text) => text;
         }
 
-        public EntryCreator(Component component, string collectionName, IDictionary<string, string> elementMap, ProcessValue processText)
+        public EntryCreator(Component component, string collectionName, IDictionary<string, string> elementMap, ProcessKeyValue processKeyValue)
         {
             Component = component;
             ElementMap = elementMap;
             CollectionName = collectionName;
-            ProcessValue = processText;
+            ProcessKeyValue = processKeyValue;
         }
 
         protected string GetElementText(int index, string xpath)
@@ -47,7 +47,7 @@ namespace Joyride.Support
             if (text != null)
             {
                 Trace.WriteLine("Found property, " + key + ", with value: " + text);
-                var finalValue = ProcessValue(key, text);
+                var finalValue = ProcessKeyValue(key, text);
                 Trace.WriteLine("Processed property (" + key + ") with value: " + finalValue);
                 dictonary.Add(key, finalValue);
             }
