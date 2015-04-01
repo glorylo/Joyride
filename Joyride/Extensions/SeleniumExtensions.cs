@@ -87,7 +87,7 @@ namespace Joyride.Extensions
         {
             IWebElement element = null;
             try {
-                element = ScreenHelper.InvokeMethod(findMethod, arguments) as IWebElement;
+                element = Util.InvokeMethod(findMethod, arguments) as IWebElement;
             }
             catch (Exception) { return null; }
             return element;
@@ -110,7 +110,7 @@ namespace Joyride.Extensions
         {
             IList<IWebElement> elements = null;
             try {
-                elements = ScreenHelper.InvokeMethod(findMethod, arguments) as IList<IWebElement>;
+                elements = Util.InvokeMethod(findMethod, arguments) as IList<IWebElement>;
             }
             catch (Exception) { return null; }
             return elements;

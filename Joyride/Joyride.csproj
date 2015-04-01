@@ -87,7 +87,7 @@
     <Compile Include="Platforms\Screen.cs" />
     <Compile Include="Platforms\ScreenFactory.cs" />
     <Compile Include="Support\EntryCreator.cs" />
-    <Compile Include="Support\ScreenHelper.cs" />
+    <Compile Include="Support\Util.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

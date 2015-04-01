@@ -2,7 +2,7 @@
 
 namespace Joyride.Support
 {
-    static public class ScreenHelper
+    static public class Util
     {
         public static object InvokeMethod(Delegate method, params object[] args)
         {
