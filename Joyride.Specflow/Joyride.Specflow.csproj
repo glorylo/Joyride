@@ -74,6 +74,7 @@
     <Compile Include="Steps\IosScreenSteps.cs" />
     <Compile Include="Steps\MobileAppSteps.cs" />
     <Compile Include="Steps\ScreenSteps.cs" />
+    <Compile Include="Support\PredicateParser.cs" />
     <Compile Include="Support\PropertyCondition.cs" />
     <Compile Include="Support\ScreenshotUtil.cs" />
     <Compile Include="Support\StepsHelper.cs" />
