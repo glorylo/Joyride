@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -7,7 +8,18 @@ using System.Text.RegularExpressions;
 
 // Forked version of PredicateParser originally by Andreas Gieriet
 // See this Article:  http://www.codeproject.com/Articles/355513/Invent-your-own-Dynamic-LINQ-parser
+// Added improvements:
+// - Access property fields via dynamic obj
+// - Added string built in predicates
+// - Added white space identifies support w/ square brackets
+//
+// Some Good TODOS / Enhancements: 
+// - Move this to a separate nuget package
+// - Make the parser customizable at run-time to add new predicates
+// - Support multi arguments for predicates via function calls
+//
 // Glory Lo
+
 namespace Joyride.Specflow.Support
 {
     public abstract class PredicateParser
@@ -44,8 +56,7 @@ namespace Joyride.Specflow.Support
         #region scanner
 
         protected static readonly string[] Operators = { "||", "&&", "==", "!=", "<=", ">=", "+", "-", "/", "*" };
-
-        /// <summary>tokenizer pattern: Optional-Spaces...Token...Optional-Spaces</summary>
+        /// <summary>tokenizer pattern: Optional-SpaceS...Token...Optional-Spaces</summary>
         private static readonly string _pattern = @"\s*(" + string.Join("|", new[]
           {              
               string.Join("|", ReservedWords.Select(Regex.Escape)), // reserved words                   
@@ -93,11 +104,9 @@ namespace Joyride.Specflow.Support
         }
         #endregion
     }
-
     public class PredicateParser<TData> : PredicateParser
     {
         #region code generator
-        private static readonly Expression _zero = Expression.Constant(0);
         private static readonly Type _bool = typeof(bool);
         private static readonly Type[] _prom = 
           { typeof(decimal), typeof(double), typeof(float), typeof(ulong), typeof(long), typeof(uint),
@@ -119,19 +128,6 @@ namespace Joyride.Specflow.Support
         }
         /// <summary>returns the first if both are same, or the largest type of both (or the first)</summary>
         private static Type MaxType(Type a, Type b) { return a == b ? a : (_prom.FirstOrDefault(t => t == a || t == b) ?? a); }
-
-        /// <summary>produce comparison based on IComparable types</summary>
-        private static Expression CompareToExpression(Expression lhs, Expression rhs, Func<Expression, Expression> rel)
-        {
-            lhs = Coerce(lhs, rhs);
-            rhs = Coerce(rhs, lhs);
-            Expression cmp = Expression.Call(
-            lhs,
-            lhs.Type.GetMethod("CompareTo", new[] { rhs.Type })
-                ?? lhs.Type.GetMethod("CompareTo", new[] { typeof(object) }), rhs);
-            return rel(cmp);
-        }
-
         /// <summary>
         /// Code generation of binary and unary epressions, utilizing type coercion where needed
         /// </summary>
@@ -140,12 +136,12 @@ namespace Joyride.Specflow.Support
           {
               { "||", (a,b)=>Expression.OrElse(Coerce(a, _bool), Coerce(b, _bool)) },
               { "&&", (a,b)=>Expression.AndAlso(Coerce(a, _bool), Coerce(b, _bool)) },
-              { "==", (a,b)=>CompareToExpression(a, b, c=>Expression.Equal             (c, _zero)) },
-              { "!=", (a,b)=>CompareToExpression(a, b, c=>Expression.NotEqual          (c, _zero)) },
-              { "<",  (a,b)=>CompareToExpression(a, b, c=>Expression.LessThan          (c, _zero)) },
-              { "<=", (a,b)=>CompareToExpression(a, b, c=>Expression.LessThanOrEqual   (c, _zero)) },
-              { ">=", (a,b)=>CompareToExpression(a, b, c=>Expression.GreaterThanOrEqual(c, _zero)) },
-              { ">",  (a,b)=>CompareToExpression(a, b, c=>Expression.GreaterThan       (c, _zero)) },
+              { "==", (a,b)=>Expression.Equal(Coerce(a,b), Coerce(b,a)) },
+              { "!=", (a,b)=>Expression.NotEqual(Coerce(a,b), Coerce(b,a)) },
+              { "<", (a,b)=>Expression.LessThan(Coerce(a,b), Coerce(b,a)) },
+              { "<=", (a,b)=>Expression.LessThanOrEqual(Coerce(a,b), Coerce(b,a)) },
+              { ">=", (a,b)=>Expression.GreaterThanOrEqual(Coerce(a,b), Coerce(b,a)) },
+              { ">", (a,b)=>Expression.GreaterThan(Coerce(a,b), Coerce(b,a)) },
               { "+", (a,b)=>Expression.Add(Coerce(a,b), Coerce(b,a)) },
               { "-", (a,b)=>Expression.Subtract(Coerce(a,b), Coerce(b,a)) },
               { "*", (a,b)=>Expression.Multiply(Coerce(a,b), Coerce(b,a)) },
@@ -211,6 +207,7 @@ namespace Joyride.Specflow.Support
         private PredicateParser(string s) : base(s) { }
         /// <summary>main entry point</summary>
         public static Expression<Func<TData, bool>> Parse(string s) { return new PredicateParser<TData>(s).Parse(); }
+        public static bool TryParse(string s) { try { Parse(s); } catch (Exception e) { Trace.WriteLine("Parsing exception: \n" + e.StackTrace); return false; } return true; }
         private Expression<Func<TData, bool>> Parse() { return Lambda(ParseExpression()); }
         private Expression ParseExpression() { return ParseOr(); }
         private Expression ParseOr() { return ParseBinary(ParseAnd, "||"); }
@@ -220,6 +217,7 @@ namespace Joyride.Specflow.Support
         private Expression ParseReservedWord() { return ParseBinary(ParseSum, "StartsWith?", "EndsWith?", "Containing?", "Matching?"); }
         private Expression ParseSum() { return ParseBinary(ParseMul, "+", "-"); }
         private Expression ParseMul() { return ParseBinary(ParseUnary, "/", "*", "%"); }
+
         private Expression ParseUnary()
         {
             if (CurrOpAndNext("!") != null) return _unOp["!"](ParseUnary());
@@ -274,8 +272,14 @@ namespace Joyride.Specflow.Support
             while ((op = CurrOpAndNext(ops)) != null) expr = _binOp[op](expr, parse());
             return expr;
         }
+
+
         #endregion
     }
+
+
+
+
 
 
 }

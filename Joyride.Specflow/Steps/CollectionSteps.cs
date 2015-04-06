@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Linq;
 using Joyride.Interfaces;
 using Joyride.Specflow.Support;
@@ -75,6 +76,53 @@ namespace Joyride.Specflow.Steps
                     Assert.IsFalse(conditionsMeet);
             });
         }
+
+        [Then(@"I (should|should not) see all the following properties within the collection ""([^""]*)"" meeting the conditions")]
+        public void ThenIShouldSeeTheFollowingPropertiesInCollectionMeetingCondition(string shouldOrShouldNot, string collectionName, Table table)
+        {
+            var conditionsMeet = true;
+            Context.MobileApp.Do<IEntryEnumerable>(i =>
+            {
+                var conditions = table.CreateSet<PropertyCondition>();
+                if (conditions == null)
+                    throw new ArgumentException("Unable to retrieve entry property table.");
+
+                var entries = i.GetEntries(collectionName);
+                foreach (var e in entries)
+                {
+                    if (!conditionsMeet)
+                        break;
+
+                    foreach (var c in conditions)
+                    {
+                        var foundProperty = e.ContainsKey(c.PropertyName);
+                        if (foundProperty)
+                        {
+                            object value;
+                            e.TryGetValue(c.PropertyName, out value);
+
+                            if (string.IsNullOrEmpty(c.Condition))
+                                continue;
+
+                            if (!StepsHelper.EvaluateCondition(c, e))
+                                conditionsMeet = false;
+
+                        }
+
+                        if (c.Mandatory && !foundProperty)
+                            conditionsMeet = false;
+                    }
+                }
+
+                if (shouldOrShouldNot == "should")
+                    Assert.IsTrue(conditionsMeet);
+                else
+                    Assert.IsFalse(conditionsMeet);
+            });
+        }
+
+
+
         #endregion
 
     }
