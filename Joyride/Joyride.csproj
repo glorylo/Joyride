@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Extensions\AndroidDriverExtension.cs" />
     <Compile Include="Extensions\TextCompareExtensions.cs" />
+    <Compile Include="Interfaces\IEntryEnumerable.cs" />
     <Compile Include="Platforms\Android\AndroidMobileApplication.cs" />
     <Compile Include="Platforms\Android\AndroidModalDialog.cs" />
     <Compile Include="Platforms\Android\AndroidScreen.cs" />
@@ -85,7 +86,8 @@
     <Compile Include="Platforms\Ios\IosScreenFactory.cs" />
     <Compile Include="Platforms\Screen.cs" />
     <Compile Include="Platforms\ScreenFactory.cs" />
-    <Compile Include="Support\ScreenHelper.cs" />
+    <Compile Include="Support\EntryCreator.cs" />
+    <Compile Include="Support\Util.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

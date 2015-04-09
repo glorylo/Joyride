@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Reflection;
 using System.Threading;
@@ -11,63 +11,83 @@ namespace Joyride.Extensions
 {
     public static class SeleniumExtensions
     {
+        private static readonly Object ThisLock = new object();
+        private static IWebElement FindElementWithTimeout(Func<IWebElement> func, int timeoutSecs)
+        {
+            IWebElement element = null;
+            lock (ThisLock)
+            {
+                RemoteMobileDriver.SetTimeout(timeoutSecs);
+                element = func();
+                RemoteMobileDriver.SetDefaultWait();                
+            }
+            return element;
+        }
+
+        private static IList<IWebElement> FindElementsWithTimeout(Func<IList<IWebElement>> func, int timeoutSecs)
+        {
+            IList<IWebElement> elements = null;
+            lock (ThisLock)
+            {
+                RemoteMobileDriver.SetTimeout(timeoutSecs);
+                elements = func();
+                RemoteMobileDriver.SetDefaultWait();
+            }
+            return elements;
+        }
+
         public static void DoActionWithTimeout(this RemoteWebDriver driver, int timeoutSecs, Action action)
         {
-            RemoteMobileDriver.SetTimeout(timeoutSecs);
-            action();
-            RemoteMobileDriver.SetDefaultWait();
+            lock (ThisLock)
+            {
+                RemoteMobileDriver.SetTimeout(timeoutSecs);
+                action();
+                RemoteMobileDriver.SetDefaultWait();
+            }
         }
 
         public static IWebElement FindElement(this IWebElement parentElement, By by, int timeoutSecs)
         {
-            IWebElement element = null;
-            RemoteMobileDriver.SetTimeout(timeoutSecs);
-            try {
-                element = parentElement.FindElement(by);    
-            }
-            catch (Exception) { return null; }
-            
-            RemoteMobileDriver.SetDefaultWait();
-            return element;
+            return FindElementWithTimeout(() =>
+            {                
+                IWebElement element = null;            
+                try {
+                    element = parentElement.FindElement(by);    
+                }
+                catch (Exception) { return null; }                        
+                return element;
+            }, timeoutSecs);
         }
 
-        public static ReadOnlyCollection<IWebElement> FindElements(this IWebElement parentElement, By by, int timeoutSecs)
+        public static IList<IWebElement> FindElements(this IWebElement parentElement, By by, int timeoutSecs)
         {
-            ReadOnlyCollection<IWebElement> elements = null;
-            RemoteMobileDriver.SetTimeout(timeoutSecs);
-            try
+            return FindElementsWithTimeout(() =>
             {
-                elements = parentElement.FindElements(by);
-            }
-            catch (Exception) { return null; }
-
-            RemoteMobileDriver.SetDefaultWait();
-            return elements;
+                IList<IWebElement> elements = null;
+                try  {
+                    elements = parentElement.FindElements(by);
+                }
+                catch (Exception) { return null; }
+                return elements;
+            }, timeoutSecs);
         }
 
         public static IWebElement FindElement(this RemoteWebDriver driver, By by, int timeoutSecs)
         {
-            RemoteMobileDriver.SetTimeout(timeoutSecs);
-            var element = driver.FindElementWithMethod(new Func<By, IWebElement>(driver.FindElement), by);
-            RemoteMobileDriver.SetDefaultWait();
-            return element;
+            return FindElementWithTimeout(() => driver.FindElementWithMethod(new Func<By, IWebElement>(driver.FindElement), by), timeoutSecs);
         }
 
-        public static ReadOnlyCollection<IWebElement> FindElements(this RemoteWebDriver driver, By by, int timeoutSecs)
+        public static IList<IWebElement> FindElements(this RemoteWebDriver driver, By by, int timeoutSecs)
         {
-            RemoteMobileDriver.SetTimeout(timeoutSecs);
-            var elements = driver.FindElementsWithMethod(new Func<By, ReadOnlyCollection<IWebElement>>(driver.FindElements), by);
-            RemoteMobileDriver.SetDefaultWait();
-            return elements;
+            return FindElementsWithTimeout(() => driver.FindElementsWithMethod(new Func<By, IList<IWebElement>>(driver.FindElements), by), timeoutSecs);
         }
 
         public static IWebElement FindElementWithMethod(this RemoteWebDriver driver, Delegate findMethod,
             params object[] arguments)
         {
             IWebElement element = null;
-            try
-            {
-                element = ScreenHelper.InvokeMethod(findMethod, arguments) as IWebElement;
+            try {
+                element = Util.InvokeMethod(findMethod, arguments) as IWebElement;
             }
             catch (Exception) { return null; }
             return element;
@@ -76,27 +96,21 @@ namespace Joyride.Extensions
         public static IWebElement FindElementWithMethod(this RemoteWebDriver driver, int timeoutSecs,
             Delegate findMethod, params object[] args)
         {
-            RemoteMobileDriver.SetTimeout(timeoutSecs);
-            var element = driver.FindElementWithMethod(findMethod, args);
-            RemoteMobileDriver.SetDefaultWait();
-            return element;
+            return FindElementWithTimeout(() => driver.FindElementWithMethod(findMethod, args), timeoutSecs);
         }
 
-        public static ReadOnlyCollection<IWebElement> FindElementsWithMethod(this RemoteWebDriver driver, int timeoutSecs,
+        public static IList<IWebElement> FindElementsWithMethod(this RemoteWebDriver driver, int timeoutSecs,
             Delegate findMethod, params object[] args)
         {
-            RemoteMobileDriver.SetTimeout(timeoutSecs);
-            var elements = driver.FindElementsWithMethod(findMethod, args);
-            RemoteMobileDriver.SetDefaultWait();
-            return elements;
+            return FindElementsWithTimeout(() => driver.FindElementsWithMethod(findMethod, args), timeoutSecs);
         }
 
-        public static ReadOnlyCollection<IWebElement> FindElementsWithMethod(this RemoteWebDriver driver, Delegate findMethod,
+        public static IList<IWebElement> FindElementsWithMethod(this RemoteWebDriver driver, Delegate findMethod,
             params object[] arguments)
         {
-            ReadOnlyCollection<IWebElement> elements = null;
+            IList<IWebElement> elements = null;
             try {
-                elements = ScreenHelper.InvokeMethod(findMethod, arguments) as ReadOnlyCollection<IWebElement>;
+                elements = Util.InvokeMethod(findMethod, arguments) as IList<IWebElement>;
             }
             catch (Exception) { return null; }
             return elements;
@@ -111,9 +125,7 @@ namespace Joyride.Extensions
         public static bool ElementExists(this RemoteWebDriver driver, int timeoutSecs, Delegate findMethod,
             params object[] arguments)
         {
-            RemoteMobileDriver.SetTimeout(timeoutSecs);
-            var foundElement = driver.FindElementWithMethod(findMethod, arguments);
-            RemoteMobileDriver.SetDefaultWait();
+            var foundElement = FindElementWithTimeout(() => driver.FindElementWithMethod(findMethod, arguments), timeoutSecs);
             return (foundElement != null);
         }
 

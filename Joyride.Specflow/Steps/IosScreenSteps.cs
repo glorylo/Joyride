@@ -29,6 +29,19 @@ namespace Joyride.Specflow.Steps
 
         #region Thens
 
+        //TODO: needs to be tested
+        // only xpath is supported so the single quote character is not allowed.
+        [Then(@"I (should|should not) see the label (equals|starts with|containing) text ""([^""']*)"" within the ""([^""]*)"" collection")]
+        public void ThenIShouldSeeLabelWithinCollection(string shouldOrShouldNot, string compare, string label, string collectionName)
+        {
+            var hasLabel = false;
+            Context.MobileApp.Do<IosScreen>(s => hasLabel = s.HasLabelInCollection(collectionName, label, compare.ToCompareType()));
+            if (shouldOrShouldNot == "should")
+                Assert.IsTrue(hasLabel, "Expecting to have a label that " + compare + " text: " + label + " within collection:  " + collectionName);
+            else
+                Assert.IsFalse(hasLabel, "Expecting not to have a label that " + compare + " text: " + label + " within collection:  " + collectionName);
+        }
+
         [Then(@"I should see the ""(\d+)"" in collection ""([^""]*)"" with (name|value) (equals|starts with|containing|matching) ""([^""]*)""")]
         public void ThenIShouldSeeElementAttributeValueInCollectionCompareWithText(int index, string collectionName, string nameOrValue, string compareType, string text)
         {

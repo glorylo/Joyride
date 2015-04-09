@@ -2,7 +2,6 @@
 using System.Linq;
 using Joyride.Extensions;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Support.UI;
 
 namespace Joyride.Platforms
@@ -11,7 +10,7 @@ namespace Joyride.Platforms
     {
         abstract public bool IsOnScreen(int timeOutSecs = DefaultWaitSeconds);
 
-        protected void TapInWebview(string elementName)
+        internal protected void TapInWebview(string elementName)
         {
             Driver.DoActionInWebView(() =>
             {

@@ -1,6 +1,6 @@
 ﻿
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using Joyride.Extensions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Android;
@@ -76,9 +76,33 @@ namespace Joyride.Platforms.Android
             return HasText(label, compareType, timeoutSecs) || HasContentDesc(label, compareType, timeoutSecs);
         }
 
-        protected bool HasContentDesc(string label, CompareType compareType, int timeoutSecs=DefaultWaitSeconds)
+        public virtual bool HasLabelInCollection(string collectionName, string label, CompareType compareType)
         {
-            ReadOnlyCollection<IWebElement> texts = null;
+            var xpath = "//*";
+            switch (compareType)
+            {
+                case CompareType.StartsWith:
+                    xpath += "[starts-with(@text, '" + label + "')]";
+                    break;
+
+                case CompareType.Containing:
+                    xpath += "[contains(@text, '" + label + "')]";
+                    break;
+                    
+                case CompareType.Equals:
+                    xpath += "[@text='" + label + "']";
+                    break;
+
+                default:
+                    throw new NotImplementedException("Other text compares are not implemented");
+            }
+            var tuple = FindElementWithinCollection(collectionName, xpath);
+            return (tuple != null);
+        }
+
+        internal protected bool HasContentDesc(string label, CompareType compareType, int timeoutSecs=DefaultWaitSeconds)
+        {
+            IList<IWebElement> texts = null;
             switch (compareType)
             {
                 case CompareType.Equals:
@@ -107,9 +131,9 @@ namespace Joyride.Platforms.Android
             return false;
         }
 
-        protected bool HasText(string label, CompareType compareType, int timeoutSecs = DefaultWaitSeconds)
+        internal protected bool HasText(string label, CompareType compareType, int timeoutSecs = DefaultWaitSeconds)
         {
-            ReadOnlyCollection<IWebElement> texts = null;
+            IList<IWebElement> texts = null;
             switch (compareType)
             {
                 case CompareType.Equals:

@@ -38,6 +38,34 @@ namespace Joyride.Platforms.Ios
             return this;
         }
 
+        //TODO: needs to be tested with ios step in joyride.specflow
+        public virtual bool HasLabelInCollection(string collectionName, string label, CompareType compareType)
+        {
+            var xpath = "//*";
+            switch (compareType)
+            {
+                case CompareType.StartsWith:
+                    xpath += "[starts-with(@label, '" + label + "')]";
+                    break;
+
+                case CompareType.Containing:
+                    xpath += "[contains(@label, '" + label + "')]";
+                    break;
+
+                case CompareType.Equals:
+                    xpath += "[@label='" + label + "']";
+                    break;
+
+                default:
+                    throw new NotImplementedException("Other text compares are not implemented");
+            }
+            var tuple = FindElementWithinCollection(collectionName, xpath);
+            return (tuple != null);
+        }
+
+
+        //TODO: would like to rewrite using text compare
+        [Obsolete]
         public bool HasLabelContainingText(string labelText, int timeoutSecs = DefaultWaitSeconds)
         {
             var xpath = "//UIAStaticText[contains(@label,'" + labelText + "')]";
@@ -45,6 +73,8 @@ namespace Joyride.Platforms.Ios
             return (element != null);
         }
 
+        //TODO: would like to write this using the collection abilities
+        [Obsolete]
         public virtual bool HasLabelContainingText(string collectionName, int index, string labelText, int timeoutSecs = DefaultWaitSeconds)
         {
             var element = GetElementInCollection(collectionName, index);
