@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joyride", "Joyride\Joyride.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joyride.Specflow", "Joyride.Specflow\Joyride.Specflow.csproj", "{514CB12A-9AD2-4BA9-9E29-D2F2A67781E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleExpression", "SimpleExpression\SimpleExpression.csproj", "{5FF3AE96-8318-4898-B285-4E98568E595D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{514CB12A-9AD2-4BA9-9E29-D2F2A67781E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{514CB12A-9AD2-4BA9-9E29-D2F2A67781E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{514CB12A-9AD2-4BA9-9E29-D2F2A67781E0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5FF3AE96-8318-4898-B285-4E98568E595D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5FF3AE96-8318-4898-B285-4E98568E595D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5FF3AE96-8318-4898-B285-4E98568E595D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5FF3AE96-8318-4898-B285-4E98568E595D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
