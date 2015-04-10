@@ -39,8 +39,8 @@ namespace Joyride.Specflow.Steps
                 Assert.IsFalse(hasProperty);
         }
 
-        [Then(@"I (should|should not) see all the following properties within the collection ""([^""]*)""")]
-        public void ThenIShouldSeeTheFollowingPropertiesWithinCollection(string shouldOrShouldNot, string collectionName, Table table)
+        [Then(@"I should see all the following properties within the collection ""([^""]*)""")]
+        public void ThenIShouldSeeTheFollowingPropertiesWithinCollection(string collectionName, Table table)
         {
             var conditionsMeet = true;
             Context.MobileApp.Do<IEntryEnumerable>(i =>
@@ -70,15 +70,12 @@ namespace Joyride.Specflow.Steps
                     }
                 }
                 
-                if (shouldOrShouldNot == "should")
-                    Assert.IsTrue(conditionsMeet);
-                else
-                    Assert.IsFalse(conditionsMeet);
+                Assert.IsTrue(conditionsMeet);
             });
         }
 
-        [Then(@"I (should|should not) see all the following properties within the collection ""([^""]*)"" meeting the conditions")]
-        public void ThenIShouldSeeTheFollowingPropertiesInCollectionMeetingCondition(string shouldOrShouldNot, string collectionName, Table table)
+        [Then(@"I should see all the following properties within the collection ""([^""]*)"" meeting the conditions")]
+        public void ThenIShouldSeeTheFollowingPropertiesInCollectionMeetingCondition(string collectionName, Table table)
         {
             var conditionsMeet = true;
             Context.MobileApp.Do<IEntryEnumerable>(i =>
@@ -114,10 +111,7 @@ namespace Joyride.Specflow.Steps
                     }
                 }
 
-                if (shouldOrShouldNot == "should")
-                    Assert.IsTrue(conditionsMeet);
-                else
-                    Assert.IsFalse(conditionsMeet);
+                Assert.IsTrue(conditionsMeet);
             });
         }
 
