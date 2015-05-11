@@ -44,6 +44,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(SolutionDir)packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="PredicateParser, Version=0.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PredicateParser.0.2.3.0\lib\net45\PredicateParser.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -74,7 +78,6 @@
     <Compile Include="Steps\IosScreenSteps.cs" />
     <Compile Include="Steps\MobileAppSteps.cs" />
     <Compile Include="Steps\ScreenSteps.cs" />
-    <Compile Include="Support\PredicateParser.cs" />
     <Compile Include="Support\PropertyCondition.cs" />
     <Compile Include="Support\ScreenshotUtil.cs" />
     <Compile Include="Support\StepsHelper.cs" />
