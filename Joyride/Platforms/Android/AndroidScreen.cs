@@ -164,5 +164,14 @@ namespace Joyride.Platforms.Android
 
         public abstract Screen GoBack();
 
+        public static bool IsOnScreen<T>(int timeoutSecs) where T : Screen, new()
+        {
+            return ScreenFactory.CreateScreen<T>().IsOnScreen(timeoutSecs);
+        }
+
+        public static bool IsOnScreen(Type t, int timeoutSecs)
+        {
+            return ScreenFactory.CreateScreen(t).IsOnScreen(timeoutSecs);
+        }
     }
 }
