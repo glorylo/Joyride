@@ -13,6 +13,8 @@ namespace Joyride.Specflow
             ScenarioContext.Current["Driver"] = null;
             ScenarioContext.Current["LogPath"] = @".\";
             ScenarioContext.Current["ScreenshotPath"] = @".\";
+            ScenarioContext.Current["CurrentUser"] = null;
+
         }
           
         public static void SetValue(string key, object value)
@@ -51,6 +53,11 @@ namespace Joyride.Specflow
             set { ScenarioContext.Current["ScreenshotPath"] = value; }
         }
 
+        public static object CurrentUser
+        {
+            get { return ScenarioContext.Current["CurrentUser"];  }
+            set { ScenarioContext.Current["CurrentUser"] = value;  }
+        }
 
     }
 }
