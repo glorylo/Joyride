@@ -142,7 +142,5 @@ namespace Joyride.Platforms.Ios
             Driver.Tap(pointBehindKeyboard);
         }
 
-
-
     }
 }
