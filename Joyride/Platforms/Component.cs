@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using Humanizer;
 using Joyride.Extensions;
 using Joyride.Support;
 using OpenQA.Selenium;
@@ -19,7 +20,7 @@ namespace Joyride.Platforms
 
         internal protected IWebElement FindElement(string elementName)
         {
-            var element = (IWebElement) Util.GetMemberValue(this, elementName.ToPascalCase(), BindingFlags.NonPublic);
+            var element = (IWebElement) Util.GetMemberValue(this, elementName.Dehumanize(), BindingFlags.NonPublic);
 
             if (element != null && element.IsPresent()) 
                 return element;
@@ -31,7 +32,7 @@ namespace Joyride.Platforms
         internal protected IList<IWebElement> FindElements(string collectionName)
         {
             var elements =
-                (IList<IWebElement>) Util.GetMemberValue(this, collectionName.ToPascalCase(), BindingFlags.NonPublic);
+                (IList<IWebElement>) Util.GetMemberValue(this, collectionName.Dehumanize(), BindingFlags.NonPublic);
 
             if (elements != null && elements.GetEnumerator().MoveNext()) 
                 return elements;
@@ -156,7 +157,7 @@ namespace Joyride.Platforms
 
         internal protected FindsByAttribute GetElementFindByAttribute(string elementOrCollectionName)
         {
-            var member = Util.GetMemberInfo(this, elementOrCollectionName.ToPascalCase(), BindingFlags.NonPublic);
+            var member = Util.GetMemberInfo(this, elementOrCollectionName.Dehumanize(), BindingFlags.NonPublic);
             return member == null ? null : member.GetCustomAttribute<FindsByAttribute>();
         }
 
@@ -168,21 +169,6 @@ namespace Joyride.Platforms
             return attribute.Using;
         }
         
-        //TODO: remove this method
-        [Obsolete("This method is no longer supported. Use GetElementFindBySelector")]
-        internal protected string GetElementXPathSelector(string elementName)
-        {
-            var field = GetType().GetField(elementName.ToPascalCase(), BindingFlags.NonPublic | BindingFlags.Instance);
-
-            if (field == null)
-                return null;
-
-            var attrib = (FindsByAttribute)field.GetCustomAttribute(typeof(FindsByAttribute));
-            if (attrib.How != How.XPath)
-                return null;
-            return attrib.Using;
-        }
-
         internal protected Tuple<IWebElement, int, string, string> FindElementWithinCollection(string collectionName, string relativeXpath, int timeoutSecs = 5)
         {           
             var size = SizeOf(collectionName);
