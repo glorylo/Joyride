@@ -44,12 +44,9 @@ namespace Joyride.Support
             return null;
         }
 
-        public static object GetDynamicMemberValue(dynamic obj, string memberName, BindingFlags flags = BindingFlags.Public)
+        public static object GetDynamicMemberValue(dynamic obj, string memberName)
         {
-            var memberValue = GetMemberValue((object)obj, memberName, flags);
-
-            if (memberValue != null)
-                return memberValue;
+            object memberValue;
 
             var dictionary = obj as IDictionary<string, object>;
 
@@ -64,7 +61,22 @@ namespace Joyride.Support
             if (memberValue == null)
                 Trace.WriteLine("Unable to the find member (" + memberName + ") for dynamic type");
 
+            Trace.WriteLine("Found dynamic member (" + memberName + "): " + memberValue);
             return memberValue;
+        }
+
+        public static bool HasMember(dynamic obj, string memberName)
+        {
+            var dictionary = obj as IDictionary<string, object>;
+            if (dictionary == null)
+                return false;
+
+            object memberValue;
+            dictionary.TryGetValue(memberName, out memberValue);
+            var foundMember = memberValue != null;
+            if (!foundMember)
+                Trace.WriteLine("Unable to find dynamic member: " + memberName);
+            return foundMember;
         }
     }
 }

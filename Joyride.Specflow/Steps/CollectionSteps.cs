@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Data;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Humanizer;
 using Joyride.Interfaces;
 using Joyride.Specflow.Support;
+using Joyride.Support;
 using NUnit.Framework;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -26,10 +28,10 @@ namespace Joyride.Specflow.Steps
             Context.MobileApp.Do<IEntryEnumerable>(i =>
             {
                 var entries = i.GetEntries(collectionName);
-                foreach (var e in entries.Where(e => e.ContainsKey(actualProperty)))
+                foreach (var e in entries.Where(e => Util.HasMember(e, actualProperty)))
                 {
-                    object value;
-                    e.TryGetValue(property, out value);
+                    object value = Util.GetDynamicMemberValue(e, actualProperty);
+                    //e.TryGetValue(property, out value);
                     hasProperty = true;
                     break;
                 }
@@ -60,11 +62,11 @@ namespace Joyride.Specflow.Steps
                     foreach (var c in conditions)
                     {
                         var property = c.PropertyName.Dehumanize();
-                        var foundProperty = e.ContainsKey(property);
+                        var foundProperty = Util.HasMember(e, property);
                         if (foundProperty)
                         {
-                            object value;
-                            e.TryGetValue(property, out value);                            
+                            object value = Util.GetDynamicMemberValue(e, property);
+                            //e.TryGetValue(property, out value);                            
                             continue;
                         }
 
@@ -96,11 +98,11 @@ namespace Joyride.Specflow.Steps
                     foreach (var c in conditions)
                     {
                         var property = c.PropertyName.Dehumanize();
-                        var foundProperty = e.ContainsKey(property);
+                        var foundProperty = Util.HasMember(e, property);
                         if (foundProperty)
                         {
-                            object value;
-                            e.TryGetValue(property, out value);
+                            object value = Util.GetDynamicMemberValue(e, property);
+                            //e.TryGetValue(property, out value);
 
                             if (string.IsNullOrEmpty(c.Condition))
                                 continue;

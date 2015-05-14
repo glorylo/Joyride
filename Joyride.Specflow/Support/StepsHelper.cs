@@ -17,7 +17,7 @@ namespace Joyride.Specflow.Support
         {
 
             var propertyName = propCondition.PropertyName.Dehumanize();
-            var tryParse = PredicateParser<IDictionary<string, object>>.TryParse(propCondition.Condition);
+            var tryParse = PredicateParser<dynamic>.TryParse(propCondition.Condition);
             if (!tryParse)
             {
                 Trace.WriteLine("Failed to Parse Condition on Property (" + propertyName + "):  " + propCondition.Condition);
@@ -26,7 +26,7 @@ namespace Joyride.Specflow.Support
             
             var propValue = entry[propertyName];
             Trace.WriteLine("Evaluating Condition (" + propCondition.Condition + ") on Property (" + propertyName + ") with value: " + propValue);
-            var expression = PredicateParser<IDictionary<string, object>>.Parse(propCondition.Condition);
+            var expression = PredicateParser<dynamic>.Parse(propCondition.Condition);
             var predicate = expression.Compile();
             var meetCondition = predicate(entry);
             if (!meetCondition)
