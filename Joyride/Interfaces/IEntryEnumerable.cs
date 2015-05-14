@@ -7,6 +7,6 @@ namespace Joyride.Interfaces
     /// </summary>
     public interface IEntryEnumerable
     {
-        IEnumerable<IDictionary<string, object>> GetEntries(string collectionName);
+        IEnumerable<dynamic> GetEntries(string collectionName);
     }
 }

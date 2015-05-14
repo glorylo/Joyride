@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Data;
 using System.Linq;
+using Humanizer;
 using Joyride.Interfaces;
 using Joyride.Specflow.Support;
+using Joyride.Support;
 using NUnit.Framework;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -21,18 +22,17 @@ namespace Joyride.Specflow.Steps
         public void ThenIShouldSeeProperty(string shouldOrShouldNot, string property, string collectionName)
         {
             var hasProperty = false;
+            var actualProperty = property.Dehumanize();
             Context.MobileApp.Do<IEntryEnumerable>(i =>
             {
                 var entries = i.GetEntries(collectionName);
-                foreach (var e in entries.Where(e => e.ContainsKey(property)))
+                foreach (var e in entries.Where(e => Util.HasMember(e, actualProperty)))
                 {
-                    object value;
-                    e.TryGetValue(property, out value);
+                    object value = Util.GetDynamicMemberValue(e, actualProperty);
                     hasProperty = true;
                     break;
                 }
             });
-
             if (shouldOrShouldNot == "should")
                 Assert.IsTrue(hasProperty);
             else
@@ -44,7 +44,7 @@ namespace Joyride.Specflow.Steps
         {
             var conditionsMeet = true;
             Context.MobileApp.Do<IEntryEnumerable>(i =>
-            {
+            {                
                 var conditions = table.CreateSet<PropertyCondition>();
                 if (conditions == null)
                     throw new ArgumentException("Unable to retrieve entry property table.");
@@ -57,19 +57,18 @@ namespace Joyride.Specflow.Steps
 
                     foreach (var c in conditions)
                     {
-                        var foundProperty = e.ContainsKey(c.PropertyName);
+                        var property = c.PropertyName.Dehumanize();
+                        var foundProperty = Util.HasMember(e, property);
                         if (foundProperty)
                         {
-                            object value;
-                            e.TryGetValue(c.PropertyName, out value);                            
+                            object value = Util.GetDynamicMemberValue(e, property);
                             continue;
                         }
 
                         if (c.Mandatory)
                             conditionsMeet = false;
                     }
-                }
-                
+                }                
                 Assert.IsTrue(conditionsMeet);
             });
         }
@@ -92,12 +91,11 @@ namespace Joyride.Specflow.Steps
 
                     foreach (var c in conditions)
                     {
-                        var foundProperty = e.ContainsKey(c.PropertyName);
+                        var property = c.PropertyName.Dehumanize();
+                        var foundProperty = Util.HasMember(e, property);
                         if (foundProperty)
                         {
-                            object value;
-                            e.TryGetValue(c.PropertyName, out value);
-
+                            object value = Util.GetDynamicMemberValue(e, property);
                             if (string.IsNullOrEmpty(c.Condition))
                                 continue;
 
@@ -109,12 +107,10 @@ namespace Joyride.Specflow.Steps
                         if (c.Mandatory && !foundProperty)
                             conditionsMeet = false;
                     }
-                }
-
+                }                
                 Assert.IsTrue(conditionsMeet);
             });
         }
-
 
 
         #endregion

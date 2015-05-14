@@ -11,6 +11,9 @@ namespace Joyride.Specflow
         {
             ScenarioContext.Current["MobileApp"] = null;
             ScenarioContext.Current["Driver"] = null;
+            ScenarioContext.Current["CurrentUser"] = null;
+
+            //TODO:  move logpath and screenshotpath out of context
             ScenarioContext.Current["LogPath"] = @".\";
             ScenarioContext.Current["ScreenshotPath"] = @".\";
         }
@@ -51,6 +54,11 @@ namespace Joyride.Specflow
             set { ScenarioContext.Current["ScreenshotPath"] = value; }
         }
 
+        public static object CurrentUser
+        {
+            get { return ScenarioContext.Current["CurrentUser"];  }
+            set { ScenarioContext.Current["CurrentUser"] = value;  }
+        }
 
     }
 }

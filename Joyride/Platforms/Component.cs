@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using Humanizer;
 using Joyride.Extensions;
+using Joyride.Support;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Support.PageObjects;
@@ -16,68 +18,26 @@ namespace Joyride.Platforms
         abstract public string Name { get; }
         static protected AppiumDriver Driver { get { return RemoteMobileDriver.GetInstance(); } }
 
-        internal protected MemberInfo GetMemberInfo(string elementOrCollectionName)
-        {
-            MemberInfo member = GetType()
-                .GetMember(elementOrCollectionName.ToPascalCase(), BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault();
-            if (member == null)
-                throw new NoSuchElementException(elementOrCollectionName + " is not defined on: " + Name);
-            return member;
-        }
-
         internal protected IWebElement FindElement(string elementName)
         {
-            IWebElement element = null;
-            var member = GetMemberInfo(elementName);
+            var element = (IWebElement) Util.GetMemberValue(this, elementName.Dehumanize(), BindingFlags.NonPublic);
 
-            var property = member as PropertyInfo;
-            if (property != null)
-            {
-                element = (IWebElement)property.GetValue(this, null);
-                if (element.IsPresent())
-                {
-                    Trace.WriteLine("Found property with elementName:  " + elementName);
-                    return element;
-                }
-            }
+            if (element != null && element.IsPresent()) 
+                return element;
 
-            var field = member as FieldInfo;
-            if (field != null)
-            {
-                element = (IWebElement)field.GetValue(this);
-                if (element.IsPresent())
-                {
-                    Trace.WriteLine("Found field with elementName:  " + elementName);
-                    return element;
-                }
-            }
-            Trace.WriteLine("Unable to find element with name:  " + elementName);
+            Trace.WriteLine("Unable to access element:  " + elementName);
             return null;
         }
 
         internal protected IList<IWebElement> FindElements(string collectionName)
         {
-            IList<IWebElement> elements = null;
-            MemberInfo member = GetMemberInfo(collectionName);
+            var elements =
+                (IList<IWebElement>) Util.GetMemberValue(this, collectionName.Dehumanize(), BindingFlags.NonPublic);
 
-            var property = member as PropertyInfo;
-            if (property != null)
-            {
-                elements = (IList<IWebElement>)property.GetValue(this, null);
-                Trace.WriteLine("Found property with collection:  " + collectionName);
+            if (elements != null && elements.GetEnumerator().MoveNext()) 
                 return elements;
-            }
 
-            var field = member as FieldInfo;
-            if (field != null)
-            {
-                elements = (IList<IWebElement>)field.GetValue(this);
-                Trace.WriteLine("Found field with collection:  " + collectionName);
-
-                // able to access elements
-                if (elements.GetEnumerator().MoveNext())
-                   return elements;
-            }            
+            Trace.WriteLine("Unable to access the collection: " + collectionName);
             return null;
         }
 
@@ -197,10 +157,8 @@ namespace Joyride.Platforms
 
         internal protected FindsByAttribute GetElementFindByAttribute(string elementOrCollectionName)
         {
-            var member = GetMemberInfo(elementOrCollectionName);
-            if (member == null)
-                return null;
-            return member.GetCustomAttribute<FindsByAttribute>();
+            var member = Util.GetMemberInfo(this, elementOrCollectionName.Dehumanize(), BindingFlags.NonPublic);
+            return member == null ? null : member.GetCustomAttribute<FindsByAttribute>();
         }
 
         internal protected string GetElementFindBySelector(string elementOrCollectionName)
@@ -211,21 +169,6 @@ namespace Joyride.Platforms
             return attribute.Using;
         }
         
-        //TODO: remove this method
-        [Obsolete("This method is no longer supported. Use GetElementFindBySelector")]
-        internal protected string GetElementXPathSelector(string elementName)
-        {
-            var field = GetType().GetField(elementName.ToPascalCase(), BindingFlags.NonPublic | BindingFlags.Instance);
-
-            if (field == null)
-                return null;
-
-            var attrib = (FindsByAttribute)field.GetCustomAttribute(typeof(FindsByAttribute));
-            if (attrib.How != How.XPath)
-                return null;
-            return attrib.Using;
-        }
-
         internal protected Tuple<IWebElement, int, string, string> FindElementWithinCollection(string collectionName, string relativeXpath, int timeoutSecs = 5)
         {           
             var size = SizeOf(collectionName);
