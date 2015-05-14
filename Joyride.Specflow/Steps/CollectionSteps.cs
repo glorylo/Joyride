@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Data;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Humanizer;
 using Joyride.Interfaces;
 using Joyride.Specflow.Support;
@@ -31,12 +29,10 @@ namespace Joyride.Specflow.Steps
                 foreach (var e in entries.Where(e => Util.HasMember(e, actualProperty)))
                 {
                     object value = Util.GetDynamicMemberValue(e, actualProperty);
-                    //e.TryGetValue(property, out value);
                     hasProperty = true;
                     break;
                 }
             });
-
             if (shouldOrShouldNot == "should")
                 Assert.IsTrue(hasProperty);
             else
@@ -66,15 +62,13 @@ namespace Joyride.Specflow.Steps
                         if (foundProperty)
                         {
                             object value = Util.GetDynamicMemberValue(e, property);
-                            //e.TryGetValue(property, out value);                            
                             continue;
                         }
 
                         if (c.Mandatory)
                             conditionsMeet = false;
                     }
-                }
-                
+                }                
                 Assert.IsTrue(conditionsMeet);
             });
         }
@@ -102,8 +96,6 @@ namespace Joyride.Specflow.Steps
                         if (foundProperty)
                         {
                             object value = Util.GetDynamicMemberValue(e, property);
-                            //e.TryGetValue(property, out value);
-
                             if (string.IsNullOrEmpty(c.Condition))
                                 continue;
 
@@ -115,12 +107,10 @@ namespace Joyride.Specflow.Steps
                         if (c.Mandatory && !foundProperty)
                             conditionsMeet = false;
                     }
-                }
-
+                }                
                 Assert.IsTrue(conditionsMeet);
             });
         }
-
 
 
         #endregion
