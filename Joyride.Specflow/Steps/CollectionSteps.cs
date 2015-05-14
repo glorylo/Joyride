@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Linq;
+using Humanizer;
 using Joyride.Interfaces;
 using Joyride.Specflow.Support;
 using NUnit.Framework;
@@ -21,10 +22,11 @@ namespace Joyride.Specflow.Steps
         public void ThenIShouldSeeProperty(string shouldOrShouldNot, string property, string collectionName)
         {
             var hasProperty = false;
+            var actualProperty = property.Dehumanize();
             Context.MobileApp.Do<IEntryEnumerable>(i =>
             {
                 var entries = i.GetEntries(collectionName);
-                foreach (var e in entries.Where(e => e.ContainsKey(property)))
+                foreach (var e in entries.Where(e => e.ContainsKey(actualProperty)))
                 {
                     object value;
                     e.TryGetValue(property, out value);
@@ -44,7 +46,7 @@ namespace Joyride.Specflow.Steps
         {
             var conditionsMeet = true;
             Context.MobileApp.Do<IEntryEnumerable>(i =>
-            {
+            {                
                 var conditions = table.CreateSet<PropertyCondition>();
                 if (conditions == null)
                     throw new ArgumentException("Unable to retrieve entry property table.");
@@ -57,11 +59,12 @@ namespace Joyride.Specflow.Steps
 
                     foreach (var c in conditions)
                     {
-                        var foundProperty = e.ContainsKey(c.PropertyName);
+                        var property = c.PropertyName.Dehumanize();
+                        var foundProperty = e.ContainsKey(property);
                         if (foundProperty)
                         {
                             object value;
-                            e.TryGetValue(c.PropertyName, out value);                            
+                            e.TryGetValue(property, out value);                            
                             continue;
                         }
 
@@ -92,11 +95,12 @@ namespace Joyride.Specflow.Steps
 
                     foreach (var c in conditions)
                     {
-                        var foundProperty = e.ContainsKey(c.PropertyName);
+                        var property = c.PropertyName.Dehumanize();
+                        var foundProperty = e.ContainsKey(property);
                         if (foundProperty)
                         {
                             object value;
-                            e.TryGetValue(c.PropertyName, out value);
+                            e.TryGetValue(property, out value);
 
                             if (string.IsNullOrEmpty(c.Condition))
                                 continue;
