@@ -81,6 +81,7 @@
     <Compile Include="Steps\CollectionSteps.cs" />
     <Compile Include="Steps\IosScreenSteps.cs" />
     <Compile Include="Steps\MobileAppSteps.cs" />
+    <Compile Include="Steps\ModalDialogSteps.cs" />
     <Compile Include="Steps\ScreenSteps.cs" />
     <Compile Include="Support\PropertyCondition.cs" />
     <Compile Include="Support\ScreenshotUtil.cs" />

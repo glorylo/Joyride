@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Extensions\AndroidDriverExtension.cs" />
     <Compile Include="Extensions\TextCompareExtensions.cs" />
+    <Compile Include="Interfaces\IDetectModalDialog.cs" />
     <Compile Include="Interfaces\IEntryEnumerable.cs" />
     <Compile Include="Platforms\Android\AndroidMobileApplication.cs" />
     <Compile Include="Platforms\Android\AndroidModalDialog.cs" />
