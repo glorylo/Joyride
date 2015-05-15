@@ -79,7 +79,7 @@
     <Compile Include="Steps\AndroidSteps.cs" />
     <Compile Include="Steps\DebugSteps.cs" />
     <Compile Include="Steps\CollectionSteps.cs" />
-    <Compile Include="Steps\IosScreenSteps.cs" />
+    <Compile Include="Steps\IosSteps.cs" />
     <Compile Include="Steps\MobileAppSteps.cs" />
     <Compile Include="Steps\ModalDialogSteps.cs" />
     <Compile Include="Steps\ScreenSteps.cs" />
