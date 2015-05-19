@@ -29,14 +29,7 @@ namespace Joyride.Specflow.Steps
         [When(@"I (accept|dismiss) any modal dialog")]
         public void GivenIAcceptOrDismissModalDialog(string acceptOrDismiss)
         {
-            Context.MobileApp.Do<IDetectModalDialog>(i =>
-            {
-                var dialog = i.DetectModalDialog();
-                if (dialog == null)
-                    throw new NoSuchElementException("Unexpected no modal dialog present on screen");
-
-                return (acceptOrDismiss == "accept") ? dialog.Accept() : dialog.Dismiss();    
-            });
+            Context.MobileApp.Do<IDetectModalDialog>(i => i.AcceptModalDialog(acceptOrDismiss == "accept"));            
         }
 
         [Given(@"I respond to the ""([^""]*)"" modal dialog with ""([^""]*)""")]
