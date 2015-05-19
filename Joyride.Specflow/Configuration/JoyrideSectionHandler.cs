@@ -1,4 +1,6 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
 using HandyConfig.Configuration;
 
 
@@ -18,46 +20,27 @@ namespace Joyride.Specflow.Configuration
         public IosElement Ios { get { return (IosElement) base["ios"]; } }        
 
         [ConfigurationProperty("servers", IsRequired = true)]
-        public ServersElement Servers { get { return (ServersElement) base["servers"]; } } 
+        public ServersElement Servers { get { return (ServersElement) base["servers"]; } }
 
-
-    }
-
-    public class DesiredCapabilityElement : ConfigurationElement
-    {
-        [ConfigurationProperty("", IsDefaultCollection = true)]
-        [ConfigurationCollection(typeof(NameValueTypeElementCollection), AddItemName = "add")]
-        public NameValueTypeElementCollection NameValueTypes
+        public static Uri GetServer(string serverName="dev")
         {
-            get { return (NameValueTypeElementCollection) this[""]; }
-            set { this[""] = value; }
-        }        
+            var bundler = new ConfigBundler(new Dictionary<string, object>()).Bundle(ServersElement.Settings);
+            var serverValue= bundler.Get<string>(serverName);
+            return new Uri(serverValue);
+        }
+
     }
 
-    public class ServersElement : DesiredCapabilityElement
-    {
-        public static NameValueTypeElementCollection Settings = JoyrideSectionHandler.Settings.Servers.NameValueTypes;
 
- 
-    }
-
-    public class IosElement : DesiredCapabilityElement
+    public class IosElement : HandyConfigElement
     {
         public static NameValueTypeElementCollection Settings = JoyrideSectionHandler.Settings.Ios.NameValueTypes;
         
     }
 
-    public class AndroidElement : DesiredCapabilityElement
+    public class AndroidElement : HandyConfigElement
     {
         public static NameValueTypeElementCollection Settings = JoyrideSectionHandler.Settings.Android.NameValueTypes;
 
     }
-
-    public class CapabilitiesElement : DesiredCapabilityElement
-    {
-        public static NameValueTypeElementCollection Settings = JoyrideSectionHandler.Settings.Capabilities.NameValueTypes;
-
-    }
-
-
 }

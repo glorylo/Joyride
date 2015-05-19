@@ -10,26 +10,25 @@ namespace Joyride.Specflow.Configuration
 {
     public class CapabilityBundler
     {
-        private DesiredCapabilities _capabilities;
         private readonly Platform _platform;
-        public CapabilityBundler(Platform platform)
+        private readonly string _targetName;
+
+        public CapabilityBundler(Platform platform, string targetName)
         {
             _platform = platform;
+            _targetName = targetName;
         }
 
-        public DesiredCapabilities Bundle(string targetName)
+        public DesiredCapabilities Bundle()
         {
             IDictionary<string, object> configs = new Dictionary<string, object>();
             var configBundler = new ConfigBundler(configs);
             configBundler.Bundle(CapabilitiesElement.Settings);
-            if (_platform == Platform.Android)
-                configBundler.Bundle(AndroidElement.Settings);
-            else
-                configBundler.Bundle(IosElement.Settings);
-            
+            configBundler.Bundle(_platform == Platform.Android ? AndroidElement.Settings : IosElement.Settings);
+
             configs = configBundler.GetConfigs();
-            _capabilities = new DesiredCapabilities(configs as Dictionary<string, object>);
-            return _capabilities;
+            var capabilities = new DesiredCapabilities(configs as Dictionary<string, object>);
+            return capabilities;
         }
 
 
