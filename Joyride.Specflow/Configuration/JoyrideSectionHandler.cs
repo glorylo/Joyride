@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Configuration;
 using HandyConfig.Configuration;
 
 
@@ -21,13 +19,6 @@ namespace Joyride.Specflow.Configuration
 
         [ConfigurationProperty("servers", IsRequired = true)]
         public ServersElement Servers { get { return (ServersElement) base["servers"]; } }
-
-        public static Uri GetServer(string serverName="dev")
-        {
-            var bundler = new ConfigBundler(new Dictionary<string, object>()).Bundle(ServersElement.Settings);
-            var serverValue= bundler.Get<string>(serverName);
-            return new Uri(serverValue);
-        }
 
     }
 

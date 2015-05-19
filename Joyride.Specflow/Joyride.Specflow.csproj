@@ -79,7 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\CapabilitiesElement.cs" />
-    <Compile Include="Configuration\CapabilityBundler.cs" />
+    <Compile Include="Configuration\JoyrideConfiguration.cs" />
     <Compile Include="Configuration\ServersElement.cs" />
     <Compile Include="Extensions\SpecsExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
