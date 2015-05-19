@@ -7,7 +7,7 @@ using TechTalk.SpecFlow;
 namespace Joyride.Specflow.Steps
 {
     [Binding, Scope(Tag = "ios")]
-    public class IosScreenSteps
+    public class IosSteps
     {
 
         #region Given/Whens
