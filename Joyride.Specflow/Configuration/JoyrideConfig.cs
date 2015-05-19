@@ -1,16 +1,15 @@
 ﻿using System.Configuration;
+using HandyConfig.Configuration;
 
 
 namespace Joyride.Specflow.Configuration
 {
-    public class JoyrideConfig : ConfigurationSection
+    public class JoyrideSection : ConfigurationSection
     {
-        private static readonly JoyrideConfig _settings = ConfigurationManager.GetSection("joyride") as JoyrideConfig;
-
-        public static JoyrideConfig Settings { get { return _settings;  }}
+        public static JoyrideSection Settings { get { return ConfigurationManager.GetSection("joyride") as JoyrideSection;  }}
 
         [ConfigurationProperty("capabilities", IsRequired = true)]
-        public GlobalCapabilityElement Capabilities { get { return (GlobalCapabilityElement) base["capabilities"]; } }
+        public CapabilitiesElement Capabilities { get { return (CapabilitiesElement) base["capabilities"]; } }
         
         [ConfigurationProperty("android")]
         public AndroidElement Android { get { return (AndroidElement) base["android"]; } }
@@ -18,76 +17,37 @@ namespace Joyride.Specflow.Configuration
         [ConfigurationProperty("ios")]
         public IosElement Ios { get { return (IosElement) base["ios"]; } }        
 
-        [ConfigurationProperty("endpoints", IsRequired = true)]
-        public EndPointElement Endpoints { get { return (EndPointElement) base["endpoints"]; } } 
+        [ConfigurationProperty("servers", IsRequired = true)]
+        public ServersElement Servers { get { return (ServersElement) base["servers"]; } } 
 
 
     }
 
-    public class EndPointElement : ConfigurationElement
+    public class ServersElement : ConfigurationElement
     {
         [ConfigurationProperty("", IsDefaultCollection = true)]
-        public NameValueConfigurationCollection Settings { get {  return (NameValueConfigurationCollection) base[""]; }}
+        public NameValueTypeElementCollection Settings { get { return (NameValueTypeElementCollection) base[""]; } }
 
     }
 
     public class IosElement : ConfigurationElement
     {
         [ConfigurationProperty("", IsDefaultCollection = true)]
-        public NameValueConfigurationCollection Settings { get { return (NameValueConfigurationCollection)base[""]; } }
+        public NameValueTypeElementCollection Settings { get { return (NameValueTypeElementCollection) base[""]; } }
         
     }
 
     public class AndroidElement : ConfigurationElement
     {
         [ConfigurationProperty("", IsDefaultCollection = true)]
-        public NameValueConfigurationCollection Settings { get { return (NameValueConfigurationCollection)base[""]; } }
+        public NameValueTypeElementCollection Settings { get { return (NameValueTypeElementCollection) base[""]; } }
     }
 
-    public class GlobalCapabilityElement : ConfigurationElement
+    public class CapabilitiesElement : ConfigurationElement
     {
         [ConfigurationProperty("", IsDefaultCollection = true)]
-        public NameValueConfigurationCollection Settings { get { return (NameValueConfigurationCollection)base[""]; } }
+        public NameValueTypeElementCollection Settings { get { return (NameValueTypeElementCollection) base[""]; } }
     }
 
-    /*
-    public class CapabilityElement : ConfigurationElement
-    {
-        [ConfigurationProperty("name", IsRequired = true)]
-        public string Name
-        {
-            get { return (string) this["name"]; }
-            set { this["name"] = value; }
-        }
 
-        [ConfigurationProperty("value", IsRequired = true)]
-        public object Value
-        {
-            get { return this["value"]; }
-            set { this["value"] = value; }
-        }
-
-        [ConfigurationProperty("type", IsRequired = true)]
-        public string Type
-        {
-            get { return (string) this["type"]; }
-            set { this["type"] = value; }
-        }
-
-        public class CapabilityElementCollection : ConfigurationElementCollection
-        {
-            protected override ConfigurationElement CreateNewElement()
-            {
-                return new CapabilityElement();
-            }
-
-            protected override object GetElementKey(ConfigurationElement element)
-            {
-                return ((CapabilityElement) element).Name;
-            }
-        }
-     
-    }
-      
-     */
 }
