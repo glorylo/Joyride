@@ -2,6 +2,7 @@
 using Joyride.Interfaces;
 using Joyride.Platforms;
 using NUnit.Framework;
+using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 
 namespace Joyride.Specflow.Steps
@@ -14,14 +15,28 @@ namespace Joyride.Specflow.Steps
         [When(@"I (accept|dismiss) the ""([^""]*)"" modal dialog")]
         public void GivenIAcceptOrDismissSpecificModalDialog(string acceptOrDismiss, string modalDialogName)
         {
-            Context.MobileApp.Do<IDetectModalDialog>(i => i.AcceptModalDialog(acceptOrDismiss == "accept", modalDialogName));
+            Context.MobileApp.Do<IDetectModalDialog>(i =>
+            {
+                var dialog = i.DetectModalDialog(modalDialogName);
+                if (dialog == null)
+                    throw new NoSuchElementException("Unexpected no modal dialog present on screen");
+
+                return (acceptOrDismiss == "accept") ? dialog.Accept() : dialog.Dismiss();                
+            });
         }
 
         [Given(@"I (accept|dismiss) any modal dialog")]
         [When(@"I (accept|dismiss) any modal dialog")]
         public void GivenIAcceptOrDismissModalDialog(string acceptOrDismiss)
         {
-            Context.MobileApp.Do<IDetectModalDialog>(i => i.AcceptModalDialog(acceptOrDismiss == "accept"));
+            Context.MobileApp.Do<IDetectModalDialog>(i =>
+            {
+                var dialog = i.DetectModalDialog();
+                if (dialog == null)
+                    throw new NoSuchElementException("Unexpected no modal dialog present on screen");
+
+                return (acceptOrDismiss == "accept") ? dialog.Accept() : dialog.Dismiss();    
+            });
         }
 
         [Given(@"I respond to the ""([^""]*)"" modal dialog with ""([^""]*)""")]
@@ -32,6 +47,9 @@ namespace Joyride.Specflow.Steps
             {
                 var dialog = i.DetectModalDialog(modalDialogName);
                 // should be able to detect the specified modal dialog or it will fail the test!
+                if (dialog == null)
+                    throw new NoSuchElementException("Unexpected no modal dialog present on screen");
+
                 return dialog.RespondWith(response);
             });
         }
