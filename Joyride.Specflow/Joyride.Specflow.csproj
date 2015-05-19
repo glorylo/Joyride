@@ -78,10 +78,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\CapabilityBundler.cs" />
     <Compile Include="Extensions\SpecsExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Context.cs" />
-    <Compile Include="Configuration\JoyrideConfig.cs" />
+    <Compile Include="Configuration\JoyrideSectionHandler.cs" />
     <Compile Include="Steps\AndroidSteps.cs" />
     <Compile Include="Steps\DebugSteps.cs" />
     <Compile Include="Steps\CollectionSteps.cs" />
