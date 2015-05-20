@@ -1,13 +1,12 @@
 ﻿using System.Configuration;
 using HandyConfig.Configuration;
+using Humanizer;
 
 
 namespace Joyride.Specflow.Configuration
 {
     public class JoyrideSectionHandler : ConfigurationSection
     {
-        public static JoyrideSectionHandler Settings { get { return ConfigurationManager.GetSection("joyride") as JoyrideSectionHandler;  }}
-
         [ConfigurationProperty("capabilities", IsRequired = true)]
         public CapabilitiesElement Capabilities { get { return (CapabilitiesElement) base["capabilities"]; } }
         
@@ -31,19 +30,22 @@ namespace Joyride.Specflow.Configuration
     }
 
     public class TargetElement : HandyConfigElement
-    {
+    {        
         [ConfigurationProperty("name", IsKey = true, IsRequired = true)]
         public string Name
         {
             get { return (string)this["name"]; }
             set { this["name"] = value; }
         }
+
+
     }
 
 
     public class IosElement : HandyConfigElement
     {
-        public static NameValueTypeElementCollection Settings = JoyrideSectionHandler.Settings.Capabilities.Ios.NameValueTypes;
+
+        
 
 
         
@@ -51,7 +53,12 @@ namespace Joyride.Specflow.Configuration
 
     public class AndroidElement : HandyConfigElement
     {
-        public static NameValueTypeElementCollection Settings = JoyrideSectionHandler.Settings.Capabilities.Android.NameValueTypes;
+        
+        
+        
+
+
+   
 
     }
 }
