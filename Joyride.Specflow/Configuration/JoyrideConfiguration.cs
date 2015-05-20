@@ -16,7 +16,6 @@ namespace Joyride.Specflow.Configuration
 
         public static DesiredCapabilities BundleCapabilities(Platform platform, string targetName)
         {
-
             IDictionary<string, object> configs = new Dictionary<string, object>();
             var configBundler = new ConfigBundler(configs);
             configBundler.Bundle(CapabilitiesElement.Settings);
