@@ -15,7 +15,9 @@ namespace Joyride.Specflow.Configuration
         private static readonly NameValueTypeElementCollection Capabilities = Config.Capabilities.NameValueTypes;
         private static readonly NameValueTypeElementCollection AndroidCapabilities = Config.Capabilities.Android.NameValueTypes;
         private static readonly NameValueTypeElementCollection IosCapabilities = Config.Capabilities.Ios.NameValueTypes;
-        private static readonly NameValueTypeElementCollection Servers = Config.Servers.NameValueTypes; 
+        private static readonly NameValueTypeElementCollection Servers = Config.Servers.NameValueTypes;
+
+        //private static readonly NameValueTypeElementCollection AndroidTargetCapabilities = Config.Capabilities.Android.Targets;
 
         public static Uri GetServer(string serverName = "dev")
         {
