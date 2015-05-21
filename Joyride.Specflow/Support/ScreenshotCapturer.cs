@@ -4,11 +4,12 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using Joyride.Extensions;
+using Joyride.Specflow.Configuration;
 using TechTalk.SpecFlow;
 
 namespace Joyride.Specflow.Support
 {
-    public static class ScreenshotUtil
+    public static class ScreenshotCapturer
     {
         private static string RemoveInvalidChars(string fileName)
         {
@@ -31,13 +32,13 @@ namespace Joyride.Specflow.Support
         private static string AddIndexToFilename(string filename, string extension)
         {
             var i = 1;
-            var pathAndFilename = Context.ScreenshotPath + filename;
+            var pathAndFilename = JoyrideConfiguration.ScreenshotPath + filename;
             while (File.Exists(pathAndFilename + i + extension))
                 i++;
             return pathAndFilename + i + extension;
         }
 
-        public static void CaptureScreenshot()
+        public static void Capture()
         {
             var filename = CreateFilename(".png");
             Context.Driver.CaptureScreenshot(filename, ImageFormat.Png);
