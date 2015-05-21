@@ -43,24 +43,20 @@ namespace Joyride.Specflow.Configuration
             }
         }
 
-        new public DeviceElement this[string id]
+        new public DeviceElement this[string key]
         {
-            get { return (DeviceElement)BaseGet(id); }
+            get { return (DeviceElement)BaseGet(key); }
         }
 
         public bool ContainsKey(string key)
         {
-            bool result = false;
             object[] keys = BaseGetAllKeys();
             foreach (object obj in keys)
             {
                 if ((string) obj == key)
-                {
-                    result = true;
-                    break;
-                }
+                   return  true;
             }
-            return result;
+            return false;
         }
     }
  

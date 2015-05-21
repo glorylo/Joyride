@@ -29,12 +29,10 @@ namespace Joyride.Specflow.Configuration
         {
             DeviceElementCollection devices = (platform == Platform.Android) ? 
                 Config.Capabilities.Android.Devices : Config.Capabilities.Ios.Devices;
-    
-            foreach (DeviceElement d in devices) 
-            {
-                if (d.Name == deviceKey)
-                    return d.NameValueTypes;
-            }
+        
+            if (devices.ContainsKey(deviceKey))
+                return devices[deviceKey].NameValueTypes;
+            
             throw new KeyNotFoundException("Unable to find device on " + platform + " with key " + deviceKey);
         }
 

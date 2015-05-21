@@ -6,9 +6,9 @@ namespace Joyride.Specflow.Configuration
     public class CapabilitiesElement : HandyConfigElement
     {
         [ConfigurationProperty("android")]
-        public AndroidElement Android { get { return (AndroidElement) base["android"]; } }
+        public AndroidElement Android { get { return (AndroidElement) this["android"]; } }
 
         [ConfigurationProperty("ios")]
-        public IosElement Ios { get { return (IosElement) base["ios"]; } }        
+        public IosElement Ios { get { return (IosElement) this["ios"]; } }        
     }
 }
