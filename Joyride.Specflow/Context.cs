@@ -13,9 +13,6 @@ namespace Joyride.Specflow
             ScenarioContext.Current["Driver"] = null;
             ScenarioContext.Current["CurrentUser"] = null;
 
-            //TODO:  move logpath and screenshotpath out of context
-            ScenarioContext.Current["LogPath"] = @".\";
-            ScenarioContext.Current["ScreenshotPath"] = @".\";
         }
           
         public static void SetValue(string key, object value)
@@ -40,18 +37,6 @@ namespace Joyride.Specflow
         {
             get { return (AppiumDriver) ScenarioContext.Current["Driver"]; }
             set { ScenarioContext.Current["Driver"] = value;  }
-        }
-
-        public static string LogPath
-        {
-            get { return (string) ScenarioContext.Current["LogPath"]; }
-            set { ScenarioContext.Current["LogPath"] = value; }
-        }
-
-        public static string ScreenshotPath
-        {
-            get { return (string)ScenarioContext.Current["ScreenshotPath"]; }
-            set { ScenarioContext.Current["ScreenshotPath"] = value; }
         }
 
         public static object CurrentUser

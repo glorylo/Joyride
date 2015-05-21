@@ -16,6 +16,17 @@ namespace Joyride.Specflow.Configuration
         private static readonly NameValueTypeElementCollection IosCapabilities = Config.Capabilities.Ios.NameValueTypes;
         private static readonly NameValueTypeElementCollection Servers = Config.Servers.NameValueTypes;
 
+        public static string ScreenshotPath { get; private set; }
+        public static string LogPath { get; private set; }
+        private static string _projectDir;
+
+        public static void SetWorkingDirectory(string projectDir)
+        {
+            _projectDir = projectDir;
+            LogPath = _projectDir + @"\Logs\";
+            ScreenshotPath = _projectDir + @"\Screenshots\";
+        }
+
         public static Uri GetServer(string serverName = "dev")
         {
             var bundler = new ConfigBundler().Bundle(Servers);

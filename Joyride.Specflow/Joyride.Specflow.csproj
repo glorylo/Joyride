@@ -96,7 +96,7 @@
     <Compile Include="Steps\ModalDialogSteps.cs" />
     <Compile Include="Steps\ScreenSteps.cs" />
     <Compile Include="Support\PropertyCondition.cs" />
-    <Compile Include="Support\ScreenshotUtil.cs" />
+    <Compile Include="Support\ScreenshotCapturer.cs" />
     <Compile Include="Support\StepsHelper.cs" />
   </ItemGroup>
   <ItemGroup>
