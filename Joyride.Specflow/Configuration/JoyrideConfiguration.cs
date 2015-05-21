@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Net.Mail;
 using HandyConfig.Configuration;
 using OpenQA.Selenium.Remote;
-using Platform = Joyride.Platform;
 
 namespace Joyride.Specflow.Configuration
 {
@@ -20,15 +18,14 @@ namespace Joyride.Specflow.Configuration
 
         public static Uri GetServer(string serverName = "dev")
         {
-            var bundler = new ConfigBundler(new Dictionary<string, object>()).Bundle(Servers);
+            var bundler = new ConfigBundler().Bundle(Servers);
             var serverValue = bundler.Get<string>(serverName);
             return new Uri(serverValue);
         }
 
         private static NameValueTypeElementCollection GetDeviceCapabilities(Platform platform, string deviceKey)
         {
-            DeviceElementCollection devices = (platform == Platform.Android) ? 
-                Config.Capabilities.Android.Devices : Config.Capabilities.Ios.Devices;
+            var devices = (platform == Platform.Android) ? Config.Capabilities.Android.Devices : Config.Capabilities.Ios.Devices;
         
             if (devices.ContainsKey(deviceKey))
                 return devices[deviceKey].NameValueTypes;
@@ -37,13 +34,12 @@ namespace Joyride.Specflow.Configuration
         }
 
         public static DesiredCapabilities BundleCapabilities(Platform platform, string deviceKey)
-        {
-            IDictionary<string, object> configs = new Dictionary<string, object>();
-            var configBundler = new ConfigBundler(configs);
+        {            
+            var configBundler = new ConfigBundler();
             configBundler.Bundle(Capabilities);
             configBundler.Bundle(platform == Platform.Android ? AndroidCapabilities : IosCapabilities);
             configBundler.Bundle(GetDeviceCapabilities(platform, deviceKey));
-            configs = configBundler.GetConfigs();
+            var configs = configBundler.GetConfigs();
             var capabilities = new DesiredCapabilities(configs as Dictionary<string, object>);
             return capabilities;
 

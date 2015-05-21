@@ -36,8 +36,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(SolutionDir)packages\Appium.WebDriver.1.2.0.8\lib\net40\appium-dotnet-driver.dll</HintPath>
     </Reference>
-    <Reference Include="HandyConfig, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\HandyConfig.1.2.1.0\lib\net45\HandyConfig.dll</HintPath>
+    <Reference Include="HandyConfig, Version=1.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\HandyConfig.1.2.2.0\lib\net45\HandyConfig.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Humanizer, Version=1.35.0.0, Culture=neutral, PublicKeyToken=979442b78dfc278e, processorArchitecture=MSIL">
@@ -84,7 +84,6 @@
     <Compile Include="Configuration\DeviceElementCollection.cs" />
     <Compile Include="Configuration\IosElement.cs" />
     <Compile Include="Configuration\JoyrideConfiguration.cs" />
-    <Compile Include="Configuration\ServersElement.cs" />
     <Compile Include="Extensions\SpecsExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Context.cs" />
