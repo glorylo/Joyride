@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Net.Mail;
 using HandyConfig.Configuration;
 using OpenQA.Selenium.Remote;
+using Platform = Joyride.Platform;
 
 namespace Joyride.Specflow.Configuration
 {
@@ -17,8 +18,6 @@ namespace Joyride.Specflow.Configuration
         private static readonly NameValueTypeElementCollection IosCapabilities = Config.Capabilities.Ios.NameValueTypes;
         private static readonly NameValueTypeElementCollection Servers = Config.Servers.NameValueTypes;
 
-        //private static readonly NameValueTypeElementCollection AndroidTargetCapabilities = Config.Capabilities.Android.Targets;
-
         public static Uri GetServer(string serverName = "dev")
         {
             var bundler = new ConfigBundler(new Dictionary<string, object>()).Bundle(Servers);
@@ -26,13 +25,26 @@ namespace Joyride.Specflow.Configuration
             return new Uri(serverValue);
         }
 
-        public static DesiredCapabilities BundleCapabilities(Platform platform, string targetName)
+        private static NameValueTypeElementCollection GetDeviceCapabilities(Platform platform, string deviceKey)
+        {
+            DeviceElementCollection devices = (platform == Platform.Android) ? 
+                Config.Capabilities.Android.Devices : Config.Capabilities.Ios.Devices;
+    
+            foreach (DeviceElement d in devices) 
+            {
+                if (d.Name == deviceKey)
+                    return d.NameValueTypes;
+            }
+            throw new KeyNotFoundException("Unable to find device on " + platform + " with key " + deviceKey);
+        }
+
+        public static DesiredCapabilities BundleCapabilities(Platform platform, string deviceKey)
         {
             IDictionary<string, object> configs = new Dictionary<string, object>();
             var configBundler = new ConfigBundler(configs);
             configBundler.Bundle(Capabilities);
             configBundler.Bundle(platform == Platform.Android ? AndroidCapabilities : IosCapabilities);
-
+            configBundler.Bundle(GetDeviceCapabilities(platform, deviceKey));
             configs = configBundler.GetConfigs();
             var capabilities = new DesiredCapabilities(configs as Dictionary<string, object>);
             return capabilities;
