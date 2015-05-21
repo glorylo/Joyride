@@ -16,22 +16,4 @@ namespace Joyride.Specflow.Configuration
         public ServersElement Servers { get { return (ServersElement) base["servers"]; } }
     }
 
- 
-    public class IosElement : HandyConfigElement
-    {
-        [ConfigurationProperty("devices")]
-        public DeviceElementCollection Devices
-        {
-            get { return this["devices"] as DeviceElementCollection; }
-        }      
-    }
-
-    public class AndroidElement : HandyConfigElement
-    {
-        [ConfigurationProperty("devices")]
-        public DeviceElementCollection Devices
-        {
-            get { return this["devices"] as DeviceElementCollection; }
-        }
-    }
 }
