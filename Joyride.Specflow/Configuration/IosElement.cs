@@ -10,7 +10,7 @@ namespace Joyride.Specflow.Configuration
 {
     public class IosElement : HandyConfigElement
     {
-        [ConfigurationProperty("devices")]
+        [ConfigurationProperty("devices", IsRequired = true)]
         public DeviceElementCollection Devices
         {
             get { return this["devices"] as DeviceElementCollection; }
