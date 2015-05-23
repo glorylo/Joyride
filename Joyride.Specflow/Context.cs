@@ -7,12 +7,15 @@ namespace Joyride.Specflow
 {
     public static class Context
     {
+        private const string MobileAppKey = "_MobileApp";
+        private const string DriverKey = "_Driver";
+        private const string CurrentUserKey = "_CurrentUser";
+
         static Context()
         {
-            ScenarioContext.Current["MobileApp"] = null;
+            ScenarioContext.Current[MobileAppKey] = null;
             ScenarioContext.Current["Driver"] = null;
             ScenarioContext.Current["CurrentUser"] = null;
-
         }
           
         public static void SetValue(string key, object value)
@@ -28,21 +31,21 @@ namespace Joyride.Specflow
         public static IMobileApplication MobileApp
         {
             get {
-                return (IMobileApplication) ScenarioContext.Current["MobileApp"];
+                return (IMobileApplication)ScenarioContext.Current[MobileAppKey];
             }
-            set { ScenarioContext.Current["MobileApp"] = value; }
+            set { ScenarioContext.Current[MobileAppKey] = value; }
         }
 
         public static AppiumDriver Driver
         {
-            get { return (AppiumDriver) ScenarioContext.Current["Driver"]; }
-            set { ScenarioContext.Current["Driver"] = value;  }
+            get { return (AppiumDriver)ScenarioContext.Current[DriverKey]; }
+            set { ScenarioContext.Current[DriverKey] = value; }
         }
 
         public static object CurrentUser
         {
-            get { return ScenarioContext.Current["CurrentUser"];  }
-            set { ScenarioContext.Current["CurrentUser"] = value;  }
+            get { return ScenarioContext.Current[CurrentUserKey]; }
+            set { ScenarioContext.Current[CurrentUserKey] = value; }
         }
 
     }
