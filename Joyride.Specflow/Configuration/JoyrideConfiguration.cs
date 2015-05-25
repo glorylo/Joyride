@@ -41,15 +41,15 @@ namespace Joyride.Specflow.Configuration
             if (devices.ContainsKey(deviceKey))
                 return devices[deviceKey].NameValueTypes;
             
-            throw new KeyNotFoundException("Unable to find device on " + platform + " with key " + deviceKey);
+            throw new KeyNotFoundException("Unable to find device on " + platform + " with key: " + deviceKey);
         }
 
         public static DesiredCapabilities BundleCapabilities(Platform platform, string deviceKey)
         {            
             var configBundler = new ConfigBundler();
-            configBundler.Bundle(Capabilities);
-            configBundler.Bundle(platform == Platform.Android ? AndroidCapabilities : IosCapabilities);
-            configBundler.Bundle(GetDeviceCapabilities(platform, deviceKey));
+            configBundler.Bundle(Capabilities)
+              .Bundle(platform == Platform.Android ? AndroidCapabilities : IosCapabilities)
+              .Bundle(GetDeviceCapabilities(platform, deviceKey));
             var configs = configBundler.GetConfigs();
             var capabilities = new DesiredCapabilities(configs as Dictionary<string, object>);
             return capabilities;
