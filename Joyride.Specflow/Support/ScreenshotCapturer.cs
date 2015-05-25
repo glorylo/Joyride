@@ -9,7 +9,7 @@ using TechTalk.SpecFlow;
 
 namespace Joyride.Specflow.Support
 {
-    public static class ScreenshotCapturer
+    public static class ScreenCapturer
     {
         private static string RemoveInvalidChars(string fileName)
         {
