@@ -81,6 +81,7 @@
     <Compile Include="Platforms\MobileApplication.cs" />
     <Compile Include="Platforms\ITouchGestures.cs" />
     <Compile Include="Platforms\IWebViewActions.cs" />
+    <Compile Include="Platforms\ModalDialogDetector.cs" />
     <Compile Include="Platforms\UndefinedResponseException.cs" />
     <Compile Include="RemoteMobileDriver.cs" />
     <Compile Include="Enums.cs" />
