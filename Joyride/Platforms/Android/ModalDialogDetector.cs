@@ -12,8 +12,8 @@ namespace Joyride.Platforms.Android
 
         public Assembly TargetAssembly { get; set; }
 
-        public int DefaultTimoutSecs = 30;
-
+        public const int DefaultTimoutSecs = 2;
+        public int TimeoutSecs { get; set; }
         protected static ModalDialogDetector Detector;
 
         public static void Register(Assembly assembly, Type baseModalType)
@@ -29,14 +29,15 @@ namespace Joyride.Platforms.Android
 
         protected ScreenFactory ScreenFactory = new AndroidScreenFactory();
         protected Dictionary<string, Type> ModalDialogs = new Dictionary<string, Type>();
-        protected IEnumerable<Type> DialogTypes;  
+        protected IEnumerable<Type> DialogTypes;
 
-        private ModalDialogDetector(Assembly assembly, Type baseModalDialogType)
+        private ModalDialogDetector(Assembly assembly, Type baseModalDialogType, int defaultTimeoutSecs = DefaultTimoutSecs)
         {
             TargetAssembly = assembly;
             BaseModalDialogType = baseModalDialogType;
             DialogTypes = GetDialogTypes();
             BuildModalDialogLookupTable();
+            TimeoutSecs = defaultTimeoutSecs;
         }
 
         protected IEnumerable<Type> GetDialogTypes()
@@ -69,39 +70,38 @@ namespace Joyride.Platforms.Android
         protected bool IsOnScreen(Type type, int timeoutSecs)
         {
             var dialog = ScreenFactory.CreateModalDialog(type);
-            return dialog.IsOnScreen(DefaultTimoutSecs);
+            return dialog.IsOnScreen(TimeoutSecs);
         }
 
-        public IModalDialog Detect(Type type, int timeoutSecs)
+        public IModalDialog Detect(Type type)
         {
-            return (IsOnScreen(type, timeoutSecs)) ? ScreenFactory.CreateModalDialog(type) : null;
+            return (IsOnScreen(type, TimeoutSecs)) ? ScreenFactory.CreateModalDialog(type) : null;
         }
 
-        public IModalDialog Detect(int timeoutSecs)
+        public IModalDialog Detect()
         {
-            return (from t in DialogTypes where IsOnScreen(t, timeoutSecs) select ScreenFactory.CreateModalDialog(t)).FirstOrDefault();
+            return (from t in DialogTypes where IsOnScreen(t, TimeoutSecs) select ScreenFactory.CreateModalDialog(t)).FirstOrDefault();
         }
 
-
-        public IModalDialog Detect(string[] modalDialogNames, int timeoutSecs)
+        public IModalDialog Detect(string[] modalDialogNames)
         {
             IModalDialog dialog = null;
             var index = 0;
 
             while ((dialog == null) && index < modalDialogNames.Length)
             {
-                dialog = Detect(modalDialogNames[index], timeoutSecs);
+                dialog = Detect(modalDialogNames[index]);
                 index++;
             }
             return dialog;
         }
 
-        public IModalDialog Detect(string modalDialogName, int timeoutSecs)
+        public IModalDialog Detect(string modalDialogName)
         {
             if (!ModalDialogs.ContainsKey(modalDialogName))
                 return null;
             var dialogType = ModalDialogs[modalDialogName];
-            return IsOnScreen(dialogType , timeoutSecs) ? ScreenFactory.CreateModalDialog(dialogType) : null;
+            return IsOnScreen(dialogType, TimeoutSecs) ? ScreenFactory.CreateModalDialog(dialogType) : null;
         }
 
     }
