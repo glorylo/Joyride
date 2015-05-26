@@ -3,14 +3,10 @@ using OpenQA.Selenium;
 
 namespace Joyride.Platforms
 {
-    //not used
-    public interface ITappable
-    {
-        Screen Tap(string elementName, bool precise = false);
-    }
 
-    public interface ITouchGestures : ITappable
+    public interface ITouchGesture
     {
+        Screen Tap(string elementName, bool precise = false);    
         Screen DoubleTap(string elementName);
         Screen TapAndHold(string elementName, int seconds);
         Screen TapInCollection(string collectionName, int oridinal = 1, bool last = false, bool precise = false);

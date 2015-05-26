@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Joyride.Platforms.Android
 {
-    public class ModalDialogDetector 
+    public class ModalDialogDetector : IModalDialogDetector
     {
 
         public Type BaseModalDialogType { get; set; }
@@ -80,7 +80,12 @@ namespace Joyride.Platforms.Android
 
         public IModalDialog Detect()
         {
-            return (from t in DialogTypes where IsOnScreen(t, TimeoutSecs) select ScreenFactory.CreateModalDialog(t)).FirstOrDefault();
+            return Detect(DialogTypes);
+        }
+
+        public IModalDialog Detect(IEnumerable<Type> dialogTypes)
+        {
+            return(from t in dialogTypes where IsOnScreen(t, TimeoutSecs) select ScreenFactory.CreateModalDialog(t)).FirstOrDefault();
         }
 
         public IModalDialog Detect(string[] modalDialogNames)

@@ -7,14 +7,13 @@ namespace Joyride.Platforms
     ///  Detect the modal dialog order from 0 - 100, lower being higher priority.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
-    public class DetectAttribute : Attribute
+    public sealed class DetectAttribute : Attribute
     {
-        public int Priority { get { return priority; } set { priority = value; } }
-        protected int priority;
+        public int Priority { get; set; }
 
         public DetectAttribute()
         {
-            priority = 100;
+            Priority = 100;
         }
     }
 }
