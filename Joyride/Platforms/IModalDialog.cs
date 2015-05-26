@@ -8,5 +8,6 @@
         Screen Accept();
         Screen Dismiss();
         Screen RespondWith(string response);
+        bool IsOnScreen(int timeoutSecs);
     }
 }

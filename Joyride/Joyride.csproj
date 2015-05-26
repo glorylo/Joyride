@@ -71,6 +71,7 @@
     <Compile Include="Platforms\Android\AndroidScreen.cs" />
     <Compile Include="Platforms\Android\AndroidScreenFactory.cs" />
     <Compile Include="Platforms\Component.cs" />
+    <Compile Include="Platforms\DetectOrderAttribute.cs" />
     <Compile Include="Platforms\IFormActions.cs" />
     <Compile Include="Platforms\IMobileApplication.cs" />
     <Compile Include="Platforms\IModalDialog.cs" />
@@ -81,7 +82,7 @@
     <Compile Include="Platforms\MobileApplication.cs" />
     <Compile Include="Platforms\ITouchGestures.cs" />
     <Compile Include="Platforms\IWebViewActions.cs" />
-    <Compile Include="Platforms\ModalDialogDetector.cs" />
+    <Compile Include="Platforms\Android\ModalDialogDetector.cs" />
     <Compile Include="Platforms\UndefinedResponseException.cs" />
     <Compile Include="RemoteMobileDriver.cs" />
     <Compile Include="Enums.cs" />
