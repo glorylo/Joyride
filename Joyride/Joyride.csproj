@@ -71,7 +71,7 @@
     <Compile Include="Platforms\Android\AndroidScreen.cs" />
     <Compile Include="Platforms\Android\AndroidScreenFactory.cs" />
     <Compile Include="Platforms\Component.cs" />
-    <Compile Include="Platforms\DetectOrderAttribute.cs" />
+    <Compile Include="Platforms\DetectAttribute.cs" />
     <Compile Include="Platforms\IFormActions.cs" />
     <Compile Include="Platforms\IMobileApplication.cs" />
     <Compile Include="Platforms\IModalDialog.cs" />

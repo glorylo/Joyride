@@ -45,8 +45,8 @@ namespace Joyride.Platforms.Android
             var list = TargetAssembly.GetTypes().Where(t => t.BaseType == BaseModalDialogType)
                 .Select(t =>
                 {
-                    var attrib = t.GetCustomAttribute(typeof (DetectOrderAttribute), false) as DetectOrderAttribute;
-                    var order = (attrib == null) ? 100 : attrib.Order;
+                    var attrib = t.GetCustomAttribute(typeof (DetectAttribute), false) as DetectAttribute;
+                    var order = (attrib == null) ? 100 : attrib.Priority;
                     return new
                     {
                         Order = order,
