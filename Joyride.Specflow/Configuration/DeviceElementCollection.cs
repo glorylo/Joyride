@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using System.Linq;
 
 namespace Joyride.Specflow.Configuration
 {
@@ -45,13 +46,8 @@ namespace Joyride.Specflow.Configuration
 
         public bool ContainsKey(string key)
         {
-            object[] keys = BaseGetAllKeys();
-            foreach (object obj in keys)
-            {
-                if ((string) obj == key)
-                   return  true;
-            }
-            return false;
+            var keys = BaseGetAllKeys();
+            return keys.Any(obj => (string) obj == key);
         }
     }
  
