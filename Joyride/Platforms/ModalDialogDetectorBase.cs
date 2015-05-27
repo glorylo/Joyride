@@ -18,14 +18,12 @@ namespace Joyride.Platforms
         protected Dictionary<string, Type> ModalDialogs = new Dictionary<string, Type>();
         protected IEnumerable<Type> DialogTypes;
 
-        protected ModalDialogDetectorBase(Assembly assembly, Type baseModalDialogType, ScreenFactory factory, int defaultTimeoutSecs = DefaultTimoutSecs)
+        protected ModalDialogDetectorBase(Assembly assembly, Type baseModalDialogType, int defaultTimeoutSecs = DefaultTimoutSecs)
         {
             TargetAssembly = assembly;
-            ScreenFactory = factory;
             BaseModalDialogType = baseModalDialogType;
-            DialogTypes = GetDialogTypes();
-            BuildModalDialogLookupTable();
             TimeoutSecs = defaultTimeoutSecs;
+            DialogTypes = GetDialogTypes();
         }
 
         protected IEnumerable<Type> GetDialogTypes()
