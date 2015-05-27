@@ -3,13 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Joyride.Extensions;
+using Joyride.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Appium.MultiTouch;
 
 namespace Joyride.Platforms.Android
 {
-    abstract public class AndroidScreen : Screen
+    abstract public class AndroidScreen : Screen, IDetectModalDialog
     {
         protected static ScreenFactory ScreenFactory = new AndroidScreenFactory();
         protected static IModalDialogDetector ModalDialogDetector;

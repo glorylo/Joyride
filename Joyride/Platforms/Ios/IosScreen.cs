@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Joyride.Extensions;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.iOS;
 
 namespace Joyride.Platforms.Ios
@@ -13,10 +12,11 @@ namespace Joyride.Platforms.Ios
     {
         protected static ScreenFactory ScreenFactory = new IosScreenFactory();
         protected static new IOSDriver Driver = (IOSDriver) RemoteMobileDriver.GetInstance();
+        protected static IModalDialogDetector ModalDialogDetector;
 
         public override Screen TapAndHold(string elementName, int seconds)
         {
-            IWebElement element = FindElement(elementName);
+            var element = FindElement(elementName);
 
             if (element == null)
                 throw new NoSuchElementException("Cannot find element:  " + elementName);
@@ -125,7 +125,7 @@ namespace Joyride.Platforms.Ios
 
         public String TitleFromNavigationBar(int timeoutSecs = 5)
         {
-            var xpath = "//UIANavigationBar[1]/UIAStaticText[1]";
+            const string xpath = "//UIANavigationBar[1]/UIAStaticText[1]";
             var element = Driver.FindElement(By.XPath(xpath), timeoutSecs);
 
             if (element == null)
