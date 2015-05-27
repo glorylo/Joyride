@@ -5,9 +5,10 @@ using System.Collections.Generic;
 namespace Joyride.Platforms.Ios
 {
 
- abstract public class IosModalDialog : Component, IModalDialog
+    abstract public class IosModalDialog : Component, IModalDialog
     {
-        protected static ScreenFactory ScreenFactory = new IosScreenFactory();
+        protected static readonly ScreenFactory ScreenFactory = new IosScreenFactory();
+        
         public abstract string Body { get; }
         public abstract string Title { get; }
         public abstract Screen Accept();
@@ -15,7 +16,7 @@ namespace Joyride.Platforms.Ios
         public abstract Screen RespondWith(string response);
         public abstract bool IsOnScreen(int timeoutSecs);
 
-     protected void SetTransition(string response, Func<Screen> func) { TransitionMap[response] = func; }
+        protected void SetTransition(string response, Func<Screen> func) { TransitionMap[response] = func; }
         protected Screen TransitionFromResponse(string response) { return TransitionMap[response](); }
         protected Dictionary<string, Func<Screen>> TransitionMap = new Dictionary<string, Func<Screen>>();
     }

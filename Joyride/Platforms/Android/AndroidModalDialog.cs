@@ -3,10 +3,9 @@ using System.Collections.Generic;
 
 namespace Joyride.Platforms.Android
 {
-    // testing... this approach
     abstract public class AndroidModalDialog : Component, IModalDialog
     {
-        protected static ScreenFactory ScreenFactory = new AndroidScreenFactory();        
+        protected static readonly ScreenFactory ScreenFactory = new AndroidScreenFactory();        
         public abstract string Body { get; }
         public abstract string Title { get; }
         public abstract Screen Accept();
