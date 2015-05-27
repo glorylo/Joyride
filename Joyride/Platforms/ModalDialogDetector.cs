@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Joyride.Platforms.Android
+namespace Joyride.Platforms
 {
-    public class ModalDialogDetector : IModalDialogDetector
+    public abstract class ModalDialogDetector : IModalDialogDetector
     {
 
         public Type BaseModalDialogType { get; set; }
@@ -16,7 +16,7 @@ namespace Joyride.Platforms.Android
         public int TimeoutSecs { get; set; }
         protected static ModalDialogDetector Detector;
 
-        public static void Register(Assembly assembly, Type baseModalType)
+/*        public static void Register(Assembly assembly, Type baseModalType)
         {
             if (Detector == null)
                 Detector = new ModalDialogDetector(assembly, baseModalType);
@@ -25,13 +25,13 @@ namespace Joyride.Platforms.Android
         public static ModalDialogDetector GetInstance()
         {
             return Detector;
-        }
+        }*/
 
-        protected ScreenFactory ScreenFactory = new AndroidScreenFactory();
+        protected ScreenFactory ScreenFactory;
         protected Dictionary<string, Type> ModalDialogs = new Dictionary<string, Type>();
         protected IEnumerable<Type> DialogTypes;
 
-        private ModalDialogDetector(Assembly assembly, Type baseModalDialogType, int defaultTimeoutSecs = DefaultTimoutSecs)
+        protected ModalDialogDetector(Assembly assembly, Type baseModalDialogType, int defaultTimeoutSecs = DefaultTimoutSecs)
         {
             TargetAssembly = assembly;
             BaseModalDialogType = baseModalDialogType;

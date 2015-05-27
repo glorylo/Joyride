@@ -1,8 +1,6 @@
-﻿
-using System;
-using Joyride.Platforms;
+﻿using System;
 
-namespace Joyride
+namespace Joyride.Platforms
 {
     abstract public class ScreenFactory
     {
