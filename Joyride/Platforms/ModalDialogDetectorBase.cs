@@ -5,33 +5,20 @@ using System.Reflection;
 
 namespace Joyride.Platforms
 {
-    public abstract class ModalDialogDetector : IModalDialogDetector
+    public abstract class ModalDialogDetectorBase : IModalDialogDetector
     {
-
         public Type BaseModalDialogType { get; set; }
 
         public Assembly TargetAssembly { get; set; }
 
         public const int DefaultTimoutSecs = 2;
         public int TimeoutSecs { get; set; }
-        protected static ModalDialogDetector Detector;
 
-/*        public static void Register(Assembly assembly, Type baseModalType)
-        {
-            if (Detector == null)
-                Detector = new ModalDialogDetector(assembly, baseModalType);
-        }
-
-        public static ModalDialogDetector GetInstance()
-        {
-            return Detector;
-        }*/
-
-        protected ScreenFactory ScreenFactory;
+        protected ScreenFactory ScreenFactory { get; set; }
         protected Dictionary<string, Type> ModalDialogs = new Dictionary<string, Type>();
         protected IEnumerable<Type> DialogTypes;
 
-        protected ModalDialogDetector(Assembly assembly, Type baseModalDialogType, int defaultTimeoutSecs = DefaultTimoutSecs)
+        protected ModalDialogDetectorBase(Assembly assembly, Type baseModalDialogType, int defaultTimeoutSecs = DefaultTimoutSecs)
         {
             TargetAssembly = assembly;
             BaseModalDialogType = baseModalDialogType;

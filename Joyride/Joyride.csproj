@@ -68,8 +68,10 @@
     <Compile Include="Interfaces\IEntryEnumerable.cs" />
     <Compile Include="Platforms\Android\AndroidMobileApplication.cs" />
     <Compile Include="Platforms\Android\AndroidModalDialog.cs" />
+    <Compile Include="Platforms\Android\AndroidModalDialogDetector.cs" />
     <Compile Include="Platforms\Android\AndroidScreen.cs" />
     <Compile Include="Platforms\Android\AndroidScreenFactory.cs" />
+    <Compile Include="Platforms\ModalDialogDetectorBase.cs" />
     <Compile Include="Platforms\IModalDialogDetector.cs" />
     <Compile Include="Platforms\Component.cs" />
     <Compile Include="Platforms\DetectAttribute.cs" />
@@ -83,7 +85,6 @@
     <Compile Include="Platforms\MobileApplication.cs" />
     <Compile Include="Platforms\ITouchGesture.cs" />
     <Compile Include="Platforms\IWebViewAction.cs" />
-    <Compile Include="Platforms\Android\ModalDialogDetector.cs" />
     <Compile Include="Platforms\UndefinedResponseException.cs" />
     <Compile Include="RemoteMobileDriver.cs" />
     <Compile Include="Enums.cs" />
