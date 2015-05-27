@@ -11,14 +11,13 @@ namespace Joyride.Platforms
 
         public Assembly TargetAssembly { get; set; }
 
-        public const int DefaultTimoutSecs = 2;
         public int TimeoutSecs { get; set; }
 
         protected ScreenFactory ScreenFactory;
         protected Dictionary<string, Type> ModalDialogs = new Dictionary<string, Type>();
         protected IEnumerable<Type> DialogTypes;
 
-        protected ModalDialogDetectorBase(Assembly assembly, Type baseModalDialogType, int defaultTimeoutSecs = DefaultTimoutSecs)
+        protected ModalDialogDetectorBase(Assembly assembly, Type baseModalDialogType, int defaultTimeoutSecs)
         {
             TargetAssembly = assembly;
             BaseModalDialogType = baseModalDialogType;
