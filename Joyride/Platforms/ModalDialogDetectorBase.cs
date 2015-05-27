@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Joyride.Platforms
 {
-    public abstract class ModalDialogDetectorBase : IModalDialogDetector
+    public class ModalDialogDetectorBase : IModalDialogDetector
     {
         public Type BaseModalDialogType { get; set; }
 
@@ -14,13 +14,14 @@ namespace Joyride.Platforms
         public const int DefaultTimoutSecs = 2;
         public int TimeoutSecs { get; set; }
 
-        protected ScreenFactory ScreenFactory { get; set; }
+        protected ScreenFactory ScreenFactory;
         protected Dictionary<string, Type> ModalDialogs = new Dictionary<string, Type>();
         protected IEnumerable<Type> DialogTypes;
 
-        protected ModalDialogDetectorBase(Assembly assembly, Type baseModalDialogType, int defaultTimeoutSecs = DefaultTimoutSecs)
+        protected ModalDialogDetectorBase(Assembly assembly, Type baseModalDialogType, ScreenFactory factory, int defaultTimeoutSecs = DefaultTimoutSecs)
         {
             TargetAssembly = assembly;
+            ScreenFactory = factory;
             BaseModalDialogType = baseModalDialogType;
             DialogTypes = GetDialogTypes();
             BuildModalDialogLookupTable();
