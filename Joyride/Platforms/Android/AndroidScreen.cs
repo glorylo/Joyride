@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Joyride.Extensions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Android;
@@ -13,6 +14,51 @@ namespace Joyride.Platforms.Android
         protected static ScreenFactory ScreenFactory = new AndroidScreenFactory();
         protected static IModalDialogDetector ModalDialogDetector;
         protected static new AndroidDriver Driver = (AndroidDriver) RemoteMobileDriver.GetInstance();
+
+        public virtual IModalDialog DetectModalDialog()
+        {
+            return ModalDialogDetector.Detect();
+        }
+
+        public virtual IModalDialog DetectModalDialog(Type dialogType)
+        {
+            return ModalDialogDetector.Detect(dialogType);
+        }
+
+        public virtual IModalDialog DetectModalDialog(string modalDialogName)
+        {
+            return ModalDialogDetector.Detect(modalDialogName);
+        }
+
+        public virtual Screen AcceptModalDialog(bool accept, string modalDialogName)
+        {
+            return AcceptModalDialogs(accept, modalDialogName);
+        }
+
+        public virtual Screen AcceptModalDialog(bool accept)
+        {
+            return AcceptModalDialogs(accept);
+        }
+
+        protected Screen AcceptModalDialogs(bool accept, params string[] dialogs)
+        {
+            var dialog = !dialogs.Any() ? ModalDialogDetector.Detect() : ModalDialogDetector.Detect(dialogs);
+
+            if (dialog == null)
+                return this;
+
+            return accept ? dialog.Accept() : dialog.Dismiss();
+        }
+
+        protected Screen AcceptModalDialogs(bool accept, Type[] dialogTypes)
+        {
+            var dialog = !dialogTypes.Any() ? ModalDialogDetector.Detect() : ModalDialogDetector.Detect(dialogTypes);
+
+            if (dialog == null)
+                return this;
+
+            return accept ? dialog.Accept() : dialog.Dismiss();
+        }
 
         public void HideKeyboard()
         {
