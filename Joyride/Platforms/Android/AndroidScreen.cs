@@ -11,6 +11,7 @@ namespace Joyride.Platforms.Android
     abstract public class AndroidScreen : Screen
     {
         protected static ScreenFactory ScreenFactory = new AndroidScreenFactory();
+        protected static IModalDialogDetector ModalDialogDetector;
         protected static new AndroidDriver Driver = (AndroidDriver) RemoteMobileDriver.GetInstance();
 
         public void HideKeyboard()
