@@ -33,7 +33,7 @@ namespace Joyride.Platforms.Android
 
         public virtual Screen AcceptModalDialog(bool accept, string modalDialogName)
         {
-            return AcceptModalDialogs(accept, modalDialogName);
+            return AcceptModalDialogs(accept, new [] { modalDialogName });
         }
 
         public virtual Screen AcceptModalDialog(bool accept)
@@ -41,7 +41,7 @@ namespace Joyride.Platforms.Android
             return AcceptModalDialogs(accept);
         }
 
-        protected Screen AcceptModalDialogs(bool accept, params string[] dialogs)
+        protected Screen AcceptModalDialogs(bool accept, string[] dialogs)
         {
             var dialog = !dialogs.Any() ? ModalDialogDetector.Detect() : ModalDialogDetector.Detect(dialogs);
 
@@ -51,7 +51,7 @@ namespace Joyride.Platforms.Android
             return accept ? dialog.Accept() : dialog.Dismiss();
         }
 
-        protected Screen AcceptModalDialogs(bool accept, Type[] dialogTypes)
+        protected Screen AcceptModalDialogs(bool accept, params Type[] dialogTypes)
         {
             var dialog = !dialogTypes.Any() ? ModalDialogDetector.Detect() : ModalDialogDetector.Detect(dialogTypes);
 
