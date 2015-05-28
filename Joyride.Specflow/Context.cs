@@ -7,15 +7,15 @@ namespace Joyride.Specflow
 {
     public static class Context
     {
-        private const string MobileAppKey = "_MobileApp";
-        private const string DriverKey = "_Driver";
-        private const string CurrentUserKey = "_CurrentUser";
+        private const string MobileAppKey = "_MobileApp_";
+        private const string DriverKey = "_Driver_";
+        private const string CurrentUserKey = "_CurrentUser_";
 
         static Context()
         {
             ScenarioContext.Current[MobileAppKey] = null;
-            ScenarioContext.Current["Driver"] = null;
-            ScenarioContext.Current["CurrentUser"] = null;
+            ScenarioContext.Current[DriverKey] = null;
+            ScenarioContext.Current[CurrentUserKey] = null;
         }
           
         public static void SetValue(string key, object value)
