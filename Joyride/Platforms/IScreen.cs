@@ -2,10 +2,7 @@
 {
 
     // not solidified yet. 
-    public interface IScreen : ITouchGesture, IWebViewAction
+    public interface IScreen : ITouchGesture, IWebViewAction, IDetectable
     {
-        // would like to get rid of this time out..
-        bool IsOnScreen(int timeOutSecs = Component.DefaultWaitSeconds);
-        string Name { get; }
     }
 }

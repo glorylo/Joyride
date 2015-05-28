@@ -216,11 +216,7 @@ namespace Joyride.Platforms
         public string GetElementText(string elementName)
         {
             var element = FindElement(elementName);
-
-            if (element == null)
-                return null;
-
-            return element.Text;
+            return element == null ? null : element.Text;
         }
 
         internal protected bool ElementExists(string elementName, int timeoutSecs=10)
