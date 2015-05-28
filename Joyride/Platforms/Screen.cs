@@ -24,7 +24,7 @@ namespace Joyride.Platforms
 
         public virtual Screen Tap(string elementName, bool precise = false)
         {
-            IWebElement element = FindElement(elementName);
+            var element = FindElement(elementName);
 
             if (element == null)
                 throw new NoSuchElementException("Cannot find element:  " + elementName);
@@ -39,7 +39,7 @@ namespace Joyride.Platforms
 
         public virtual Screen DoubleTap(string elementName)
         {
-            IWebElement element = FindElement(elementName);
+            var element = FindElement(elementName);
 
             if (element == null)
                 throw new NoSuchElementException("Cannot find element:  " + elementName);
@@ -50,7 +50,7 @@ namespace Joyride.Platforms
 
         public virtual Screen TapAndHold(string elementName, int seconds)
         {
-            IWebElement element = FindElement(elementName);
+            var element = FindElement(elementName);
 
             if (element == null)
                 throw new NoSuchElementException("Cannot find element:  " + elementName);

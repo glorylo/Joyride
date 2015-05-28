@@ -29,6 +29,16 @@ namespace Joyride.Platforms
             return null;
         }
 
+        internal protected IWebElement FindCachedElement(string elementName)
+        {
+            var element = FindElement(elementName);
+
+            if (element == null)
+              return null;
+
+            return Util.GetMemberValue(element, "WrappedElement") as IWebElement;
+        }
+
         internal protected IList<IWebElement> FindElements(string collectionName)
         {
             var elements =
