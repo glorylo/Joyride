@@ -3,16 +3,62 @@ using System.Drawing;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Joyride.Extensions;
+using Joyride.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.iOS;
 
 namespace Joyride.Platforms.Ios
 {
-    abstract public class IosScreen : Screen
+    abstract public class IosScreen : Screen, IDetectModalDialog
     {
         protected static ScreenFactory ScreenFactory = new IosScreenFactory();
         protected static new IOSDriver Driver = (IOSDriver) RemoteMobileDriver.GetInstance();
         protected static IModalDialogDetector ModalDialogDetector;
+
+        public virtual IModalDialog DetectModalDialog()
+        {
+            return ModalDialogDetector.Detect();
+        }
+
+        public virtual IModalDialog DetectModalDialog(Type dialogType)
+        {
+            return ModalDialogDetector.Detect(dialogType);
+        }
+
+        public virtual IModalDialog DetectModalDialog(string modalDialogName)
+        {
+            return ModalDialogDetector.Detect(modalDialogName);
+        }
+
+        public virtual Screen AcceptModalDialog(bool accept, string modalDialogName)
+        {
+            return AcceptModalDialogs(accept, new[] { modalDialogName });
+        }
+
+        public virtual Screen AcceptModalDialog(bool accept)
+        {
+            return AcceptModalDialogs(accept);
+        }
+
+        protected Screen AcceptModalDialogs(bool accept, string[] dialogs)
+        {
+            var dialog = !dialogs.Any() ? ModalDialogDetector.Detect() : ModalDialogDetector.Detect(dialogs);
+
+            if (dialog == null)
+                return this;
+
+            return accept ? dialog.Accept() : dialog.Dismiss();
+        }
+
+        protected Screen AcceptModalDialogs(bool accept, params Type[] dialogTypes)
+        {
+            var dialog = !dialogTypes.Any() ? ModalDialogDetector.Detect() : ModalDialogDetector.Detect(dialogTypes);
+
+            if (dialog == null)
+                return this;
+
+            return accept ? dialog.Accept() : dialog.Dismiss();
+        }
 
         public override Screen TapAndHold(string elementName, int seconds)
         {
