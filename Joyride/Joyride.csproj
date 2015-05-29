@@ -66,12 +66,17 @@
     <Compile Include="Extensions\TextCompareExtensions.cs" />
     <Compile Include="Interfaces\IDetectModalDialog.cs" />
     <Compile Include="Interfaces\IEntryEnumerable.cs" />
+    <Compile Include="Platforms\Android\AndroidDetector.cs" />
     <Compile Include="Platforms\Android\AndroidMobileApplication.cs" />
     <Compile Include="Platforms\Android\AndroidModalDialog.cs" />
     <Compile Include="Platforms\Android\AndroidModalDialogDetector.cs" />
     <Compile Include="Platforms\Android\AndroidScreen.cs" />
     <Compile Include="Platforms\Android\AndroidScreenFactory.cs" />
+    <Compile Include="Platforms\Detector.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Platforms\IDetectable.cs" />
+    <Compile Include="Platforms\IDetector.cs" />
     <Compile Include="Platforms\Ios\IosModalDialogDetector.cs" />
     <Compile Include="Platforms\ModalDialogDetectorBase.cs" />
     <Compile Include="Platforms\IModalDialogDetector.cs" />
