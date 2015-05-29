@@ -10,10 +10,9 @@ namespace Joyride
     public static class RemoteMobileDriver
     {
 
-        //TODO: Consider abstracting driver if there are new players in this space out there.  
-        //Currently there is no other driver doing remote selenium interface for mobile.  
-        //Simplicity of design wins out here.
+        //TODO: Consider abstracting driver 
         private static AppiumDriver _driver;
+
         public const int DefaultWaitSeconds = 30;
         public static int CommandTimeOutSeconds { get; set; }       
         public static bool EnableCustomWaits { get; set; }
@@ -26,32 +25,47 @@ namespace Joyride
         }
         
         //TODO: unlikely to fix but not thread safe
-        static public void Initialize(Uri hostUri, Platform platform, DesiredCapabilities capabilities)
+        public static void Initialize(Uri hostUri, Platform platform, DesiredCapabilities capabilities)
         {
             if (_driver != null)
                 throw new Exception("Unable to create multiple instances of appium driver");
 
             Platform = platform;
-            if (platform == Platform.Android)
-              _driver = new AndroidDriver(hostUri, capabilities);
-            else if (platform == Platform.Ios)
-                _driver = new IOSDriver(hostUri, capabilities);
-            else
-                throw new Exception("Unsupported driver for platform:  " + platform);
+            switch (platform)
+            {
+                case Platform.Android:
+                    _driver = new AndroidDriver(hostUri, capabilities);
+                    break;
+                case Platform.Ios:
+                    _driver = new IOSDriver(hostUri, capabilities);
+                    break;
+                default:
+                    throw new Exception("Unsupported driver for platform:  " + platform);
+            }
 
-            _driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(DefaultWaitSeconds));
+            SetImplicitWait(TimeSpan.FromSeconds(DefaultWaitSeconds));
         }
 
-        static public void SetTimeout(int seconds)
+        private static void SetImplicitWait(TimeSpan span)
+        {
+            try
+            {
+                _driver.Manage().Timeouts().ImplicitlyWait(span);
+            }
+            catch { } // suppress errors for now
+            
+        }
+
+        public static void SetTimeout(int seconds)
         {
             if (EnableCustomWaits && seconds != CommandTimeOutSeconds)
             {
                 CommandTimeOutSeconds = seconds;
-                _driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(seconds));  
+                SetImplicitWait(TimeSpan.FromSeconds(seconds));
             }
         }
         
-        static public void SetDefaultWait()
+        public static void SetDefaultWait()
         {
             SetTimeout(DefaultWaitSeconds);
         }
@@ -61,7 +75,7 @@ namespace Joyride
             return _driver;
         }
         
-        static public void CleanUp()
+        public static void CleanUp()
         {
             _driver.Quit();
             _driver = null;
