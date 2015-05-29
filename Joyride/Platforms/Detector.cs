@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
@@ -89,11 +90,15 @@ namespace Joyride.Platforms
             return detectable;
         }
 
-        public T Detect(string modalDialogName)
+        public T Detect(string name)
         {
-            if (!LookupTable.ContainsKey(modalDialogName))
+            if (!LookupTable.ContainsKey(name))
+            {
+                Trace.WriteLine("Unable to find detectable:  " + name);
                 return default(T);
-            var detectableType = LookupTable[modalDialogName];
+            }
+                
+            var detectableType = LookupTable[name];
             return IsOnScreen(detectableType, TimeoutSecs) ? FactoryMethod(detectableType) : default(T);
         }
 
