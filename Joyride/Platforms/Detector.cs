@@ -14,7 +14,7 @@ namespace Joyride.Platforms
         protected Dictionary<string, Type> LookupTable = new Dictionary<string, Type>();
         public Type BaseDetectableType { get; set; }
 
-        protected Detector(Assembly assembly, Type baseDetectableType, Func<Type, T> factoryMethod, int defaultTimeoutSecs) 
+        public Detector(Assembly assembly, Type baseDetectableType, Func<Type, T> factoryMethod, int defaultTimeoutSecs) 
         {
             TargetAssembly = assembly;
             TimeoutSecs = defaultTimeoutSecs;
@@ -25,21 +25,10 @@ namespace Joyride.Platforms
               BaseDetectableType = baseDetectableType;
             else
                 throw new ArgumentException("Unexpected type of: " + baseDetectableType);
+            BuildLookupTable();
         }
 
-        protected Detector(Assembly assembly, Type baseDetectableType, int defaultTimeoutSecs)
-        {
-            TargetAssembly = assembly;
-            TimeoutSecs = defaultTimeoutSecs;
-            DetectableTypes = GetDetectableTypes();
-
-            if (typeof(IDetectable).IsAssignableFrom(baseDetectableType))
-                BaseDetectableType = baseDetectableType;
-            else
-                throw new ArgumentException("Unexpected type of: " + baseDetectableType);
-        }
-
-        protected IEnumerable<Type> GetDetectableTypes()
+        public IEnumerable<Type> GetDetectableTypes()
         {
             var list = TargetAssembly.GetTypes().Where(t => t.BaseType == BaseDetectableType)
                 .Select(t =>

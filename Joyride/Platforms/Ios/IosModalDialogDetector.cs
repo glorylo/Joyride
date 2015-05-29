@@ -1,17 +1,44 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace Joyride.Platforms.Ios
 {
-    public class IosModalDialogDetector : ModalDialogDetectorBase
+    public class IosModalDialogDetector : IDetector<IModalDialog>
     {
         public const int DefaultTimeoutSecs = 5;
+        protected ScreenFactory ScreenFactory = new IosScreenFactory();
 
-        public IosModalDialogDetector(Assembly assembly, Type baseModalDialogType, int defaultTimeoutSecs=DefaultTimeoutSecs) 
-            : base(assembly, baseModalDialogType, defaultTimeoutSecs)
+        protected readonly IDetector<IModalDialog> Detector; 
+
+        public IosModalDialogDetector(Assembly assembly, Type baseModalDialogType, int defaultTimeoutSecs=DefaultTimeoutSecs)             
         {
-            ScreenFactory = new IosScreenFactory();
-            BuildModalDialogLookupTable();
+            Detector = new Detector<IModalDialog>(assembly, baseModalDialogType, ScreenFactory.CreateModalDialog, defaultTimeoutSecs);
+        }
+
+        public IModalDialog Detect(Type type)
+        {
+            return Detector.Detect(type);
+        }
+
+        public IModalDialog Detect(IEnumerable<Type> types)
+        {
+            return Detector.Detect(types);
+        }
+
+        public IModalDialog Detect()
+        {
+            return Detector.Detect();
+        }
+
+        public IModalDialog Detect(string[] modalDialogNames)
+        {
+            return Detector.Detect(modalDialogNames);
+        }
+
+        public IModalDialog Detect(string modalDialogName)
+        {
+            return Detector.Detect(modalDialogName);
         }
     }
 }

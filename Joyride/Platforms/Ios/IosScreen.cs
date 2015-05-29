@@ -13,7 +13,7 @@ namespace Joyride.Platforms.Ios
     {
         protected static ScreenFactory ScreenFactory = new IosScreenFactory();
         protected static new IOSDriver Driver = (IOSDriver) RemoteMobileDriver.GetInstance();
-        protected static IModalDialogDetector ModalDialogDetector;
+        protected static IDetector<IModalDialog> ModalDialogDetector;
 
         public virtual IModalDialog DetectModalDialog()
         {

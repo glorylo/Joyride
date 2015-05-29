@@ -8,7 +8,7 @@ namespace Joyride.Platforms
         T Detect(Type type);
         T Detect(IEnumerable<Type> types);
         T Detect();
-        T Detect(string[] modalDialogNames);
-        T Detect(string modalDialogName);
+        T Detect(string[] names);
+        T Detect(string name);
     }
 }
