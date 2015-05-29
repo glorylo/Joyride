@@ -14,6 +14,7 @@ namespace Joyride.Platforms
         public Type BaseDetectableType { get; set; }
         public Assembly TargetAssembly { get; set; }
         public int TimeoutSecs { get; set; }
+        public int SingleDetectTimeoutSecs = RemoteMobileDriver.DefaultWaitSeconds;
 
         public Detector(Assembly assembly, Type baseDetectableType, Func<Type, T> factoryMethod, int defaultTimeoutSecs) 
         {
@@ -64,7 +65,7 @@ namespace Joyride.Platforms
 
         public T Detect(Type type)
         {
-            return (IsOnScreen(type, TimeoutSecs)) ? FactoryMethod(type) : default(T);
+            return (IsOnScreen(type, SingleDetectTimeoutSecs)) ? FactoryMethod(type) : default(T);
         }
 
         public T Detect()
@@ -99,7 +100,7 @@ namespace Joyride.Platforms
             }
                 
             var detectableType = LookupTable[name];
-            return IsOnScreen(detectableType, TimeoutSecs) ? FactoryMethod(detectableType) : default(T);
+            return IsOnScreen(detectableType, SingleDetectTimeoutSecs) ? FactoryMethod(detectableType) : default(T);
         }
 
     }
