@@ -47,7 +47,8 @@ namespace Joyride.Platforms.Ios
             if (dialog == null)
                 return this;
 
-            return accept ? dialog.Accept() : dialog.Dismiss();
+            var screen = accept ? dialog.Accept() : dialog.Dismiss();
+            return screen ?? this;
         }
 
         protected Screen AcceptModalDialogs(bool accept, params Type[] dialogTypes)
@@ -57,7 +58,8 @@ namespace Joyride.Platforms.Ios
             if (dialog == null)
                 return this;
 
-            return accept ? dialog.Accept() : dialog.Dismiss();
+            var screen = accept ? dialog.Accept() : dialog.Dismiss();
+            return screen ?? this;
         }
 
         public override Screen TapAndHold(string elementName, int seconds)
