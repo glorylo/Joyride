@@ -5,7 +5,8 @@ namespace Joyride.Platforms.Android
 {
     abstract public class AndroidModalDialog : Component, IModalDialog
     {
-        protected static readonly ScreenFactory ScreenFactory = new AndroidScreenFactory();        
+        protected static readonly ScreenFactory ScreenFactory = new AndroidScreenFactory();
+        protected static readonly Func<Screen> NoTransition = () => null;
         public abstract string Body { get; }
         public abstract string Title { get; }
         public abstract Screen Accept();

@@ -8,7 +8,8 @@ namespace Joyride.Platforms.Ios
     abstract public class IosModalDialog : Component, IModalDialog
     {
         protected static readonly ScreenFactory ScreenFactory = new IosScreenFactory();
-        
+        protected static readonly Func<Screen> NoTransition = () => null;
+
         public abstract string Body { get; }
         public abstract string Title { get; }
         public abstract Screen Accept();

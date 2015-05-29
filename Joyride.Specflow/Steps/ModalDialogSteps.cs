@@ -44,7 +44,8 @@ namespace Joyride.Specflow.Steps
                 if (dialog == null)
                     throw new NoSuchElementException("Unexpected no modal dialog present on screen");
 
-                return dialog.RespondWith(response);
+                var screen = dialog.RespondWith(response);
+                return screen ?? (Screen) i;
             });
         }
 
