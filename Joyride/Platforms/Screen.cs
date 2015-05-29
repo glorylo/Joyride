@@ -8,7 +8,7 @@ namespace Joyride.Platforms
 {
     abstract public class Screen : Component, IScreen
     {
-        abstract public bool IsOnScreen(int timeOutSecs = DefaultWaitSeconds);
+        abstract public bool IsOnScreen(int timeOutSecs);
 
         internal protected void TapInWebview(string elementName)
         {

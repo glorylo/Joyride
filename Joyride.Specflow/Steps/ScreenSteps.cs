@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using Joyride.Extensions;
 using Joyride.Platforms;
+using Joyride.Specflow.Configuration;
 using Joyride.Specflow.Support;
 using NUnit.Framework;
 using TechTalk.SpecFlow;
@@ -11,7 +12,7 @@ namespace Joyride.Specflow.Steps
     [Binding]
     public class ScreenSteps
     {
-
+        public static int TimeoutSecs = JoyrideConfiguration.TimeoutSecs;
         #region Given/Whens
 
         [Given(@"I enter ""([^""]*)"" in the ""([^""]*)"" field")]
@@ -149,7 +150,7 @@ namespace Joyride.Specflow.Steps
         [Then(@"I should be on the ""([^""]*)"" screen")]
         public void ThenIShouldBeOnSomeScreen(string screen)
         {
-            Assert.IsTrue(Context.MobileApp.Screen.Name.Equals(screen) && Context.MobileApp.Screen.IsOnScreen(),
+            Assert.IsTrue(Context.MobileApp.Screen.Name.Equals(screen) && Context.MobileApp.Screen.IsOnScreen(TimeoutSecs),
                 "Incorrectly on screen: " + Context.MobileApp.Screen.Name);
         }
         
