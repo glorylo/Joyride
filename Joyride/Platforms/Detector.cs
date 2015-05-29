@@ -5,14 +5,14 @@ using System.Reflection;
 
 namespace Joyride.Platforms
 {
-    public class Detector<T> : IDetector<T> where T: IDetectable
+    public class Detector<T> : IDetector<T> where T : IDetectable
     {
         protected IEnumerable<Type> DetectableTypes;
-        public Assembly TargetAssembly { get; set; }
-        public int TimeoutSecs { get; set; }
         protected Func<Type, T> FactoryMethod { get; set; }
         protected Dictionary<string, Type> LookupTable = new Dictionary<string, Type>();
         public Type BaseDetectableType { get; set; }
+        public Assembly TargetAssembly { get; set; }
+        public int TimeoutSecs { get; set; }
 
         public Detector(Assembly assembly, Type baseDetectableType, Func<Type, T> factoryMethod, int defaultTimeoutSecs) 
         {
@@ -45,7 +45,6 @@ namespace Joyride.Platforms
                 .Select(t => t.Type);
             return list;
         }
-
 
         protected void BuildLookupTable()
         {
