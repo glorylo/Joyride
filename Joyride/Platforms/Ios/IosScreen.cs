@@ -83,7 +83,7 @@ namespace Joyride.Platforms.Ios
             return (textWithLabelText != null);
         }
 
-        public Screen DragSlider(string elementName, int percentage)
+        public virtual Screen DragSlider(string elementName, int percentage)
         {
             if ((percentage < 0) || (percentage > 100))
                 throw new IndexOutOfRangeException("Slider can only accept values 1-100.  Requested: " + percentage);
@@ -98,7 +98,7 @@ namespace Joyride.Platforms.Ios
             return this;
         }
 
-        public int CurrentPageOnIndictator(string elementName)
+        public virtual int CurrentPageOnIndictator(string elementName)
         {
             var value = GetElementAttribute(elementName, "value");
             if (value == null)
@@ -111,7 +111,7 @@ namespace Joyride.Platforms.Ios
             throw new Exception("Unable to extra current page from:  " + value);
         }
 
-        public bool HasNavigationBarTitled(string title, int timeoutSecs = DefaultWaitSeconds)
+        public virtual bool HasNavigationBarTitled(string title, int timeoutSecs = DefaultWaitSeconds)
         {
             var xpath = "//UIANavigationBar[1]/UIAStaticText[@label='" + title + "']";
             var element = Driver.FindElement(By.XPath(xpath), timeoutSecs);
@@ -119,7 +119,7 @@ namespace Joyride.Platforms.Ios
         }
 
 
-        public String TitleFromNavigationBar(int timeoutSecs)
+        public virtual String TitleFromNavigationBar(int timeoutSecs)
         {
             const string xpath = "//UIANavigationBar[1]/UIAStaticText[1]";
             var element = Driver.FindElement(By.XPath(xpath), timeoutSecs);
