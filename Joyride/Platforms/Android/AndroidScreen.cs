@@ -1,69 +1,19 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Joyride.Extensions;
-using Joyride.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Appium.MultiTouch;
 
 namespace Joyride.Platforms.Android
 {
-    abstract public class AndroidScreen : Screen, IDetectModalDialog
+    abstract public class AndroidScreen : Screen
     {
         protected static ScreenFactory ScreenFactory = new AndroidScreenFactory();
-        protected static IDetector<IModalDialog> ModalDialogDetector;
         protected static new AndroidDriver Driver = (AndroidDriver) RemoteMobileDriver.GetInstance();
-
-        public virtual IModalDialog DetectModalDialog()
-        {
-            return ModalDialogDetector.Detect();
-        }
-
-        public virtual IModalDialog DetectModalDialog(Type dialogType)
-        {
-            return ModalDialogDetector.Detect(dialogType);
-        }
-
-        public virtual IModalDialog DetectModalDialog(string modalDialogName)
-        {
-            return ModalDialogDetector.Detect(modalDialogName);
-        }
-
-        public virtual Screen AcceptModalDialog(bool accept, string modalDialogName)
-        {
-            return AcceptModalDialogs(accept, new [] { modalDialogName });
-        }
-
-        public virtual Screen AcceptModalDialog(bool accept)
-        {
-            return AcceptModalDialogs(accept);
-        }
-
-        protected Screen AcceptModalDialogs(bool accept, string[] dialogs)
-        {
-            var dialog = !dialogs.Any() ? ModalDialogDetector.Detect() : ModalDialogDetector.Detect(dialogs);
-
-            if (dialog == null)
-                return this;
-
-            var screen =  accept ? dialog.Accept() : dialog.Dismiss();
-            return screen ?? this;
-        }
-
-        protected Screen AcceptModalDialogs(bool accept, params Type[] dialogTypes)
-        {
-            var dialog = !dialogTypes.Any() ? ModalDialogDetector.Detect() : ModalDialogDetector.Detect(dialogTypes);
-
-            if (dialog == null)
-                return this;
-
-            var screen = accept ? dialog.Accept() : dialog.Dismiss();
-            return screen ?? this;
-        }
-
-        public void HideKeyboard()
+        
+        public virtual void HideKeyboard()
         {
             // suppress any odd appium errors
             try { Driver.HideKeyboard(); }
@@ -121,7 +71,7 @@ namespace Joyride.Platforms.Android
             return this;
         }
 
-        public virtual bool HasLabel(string label, CompareType compareType, int timeoutSecs = DefaultWaitSeconds)
+        public virtual bool HasLabel(string label, CompareType compareType, int timeoutSecs)
         {
             return HasText(label, compareType, timeoutSecs) || HasContentDesc(label, compareType, timeoutSecs);
         }
@@ -150,7 +100,7 @@ namespace Joyride.Platforms.Android
             return (tuple != null);
         }
 
-        internal protected bool HasContentDesc(string label, CompareType compareType, int timeoutSecs=DefaultWaitSeconds)
+        internal protected bool HasContentDesc(string label, CompareType compareType, int timeoutSecs)
         {
             IList<IWebElement> texts;
             switch (compareType)
@@ -178,7 +128,7 @@ namespace Joyride.Platforms.Android
             return texts != null && texts.Count != 0;
         }
 
-        internal protected bool HasText(string label, CompareType compareType, int timeoutSecs = DefaultWaitSeconds)
+        internal protected bool HasText(string label, CompareType compareType, int timeoutSecs)
         {
             IList<IWebElement> texts = null;
             switch (compareType)
@@ -208,14 +158,5 @@ namespace Joyride.Platforms.Android
 
         public abstract Screen GoBack();
 
-        public static bool IsOnScreen<T>(int timeoutSecs) where T : Screen, new()
-        {
-            return ScreenFactory.CreateScreen<T>().IsOnScreen(timeoutSecs);
-        }
-
-        public static bool IsOnScreen(Type t, int timeoutSecs)
-        {
-            return ScreenFactory.CreateScreen(t).IsOnScreen(timeoutSecs);
-        }
     }
 }

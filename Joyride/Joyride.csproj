@@ -70,6 +70,7 @@
     <Compile Include="Platforms\Android\AndroidModalDialog.cs" />
     <Compile Include="Platforms\Android\AndroidModalDialogDetector.cs" />
     <Compile Include="Platforms\Android\AndroidScreen.cs" />
+    <Compile Include="Platforms\Android\AndroidScreenDetector.cs" />
     <Compile Include="Platforms\Android\AndroidScreenFactory.cs" />
     <Compile Include="Platforms\Detector.cs">
       <SubType>Code</SubType>
@@ -85,6 +86,7 @@
     <Compile Include="Platforms\Ios\IosMobileApplication.cs" />
     <Compile Include="Platforms\Ios\IosModalDialog.cs" />
     <Compile Include="Platforms\Ios\IosScreen.cs" />
+    <Compile Include="Platforms\Ios\IosScreenDetector.cs" />
     <Compile Include="Platforms\IScreen.cs" />
     <Compile Include="Platforms\MobileApplication.cs" />
     <Compile Include="Platforms\ITouchGesture.cs" />

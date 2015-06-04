@@ -38,10 +38,15 @@ namespace Joyride.Specflow
 
         public static AppiumDriver Driver
         {
-            get { return (AppiumDriver)ScenarioContext.Current[DriverKey]; }
+            get { return (AppiumDriver) ScenarioContext.Current[DriverKey]; }
             set { ScenarioContext.Current[DriverKey] = value; }
         }
 
+        public static bool HasError
+        {
+            get { return ScenarioContext.Current.TestError != null; }            
+        }
+        
         public static object CurrentUser
         {
             get { return ScenarioContext.Current[CurrentUserKey]; }

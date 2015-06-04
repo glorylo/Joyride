@@ -1,14 +1,112 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using Joyride.Extensions;
+using Joyride.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
 namespace Joyride.Platforms
 {
-    abstract public class Screen : Component, IScreen
+    abstract public class Screen : Component, IScreen, IDetectModalDialog
     {
         abstract public bool IsOnScreen(int timeOutSecs);
+        protected static IDetector<IModalDialog> ModalDialogDetector;
+
+        #region ModalDialog Handling
+        public virtual IModalDialog DetectModalDialog()
+        {
+            return ModalDialogDetector.Detect();
+        }
+
+        public virtual IModalDialog DetectModalDialog(string modalDialogName)
+        {
+            return ModalDialogDetector.Detect(modalDialogName);
+        }
+
+        public virtual Screen AcceptModalDialog(bool accept, string modalDialogName, bool throwException = false)
+        {
+            var dialog = DetectModalDialog(modalDialogName);
+            if (dialog == null)
+            {
+                if (throwException)
+                    throw new NoSuchElementException("Unable to detect the modal dialog: " + modalDialogName);
+                Trace.WriteLine("Unable to detect modal dialog: " + modalDialogName);
+                return this;
+            }
+            var screen = (accept) ? dialog.Accept() : dialog.Dismiss();
+            return screen ?? this;
+        }
+
+        public virtual Screen AcceptModalDialog(bool accept)
+        {
+            return AcceptModalDialogs(accept);
+        }
+
+        public virtual Screen RespondModalDialog(string response, string modalDialogName, bool throwException = false)
+        {
+            var dialog = DetectModalDialog(modalDialogName);
+            if (dialog == null)
+            {
+                if (throwException)
+                    throw new NoSuchElementException("Unable to detect the modal dialog: " + modalDialogName);
+                Trace.WriteLine("Unable to detect modal dialog: " + modalDialogName);
+                return this;
+            }
+            return dialog.RespondWith(response) ?? this;
+        }
+
+        internal protected IModalDialog DetectModalDialog(Type dialogType)
+        {
+            return ModalDialogDetector.Detect(dialogType);
+        }
+
+        internal protected IModalDialog DetectModalDialogs(params Type[] dialogs)
+        {
+            var dialog = !dialogs.Any() ? ModalDialogDetector.Detect() : ModalDialogDetector.Detect(dialogs);
+            return dialog;
+        }
+
+        internal protected Screen AcceptModalDialog(bool accept, Type dialogType, bool throwException = false)
+        {
+            var dialog = DetectModalDialog(dialogType);
+            if (dialog == null)
+            {
+                if (throwException)
+                    throw new NoSuchElementException("Unable to detect the modal dialog of type: " + dialogType);
+                Trace.WriteLine("Unable to detect modal dialog of type: " + dialogType);
+                return this;
+            }
+
+            var screen = (accept) ? dialog.Accept() : dialog.Dismiss();
+            return screen ?? this;
+        }
+
+        internal protected Screen RespondModalDialog(string response, Type dialogType, bool throwException = false)
+        {
+            var dialog = DetectModalDialog(dialogType);
+            if (dialog == null)
+            {
+                if (throwException)
+                    throw new NoSuchElementException("Unable to detect the modal dialog of type: " + dialogType);
+                Trace.WriteLine("Unable to detect modal dialog of type: " + dialogType);
+                return this;
+            }
+            return dialog.RespondWith(response) ?? this;
+        }
+
+        internal protected Screen AcceptModalDialogs(bool accept, params Type[] dialogTypes)
+        {
+            var dialog = !dialogTypes.Any() ? ModalDialogDetector.Detect() : ModalDialogDetector.Detect(dialogTypes);
+
+            if (dialog == null)
+                return this;
+
+            var screen = accept ? dialog.Accept() : dialog.Dismiss();
+            return screen ?? this;
+        }
+
+        #endregion
 
         internal protected void TapInWebview(string elementName)
         {
@@ -181,7 +279,7 @@ namespace Joyride.Platforms
             return this;
         }
 
-        public virtual Screen ScrollUntil(string elementName, Direction direction, double scale=1.0, long durationMilliSecs = 500, int maxRetries = 30)
+        public virtual Screen ScrollUntil(string elementName, Direction direction, double scale=1.0, long durationMilliSecs = 500, int maxRetries = 60)
         {
             var element = FindElement(elementName, 3);
 

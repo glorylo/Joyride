@@ -15,15 +15,8 @@ namespace Joyride.Specflow.Steps
         [When(@"I (accept|dismiss) the ""([^""]*)"" modal dialog")]
         public void GivenIAcceptOrDismissSpecificModalDialog(string acceptOrDismiss, string modalDialogName)
         {
-            Context.MobileApp.Do<IDetectModalDialog>(i =>
-            {
-                var dialog = i.DetectModalDialog(modalDialogName);
-                if (dialog == null)
-                    throw new NoSuchElementException("Unexpected modal dialog not present on screen: " + modalDialogName);
-
-                var screen = (acceptOrDismiss == "accept") ? dialog.Accept() : dialog.Dismiss();
-                return screen ?? (Screen) i;
-            });
+            var accept = (acceptOrDismiss == "accept");
+            Context.MobileApp.Do<IDetectModalDialog>(i => i.AcceptModalDialog(accept, modalDialogName, true));
         }
 
         [Given(@"I (accept|dismiss) any modal dialog")]
@@ -37,15 +30,7 @@ namespace Joyride.Specflow.Steps
         [When(@"I respond to the ""([^""]*)"" modal dialog with ""([^""]*)""")]
         public void GivenIRespondWithModalDialog(string modalDialogName, string response)
         {
-            Context.MobileApp.Do<IDetectModalDialog>(i =>
-            {
-                var dialog = i.DetectModalDialog(modalDialogName);
-                // should be able to detect the specified modal dialog or it will fail the test!
-                if (dialog == null)
-                    throw new NoSuchElementException("Unexpected no modal dialog present on screen");
-
-                return dialog.RespondWith(response) ?? (Screen) i;
-            });
+            Context.MobileApp.Do<IDetectModalDialog>(i => i.RespondModalDialog(response, modalDialogName, true));
         }
 
         #endregion

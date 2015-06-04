@@ -1,6 +1,8 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using Joyride.Extensions;
+using OpenQA.Selenium;
 
 namespace Joyride.Platforms.Ios
 {
@@ -10,8 +12,24 @@ namespace Joyride.Platforms.Ios
         protected static readonly ScreenFactory ScreenFactory = new IosScreenFactory();
         protected static readonly Func<Screen> NoTransition = () => null;
 
-        public abstract string Body { get; }
-        public abstract string Title { get; }
+        public virtual string Title
+        {
+            get
+            {
+                var element = Driver.FindElement(By.XPath("//UIAAlert//UIAStaticText[1]"), DefaultWaitSeconds);
+                return (element == null) ? null : element.Text;
+            }
+        }
+        
+        public virtual string Body
+        {
+            get
+            {
+                var element = Driver.FindElement(By.XPath("//UIAAlert//UIAStaticText[2]"), DefaultWaitSeconds);
+                return (element == null) ? null : element.Text;
+            }
+        }
+        
         public abstract Screen Accept();
         public abstract Screen Dismiss();
         public abstract Screen RespondWith(string response);

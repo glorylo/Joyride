@@ -3,64 +3,15 @@ using System.Drawing;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Joyride.Extensions;
-using Joyride.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.iOS;
 
 namespace Joyride.Platforms.Ios
 {
-    abstract public class IosScreen : Screen, IDetectModalDialog
+    abstract public class IosScreen : Screen
     {
         protected static ScreenFactory ScreenFactory = new IosScreenFactory();
         protected static new IOSDriver Driver = (IOSDriver) RemoteMobileDriver.GetInstance();
-        protected static IDetector<IModalDialog> ModalDialogDetector;
-
-        public virtual IModalDialog DetectModalDialog()
-        {
-            return ModalDialogDetector.Detect();
-        }
-
-        public virtual IModalDialog DetectModalDialog(Type dialogType)
-        {
-            return ModalDialogDetector.Detect(dialogType);
-        }
-
-        public virtual IModalDialog DetectModalDialog(string modalDialogName)
-        {
-            return ModalDialogDetector.Detect(modalDialogName);
-        }
-
-        public virtual Screen AcceptModalDialog(bool accept, string modalDialogName)
-        {
-            return AcceptModalDialogs(accept, new[] { modalDialogName });
-        }
-
-        public virtual Screen AcceptModalDialog(bool accept)
-        {
-            return AcceptModalDialogs(accept);
-        }
-
-        protected Screen AcceptModalDialogs(bool accept, string[] dialogs)
-        {
-            var dialog = !dialogs.Any() ? ModalDialogDetector.Detect() : ModalDialogDetector.Detect(dialogs);
-
-            if (dialog == null)
-                return this;
-
-            var screen = accept ? dialog.Accept() : dialog.Dismiss();
-            return screen ?? this;
-        }
-
-        protected Screen AcceptModalDialogs(bool accept, params Type[] dialogTypes)
-        {
-            var dialog = !dialogTypes.Any() ? ModalDialogDetector.Detect() : ModalDialogDetector.Detect(dialogTypes);
-
-            if (dialog == null)
-                return this;
-
-            var screen = accept ? dialog.Accept() : dialog.Dismiss();
-            return screen ?? this;
-        }
 
         public override Screen TapAndHold(string elementName, int seconds)
         {
@@ -168,7 +119,7 @@ namespace Joyride.Platforms.Ios
         }
 
 
-        public String TitleFromNavigationBar(int timeoutSecs = 5)
+        public String TitleFromNavigationBar(int timeoutSecs)
         {
             const string xpath = "//UIANavigationBar[1]/UIAStaticText[1]";
             var element = Driver.FindElement(By.XPath(xpath), timeoutSecs);
@@ -180,7 +131,7 @@ namespace Joyride.Platforms.Ios
         }
 
 
-        public void HideKeyboard()
+        public virtual void HideKeyboard()
         {
             var windowSize = Driver.ScreenSize();
             var pointBehindKeyboard = new Point(windowSize.Width / 2, windowSize.Height / 3);

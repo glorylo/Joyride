@@ -1,6 +1,7 @@
 ﻿using System;
 using Joyride.Extensions;
 using Joyride.Platforms.Ios;
+using Joyride.Specflow.Configuration;
 using NUnit.Framework;
 using TechTalk.SpecFlow;
 
@@ -9,6 +10,7 @@ namespace Joyride.Specflow.Steps
     [Binding, Scope(Tag = "ios")]
     public class IosSteps
     {
+        public static int TimeoutSecs = JoyrideConfiguration.TimeoutSecs;
 
         #region Given/Whens
 
@@ -58,8 +60,8 @@ namespace Joyride.Specflow.Steps
         [Then(@"I (should|should not) see the navigation bar title ""([^""]*)""")]
         public void ThenIShouldScreenWithTitle(string shouldOrShouldNot, string title)
         {
-            string screenTitlebar = null;            
-            Context.MobileApp.Do<IosScreen>(s => screenTitlebar = s.TitleFromNavigationBar());
+            string screenTitlebar = null;
+            Context.MobileApp.Do<IosScreen>(s => screenTitlebar = s.TitleFromNavigationBar(TimeoutSecs));
             if (shouldOrShouldNot == "should")
               Assert.IsTrue(screenTitlebar == title, "Expected title with '" + title + "' but actual title is '" + screenTitlebar + "'");
             else

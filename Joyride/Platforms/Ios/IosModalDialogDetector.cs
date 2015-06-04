@@ -16,27 +16,27 @@ namespace Joyride.Platforms.Ios
             Detector = new Detector<IModalDialog>(assembly, baseModalDialogType, ScreenFactory.CreateModalDialog, defaultTimeoutSecs);
         }
 
-        public IModalDialog Detect(Type type)
+        public virtual IModalDialog Detect(Type type)
         {
             return Detector.Detect(type);
         }
 
-        public IModalDialog Detect(IEnumerable<Type> types)
+        public virtual IModalDialog Detect(IEnumerable<Type> types)
         {
             return Detector.Detect(types);
         }
 
-        public IModalDialog Detect()
+        public virtual IModalDialog Detect()
         {
             return Detector.Detect();
         }
 
-        public IModalDialog Detect(string[] modalDialogNames)
+        public virtual IModalDialog Detect(string[] modalDialogNames)
         {
             return Detector.Detect(modalDialogNames);
         }
 
-        public IModalDialog Detect(string modalDialogName)
+        public virtual IModalDialog Detect(string modalDialogName)
         {
             return Detector.Detect(modalDialogName);
         }
