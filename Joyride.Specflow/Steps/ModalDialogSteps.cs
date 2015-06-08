@@ -2,7 +2,6 @@
 using Joyride.Interfaces;
 using Joyride.Platforms;
 using NUnit.Framework;
-using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 
 namespace Joyride.Specflow.Steps

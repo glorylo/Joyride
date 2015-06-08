@@ -5,6 +5,7 @@ using Joyride.Platforms;
 using Joyride.Specflow.Configuration;
 using Joyride.Specflow.Support;
 using NUnit.Framework;
+using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 
 namespace Joyride.Specflow.Steps
@@ -14,6 +15,15 @@ namespace Joyride.Specflow.Steps
     {
         public static int TimeoutSecs = JoyrideConfiguration.TimeoutSecs;
         #region Given/Whens
+
+        [Given(@"I rotate the screen to (landscape|portrait) orientation")]
+        [When(@"I rotate the screen to (landscape|portrait) orientation")]
+        public void GivenIRotateTheScreen(string orientation)
+        {
+            var mode = orientation == "landscape" ? ScreenOrientation.Landscape : ScreenOrientation.Portrait;
+            Context.MobileApp.Do<Screen>(s => s.Rotate(mode));
+        }
+
 
         [Given(@"I enter ""([^""]*)"" in the ""([^""]*)"" field")]
         [When(@"I enter ""([^""]*)"" in the ""([^""]*)"" field")]

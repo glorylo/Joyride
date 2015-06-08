@@ -108,6 +108,12 @@ namespace Joyride.Platforms
 
         #endregion
 
+        public virtual Screen Rotate(ScreenOrientation orientation)
+        {
+            Driver.Orientation = orientation;
+            return this;
+        }
+
         internal protected void TapInWebview(string elementName)
         {
             Driver.DoActionInWebView(() =>
