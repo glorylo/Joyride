@@ -30,7 +30,7 @@ namespace Joyride.Platforms
             if (dialog == null)
             {
                 if (throwException)
-                    throw new NoSuchElementException("Unable to detect the modal dialog: " + modalDialogName);
+                    throw new NoAlertPresentException("Unable to detect the modal dialog: " + modalDialogName);
                 Trace.WriteLine("Unable to detect modal dialog: " + modalDialogName);
                 return this;
             }
@@ -49,7 +49,7 @@ namespace Joyride.Platforms
             if (dialog == null)
             {
                 if (throwException)
-                    throw new NoSuchElementException("Unable to detect the modal dialog: " + modalDialogName);
+                    throw new NoAlertPresentException("Unable to detect the modal dialog: " + modalDialogName);
                 Trace.WriteLine("Unable to detect modal dialog: " + modalDialogName);
                 return this;
             }
@@ -73,7 +73,7 @@ namespace Joyride.Platforms
             if (dialog == null)
             {
                 if (throwException)
-                    throw new NoSuchElementException("Unable to detect the modal dialog of type: " + dialogType);
+                    throw new NoAlertPresentException("Unable to detect the modal dialog of type: " + dialogType);
                 Trace.WriteLine("Unable to detect modal dialog of type: " + dialogType);
                 return this;
             }
@@ -88,7 +88,7 @@ namespace Joyride.Platforms
             if (dialog == null)
             {
                 if (throwException)
-                    throw new NoSuchElementException("Unable to detect the modal dialog of type: " + dialogType);
+                    throw new NoAlertPresentException("Unable to detect the modal dialog of type: " + dialogType);
                 Trace.WriteLine("Unable to detect modal dialog of type: " + dialogType);
                 return this;
             }
