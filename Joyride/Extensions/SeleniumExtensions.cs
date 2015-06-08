@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Reflection;
 using System.Threading;
@@ -7,85 +8,94 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using Joyride.Support;
 
+
 namespace Joyride.Extensions
 {
     public static class SeleniumExtensions
     {
-        private static readonly Object ThisLock = new object();
-        private static IWebElement FindElementWithTimeout(Func<IWebElement> func, int timeoutSecs)
+        // not thread safe!
+        private static int _commandTimeOutSeconds = RemoteMobileDriver.DefaultWaitSeconds;
+        public static int DefaultWaitSeconds = RemoteMobileDriver.DefaultWaitSeconds;
+
+        public static void SetTimeout(this RemoteWebDriver driver, int seconds)
         {
-            IWebElement element = null;
-            lock (ThisLock)
+            if (seconds != _commandTimeOutSeconds)
             {
-                RemoteMobileDriver.SetTimeout(timeoutSecs);
-                element = func();
-                RemoteMobileDriver.SetDefaultWait();                
+                _commandTimeOutSeconds = seconds;
+                driver.SetImplicitWait(TimeSpan.FromSeconds(seconds));
             }
+        }
+
+        public static void SetDefaultWait(this RemoteWebDriver driver)
+        {
+            driver.SetTimeout(DefaultWaitSeconds);
+        }
+
+        public static void SetImplicitWait(this IWebDriver driver, TimeSpan span)
+        {
+            try
+            {
+                driver.Manage().Timeouts().ImplicitlyWait(span);
+            }
+            catch // suppress errors for now
+            {
+                Debug.WriteLine("Unable to set timeout to:  " + span);
+            } 
+        }
+                
+        private static IWebElement FindElementWithTimeout(RemoteWebDriver driver, Func<IWebElement> func, int timeoutSecs)
+        {
+
+            //TODO: Would like to swap out with WebDriverWait
+/*            IWebElement element = null;
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutSecs));
+            try
+            {
+                element = wait.Until((d) => func());
+            }
+            catch
+            {
+                return null;
+            }
+            return element;
+*/            
+            driver.SetTimeout(timeoutSecs);
+            var element = func();
+            driver.SetDefaultWait();                            
             return element;
         }
 
-        private static IList<IWebElement> FindElementsWithTimeout(Func<IList<IWebElement>> func, int timeoutSecs)
+        private static IList<IWebElement> FindElementsWithTimeout(RemoteWebDriver driver, Func<IList<IWebElement>> func, int timeoutSecs)
         {
-            IList<IWebElement> elements = null;
-            lock (ThisLock)
-            {
-                RemoteMobileDriver.SetTimeout(timeoutSecs);
-                elements = func();
-                RemoteMobileDriver.SetDefaultWait();
-            }
+            //TODO: Would like to swap out with WebDriverWait
+            driver.SetTimeout(timeoutSecs);
+            var elements = func();
+            driver.SetDefaultWait();            
             return elements;
         }
 
         public static void DoActionWithTimeout(this RemoteWebDriver driver, int timeoutSecs, Action action)
         {
-            lock (ThisLock)
-            {
-                RemoteMobileDriver.SetTimeout(timeoutSecs);
-                action();
-                RemoteMobileDriver.SetDefaultWait();
-            }
+            //TODO: Would like to swap out with WebDriverWait
+            driver.SetTimeout(timeoutSecs);
+            action();
+            driver.SetDefaultWait();            
         }
-
-        public static IWebElement FindElement(this IWebElement parentElement, By by, int timeoutSecs)
-        {
-            return FindElementWithTimeout(() =>
-            {                
-                IWebElement element = null;            
-                try {
-                    element = parentElement.FindElement(by);    
-                }
-                catch (Exception) { return null; }                        
-                return element;
-            }, timeoutSecs);
-        }
-
-        public static IList<IWebElement> FindElements(this IWebElement parentElement, By by, int timeoutSecs)
-        {
-            return FindElementsWithTimeout(() =>
-            {
-                IList<IWebElement> elements = null;
-                try  {
-                    elements = parentElement.FindElements(by);
-                }
-                catch (Exception) { return null; }
-                return elements;
-            }, timeoutSecs);
-        }
-
+        
         public static IWebElement FindElement(this RemoteWebDriver driver, By by, int timeoutSecs)
         {
-            return FindElementWithTimeout(() => driver.FindElementWithMethod(new Func<By, IWebElement>(driver.FindElement), by), timeoutSecs);
+            return FindElementWithTimeout(driver, () => driver.FindElementWithMethod(new Func<By, IWebElement>(driver.FindElement), by), timeoutSecs);
         }
 
         public static IList<IWebElement> FindElements(this RemoteWebDriver driver, By by, int timeoutSecs)
         {
-            return FindElementsWithTimeout(() => driver.FindElementsWithMethod(new Func<By, IList<IWebElement>>(driver.FindElements), by), timeoutSecs);
+            return FindElementsWithTimeout(driver, () => driver.FindElementsWithMethod(new Func<By, IList<IWebElement>>(driver.FindElements), by), timeoutSecs);
         }
 
         public static IWebElement FindElementWithMethod(this RemoteWebDriver driver, Delegate findMethod,
             params object[] arguments)
         {
-            IWebElement element = null;
+            IWebElement element;
             try {
                 element = Util.InvokeMethod(findMethod, arguments) as IWebElement;
             }
@@ -96,19 +106,19 @@ namespace Joyride.Extensions
         public static IWebElement FindElementWithMethod(this RemoteWebDriver driver, int timeoutSecs,
             Delegate findMethod, params object[] args)
         {
-            return FindElementWithTimeout(() => driver.FindElementWithMethod(findMethod, args), timeoutSecs);
+            return FindElementWithTimeout(driver, () => driver.FindElementWithMethod(findMethod, args), timeoutSecs);
         }
 
         public static IList<IWebElement> FindElementsWithMethod(this RemoteWebDriver driver, int timeoutSecs,
             Delegate findMethod, params object[] args)
         {
-            return FindElementsWithTimeout(() => driver.FindElementsWithMethod(findMethod, args), timeoutSecs);
+            return FindElementsWithTimeout(driver, () => driver.FindElementsWithMethod(findMethod, args), timeoutSecs);
         }
 
         public static IList<IWebElement> FindElementsWithMethod(this RemoteWebDriver driver, Delegate findMethod,
             params object[] arguments)
         {
-            IList<IWebElement> elements = null;
+            IList<IWebElement> elements;
             try {
                 elements = Util.InvokeMethod(findMethod, arguments) as IList<IWebElement>;
             }
@@ -125,7 +135,7 @@ namespace Joyride.Extensions
         public static bool ElementExists(this RemoteWebDriver driver, int timeoutSecs, Delegate findMethod,
             params object[] arguments)
         {
-            var foundElement = FindElementWithTimeout(() => driver.FindElementWithMethod(findMethod, arguments), timeoutSecs);
+            var foundElement = FindElementWithTimeout(driver, () => driver.FindElementWithMethod(findMethod, arguments), timeoutSecs);
             return (foundElement != null);
         }
 
@@ -148,7 +158,7 @@ namespace Joyride.Extensions
 
         public static Point GetCenter(this IWebElement element)
         {
-            Point upperLeft = element.Location;
+            var upperLeft = element.Location;
             var size = element.Size;
             int x = upperLeft.X + size.Width/2;
             int y = upperLeft.Y + size.Height/2;

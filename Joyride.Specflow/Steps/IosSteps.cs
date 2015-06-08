@@ -68,30 +68,6 @@ namespace Joyride.Specflow.Steps
               Assert.IsFalse(screenTitlebar == title, "Expected title to be not equal to '" + title + "' but actual title is '" + screenTitlebar + "'");
         }
 
-        [Obsolete("This step is deprecated and will be replaced with a more generic step")]
-        [Then(@"I (should|should not) see label with text ""([^""]*)""")]
-        public void ThenIShouldSeeLabelWithText(string shouldOrShouldNot, string labelText)
-        {
-            bool hasLabel = false;
-            Context.MobileApp.Do<IosScreen>(s => hasLabel = s.HasLabelContainingText(labelText));
-            if (shouldOrShouldNot == "should")                
-                Assert.IsTrue(hasLabel);
-            else
-                Assert.IsFalse(hasLabel);
-        }
-
-        [Obsolete("This step is deprecated and will be replaced with a more generic step")]
-        [Then(@"I (should|should not) see label in the ""(\d+)"" item in collection ""([^""]*)"" with text ""([^""]*)""")]
-        public void ThenIShouldSeeLabelInCollectionWithText(string shouldOrShouldNot, int index, string collectionName, string labelText)
-        {
-            bool hasLabel = false;
-            Context.MobileApp.Do<IosScreen>(s => hasLabel = s.HasLabelContainingText(collectionName, index, labelText));
-
-            if (shouldOrShouldNot == "should")
-                Assert.IsTrue(hasLabel);
-            else
-                Assert.IsFalse(hasLabel);
-        }
 
         #endregion
     }

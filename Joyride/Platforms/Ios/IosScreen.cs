@@ -59,30 +59,6 @@ namespace Joyride.Platforms.Ios
             return (tuple != null);
         }
 
-
-        //TODO: would like to rewrite using text compare
-        [Obsolete]
-        public bool HasLabelContainingText(string labelText, int timeoutSecs = DefaultWaitSeconds)
-        {
-            var xpath = "//UIAStaticText[contains(@label,'" + labelText + "')]";
-            var element = Driver.FindElement(By.XPath(xpath), timeoutSecs);
-            return (element != null);
-        }
-
-        //TODO: would like to write this using the collection abilities
-        [Obsolete]
-        public virtual bool HasLabelContainingText(string collectionName, int index, string labelText, int timeoutSecs = DefaultWaitSeconds)
-        {
-            var element = GetElementInCollection(collectionName, index);
-            var texts = element.FindElements(By.ClassName("UIAStaticText"), timeoutSecs);
-
-            if (texts.Count == 0)
-                return false;
-
-            var textWithLabelText = texts.FirstOrDefault(e => e.Text.Contains(labelText));
-            return (textWithLabelText != null);
-        }
-
         public virtual Screen DragSlider(string elementName, int percentage)
         {
             if ((percentage < 0) || (percentage > 100))
