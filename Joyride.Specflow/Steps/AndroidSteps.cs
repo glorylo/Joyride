@@ -1,5 +1,6 @@
 ﻿using Joyride.Extensions;
 using Joyride.Platforms.Android;
+using Joyride.Specflow.Configuration;
 using NUnit.Framework;
 using TechTalk.SpecFlow;
 
@@ -8,6 +9,7 @@ namespace Joyride.Specflow.Steps
     [Binding, Scope(Tag = "android")]
     public class AndroidSteps
     {
+        public static int TimeoutSecs = JoyrideConfiguration.TimeoutSecs;
         #region Given/Whens
         [Given(@"I go back")]
         [When(@"I go back")]
@@ -42,7 +44,7 @@ namespace Joyride.Specflow.Steps
         public void ThenIShouldSeeLabel(string shouldOrShouldNot, string compare, string label)
         {
             var hasLabel = false;
-            Context.MobileApp.Do<AndroidScreen>(s => hasLabel = s.HasLabel(label, compare.ToCompareType(), 5));
+            Context.MobileApp.Do<AndroidScreen>(s => hasLabel = s.HasLabel(label, compare.ToCompareType(), TimeoutSecs));
 
             if (shouldOrShouldNot == "should")
               Assert.IsTrue(hasLabel, "Expecting to have a label that " + compare + " text: " + label);

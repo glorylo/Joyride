@@ -7,12 +7,15 @@ namespace Joyride.Specflow
 {
     public static class Context
     {
+        private const string MobileAppKey = "_MobileApp_";
+        private const string DriverKey = "_Driver_";
+        private const string CurrentUserKey = "_CurrentUser_";
+
         static Context()
         {
-            ScenarioContext.Current["MobileApp"] = null;
-            ScenarioContext.Current["Driver"] = null;
-            ScenarioContext.Current["LogPath"] = @".\";
-            ScenarioContext.Current["ScreenshotPath"] = @".\";
+            ScenarioContext.Current[MobileAppKey] = null;
+            ScenarioContext.Current[DriverKey] = null;
+            ScenarioContext.Current[CurrentUserKey] = null;
         }
           
         public static void SetValue(string key, object value)
@@ -28,29 +31,27 @@ namespace Joyride.Specflow
         public static IMobileApplication MobileApp
         {
             get {
-                return (IMobileApplication) ScenarioContext.Current["MobileApp"];
+                return (IMobileApplication)ScenarioContext.Current[MobileAppKey];
             }
-            set { ScenarioContext.Current["MobileApp"] = value; }
+            set { ScenarioContext.Current[MobileAppKey] = value; }
         }
 
         public static AppiumDriver Driver
         {
-            get { return (AppiumDriver) ScenarioContext.Current["Driver"]; }
-            set { ScenarioContext.Current["Driver"] = value;  }
+            get { return (AppiumDriver) ScenarioContext.Current[DriverKey]; }
+            set { ScenarioContext.Current[DriverKey] = value; }
         }
 
-        public static string LogPath
+        public static bool HasError
         {
-            get { return (string) ScenarioContext.Current["LogPath"]; }
-            set { ScenarioContext.Current["LogPath"] = value; }
+            get { return ScenarioContext.Current.TestError != null; }            
         }
-
-        public static string ScreenshotPath
+        
+        public static object CurrentUser
         {
-            get { return (string)ScenarioContext.Current["ScreenshotPath"]; }
-            set { ScenarioContext.Current["ScreenshotPath"] = value; }
+            get { return ScenarioContext.Current[CurrentUserKey]; }
+            set { ScenarioContext.Current[CurrentUserKey] = value; }
         }
-
 
     }
 }

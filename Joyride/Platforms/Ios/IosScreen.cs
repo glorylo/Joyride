@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Joyride.Extensions;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.iOS;
 
 namespace Joyride.Platforms.Ios
@@ -16,7 +15,7 @@ namespace Joyride.Platforms.Ios
 
         public override Screen TapAndHold(string elementName, int seconds)
         {
-            IWebElement element = FindElement(elementName);
+            var element = FindElement(elementName);
 
             if (element == null)
                 throw new NoSuchElementException("Cannot find element:  " + elementName);
@@ -28,12 +27,9 @@ namespace Joyride.Platforms.Ios
         public override Screen EnterText(string elementName, string text)
         {
             var element = FindElement(elementName);
-
             if (element == null)
-                throw new NoSuchElementException("Cannot find element:  " + elementName);
+                throw new NoSuchElementException("Unable to find element " + elementName);
 
-            element.Click();
-            element.Clear();
             element.SendKeys(text);
             return this;
         }
@@ -63,31 +59,7 @@ namespace Joyride.Platforms.Ios
             return (tuple != null);
         }
 
-
-        //TODO: would like to rewrite using text compare
-        [Obsolete]
-        public bool HasLabelContainingText(string labelText, int timeoutSecs = DefaultWaitSeconds)
-        {
-            var xpath = "//UIAStaticText[contains(@label,'" + labelText + "')]";
-            var element = Driver.FindElement(By.XPath(xpath), timeoutSecs);
-            return (element != null);
-        }
-
-        //TODO: would like to write this using the collection abilities
-        [Obsolete]
-        public virtual bool HasLabelContainingText(string collectionName, int index, string labelText, int timeoutSecs = DefaultWaitSeconds)
-        {
-            var element = GetElementInCollection(collectionName, index);
-            var texts = element.FindElements(By.ClassName("UIAStaticText"), timeoutSecs);
-
-            if (texts.Count == 0)
-                return false;
-
-            var textWithLabelText = texts.FirstOrDefault(e => e.Text.Contains(labelText));
-            return (textWithLabelText != null);
-        }
-
-        public Screen DragSlider(string elementName, int percentage)
+        public virtual Screen DragSlider(string elementName, int percentage)
         {
             if ((percentage < 0) || (percentage > 100))
                 throw new IndexOutOfRangeException("Slider can only accept values 1-100.  Requested: " + percentage);
@@ -102,7 +74,7 @@ namespace Joyride.Platforms.Ios
             return this;
         }
 
-        public int CurrentPageOnIndictator(string elementName)
+        public virtual int CurrentPageOnIndictator(string elementName)
         {
             var value = GetElementAttribute(elementName, "value");
             if (value == null)
@@ -115,7 +87,7 @@ namespace Joyride.Platforms.Ios
             throw new Exception("Unable to extra current page from:  " + value);
         }
 
-        public bool HasNavigationBarTitled(string title, int timeoutSecs = DefaultWaitSeconds)
+        public virtual bool HasNavigationBarTitled(string title, int timeoutSecs = DefaultWaitSeconds)
         {
             var xpath = "//UIANavigationBar[1]/UIAStaticText[@label='" + title + "']";
             var element = Driver.FindElement(By.XPath(xpath), timeoutSecs);
@@ -123,9 +95,9 @@ namespace Joyride.Platforms.Ios
         }
 
 
-        public String TitleFromNavigationBar(int timeoutSecs = 5)
+        public virtual String TitleFromNavigationBar(int timeoutSecs)
         {
-            var xpath = "//UIANavigationBar[1]/UIAStaticText[1]";
+            const string xpath = "//UIANavigationBar[1]/UIAStaticText[1]";
             var element = Driver.FindElement(By.XPath(xpath), timeoutSecs);
 
             if (element == null)
@@ -135,14 +107,12 @@ namespace Joyride.Platforms.Ios
         }
 
 
-        public void HideKeyboard()
+        public virtual void HideKeyboard()
         {
             var windowSize = Driver.ScreenSize();
             var pointBehindKeyboard = new Point(windowSize.Width / 2, windowSize.Height / 3);
             Driver.Tap(pointBehindKeyboard);
         }
-
-
 
     }
 }

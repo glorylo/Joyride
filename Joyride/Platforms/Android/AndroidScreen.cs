@@ -12,8 +12,8 @@ namespace Joyride.Platforms.Android
     {
         protected static ScreenFactory ScreenFactory = new AndroidScreenFactory();
         protected static new AndroidDriver Driver = (AndroidDriver) RemoteMobileDriver.GetInstance();
-
-        public void HideKeyboard()
+        
+        public virtual void HideKeyboard()
         {
             // suppress any odd appium errors
             try { Driver.HideKeyboard(); }
@@ -25,7 +25,7 @@ namespace Joyride.Platforms.Android
 
         public override Screen TapAndHold(string elementName, int seconds)
         {
-            IWebElement element = FindElement(elementName);
+            var element = FindElement(elementName);
 
             if (element == null)
                 throw new NoSuchElementException("Cannot find element:  " + elementName);
@@ -71,7 +71,7 @@ namespace Joyride.Platforms.Android
             return this;
         }
 
-        public virtual bool HasLabel(string label, CompareType compareType, int timeoutSecs = DefaultWaitSeconds)
+        public virtual bool HasLabel(string label, CompareType compareType, int timeoutSecs)
         {
             return HasText(label, compareType, timeoutSecs) || HasContentDesc(label, compareType, timeoutSecs);
         }
@@ -100,9 +100,9 @@ namespace Joyride.Platforms.Android
             return (tuple != null);
         }
 
-        internal protected bool HasContentDesc(string label, CompareType compareType, int timeoutSecs=DefaultWaitSeconds)
+        internal protected bool HasContentDesc(string label, CompareType compareType, int timeoutSecs)
         {
-            IList<IWebElement> texts = null;
+            IList<IWebElement> texts;
             switch (compareType)
             {
                 case CompareType.Equals:
@@ -125,13 +125,10 @@ namespace Joyride.Platforms.Android
                     throw new NotImplementedException("Not implemented compare type: " + compareType);
             }
 
-            if (texts != null && texts.Count != 0)
-                return true;
-
-            return false;
+            return texts != null && texts.Count != 0;
         }
 
-        internal protected bool HasText(string label, CompareType compareType, int timeoutSecs = DefaultWaitSeconds)
+        internal protected bool HasText(string label, CompareType compareType, int timeoutSecs)
         {
             IList<IWebElement> texts = null;
             switch (compareType)
@@ -156,13 +153,18 @@ namespace Joyride.Platforms.Android
                     throw new NotImplementedException("Not implemented compare type: " + compareType);
             }
 
-            if (texts != null && texts.Count != 0)
-                return true;
-
-            return false;
+            return texts != null && texts.Count != 0;
         }
 
         public abstract Screen GoBack();
+
+        public override Screen Rotate(ScreenOrientation orientation)
+        {
+            base.Rotate(orientation);
+            // allow time to render
+            Driver.WaitFor(TimeSpan.FromMilliseconds(500));
+            return this;
+        }
 
     }
 }

@@ -2,7 +2,7 @@
 
 # Introduction
 
-Joyride is cross platform mobile "pageobjects" framework to interact with screens.  It supplies some of the basic touch guestures in interacting with native and hybrid mobile applications.  This is built on top of [Appium](http://appium.io).
+Joyride is a cross platform mobile framework to interact with screens.  It supplies some of the basic touch gestures for native and hybrid mobile applications and is built on top of [Appium](http://appium.io).
 
 Joyride.Specflow is the Behaviour Driven Development (BDD) layer that supplies a stock of useful actions such as tap and entering text, etc.  
 
@@ -11,6 +11,9 @@ Joyride.Specflow is the Behaviour Driven Development (BDD) layer that supplies a
 * Appium.WebDriver
 * Selenium.WebDriver
 * Selenium.Support
+* HandyConfig
+* Humanizer
+* PredicateParser
 * Newtonsoft.Json
 * NUnit
 * SpecFlow

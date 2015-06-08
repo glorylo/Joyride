@@ -2,8 +2,10 @@
 using System.Diagnostics;
 using Joyride.Extensions;
 using Joyride.Platforms;
+using Joyride.Specflow.Configuration;
 using Joyride.Specflow.Support;
 using NUnit.Framework;
+using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 
 namespace Joyride.Specflow.Steps
@@ -11,8 +13,17 @@ namespace Joyride.Specflow.Steps
     [Binding]
     public class ScreenSteps
     {
-
+        public static int TimeoutSecs = JoyrideConfiguration.TimeoutSecs;
         #region Given/Whens
+
+        [Given(@"I rotate the screen to (landscape|portrait) orientation")]
+        [When(@"I rotate the screen to (landscape|portrait) orientation")]
+        public void GivenIRotateTheScreen(string orientation)
+        {
+            var mode = orientation == "landscape" ? ScreenOrientation.Landscape : ScreenOrientation.Portrait;
+            Context.MobileApp.Do<Screen>(s => s.Rotate(mode));
+        }
+
 
         [Given(@"I enter ""([^""]*)"" in the ""([^""]*)"" field")]
         [When(@"I enter ""([^""]*)"" in the ""([^""]*)"" field")]
@@ -103,40 +114,6 @@ namespace Joyride.Specflow.Steps
             Context.MobileApp.Do<Screen>(s => s.ScrollUntil(elementName, directionToScroll));
         }
 
-        [Given(@"I tap the ""(.*?)"" item in the ""([^""]*)"" collection")]
-        [When(@"I tap the ""(.*?)"" item in the ""([^""]*)"" collection")]
-        public void GivenITapTheItemInTheCollection(string ordinal, string collectionName)
-        {
-            if (ordinal == "most recent")
-                Context.MobileApp.Do<Screen>( s => s.TapInCollection(collectionName, last: true));
-            else
-            {
-                int index = Int32.Parse(ordinal);
-                Context.MobileApp.Do<Screen>(s => s.TapInCollection(collectionName, index));
-            }
-        }
-
-        [Given(@"I tap up to ""(\d+)"" item\(s\) in the ""([^""]*)"" collection")]
-        [When(@"I tap up to ""(\d+)"" item\(s\) in the ""([^""]*)"" collection")]
-        public void GivenITapUpToXItemsInTheCollection(int times, string collectionName)
-        {
-            for (int i = 1; i <= times; i++)
-            {
-                //copy to local var due to access modifier warning
-                int j = i;  
-                Context.MobileApp.Do<Screen>(s => s.TapInCollection(collectionName, j));
-            }
-        }
-        
-        [Given(@"I inspect the number of items in collection ""([^""]*)""")]
-        [When(@"I inspect the number of items in collection ""([^""]*)""")]
-        public void GivenIInspectNumberOfItemsInCollection(string collectionName)
-        {
-            var collectionCount = Context.MobileApp.Screen.SizeOf(collectionName);
-            var collectionKey = collectionName;
-            Context.SetValue(collectionKey, collectionCount);
-        }
-
         [Given(@"I pinch the screen to zoom (out|in)")]
         [When(@"I pinch the screen to zoom (out|in)")]
         public void GivenIPinchTheScreen(string zoom)
@@ -183,7 +160,7 @@ namespace Joyride.Specflow.Steps
         [Then(@"I should be on the ""([^""]*)"" screen")]
         public void ThenIShouldBeOnSomeScreen(string screen)
         {
-            Assert.IsTrue(Context.MobileApp.Screen.Name.Equals(screen) && Context.MobileApp.Screen.IsOnScreen(),
+            Assert.IsTrue(Context.MobileApp.Screen.Name.Equals(screen) && Context.MobileApp.Screen.IsOnScreen(TimeoutSecs),
                 "Incorrectly on screen: " + Context.MobileApp.Screen.Name);
         }
         
@@ -197,60 +174,6 @@ namespace Joyride.Specflow.Steps
 
             Assert.That(attributeValue.CompareWith(text, compareType.ToCompareType()), Is.True,
                 "Unexpected text compare for attribute " + attribute + " with '" + attributeValue + "' is not " + compareType + " '" + text + "'");
-        }
-
-        [Then(@"I should see an item in collection ""([^""]*)"" with text (equals|starts with|containing|matching) ""([^""]*)""")]
-        public void ThenIShouldSeeItemInCollectionWithText(string collectionName, string compareType, string text)
-        {
-            Assert.IsTrue(Context.MobileApp.Screen.HasTextInCollection(collectionName, text, compareType.ToCompareType()));
-        }
-
-        [Then(@"I should see ""(\d+)"" items in ""([^""]*)"" collection")]
-        public void ThenIShouldSeeNumberOfItemsInCollection(int size, string collectionName)
-        {
-            var actualSize = Context.MobileApp.Screen.SizeOf(collectionName);
-            Assert.That(actualSize == size, Is.True,
-                "Unexpected number of items in '" + collectionName + "' with  " + actualSize + ".  Expecting: " + size);
-        }
-
-        [Then(@"I should see the collection ""([^""]*)"" is (not empty|empty)")]
-        public void ThenIShouldSeeEmptyCollection(string collectionName, string emptyOrNotEmpty)
-        {
-            var actualSize = Context.MobileApp.Screen.SizeOf(collectionName);
-            if (emptyOrNotEmpty == "empty")
-              Assert.That(actualSize == 0, Is.True,
-                "Unexpected number of items in '" + collectionName + "' with  " + actualSize + ".  Expecting: " + 0);
-            else
-                Assert.That(actualSize != 0, Is.True,
-                  "Expecting number of items in '" + collectionName + "' to be not 0");
-        }
-
-        [Then(@"I should see the number of items in the collection ""([^""]*)"" to be (less than|greater than) ""(\d+)""")]
-        public void ThenIShouldSeCollectionGreaterLessThan(string collectionName, string lessThanOrGreaterThan, int size)
-        {
-            var actualSize = Context.MobileApp.Screen.SizeOf(collectionName);
-            if (lessThanOrGreaterThan == "less than")
-                Assert.That(actualSize < size, Is.True,
-                  "The number of items (" + actualSize + ") in '" + collectionName + "' is not less than " + size);
-            else
-                Assert.That(actualSize > size, Is.True,
-                  "The number of items (" + actualSize + ") in '" + collectionName + "' is not greater than " + size);
-        }
-
-        [Then(@"I should see ""(\d+)"" (less|more) item\(s\) in ""([^""]*)"" collection")]        
-        public void ThenIShouldSeeMoreLessItems(int difference, string lessOrMore, string collectionName)
-        {
-            var actualSize = Context.MobileApp.Screen.SizeOf(collectionName);
-            var originalSize = (int) Context.GetValue(collectionName);
-            int expectedSize;
-
-            if (lessOrMore == "less")
-                expectedSize = originalSize - difference;
-            else
-                expectedSize = originalSize + difference;
-
-            Assert.IsTrue(expectedSize == actualSize, 
-                "Unexpected number of items in '" + collectionName + "' with  " + actualSize + ".  Expecting: " + expectedSize);
         }
 
         [Then(@"I (should|should not) see selected drop down ""([^""]*)"" (equals|containing) ""([^""]*)""")]

@@ -1,8 +1,7 @@
 ﻿namespace Joyride.Platforms
 {
-    public interface IModalDialog
+    public interface IModalDialog : IDetectable
     {
-        string Name { get; }
         string Body { get; }
         string Title { get; }
         Screen Accept();

@@ -36,6 +36,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(SolutionDir)packages\Appium.WebDriver.1.2.0.8\lib\net40\appium-dotnet-driver.dll</HintPath>
     </Reference>
+    <Reference Include="Humanizer, Version=1.36.0.0, Culture=neutral, PublicKeyToken=979442b78dfc278e, processorArchitecture=MSIL">
+      <HintPath>$(SolutionDir)packages\Humanizer.1.36.0\lib\portable-win+net40+sl50+wp8+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Humanizer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(SolutionDir)packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -48,39 +52,49 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WebDriver, Version=2.44.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(SolutionDir)packages\Selenium.WebDriver.2.44.0\lib\net40\WebDriver.dll</HintPath>
+    <Reference Include="WebDriver, Version=2.45.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>$(SolutionDir)packages\Selenium.WebDriver.2.45.0\lib\net40\WebDriver.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="WebDriver.Support, Version=2.44.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(SolutionDir)packages\Selenium.Support.2.44.0\lib\net40\WebDriver.Support.dll</HintPath>
+    <Reference Include="WebDriver.Support, Version=2.45.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>$(SolutionDir)packages\Selenium.Support.2.45.0\lib\net40\WebDriver.Support.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\AndroidDriverExtension.cs" />
     <Compile Include="Extensions\TextCompareExtensions.cs" />
+    <Compile Include="Interfaces\IDetectModalDialog.cs" />
     <Compile Include="Interfaces\IEntryEnumerable.cs" />
     <Compile Include="Platforms\Android\AndroidMobileApplication.cs" />
     <Compile Include="Platforms\Android\AndroidModalDialog.cs" />
+    <Compile Include="Platforms\Android\AndroidModalDialogDetector.cs" />
     <Compile Include="Platforms\Android\AndroidScreen.cs" />
+    <Compile Include="Platforms\Android\AndroidScreenDetector.cs" />
     <Compile Include="Platforms\Android\AndroidScreenFactory.cs" />
+    <Compile Include="Platforms\Detector.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Platforms\IDetectable.cs" />
+    <Compile Include="Platforms\IDetector.cs" />
+    <Compile Include="Platforms\Ios\IosModalDialogDetector.cs" />
     <Compile Include="Platforms\Component.cs" />
-    <Compile Include="Platforms\IFormActions.cs" />
+    <Compile Include="Platforms\DetectAttribute.cs" />
+    <Compile Include="Platforms\IFormAction.cs" />
     <Compile Include="Platforms\IMobileApplication.cs" />
     <Compile Include="Platforms\IModalDialog.cs" />
     <Compile Include="Platforms\Ios\IosMobileApplication.cs" />
     <Compile Include="Platforms\Ios\IosModalDialog.cs" />
     <Compile Include="Platforms\Ios\IosScreen.cs" />
+    <Compile Include="Platforms\Ios\IosScreenDetector.cs" />
     <Compile Include="Platforms\IScreen.cs" />
     <Compile Include="Platforms\MobileApplication.cs" />
-    <Compile Include="Platforms\ITouchGestures.cs" />
-    <Compile Include="Platforms\IWebViewActions.cs" />
+    <Compile Include="Platforms\ITouchGesture.cs" />
+    <Compile Include="Platforms\IWebViewAction.cs" />
     <Compile Include="Platforms\UndefinedResponseException.cs" />
     <Compile Include="RemoteMobileDriver.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Extensions\AppiumExtensions.cs" />
-    <Compile Include="Extensions\ComponentExtensions.cs" />
     <Compile Include="Extensions\SeleniumExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Platforms\Ios\IosScreenFactory.cs" />

@@ -1,13 +1,16 @@
-﻿using Joyride.Extensions;
+﻿using System;
+using Joyride.Extensions;
 using Joyride.Platforms.Ios;
+using Joyride.Specflow.Configuration;
 using NUnit.Framework;
 using TechTalk.SpecFlow;
 
 namespace Joyride.Specflow.Steps
 {
     [Binding, Scope(Tag = "ios")]
-    public class IosScreenSteps
+    public class IosSteps
     {
+        public static int TimeoutSecs = JoyrideConfiguration.TimeoutSecs;
 
         #region Given/Whens
 
@@ -57,36 +60,14 @@ namespace Joyride.Specflow.Steps
         [Then(@"I (should|should not) see the navigation bar title ""([^""]*)""")]
         public void ThenIShouldScreenWithTitle(string shouldOrShouldNot, string title)
         {
-            string screenTitlebar = null;            
-            Context.MobileApp.Do<IosScreen>(s => screenTitlebar = s.TitleFromNavigationBar());
+            string screenTitlebar = null;
+            Context.MobileApp.Do<IosScreen>(s => screenTitlebar = s.TitleFromNavigationBar(TimeoutSecs));
             if (shouldOrShouldNot == "should")
               Assert.IsTrue(screenTitlebar == title, "Expected title with '" + title + "' but actual title is '" + screenTitlebar + "'");
             else
               Assert.IsFalse(screenTitlebar == title, "Expected title to be not equal to '" + title + "' but actual title is '" + screenTitlebar + "'");
         }
 
-        [Then(@"I (should|should not) see label with text ""([^""]*)""")]
-        public void ThenIShouldSeeLabelWithText(string shouldOrShouldNot, string labelText)
-        {
-            bool hasLabel = false;
-            Context.MobileApp.Do<IosScreen>(s => hasLabel = s.HasLabelContainingText(labelText));
-            if (shouldOrShouldNot == "should")                
-                Assert.IsTrue(hasLabel);
-            else
-                Assert.IsFalse(hasLabel);
-        }
-
-        [Then(@"I (should|should not) see label in the ""(\d+)"" item in collection ""([^""]*)"" with text ""([^""]*)""")]
-        public void ThenIShouldSeeLabelInCollectionWithText(string shouldOrShouldNot, int index, string collectionName, string labelText)
-        {
-            bool hasLabel = false;
-            Context.MobileApp.Do<IosScreen>(s => hasLabel = s.HasLabelContainingText(collectionName, index, labelText));
-
-            if (shouldOrShouldNot == "should")
-                Assert.IsTrue(hasLabel);
-            else
-                Assert.IsFalse(hasLabel);
-        }
 
         #endregion
     }
