@@ -2,6 +2,7 @@
 using System.IO;
 using Joyride.Extensions;
 using Joyride.Specflow.Configuration;
+using Joyride.Specflow.Support;
 using TechTalk.SpecFlow;
 
 namespace Joyride.Specflow.Steps
@@ -39,6 +40,14 @@ namespace Joyride.Specflow.Steps
             {
                 writer.WriteLine(Context.MobileApp.Screen.GetSourceWebView());
             }            
+        }
+
+        [Given(@"I take a screenshot")]
+        [When(@"I take a screenshot")]
+        [Then(@"I take a screenshot")]
+        public void TakeScreenshot()
+        {
+            ScreenCapturer.Capture();
         }
     }
 }

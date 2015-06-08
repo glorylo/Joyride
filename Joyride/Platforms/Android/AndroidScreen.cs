@@ -158,5 +158,13 @@ namespace Joyride.Platforms.Android
 
         public abstract Screen GoBack();
 
+        public override Screen Rotate(ScreenOrientation orientation)
+        {
+            base.Rotate(orientation);
+            // allow time to render
+            Driver.WaitFor(TimeSpan.FromMilliseconds(500));
+            return this;
+        }
+
     }
 }
