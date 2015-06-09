@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Joyride.Specflow")]
 [assembly: AssemblyDescription("A Behavior Driven Development (BDD) binding layer on top of Joyride.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Glory Lo")]
 [assembly: AssemblyProduct("Joyride.Specflow")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]

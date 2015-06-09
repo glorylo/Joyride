@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Joyride")]
 [assembly: AssemblyDescription("A cross platform mobile framework (android and ios) for automating acceptance tests")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Glory Lo")]
 [assembly: AssemblyProduct("Joyride")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]

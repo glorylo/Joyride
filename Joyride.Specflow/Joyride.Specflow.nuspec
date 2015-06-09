@@ -29,11 +29,11 @@
     <description>$description$</description>
     <releaseNotes>Initial release</releaseNotes>
     <copyright>Copyright 2015</copyright>
-    <tags>mobile bdd behaviour driven development appium selenium ios android automation acceptance automation specs</tags>
+    <tags>native hybrid mobile bdd behaviour driven development appium selenium ios android automation acceptance automation specs</tags>
   </metadata>
   	<files>
-	  <file src="content\Specs\" target="content\Specs" /> 
-	  <file src="content\Steps\*.*" target="content\Steps" /> 
+	  <file src="content\Specs\*.*" target="content\Specs" />
+    <file src="content\Steps\*.*" target="content\Steps" /> 
 	  <file src="content\App.config*" target="content\" /> 
 	</files>
 </package>
