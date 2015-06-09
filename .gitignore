@@ -53,6 +53,7 @@ _ReSharper*/
 #NuGet
 .nuget/
 packages/
+*.nupkg
 
 #ncrunch
 *ncrunch*
@@ -60,3 +61,5 @@ packages/
 
 # visual studio database projects
 *.dbmdl
+
+

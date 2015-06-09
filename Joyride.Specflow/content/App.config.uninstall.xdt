@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration  xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <configSections>
+    <section name="specFlow" type="TechTalk.SpecFlow.Configuration.ConfigurationSectionHandler, TechTalk.SpecFlow" />
+    <section name="joyride" xdt:Transform="Remove" xdt:Locator="Match(name)" />
+  </configSections>
+
+  <appSettings>    
+  </appSettings>
+
+  <joyride xdt:Transform="RemoveAll" />
+
+  <specFlow>
+    <!-- For additional details on SpecFlow configuration options see http://go.specflow.org/doc-config -->
+    <unitTestProvider name="NUnit"  xdt:Transform="Remove"/>
+
+    <stepAssemblies>
+      <stepAssembly assembly="Joyride.Specflow" xdt:Transform="Remove" xdt:Locator="Match(assembly)" />
+    </stepAssemblies>
+  </specFlow>
+  
+</configuration>
