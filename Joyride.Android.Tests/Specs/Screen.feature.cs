@@ -66,16 +66,24 @@ namespace Joyride.Android.Tests.Specs
             testRunner.CollectScenarioErrors();
         }
         
+        public virtual void FeatureBackground()
+        {
+#line 7
+#line 8
+testRunner.Given("I launch the \"Api Demo App\" mobile application", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+        }
+        
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Launching the app should be on main screen")]
         public virtual void LaunchingTheAppShouldBeOnMainScreen()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Launching the app should be on main screen", ((string[])(null)));
-#line 8
-this.ScenarioSetup(scenarioInfo);
-#line 9
-testRunner.Given("I launch the \"Api Demo App\" mobile application", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 10
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 11
 testRunner.Then("I should be on the \"Main\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -86,10 +94,10 @@ testRunner.Then("I should be on the \"Main\" screen", ((string)(null)), ((TechTa
         public virtual void ClosingTheApp()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Closing the app", ((string[])(null)));
-#line 12
-this.ScenarioSetup(scenarioInfo);
 #line 13
-testRunner.Given("I launch the \"Api Demo App\" mobile application", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
 #line 14
 testRunner.When("I close the mobile application", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
@@ -112,13 +120,13 @@ testRunner.When("I close the mobile application", ((string)(null)), ((TechTalk.S
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Rotate screen to proper orientation", @__tags);
 #line 19
 this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
 #line 20
-testRunner.Given("I launch the \"Api Demo App\" mobile application", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 21
 testRunner.And("I wait for \"3\" seconds", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 22
+#line 21
 testRunner.When(string.Format("I rotate the screen to {0} orientation", orientation), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 23
+#line 22
 testRunner.Then(string.Format("the screen should be on {0} orientation", orientation), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -129,13 +137,13 @@ testRunner.Then(string.Format("the screen should be on {0} orientation", orienta
         public virtual void NavigateToAppScreen()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Navigate to App screen", ((string[])(null)));
-#line 30
+#line 29
 this.ScenarioSetup(scenarioInfo);
-#line 31
-testRunner.Given("I launch the \"Api Demo App\" mobile application", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 32
+#line 7
+this.FeatureBackground();
+#line 30
 testRunner.When("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 33
+#line 31
 testRunner.Then("I should be on the \"App\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

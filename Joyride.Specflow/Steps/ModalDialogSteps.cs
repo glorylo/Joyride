@@ -57,7 +57,7 @@ namespace Joyride.Specflow.Steps
 
         }
 
-        [Then(@"I should see the ""([^""]*)"" modal dialog (equals|starts with|containing|matching) (body|title) text ""([^""]*)""")]
+        [Then(@"I should see the ""([^""]*)"" modal dialog (equals|ends with|starts with|containing|matching) (body|title) text ""([^""]*)""")]
         public void ThenIShouldSeeTheSpecificModalDialogWithText(string modalDialogName, string compareType, string bodyOrTitle, string text)
         {
             IModalDialog dialog = null;

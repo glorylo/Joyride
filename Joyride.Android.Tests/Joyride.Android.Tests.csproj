@@ -78,6 +78,11 @@
     <Compile Include="SampleApp\ApiDemo\Screens\AppScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\MainScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\NullApiDemoScreen.cs" />
+    <Compile Include="Specs\ModalDialog.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModalDialog.feature</DependentUpon>
+    </Compile>
     <Compile Include="Specs\Screen.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -88,6 +93,10 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Specs\ModalDialog.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ModalDialog.feature.cs</LastGenOutput>
+    </None>
     <None Include="Specs\Screen.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Screen.feature.cs</LastGenOutput>

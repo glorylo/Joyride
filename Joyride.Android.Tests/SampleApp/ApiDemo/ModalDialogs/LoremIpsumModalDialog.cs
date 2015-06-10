@@ -1,10 +1,4 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Joyride.Platforms;
+﻿using Joyride.Platforms;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
@@ -24,8 +18,7 @@ namespace Joyride.Android.Tests.SampleApp.ApiDemo.ModalDialogs
         public override bool IsOnScreen(int timoutSecs)
         {
             var foundTitle = ElementExists("Alert Title", timoutSecs);
-            return foundTitle && AlertTitle.Text ==
-                   "Lorem ipsum dolor sit aie consectetur adipiscing Plloaso mako nuto siwuf cakso dodtos anr koop.";
+            return foundTitle && AlertTitle.Text.StartsWith("Lorem ipsum dolor sit aie consectetur");
         }
 
         public LoremIpsumModalDialog()
@@ -70,7 +63,7 @@ namespace Joyride.Android.Tests.SampleApp.ApiDemo.ModalDialogs
                 case "Cancel":
                     return Dismiss();
                 default:
-                    throw new UndefinedResponseException("Undefined response for modal dialog with ");
+                    throw new UndefinedResponseException("Undefined response for modal dialog with: " + response);
             }
         }
     }

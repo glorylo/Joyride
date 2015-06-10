@@ -10,6 +10,19 @@ namespace Joyride.Android.Tests.SampleApp.ApiDemo.Screens
         [FindsBy(How = How.XPath, Using = "//*[@resource-id='android:id/text1' and @text='Activity']")]
         private IWebElement Activity;
 
+        [FindsBy(How = How.XPath, Using = "//*[@resource-id='android:id/text1' and @text='Alert Dialogs']")]
+        private IWebElement AlertDialogs;
+
+
+        public override Screen Tap(string elementName, bool precise = false)
+        {
+            var screen = base.Tap(elementName, precise);
+
+            if (elementName == "Alert Dialogs")
+                return ScreenFactory.CreateScreen<AlertDialogsScreen>();
+
+            return screen;
+        }
         public override bool IsOnScreen(int timeOutSecs)
         {
             return ElementExists("Activity", timeOutSecs);
