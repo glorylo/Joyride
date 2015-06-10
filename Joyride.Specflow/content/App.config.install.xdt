@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration  xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <configSections>
+    <section name="specFlow" type="TechTalk.SpecFlow.Configuration.ConfigurationSectionHandler, TechTalk.SpecFlow" />
+    <section name="joyride" type="Joyride.Specflow.Configuration.JoyrideSectionHandler, Joyride.Specflow"  xdt:Transform="Insert" />
+  </configSections>
+
+  <appSettings>    
+  </appSettings>
+
+  <joyride xdt:Transform="Insert">
+      <capabilities>
+          <add name="autoLaunch" value="false" type="System.Boolean" />
+          <add name="fullReset" value="false" type="System.Boolean" />      
+      <android>
+           <add name="platformName" value="Android" />
+           <add name="appPackage" value="com.my.test.app" />
+           <add name="appActivity" value="activity-change-or-delete-me" />
+
+        <devices>
+          <device name="nexus5">
+            <add name="deviceName" value="device-id-replace-me" />
+          </device>
+
+          <device name="nexus5_emulator">            
+            <add name="appActivity" value="change-or-delete-me" />
+            <add name="appWaitActivity" value="change-or-delete-me" />
+          </device>
+        </devices>  
+    </android>
+
+      <ios>
+        <add name="platformName" value="iOS" />
+        <add name="bundleId" value="com.my.test.app" />
+        <add name="sendKeyStrategy" value="setValue" />
+
+        <devices>
+          <device name="iphone5s_4">
+            <add name="deviceName" value="iPhone" />
+            <add name="platformVersion" value="8.3" />
+            <add name="udid" value="udid-replace-me" />
+          </device>
+        </devices>
+      </ios>
+    </capabilities>
+
+    <servers>
+      <add name="dev" value="http://127.0.0.1:4723/wd/hub" />
+      <add name="ci" value="http://127.0.0.1:4723/wd/hub" />
+    </servers>  
+  </joyride>
+
+  <specFlow>
+    <unitTestProvider name="NUnit"/>
+    <stepAssemblies xdt:Transform="Insert">
+      <stepAssembly assembly="Joyride.Specflow" />
+    </stepAssemblies>
+  </specFlow>
+  
+</configuration>

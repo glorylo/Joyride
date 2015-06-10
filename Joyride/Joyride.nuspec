@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>Glory Lo</authors>
+    <owners>Glory Lo</owners>
+	
+	<!-- 
+    <licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>
+    <projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>
+    <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>
+	-->
+	
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+	
+	<dependencies>
+      <dependency id="Appium.WebDriver" version="1.2.0.8"  />
+      <dependency id="Humanizer" version="1.36.0"  />
+      <dependency id="Newtonsoft.Json" version="6.0.8" />
+      <dependency id="Selenium.Support" version="2.45.0" />
+      <dependency id="Selenium.WebDriver" version="2.45.0" />	
+	</dependencies>
+	
+    <description>$description$</description>
+    <releaseNotes>Initial release</releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <tags>mobile bdd behaviour driven development appium selenium ios android automation acceptance automation specs</tags>
+  </metadata>
+</package>
