@@ -120,17 +120,17 @@ testRunner.Then("I should see the \"Lorem Ipsum\" modal dialog", ((string)(null)
         public virtual void ShouldSeeTitleContainingTextInModalDialog()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should see title containing text in modal dialog", ((string[])(null)));
-#line 24
+#line 23
 this.ScenarioSetup(scenarioInfo);
 #line 8
 this.FeatureBackground();
-#line 25
+#line 24
 testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 26
+#line 25
 testRunner.And("I tap the \"Alert Dialogs\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 27
+#line 26
 testRunner.When("I tap the \"Ok Cancel Dialog\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 28
+#line 27
 testRunner.Then("I should see the \"Lorem Ipsum\" modal dialog containing title text \"Plloaso mako n" +
                     "uto siwuf\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -142,19 +142,154 @@ testRunner.Then("I should see the \"Lorem Ipsum\" modal dialog containing title 
         public virtual void ShouldSeeTitleEndingTextInModalDialog()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should see title ending text in modal dialog", ((string[])(null)));
-#line 30
+#line 29
 this.ScenarioSetup(scenarioInfo);
 #line 8
 this.FeatureBackground();
-#line 31
+#line 30
 testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 32
+#line 31
 testRunner.And("I tap the \"Alert Dialogs\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 33
+#line 32
 testRunner.When("I tap the \"Ok Cancel Dialog\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 34
+#line 33
 testRunner.Then("I should see the \"Lorem Ipsum\" modal dialog ends with title text \"cakso dodtos an" +
                     "r koop.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Should be able to accept or dismiss modal dialog")]
+        [NUnit.Framework.TestCaseAttribute("accept", null)]
+        [NUnit.Framework.TestCaseAttribute("dismiss", null)]
+        public virtual void ShouldBeAbleToAcceptOrDismissModalDialog(string acceptOrDismiss, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should be able to accept or dismiss modal dialog", exampleTags);
+#line 35
+this.ScenarioSetup(scenarioInfo);
+#line 8
+this.FeatureBackground();
+#line 36
+testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 37
+testRunner.And("I tap the \"Alert Dialogs\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 38
+testRunner.And("I tap the \"Ok Cancel Dialog\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 39
+testRunner.When(string.Format("I {0} the \"Lorem Ipsum\" modal dialog", acceptOrDismiss), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 40
+testRunner.Then("I should be on the \"Alert Dialogs\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Should be able to dismiss any modal dialog")]
+        public virtual void ShouldBeAbleToDismissAnyModalDialog()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should be able to dismiss any modal dialog", ((string[])(null)));
+#line 47
+this.ScenarioSetup(scenarioInfo);
+#line 8
+this.FeatureBackground();
+#line 48
+testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 49
+testRunner.And("I tap the \"Alert Dialogs\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 50
+testRunner.And("I tap the \"Ok Cancel Dialog\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 51
+testRunner.When("I dismiss any modal dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 52
+testRunner.Then("I should be on the \"Alert Dialogs\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Should detect the long message modal dialog")]
+        public virtual void ShouldDetectTheLongMessageModalDialog()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should detect the long message modal dialog", ((string[])(null)));
+#line 55
+this.ScenarioSetup(scenarioInfo);
+#line 8
+this.FeatureBackground();
+#line 56
+testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 57
+testRunner.And("I tap the \"Alert Dialogs\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 58
+testRunner.When("I tap the \"Ok Cancel Dialog With Long Message\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 59
+testRunner.Then("I should see the \"Long Message\" modal dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Respond to with the long message modal dialog")]
+        [NUnit.Framework.TestCaseAttribute("Something", null)]
+        [NUnit.Framework.TestCaseAttribute("Ok", null)]
+        [NUnit.Framework.TestCaseAttribute("Cancel", null)]
+        public virtual void RespondToWithTheLongMessageModalDialog(string response, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Respond to with the long message modal dialog", exampleTags);
+#line 62
+this.ScenarioSetup(scenarioInfo);
+#line 8
+this.FeatureBackground();
+#line 63
+testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 64
+testRunner.And("I tap the \"Alert Dialogs\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 65
+testRunner.And("I tap the \"Ok Cancel Dialog With Long Message\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 66
+testRunner.When(string.Format("I respond to the \"Long Message\" modal dialog with \"{0}\"", response), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 67
+testRunner.Then("I should be on the \"Alert Dialogs\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Should not see any modal dialog")]
+        public virtual void ShouldNotSeeAnyModalDialog()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should not see any modal dialog", ((string[])(null)));
+#line 75
+this.ScenarioSetup(scenarioInfo);
+#line 8
+this.FeatureBackground();
+#line 76
+testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 77
+testRunner.When("I tap the \"Alert Dialogs\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 78
+testRunner.Then("I should not see any modal dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Should see any modal dialog")]
+        public virtual void ShouldSeeAnyModalDialog()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should see any modal dialog", ((string[])(null)));
+#line 80
+this.ScenarioSetup(scenarioInfo);
+#line 8
+this.FeatureBackground();
+#line 81
+testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 82
+testRunner.And("I tap the \"Alert Dialogs\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 83
+testRunner.When("I tap the \"Ok Cancel Dialog With Long Message\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 84
+testRunner.Then("I should see any modal dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

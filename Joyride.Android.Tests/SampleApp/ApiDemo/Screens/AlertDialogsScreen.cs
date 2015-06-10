@@ -12,7 +12,7 @@ namespace Joyride.Android.Tests.SampleApp.ApiDemo.Screens
 
         [FindsBy(How = How.Id, Using = "io.appium.android.apis:id/two_buttons2")]
         private IWebElement OkCancelDialogWithLongMessage ;
-
+        
         public override bool IsOnScreen(int timeOutSecs)
         {
             var xpath = @"//android.widget.TextView[@text='App/Alert Dialogs']";

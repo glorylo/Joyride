@@ -72,6 +72,7 @@
     <Compile Include="SampleApp\ApiDemo\ApiDemoApp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleApp\ApiDemo\ModalDialogs\ApiDemoModalDialog.cs" />
+    <Compile Include="SampleApp\ApiDemo\ModalDialogs\LongMessageModalDialog.cs" />
     <Compile Include="SampleApp\ApiDemo\ModalDialogs\LoremIpsumModalDialog.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\AlertDialogsScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\ApiDemoScreen.cs" />

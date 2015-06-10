@@ -36,12 +36,16 @@ namespace Joyride.Specflow.Steps
 
         #region Thens
 
-        [Then(@"I should see any modal dialog")]
-        public void ThenIShouldSeeModalDialog()
+        [Then(@"I (should|should not) see any modal dialog")]
+        public void ThenIShouldSeeModalDialog(string shouldOrShouldNot)
         {
             IModalDialog dialog = null;
             Context.MobileApp.Do<IDetectModalDialog>(i => dialog = i.DetectModalDialog());
-            Assert.IsTrue(dialog != null);
+
+            if (shouldOrShouldNot == "should")
+              Assert.IsTrue(dialog != null);
+            else
+              Assert.IsFalse(dialog != null);
         }
 
         [Then(@"I (should|should not) see the ""([^""]*)"" modal dialog")]

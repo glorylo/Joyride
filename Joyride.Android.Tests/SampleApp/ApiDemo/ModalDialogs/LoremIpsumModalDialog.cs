@@ -9,10 +9,10 @@ namespace Joyride.Android.Tests.SampleApp.ApiDemo.ModalDialogs
         [FindsBy(How = How.Id, Using = "android:id/alertTitle")]
         private IWebElement AlertTitle;
 
-        [FindsBy(How = How.Id, Using = "android:id/button1")] 
+        [FindsBy(How = How.XPath, Using = "//android.widget.Button[@text='OK']")] 
         private IWebElement Ok;
 
-        [FindsBy(How = How.Id, Using = "android:id/button2")]
+        [FindsBy(How = How.XPath, Using = "//android.widget.Button[@text='Cancel']")] 
         private IWebElement Cancel;
 
         public override bool IsOnScreen(int timoutSecs)
