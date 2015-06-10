@@ -95,21 +95,6 @@ namespace Joyride.Extensions
             driver.DoubleTap(element.GetCenter());
         }
         
-        //TODO: does not work
-        public static void ScrollToVisible(this AppiumDriver driver, IWebElement element)
-        {
-            //var scrollLength = 0;
-            //if (element.Location.Y < 0)
-            //    scrollLength = RemoteDriver.ScreenSize.Height + (-1*element.Location.Y);
-
-            var args = new Dictionary<string, string>
-            {
-                {"direction", "up"},
-                {"element", element.GetIdForElement()}
-            };
-            driver.ExecuteScript("mobile: scrollTo", args);   
-        }
-
         public static void TapAndHold(this AppiumDriver driver, IWebElement element, int seconds, bool precise=false)
         {
             if (precise)

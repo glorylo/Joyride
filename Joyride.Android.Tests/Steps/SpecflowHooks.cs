@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Joyride.Android.Tests.SampleApp.ApiDemo;
 using Joyride.Specflow;
 using Joyride.Specflow.Configuration;
 using Joyride.Specflow.Support;
@@ -32,7 +33,7 @@ namespace Joyride.Android.Tests.Steps
         public void BeforeScenario()
         {
             Context.Driver = RemoteMobileDriver.GetInstance();
-            Context.MobileApp = new SampleApp.ApiDemoApp();
+            Context.MobileApp = new ApiDemoApp();
             // Add your test app here
             // Context.MobileApp = new ApiDemoApp.ApiDemoApp();
         }
