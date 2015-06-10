@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Reflection;
 using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
@@ -39,7 +38,7 @@ namespace Joyride.Extensions
             }
             catch // suppress errors for now
             {
-                Debug.WriteLine("Unable to set timeout to:  " + span);
+                Trace.WriteLine("Unable to set timeout to:  " + span);
             } 
         }
                 
@@ -165,13 +164,5 @@ namespace Joyride.Extensions
             return new Point(x, y);
         }
 
-        public static string GetIdForElement(this IWebElement element)
-        {
-            var fieldInfo = typeof (RemoteWebElement).GetField("elementId",
-                BindingFlags.NonPublic | BindingFlags.Instance);
-            if (fieldInfo != null)
-                return (string) fieldInfo.GetValue(element);
-            return null;
-        }
     }
 }
