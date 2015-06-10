@@ -3,7 +3,6 @@ using System.Diagnostics;
 using Joyride.Extensions;
 using Joyride.Platforms;
 using Joyride.Specflow.Configuration;
-using Joyride.Specflow.Support;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using TechTalk.SpecFlow;
@@ -14,6 +13,8 @@ namespace Joyride.Specflow.Steps
     public class ScreenSteps
     {
         public static int TimeoutSecs = JoyrideConfiguration.TimeoutSecs;
+        public static int NonExistenceTimeoutSecs = JoyrideConfiguration.NonexistenceTimeoutSecs;
+
         #region Given/Whens
 
         [Given(@"I rotate the screen to (landscape|portrait) orientation")]
@@ -53,14 +54,6 @@ namespace Joyride.Specflow.Steps
             Context.MobileApp.Do<Screen>(s => s.TapAndHold(elementName, seconds));
         }
                 
-        [Given(@"I select (""(.*?)""|{(.*?)}) for ""([^""]*)""")]
-        [When(@"I select (""(.*?)""|{(.*?)}) for ""([^""]*)""")]
-        public void WhenISelectOptionForDropdown(string wholeValue, string value, string valueWithCurly, string dropDownList)
-        {
-            var extractedValue = StepsHelper.ExtractValue(value, valueWithCurly);
-            Context.MobileApp.Do<Screen>(s => s.SelectOption(dropDownList, extractedValue));
-        }
-       
         [Given(@"I (uncheck|check) the ""([^""]*)"" checkbox")]
         [When(@"I (uncheck|check) the ""([^""]*)"" checkbox")]
         public void WhenICheckSomeCheckbox(string checkOrUnchecked, string checkboxName)
@@ -129,7 +122,8 @@ namespace Joyride.Specflow.Steps
         [Then(@"I should see the label ""([^""]*)"" with text (equals|starts with|containing) ""([^""]*)""")]
         public void ThenIShouldSeeLabelWithText(string elementName, string compareType, string text)
         {
-            var actualLabel = Context.MobileApp.Screen.GetElementText(elementName);
+            string actualLabel = null;
+            Context.MobileApp.Do<Screen>(s => actualLabel = s.GetElementText(elementName));
             Trace.Write("Actual Label is:  " + actualLabel);
 
             if (actualLabel == null)
@@ -142,32 +136,50 @@ namespace Joyride.Specflow.Steps
         [Then(@"the element ""([^""]*)"" (should|should not) be present")]
         public void ThenIShouldSeeElementIsPresent(string elementName, string shouldOrShouldNot)
         {
+            var elementPresent = false;
             if (shouldOrShouldNot == "should")
-               Assert.IsTrue(Context.MobileApp.Screen.ElementIsPresent(elementName));
+            {
+                Context.MobileApp.Do<Screen>(s => elementPresent = s.ElementIsPresent(elementName));
+                Assert.IsTrue(elementPresent);
+            }
             else
-               Assert.IsFalse(Context.MobileApp.Screen.ElementIsPresent(elementName, 10));
+            {
+                Context.MobileApp.Do<Screen>(s => elementPresent = s.ElementIsPresent(elementName, NonExistenceTimeoutSecs));
+                Assert.IsFalse(elementPresent); 
+            }
+               
         }
 
         [Then(@"I (should|should not) see the (field|element|label|button) ""([^""]*)""")]
         public void ThenIShouldSeeElement(string shouldOrShouldNot, string elementType, string elementName)
         {
+            var elementVisible = false;
             if (shouldOrShouldNot == "should")
-                Assert.IsTrue(Context.MobileApp.Screen.ElementIsVisible(elementName));
+            {
+                Context.MobileApp.Do<Screen>(s => elementVisible = s.ElementIsVisible(elementName));
+                Assert.IsTrue(elementVisible);
+            }
             else
-                Assert.IsFalse(Context.MobileApp.Screen.ElementIsVisible(elementName, 10));
+            {
+                Context.MobileApp.Do<Screen>(s => elementVisible = s.ElementIsVisible(elementName, NonExistenceTimeoutSecs));
+                Assert.IsFalse(elementVisible);
+            }                
         }
 
         [Then(@"I should be on the ""([^""]*)"" screen")]
         public void ThenIShouldBeOnSomeScreen(string screen)
         {
-            Assert.IsTrue(Context.MobileApp.Screen.Name.Equals(screen) && Context.MobileApp.Screen.IsOnScreen(TimeoutSecs),
+            var onScreen = false;
+            Context.MobileApp.Do<Screen>(s => onScreen = s.Name.Equals(screen) && s.IsOnScreen(TimeoutSecs));
+            Assert.IsTrue(onScreen,
                 "Incorrectly on screen: " + Context.MobileApp.Screen.Name);
         }
         
         [Then(@"I should see element ""([^""]*)"" with (.*) (equals|starts with|containing|matching) ""([^""]*)""")]
         public void ThenIShouldSeeElementValueCompareWithText(string elementName, string attribute, string compareType, string text)
         {
-            var attributeValue = Context.MobileApp.Screen.GetElementAttribute(elementName, attribute);
+            string attributeValue = null;            
+            Context.MobileApp.Do<Screen>(s => attributeValue = s.GetElementAttribute(elementName, attribute));
 
             if (attributeValue == null)
                 Assert.Fail("Unable to find attribute " + attribute + " for element: " + elementName);
@@ -176,15 +188,19 @@ namespace Joyride.Specflow.Steps
                 "Unexpected text compare for attribute " + attribute + " with '" + attributeValue + "' is not " + compareType + " '" + text + "'");
         }
 
-        [Then(@"I (should|should not) see selected drop down ""([^""]*)"" (equals|containing) ""([^""]*)""")]
-        public void ThenSelectedDropdownValue(string shouldOrShouldNot, string elementName, string compare, string text)
+
+
+/*        [Then(@"the screen should be on (landscape|portrait) orientation")]
+        public void ThenScreenOrientation(string orientation)
         {
-            var selectedText = Context.MobileApp.Screen.GetSelectedOption(elementName);
-            if (shouldOrShouldNot == "should")
-              Assert.IsTrue(selectedText != null && selectedText.CompareWith(text, compare.ToCompareType()));
-            else
-              Assert.IsFalse(selectedText != null && selectedText.CompareWith(text, compare.ToCompareType()));
+            var matchOrientation = false;
+            var mode = (orientation == "landscape") ? ScreenOrientation.Landscape : ScreenOrientation.Portrait;
+            Context.MobileApp.Do<Screen>(s => matchOrientation = s.IsOrientation(mode));
+
+            Assert.IsTrue(matchOrientation, "Unexpected screen orientation not matching:  " + orientation);
         }
+*/
+
 
         [Then(@"I fail the scenario with reason ""([^""]*)""")]
         public void ThenIFailScenario(string reason)

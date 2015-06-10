@@ -17,6 +17,8 @@ namespace Joyride.Specflow.Configuration
         private static readonly NameValueTypeElementCollection Servers = Config.Servers.NameValueTypes;
 
         public static int TimeoutSecs = 30;
+        public static int NonexistenceTimeoutSecs = 15;
+
         public static string ScreenshotPath { get; private set; }
         public static string LogPath { get; private set; }
         private static string _projectDir;

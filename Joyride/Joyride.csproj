@@ -90,7 +90,7 @@
     <Compile Include="Platforms\IScreen.cs" />
     <Compile Include="Platforms\MobileApplication.cs" />
     <Compile Include="Platforms\ITouchGesture.cs" />
-    <Compile Include="Platforms\IWebViewAction.cs" />
+    <Compile Include="Platforms\IWebview.cs" />
     <Compile Include="Platforms\UndefinedResponseException.cs" />
     <Compile Include="RemoteMobileDriver.cs" />
     <Compile Include="Enums.cs" />

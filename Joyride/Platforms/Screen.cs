@@ -314,6 +314,14 @@ namespace Joyride.Platforms
             Driver.Orientation = orientation;
             return this;
         }
+
+        //TODO: Not reliable due to auto rotate and forced orientation
+/*
+        public bool IsOrientation(ScreenOrientation orientation)
+        {
+            return Driver.Orientation == orientation;
+        }
+*/
         
         public string GetSourceWebView()
         {

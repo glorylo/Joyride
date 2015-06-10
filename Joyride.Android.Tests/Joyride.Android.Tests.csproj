@@ -69,24 +69,25 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="SampleApp\ApiDemoApp.cs" />
+    <Compile Include="SampleApp\ApiDemo\ApiDemoApp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SampleApp\Screens\ApiDemoScreen.cs" />
-    <Compile Include="SampleApp\Screens\MainScreen.cs" />
-    <Compile Include="SampleApp\Screens\NullApiDemoScreen.cs" />
-    <Compile Include="Specs\MobileApp.feature.cs">
+    <Compile Include="SampleApp\ApiDemo\Screens\ApiDemoScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\AppScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\MainScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\NullApiDemoScreen.cs" />
+    <Compile Include="Specs\BasicAppActions.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>MobileApp.feature</DependentUpon>
+      <DependentUpon>BasicAppActions.feature</DependentUpon>
     </Compile>
     <Compile Include="Steps\SpecflowHooks.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Specs\MobileApp.feature">
+    <None Include="Specs\BasicAppActions.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>MobileApp.feature.cs</LastGenOutput>
+      <LastGenOutput>BasicAppActions.feature.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -100,7 +101,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="SampleApp\ModalDialogs\" />
+    <Folder Include="SampleApp\ApiDemo\ModalDialogs\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
