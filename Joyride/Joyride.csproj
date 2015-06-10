@@ -91,6 +91,7 @@
     <Compile Include="Platforms\MobileApplication.cs" />
     <Compile Include="Platforms\IGesture.cs" />
     <Compile Include="Platforms\IWebview.cs" />
+    <Compile Include="Platforms\ModalDialog.cs" />
     <Compile Include="Platforms\UndefinedResponseException.cs" />
     <Compile Include="RemoteMobileDriver.cs" />
     <Compile Include="Enums.cs" />
