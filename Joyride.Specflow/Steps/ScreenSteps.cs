@@ -33,26 +33,6 @@ namespace Joyride.Specflow.Steps
             Context.MobileApp.Do<Screen>(s => s.EnterText(fieldName, fieldValue));
         }
 
-        [Given(@"I tap the ""([^""]*)"" (button|field|label|element)")]
-        [When(@"I tap the ""([^""]*)"" (button|field|label|element)")]
-        public void WhenITapTheButton(string elementName, string elementType)
-        {
-            Context.MobileApp.Do<Screen>(s => s.Tap(elementName));
-        }
-
-        [Given(@"I double tap the ""([^""]*)"" (button|field|label|element)")]
-        [When(@"I double tap the ""([^""]*)"" (button|field|label|element)")]
-        public void WhenIDoubleTap(string elementName, string elementType)
-        {
-            Context.MobileApp.Do<Screen>(s => s.DoubleTap(elementName));
-        }
-        
-        [Given(@"I tap the ""([^""]*)"" button and hold for ""(\d+)"" seconds")]
-        [When(@"I tap the ""([^""]*)"" button and hold for ""(\d+)"" seconds")]        
-        public void WhenITapAndHoldTheButton(string elementName, int seconds)
-        {
-            Context.MobileApp.Do<Screen>(s => s.TapAndHold(elementName, seconds));
-        }
                 
         [Given(@"I (uncheck|check) the ""([^""]*)"" checkbox")]
         [When(@"I (uncheck|check) the ""([^""]*)"" checkbox")]
@@ -64,56 +44,6 @@ namespace Joyride.Specflow.Steps
                 Context.MobileApp.Do<Screen>(s => s.SetCheckbox(checkboxName, false));
         }
 
-        [Given(@"I scroll the screen (left|right|up|down)")]
-        [When(@"I scroll the screen (left|right|up|down)")]
-        public void GivenIScrollScreenInDirection(string direction)
-        {
-            var directionToScroll = (Direction) Enum.Parse(typeof(Direction), direction, true);
-            Context.MobileApp.Do<Screen>(s => s.Scroll(directionToScroll));
-        }
-
-        [Given(@"I do a (slight|moderate) scroll (left|right|up|down)")]
-        [When(@"I do a (slight|moderate) scroll (left|right|up|down)")]
-        public void GivenIScrollScreenInDirectionWithScale(string slightOrModerate, string direction)
-        {
-            var directionToScroll = (Direction)Enum.Parse(typeof(Direction), direction, true);
-            if (slightOrModerate == "slight")
-              Context.MobileApp.Do<Screen>(s => s.Scroll(directionToScroll, 0.5));
-            else
-              Context.MobileApp.Do<Screen>(s => s.Scroll(directionToScroll, 0.75));
-        }
-
-        [Given(@"I scroll the ""([^""]*)"" (left|right|up|down)")]
-        [When(@"I scroll the ""([^""]*)"" (left|right|up|down)")]
-        public void GivenIScrollElementinDirection(string elementName, string direction)
-        {
-            var directionToScroll = (Direction)Enum.Parse(typeof(Direction), direction, true);
-            Context.MobileApp.Do<Screen>(s => s.Scroll(elementName, directionToScroll));
-        }
-
-        [Given(@"I swipe the screen (left|right|up|down)")]
-        [When(@"I swipe the screen (left|right|up|down)")]
-        public void GivenISwipeScreenInDirection(string direction)
-        {
-            var directionToSwipe = (Direction) Enum.Parse(typeof(Direction), direction, true);
-            Context.MobileApp.Do<Screen>(s => s.Swipe(directionToSwipe));
-        }
-
-        [Given(@"I scroll the screen (left|right|up|down) until I see element ""([^""]*)""")]
-        [When(@"I scroll the screen (left|right|up|down) until I see element ""([^""]*)""")]
-        public void GivenIScrollUntil(string direction, string elementName)
-        {
-            var directionToScroll = (Direction)Enum.Parse(typeof(Direction), direction, true);
-            Context.MobileApp.Do<Screen>(s => s.ScrollUntil(elementName, directionToScroll));
-        }
-
-        [Given(@"I pinch the screen to zoom (out|in)")]
-        [When(@"I pinch the screen to zoom (out|in)")]
-        public void GivenIPinchTheScreen(string zoom)
-        {
-            var direction = (Direction) Enum.Parse(typeof (Direction), zoom, true);
-            Context.MobileApp.Do<Screen>(s => s.PinchToZoom(direction));
-        }
 
         #endregion
 
@@ -188,9 +118,8 @@ namespace Joyride.Specflow.Steps
                 "Unexpected text compare for attribute " + attribute + " with '" + attributeValue + "' is not " + compareType + " '" + text + "'");
         }
 
-
-
-/*        [Then(@"the screen should be on (landscape|portrait) orientation")]
+/*      
+        [Then(@"the screen should be on (landscape|portrait) orientation")]
         public void ThenScreenOrientation(string orientation)
         {
             var matchOrientation = false;
@@ -200,7 +129,6 @@ namespace Joyride.Specflow.Steps
             Assert.IsTrue(matchOrientation, "Unexpected screen orientation not matching:  " + orientation);
         }
 */
-
 
         [Then(@"I fail the scenario with reason ""([^""]*)""")]
         public void ThenIFailScenario(string reason)

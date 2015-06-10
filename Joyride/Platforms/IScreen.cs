@@ -2,7 +2,7 @@
 {
 
     // not solidified yet. 
-    public interface IScreen : ITouchGesture, IWebview, IDetectable
+    public interface IScreen : IGesture, IWebview, IDetectable
     {
     }
 }
