@@ -87,7 +87,7 @@ namespace Joyride.Platforms.Ios
             throw new Exception("Unable to extra current page from:  " + value);
         }
 
-        public virtual bool HasNavigationBarTitled(string title, int timeoutSecs = DefaultWaitSeconds)
+        public virtual bool HasNavigationBarTitled(string title, int timeoutSecs)
         {
             var xpath = "//UIANavigationBar[1]/UIAStaticText[@label='" + title + "']";
             var element = Driver.FindElement(By.XPath(xpath), timeoutSecs);

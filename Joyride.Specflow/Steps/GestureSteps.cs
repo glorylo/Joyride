@@ -40,7 +40,7 @@ namespace Joyride.Specflow.Steps
         [When(@"I do a (slight|moderate) scroll (left|right|up|down)")]
         public void GivenIScrollScreenInDirectionWithScale(string slightOrModerate, string direction)
         {
-            var directionToScroll = (Direction)Enum.Parse(typeof(Direction), direction, true);
+            var directionToScroll = (Direction) Enum.Parse(typeof(Direction), direction, true);
             if (slightOrModerate == "slight")
                 Context.MobileApp.Do<IGesture>(i => i.Scroll(directionToScroll, 0.5));
             else
@@ -67,7 +67,7 @@ namespace Joyride.Specflow.Steps
         [When(@"I scroll the screen (left|right|up|down) until I see element ""([^""]*)""")]
         public void GivenIScrollUntil(string direction, string elementName)
         {
-            var directionToScroll = (Direction)Enum.Parse(typeof(Direction), direction, true);
+            var directionToScroll = (Direction) Enum.Parse(typeof(Direction), direction, true);
             Context.MobileApp.Do<IGesture>(i => i.ScrollUntil(elementName, directionToScroll));
         }
 

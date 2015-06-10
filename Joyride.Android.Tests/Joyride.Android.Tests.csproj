@@ -75,19 +75,19 @@
     <Compile Include="SampleApp\ApiDemo\Screens\AppScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\MainScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\NullApiDemoScreen.cs" />
-    <Compile Include="Specs\BasicAppActions.feature.cs">
+    <Compile Include="Specs\Screen.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BasicAppActions.feature</DependentUpon>
+      <DependentUpon>Screen.feature</DependentUpon>
     </Compile>
     <Compile Include="Steps\SpecflowHooks.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Specs\BasicAppActions.feature">
+    <None Include="Specs\Screen.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>BasicAppActions.feature.cs</LastGenOutput>
+      <LastGenOutput>Screen.feature.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

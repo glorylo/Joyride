@@ -26,7 +26,7 @@ namespace Joyride.Android.Tests.Specs
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "BasicAppActions.feature"
+#line 1 "Screen.feature"
 #line hidden
         
         [NUnit.Framework.TestFixtureSetUpAttribute()]
@@ -120,6 +120,23 @@ testRunner.And("I wait for \"3\" seconds", ((string)(null)), ((TechTalk.SpecFlow
 testRunner.When(string.Format("I rotate the screen to {0} orientation", orientation), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 23
 testRunner.Then(string.Format("the screen should be on {0} orientation", orientation), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Navigate to App screen")]
+        public virtual void NavigateToAppScreen()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Navigate to App screen", ((string[])(null)));
+#line 30
+this.ScenarioSetup(scenarioInfo);
+#line 31
+testRunner.Given("I launch the \"Api Demo App\" mobile application", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 32
+testRunner.When("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 33
+testRunner.Then("I should be on the \"App\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

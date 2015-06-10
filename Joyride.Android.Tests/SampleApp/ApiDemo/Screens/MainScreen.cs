@@ -7,7 +7,7 @@ namespace Joyride.Android.Tests.SampleApp.ApiDemo.Screens
 {
     public class MainScreen : ApiDemoScreen
     {
-        [FindsBy(How = How.XPath, Using = "//[@resource-id='android:id/text1 and @text='App']")] 
+        [FindsBy(How = How.XPath, Using = "//*[@resource-id='android:id/text1' and @text='App']")] 
         private IWebElement App;
 
 
@@ -26,9 +26,7 @@ namespace Joyride.Android.Tests.SampleApp.ApiDemo.Screens
 
         public override bool IsOnScreen(int timeOutSecs)
         {
-            const string headerXpath = "//*[@resource-id='android:id/action_bar']/android.widget.TextView[@text='API Demos']";
-            var header = Driver.FindElement(By.XPath(headerXpath), timeOutSecs);
-            return header != null;
+            return ElementExists("App", timeOutSecs);
         }
 
         public override string Name

@@ -27,3 +27,7 @@ Examples:
 | landsape    |
 | portrait    |
 
+Scenario: Navigate to App screen
+Given I launch the "Api Demo App" mobile application
+When I tap the "App" button
+Then I should be on the "App" screen
