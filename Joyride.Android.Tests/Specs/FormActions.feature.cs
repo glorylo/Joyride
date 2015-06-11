@@ -33,8 +33,8 @@ namespace Joyride.Android.Tests.Specs
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Form Actions", "In order to interact with form elements\nAs a user\nI want to be able to enter text" +
-                    ", toggle checkboxes, etc.", ProgrammingLanguage.CSharp, new string[] {
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Form Actions", "In order to interact with form elements\r\nAs a user\r\nI want to be able to enter te" +
+                    "xt, toggle checkboxes, etc.", ProgrammingLanguage.CSharp, new string[] {
                         "android"});
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -157,6 +157,54 @@ testRunner.And("I enter \"New Left Title\" in the \"Left\" field", ((string)(nul
 testRunner.When("I tap the \"Change Left\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 33
 testRunner.Then("I should see the label \"Left Title\" with text equals \"New Left Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Navigate to Presentation Screen")]
+        public virtual void NavigateToPresentationScreen()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Navigate to Presentation Screen", ((string[])(null)));
+#line 35
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 36
+testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 37
+testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 38
+testRunner.And("I do a moderate scroll down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 39
+testRunner.When("I tap the \"Presentation\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 40
+testRunner.Then("I should be on the \"Presentation\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Should set checkox to enabled")]
+        public virtual void ShouldSetCheckoxToEnabled()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should set checkox to enabled", ((string[])(null)));
+#line 42
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 43
+testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 44
+testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 45
+testRunner.And("I do a moderate scroll down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 46
+testRunner.And("I tap the \"Presentation\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 47
+testRunner.When("I check the \"Show All Displays\" checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 50
+testRunner.Then("I should see the \"Show All Displays\" element checked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

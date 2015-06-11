@@ -31,3 +31,25 @@ And I tap the "Custom Title" button
 And I enter "New Left Title" in the "Left" field
 When I tap the "Change Left" button
 Then I should see the label "Left Title" with text equals "New Left Title"
+
+Scenario: Navigate to Presentation Screen
+Given I tap the "App" button
+And I tap the "Activity" button
+And I do a moderate scroll down
+When I tap the "Presentation" button
+Then I should be on the "Presentation" screen
+
+Scenario: Should set checkox to enabled
+Given I tap the "App" button
+And I tap the "Activity" button
+And I do a moderate scroll down
+And I tap the "Presentation" button
+When I check the "Show All Displays" checkbox
+#Then I should see element "Show All Displays" with checked equals "true"
+#Then I should see element "Show All Displays" checked
+Then I should see the "Show All Displays" element checked
+
+
+
+
+

@@ -81,6 +81,7 @@
     <Compile Include="SampleApp\ApiDemo\Screens\CustomTitleScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\MainScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\NullApiDemoScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\PresentationScreen.cs" />
     <Compile Include="Specs\FormActions.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

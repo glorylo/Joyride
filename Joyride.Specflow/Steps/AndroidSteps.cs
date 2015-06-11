@@ -1,4 +1,5 @@
-﻿using Joyride.Extensions;
+﻿using System;
+using Joyride.Extensions;
 using Joyride.Platforms.Android;
 using Joyride.Specflow.Configuration;
 using NUnit.Framework;
@@ -7,7 +8,7 @@ using TechTalk.SpecFlow;
 namespace Joyride.Specflow.Steps
 {
     [Binding, Scope(Tag = "android")]
-    public class AndroidSteps
+    public class AndroidSteps : TechTalk.SpecFlow.Steps
     {
         public static int TimeoutSecs = JoyrideConfiguration.TimeoutSecs;
         #region Given/Whens
@@ -50,6 +51,13 @@ namespace Joyride.Specflow.Steps
               Assert.IsTrue(hasLabel, "Expecting to have a label that " + compare + " text: " + label);
             else
               Assert.IsFalse(hasLabel, "Expecting not to have a label that " + compare + " text: " + label);
+        }
+
+        [Then(@"I (should|should not) see the ""([^""]*)"" element (checked|unchecked)")]
+        public void ThenIShouldSeeElementEnabledOrDisabled(string shouldOrShouldNot, string elementName, string checkedOrUnchecked)
+        {
+            var value = (checkedOrUnchecked == "checked") ? "true" : "false";
+            Then(String.Format(@"I {0} see element ""{1}"" with {2} equals ""{3}""", shouldOrShouldNot, elementName, "checked", value));
         }
 
         #endregion

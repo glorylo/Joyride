@@ -9,6 +9,9 @@ namespace Joyride.Android.Tests.SampleApp.ApiDemo.Screens
         [FindsBy(How = How.XPath, Using = "//android.widget.TextView[@text='Custom Title']")]
         private IWebElement CustomTitle;
 
+        [FindsBy(How = How.XPath, Using = "//android.widget.TextView[@text='Presentation']")]
+        private IWebElement Presentation;
+
         public override bool IsOnScreen(int timeOutSecs)
         {
             // not reliable 
@@ -21,6 +24,9 @@ namespace Joyride.Android.Tests.SampleApp.ApiDemo.Screens
 
             if (elementName == "Custom Title")
                 return ScreenFactory.CreateScreen<CustomTitleScreen>();
+
+            if (elementName == "Presentation")
+                return ScreenFactory.CreateScreen<PresentationScreen>();
 
             return screen;
         }
