@@ -69,29 +69,12 @@ namespace Joyride.Extensions
             driver.Tap(element.GetCenter());
         }
 
-        //TODO:  does not work.  Appears to be an appium bug.
-        public static void DoubleTap(this AppiumDriver driver, Point point)
-        {
-
-/*
-            new TouchAction(driver)
-                .Press(point.X, point.Y)
-                .Wait(200)
-                .Release()
-                .Wait(300)
-                .Press(0, 0)
-                .Wait(200)
-                .Release()
-                .Perform();
- */
-
-            new TouchAction(driver)
-                .Tap(point.X, point.Y, count: 2)
-                .Perform(); 
-         }
         public static void DoubleTap(this AppiumDriver driver, IWebElement element)
         {
-            driver.DoubleTap(element.GetCenter());
+           var center = element.GetCenter();
+           new TouchAction(driver).
+               Tap(element, center.X, center.Y, 2)
+               .Perform();            
         }
         
         public static void TapAndHold(this AppiumDriver driver, IWebElement element, int seconds, bool precise=false)

@@ -10,6 +10,8 @@ namespace Joyride.Android.Tests.SampleApp.ApiDemo.Screens
         [FindsBy(How = How.XPath, Using = "//*[@resource-id='android:id/text1' and @text='App']")] 
         private IWebElement App;
 
+        [FindsBy(How = How.XPath, Using = "//*[@resource-id='android:id/text1' and @text='Animation']")]
+        private IWebElement Animation;
 
         public override Screen Tap(string elementName, bool precise = false)
         {
@@ -18,6 +20,9 @@ namespace Joyride.Android.Tests.SampleApp.ApiDemo.Screens
             {
                 case "App":
                     return ScreenFactory.CreateScreen<AppScreen>();
+
+                case "Animation":
+                    return ScreenFactory.CreateScreen<AnimationScreen>();
 
                 default:
                     return screen;

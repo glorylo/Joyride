@@ -136,6 +136,27 @@ testRunner.Then("I should see the collection \"Menu\" is not empty", ((string)(n
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Should be able to double tap")]
+        public virtual void ShouldBeAbleToDoubleTap()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should be able to double tap", ((string[])(null)));
+#line 28
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 29
+testRunner.And("I tap the \"Animation\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 30
+testRunner.And("I tap the \"Default Layout Animations\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 31
+testRunner.When("I double tap the \"Add Button\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 32
+testRunner.Then("I should see \"2\" items in \"Buttons\" collection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

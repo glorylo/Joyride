@@ -139,7 +139,7 @@ namespace Joyride.Platforms
 
         public virtual Screen DoubleTap(string elementName)
         {
-            var element = FindElement(elementName);
+            var element = FindCachedElement(elementName);
 
             if (element == null)
                 throw new NoSuchElementException("Cannot find element:  " + elementName);
@@ -150,7 +150,7 @@ namespace Joyride.Platforms
 
         public virtual Screen TapAndHold(string elementName, int seconds)
         {
-            var element = FindElement(elementName);
+            var element = FindCachedElement(elementName);
 
             if (element == null)
                 throw new NoSuchElementException("Cannot find element:  " + elementName);

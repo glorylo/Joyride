@@ -1,5 +1,5 @@
 ﻿@android 
-Feature:  Basic App Actions
+Feature:  Screen actions
     In order to use the app
 	As a user
 	I want to be launch and close the app
@@ -30,8 +30,27 @@ Scenario: Navigate to App screen
 When I tap the "App" button
 Then I should be on the "App" screen
 
-
 Scenario: Navigate to back to Main screen
 And I tap the "App" button
 When I go back
 Then I should be on the "Main" screen
+
+Scenario: Navigate to Activity screen
+Given I tap the "App" button
+When I tap the "Activity" button
+Then I should be on the "Activity" screen
+
+Scenario: Navigate to Custom Title screen
+Given I tap the "App" button
+And I tap the "Activity" button
+When I tap the "Custom Title" button
+Then I should be on the "Custom Title" screen
+
+Scenario: Navigate to Animation screen
+And I tap the "Animation" button
+Then I should be on the "Animation" screen
+
+Scenario: Navigate to Default Layout Animations screen
+And I tap the "Animation" button
+When I tap the "Default Layout Animations" button
+Then I should be on the "Default Layout Animations" screen

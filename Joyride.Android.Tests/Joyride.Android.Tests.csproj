@@ -76,10 +76,12 @@
     <Compile Include="SampleApp\ApiDemo\ModalDialogs\LoremIpsumModalDialog.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\ActivityScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\AlertDialogsScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\AnimationScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\ApiDemoScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\AppScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\ContextMenuScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\CustomTitleScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\DefaultLayoutAnimationsScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\FragmentScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\MainScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\NullApiDemoScreen.cs" />
