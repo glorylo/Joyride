@@ -74,11 +74,18 @@
     <Compile Include="SampleApp\ApiDemo\ModalDialogs\ApiDemoModalDialog.cs" />
     <Compile Include="SampleApp\ApiDemo\ModalDialogs\LongMessageModalDialog.cs" />
     <Compile Include="SampleApp\ApiDemo\ModalDialogs\LoremIpsumModalDialog.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\ActivityScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\AlertDialogsScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\ApiDemoScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\AppScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\CustomTitleScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\MainScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\NullApiDemoScreen.cs" />
+    <Compile Include="Specs\FormActions.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FormActions.feature</DependentUpon>
+    </Compile>
     <Compile Include="Specs\ModalDialog.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -94,6 +101,10 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Specs\FormActions.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>FormActions.feature.cs</LastGenOutput>
+    </None>
     <None Include="Specs\ModalDialog.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ModalDialog.feature.cs</LastGenOutput>

@@ -29,3 +29,9 @@ Examples:
 Scenario: Navigate to App screen
 When I tap the "App" button
 Then I should be on the "App" screen
+
+
+Scenario: Navigate to back to Main screen
+And I tap the "App" button
+When I go back
+Then I should be on the "Main" screen

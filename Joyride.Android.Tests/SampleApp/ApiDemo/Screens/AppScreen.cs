@@ -21,6 +21,9 @@ namespace Joyride.Android.Tests.SampleApp.ApiDemo.Screens
             if (elementName == "Alert Dialogs")
                 return ScreenFactory.CreateScreen<AlertDialogsScreen>();
 
+            if (elementName == "Activity")
+                return ScreenFactory.CreateScreen<ActivityScreen>();
+
             return screen;
         }
         public override bool IsOnScreen(int timeOutSecs)

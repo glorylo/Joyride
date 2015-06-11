@@ -2,17 +2,16 @@
 Feature:  Modal Dialog 
     In order to interact with modal dialog
 	As a user
-	I want to be able to resond with accept / dismiss 
+	I want to be able to respond with accept / dismiss 
 
 
 Background: 
 Given I launch the "Api Demo App" mobile application
 
-Scenario: Navigate to Activity screen
+Scenario: Navigate to Alert Dialogs screen
 Given I tap the "App" button
 When I tap the "Alert Dialogs" button
 Then I should be on the "Alert Dialogs" screen
-
 
 Scenario: Should detect a modal dialog 
 Given I tap the "App" button
@@ -62,7 +61,6 @@ And I tap the "Alert Dialogs" button
 And I tap the "Ok Cancel Dialog" button
 When I dismiss any modal dialog
 Then I should be on the "Alert Dialogs" screen
-
 
 Scenario: Should detect the long message modal dialog 
 Given I tap the "App" button
