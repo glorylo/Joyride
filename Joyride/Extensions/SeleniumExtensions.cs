@@ -91,6 +91,11 @@ namespace Joyride.Extensions
             return FindElementsWithTimeout(driver, () => driver.FindElementsWithMethod(new Func<By, IList<IWebElement>>(driver.FindElements), by), timeoutSecs);
         }
 
+        public static IWebElement FindElementWithImplicitWait(this RemoteWebDriver driver, By by)
+        {
+            return driver.FindElementWithMethod(new Func<By, IWebElement>(driver.FindElement), by);
+        }
+
         public static IWebElement FindElementWithMethod(this RemoteWebDriver driver, Delegate findMethod,
             params object[] arguments)
         {

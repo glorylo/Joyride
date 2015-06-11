@@ -24,10 +24,6 @@ namespace Joyride.Specflow.Steps
             Context.MobileApp.Do<Screen>(s => s.Rotate(mode));
         }
 
-
-
-
-
         #endregion
 
         #region Thens
@@ -59,8 +55,7 @@ namespace Joyride.Specflow.Steps
             {
                 Context.MobileApp.Do<Screen>(s => elementPresent = s.ElementIsPresent(elementName, NonExistenceTimeoutSecs));
                 Assert.IsFalse(elementPresent); 
-            }
-               
+            }               
         }
 
         [Then(@"I (should|should not) see the (field|element|label|button) ""([^""]*)""")]
