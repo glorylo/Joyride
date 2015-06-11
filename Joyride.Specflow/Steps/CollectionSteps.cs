@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Odbc;
 using System.Linq;
 using Humanizer;
 using Joyride.Extensions;
@@ -77,21 +78,31 @@ namespace Joyride.Specflow.Steps
         [Then(@"I should see an item in collection ""([^""]*)"" with text (equals|starts with|containing|matching) ""([^""]*)""")]
         public void ThenIShouldSeeItemInCollectionWithText(string collectionName, string compareType, string text)
         {
-            Assert.IsTrue(Context.MobileApp.Screen.HasTextInCollection(collectionName, text, compareType.ToCompareType()));
+            var hasText = false;
+            Context.MobileApp.Do<Screen>(s => hasText = s.HasTextInCollection(collectionName, text, compareType.ToCompareType()));
+            Assert.IsTrue(hasText);
         }
 
-        [Then(@"I should see ""(\d+)"" items in ""([^""]*)"" collection")]
-        public void ThenIShouldSeeNumberOfItemsInCollection(int size, string collectionName)
+        [Then(@"I (should|should not) see ""(\d+)"" items in ""([^""]*)"" collection")]
+        public void ThenIShouldSeeNumberOfItemsInCollection(string shouldOrShouldNot, int size, string collectionName)
         {
-            var actualSize = Context.MobileApp.Screen.SizeOf(collectionName);
-            Assert.That(actualSize == size, Is.True,
-                "Unexpected number of items in '" + collectionName + "' with  " + actualSize + ".  Expecting: " + size);
+            var actualSize = 0;
+            Context.MobileApp.Do<Screen>(s => actualSize = s.SizeOf(collectionName));
+
+            if (shouldOrShouldNot == "should")
+              Assert.That(actualSize == size, Is.True,
+                 "Unexpected number of items in '" + collectionName + "' with  " + actualSize + ".  Expecting: " + size);
+            else
+                Assert.That(actualSize == size, Is.False,
+                   "Unexpected number of items in '" + collectionName + "' with actual number of " + actualSize + " = " + size);
         }
 
         [Then(@"I should see the collection ""([^""]*)"" is (not empty|empty)")]
         public void ThenIShouldSeeEmptyCollection(string collectionName, string emptyOrNotEmpty)
         {
-            var actualSize = Context.MobileApp.Screen.SizeOf(collectionName);
+            var actualSize = 0;
+            Context.MobileApp.Do<Screen>(s => actualSize = s.SizeOf(collectionName));
+
             if (emptyOrNotEmpty == "empty")
                 Assert.That(actualSize == 0, Is.True,
                   "Unexpected number of items in '" + collectionName + "' with  " + actualSize + ".  Expecting: " + 0);
@@ -103,7 +114,9 @@ namespace Joyride.Specflow.Steps
         [Then(@"I should see the number of items in the collection ""([^""]*)"" to be (less than|greater than) ""(\d+)""")]
         public void ThenIShouldSeCollectionGreaterLessThan(string collectionName, string lessThanOrGreaterThan, int size)
         {
-            var actualSize = Context.MobileApp.Screen.SizeOf(collectionName);
+            var actualSize = 0;
+            Context.MobileApp.Do<Screen>(s => actualSize = s.SizeOf(collectionName));
+
             if (lessThanOrGreaterThan == "less than")
                 Assert.That(actualSize < size, Is.True,
                   "The number of items (" + actualSize + ") in '" + collectionName + "' is not less than " + size);
@@ -115,8 +128,10 @@ namespace Joyride.Specflow.Steps
         [Then(@"I should see ""(\d+)"" (less|more) item\(s\) in ""([^""]*)"" collection")]
         public void ThenIShouldSeeMoreLessItems(int difference, string lessOrMore, string collectionName)
         {
-            var actualSize = Context.MobileApp.Screen.SizeOf(collectionName);
-            var originalSize = (int)Context.GetValue(collectionName);
+            var actualSize = 0;
+            Context.MobileApp.Do<Screen>(s => actualSize = s.SizeOf(collectionName));
+
+            var originalSize = (int) Context.GetValue(collectionName);
             int expectedSize;
 
             if (lessOrMore == "less")

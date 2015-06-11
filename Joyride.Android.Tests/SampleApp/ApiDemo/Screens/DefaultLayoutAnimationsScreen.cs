@@ -7,7 +7,7 @@ namespace Joyride.Android.Tests.SampleApp.ApiDemo.Screens
 {
     public class DefaultLayoutAnimationsScreen : ApiDemoScreen
     {
-        [FindsBy(How = How.Id, Using = "io.appium.android.apis:id/addNewButton")]
+        [FindsBy(How = How.Id, Using = "io.appium.android.apis:id/addNewButton")][CacheLookup]
         private IWebElement AddButton;
 
         [FindsBy(How = How.XPath, Using = "//*[@resource-id='io.appium.android.apis:id/gridContainer']/android.widget.Button")]
