@@ -25,23 +25,7 @@ namespace Joyride.Specflow.Steps
         }
 
 
-        [Given(@"I enter ""([^""]*)"" in the ""([^""]*)"" field")]
-        [When(@"I enter ""([^""]*)"" in the ""([^""]*)"" field")]
-        public void GivenICanEnterInTheField(string fieldValue, string fieldName)
-        {
-            Context.MobileApp.Do<Screen>(s => s.EnterText(fieldName, fieldValue));
-        }
 
-                
-        [Given(@"I (uncheck|check) the ""([^""]*)"" checkbox")]
-        [When(@"I (uncheck|check) the ""([^""]*)"" checkbox")]
-        public void WhenICheckSomeCheckbox(string checkOrUnchecked, string checkboxName)
-        {
-            if (checkOrUnchecked == "check")
-                Context.MobileApp.Do<Screen>(s => s.SetCheckbox(checkboxName));
-            else
-                Context.MobileApp.Do<Screen>(s => s.SetCheckbox(checkboxName, false));
-        }
 
 
         #endregion

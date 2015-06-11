@@ -82,10 +82,10 @@
     <Compile Include="SampleApp\ApiDemo\Screens\MainScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\NullApiDemoScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\PresentationScreen.cs" />
-    <Compile Include="Specs\FormActions.feature.cs">
+    <Compile Include="Specs\UiControl.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>FormActions.feature</DependentUpon>
+      <DependentUpon>UiControl.feature</DependentUpon>
     </Compile>
     <Compile Include="Specs\ModalDialog.feature.cs">
       <AutoGen>True</AutoGen>
@@ -102,9 +102,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Specs\FormActions.feature">
+    <None Include="Specs\UiControl.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>FormActions.feature.cs</LastGenOutput>
+      <LastGenOutput>UiControl.feature.cs</LastGenOutput>
     </None>
     <None Include="Specs\ModalDialog.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

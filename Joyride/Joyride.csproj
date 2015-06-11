@@ -80,7 +80,7 @@
     <Compile Include="Platforms\Ios\IosModalDialogDetector.cs" />
     <Compile Include="Platforms\Component.cs" />
     <Compile Include="Platforms\DetectAttribute.cs" />
-    <Compile Include="Platforms\IFormAction.cs" />
+    <Compile Include="Platforms\IUiControl.cs" />
     <Compile Include="Platforms\IMobileApplication.cs" />
     <Compile Include="Platforms\IModalDialog.cs" />
     <Compile Include="Platforms\Ios\IosMobileApplication.cs" />

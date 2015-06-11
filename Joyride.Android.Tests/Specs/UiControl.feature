@@ -1,5 +1,5 @@
 ﻿@android
-Feature: Form Actions
+Feature: Ui Control 
 	In order to interact with form elements
 	As a user
 	I want to be able to enter text, toggle checkboxes, etc.

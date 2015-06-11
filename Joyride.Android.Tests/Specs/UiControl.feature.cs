@@ -19,21 +19,21 @@ namespace Joyride.Android.Tests.Specs
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.3.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Form Actions")]
+    [NUnit.Framework.DescriptionAttribute("Ui Control")]
     [NUnit.Framework.CategoryAttribute("android")]
-    public partial class FormActionsFeature
+    public partial class UiControlFeature
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "FormActions.feature"
+#line 1 "UiControl.feature"
 #line hidden
         
         [NUnit.Framework.TestFixtureSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Form Actions", "In order to interact with form elements\r\nAs a user\r\nI want to be able to enter te" +
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Ui Control", "In order to interact with form elements\r\nAs a user\r\nI want to be able to enter te" +
                     "xt, toggle checkboxes, etc.", ProgrammingLanguage.CSharp, new string[] {
                         "android"});
             testRunner.OnFeatureStart(featureInfo);
