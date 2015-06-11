@@ -23,6 +23,6 @@ Given I tap the "App" button
 And I tap the "Fragment" button
 And I tap the "Context Menu" button
 When I tap the "Long Press" button and hold for "4" seconds
-Then I should see "2" items in "Menu" collection
+Then I should see the collection "Menu" is not empty
 
 

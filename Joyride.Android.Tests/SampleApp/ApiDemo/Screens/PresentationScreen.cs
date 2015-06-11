@@ -12,7 +12,7 @@ namespace Joyride.Android.Tests.SampleApp.ApiDemo.Screens
         
         public override bool IsOnScreen(int timeOutSecs)
         {
-            var title = Driver.FindElementWithImplicitWait(By.XPath("//android.widget.TextView[@text='App/Activity/Presentation']"));
+            var title = Driver.FindElement(By.XPath("//android.widget.TextView[@text='App/Activity/Presentation']"), timeOutSecs);
             return title != null;
         }
 

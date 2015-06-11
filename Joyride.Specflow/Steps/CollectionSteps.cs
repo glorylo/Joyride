@@ -17,23 +17,41 @@ namespace Joyride.Specflow.Steps
     {
         #region Given/Whens
 
-        [Given(@"I tap the ""(.*?)"" item in the ""([^""]*)"" collection")]
-        [When(@"I tap the ""(.*?)"" item in the ""([^""]*)"" collection")]
+        [Given(@"I tap the ""(first|most recent|last)"" item in the ""([^""]*)"" collection")]
+        [When(@"I tap the ""(first|most recent|last)"" item in the ""([^""]*)"" collection")]
         public void GivenITapTheItemInTheCollection(string ordinal, string collectionName)
         {
-            if (ordinal == "most recent")
-                Context.MobileApp.Do<Screen>(s => s.TapInCollection(collectionName, last: true));
-            else
+            switch (ordinal)
             {
-                int index = Int32.Parse(ordinal);
-                Context.MobileApp.Do<Screen>(s => s.TapInCollection(collectionName, index));
+                case "last":
+                case "most recent":
+                    Context.MobileApp.Do<Screen>(s => s.TapInCollection(collectionName, last: true));
+                    break;
+
+                case "first":
+                    Context.MobileApp.Do<Screen>(s => s.TapInCollection(collectionName, 1));
+                    break;
             }
+        }
+
+        [Given(@"I tap the ""(\d+)(?:(?:st|nd|rd|th)?)"" item in the ""([^""]*)"" collection")]
+        [When(@"I tap the ""(\d+)(?:(?:st|nd|rd|th)?)"" item in the ""([^""]*)"" collection")]
+        public void GivenITapTheItemByIndexInCollection(int ordinal, string collectionName)
+        {
+            if (ordinal < 1)
+                throw new IndexOutOfRangeException("Expecting max count to be greater than 1. Received: " + ordinal);
+
+            Context.MobileApp.Do<Screen>(s => s.TapInCollection(collectionName, ordinal));
+            
         }
 
         [Given(@"I tap up to ""(\d+)"" item\(s\) in the ""([^""]*)"" collection")]
         [When(@"I tap up to ""(\d+)"" item\(s\) in the ""([^""]*)"" collection")]
         public void GivenITapUpToXItemsInTheCollection(int times, string collectionName)
         {
+            if (times < 1)
+                throw new IndexOutOfRangeException("Expecting max count to be greater than 1. Received: " + times);
+
             for (int i = 1; i <= times; i++)
             {
                 //copy to local var due to access modifier warning

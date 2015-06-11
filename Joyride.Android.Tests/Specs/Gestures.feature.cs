@@ -132,7 +132,7 @@ testRunner.And("I tap the \"Context Menu\" button", ((string)(null)), ((TechTalk
 #line 25
 testRunner.When("I tap the \"Long Press\" button and hold for \"4\" seconds", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 26
-testRunner.Then("I should see \"2\" items in \"Menu\" collection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I should see the collection \"Menu\" is not empty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
