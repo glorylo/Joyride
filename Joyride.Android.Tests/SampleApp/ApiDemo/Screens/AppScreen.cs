@@ -13,6 +13,8 @@ namespace Joyride.Android.Tests.SampleApp.ApiDemo.Screens
         [FindsBy(How = How.XPath, Using = "//*[@resource-id='android:id/text1' and @text='Alert Dialogs']")]
         private IWebElement AlertDialogs;
 
+        [FindsBy(How = How.XPath, Using = "//*[@resource-id='android:id/text1' and @text='Fragment']")]
+        private IWebElement Fragment;
 
         public override Screen Tap(string elementName, bool precise = false)
         {
@@ -23,6 +25,9 @@ namespace Joyride.Android.Tests.SampleApp.ApiDemo.Screens
 
             if (elementName == "Activity")
                 return ScreenFactory.CreateScreen<ActivityScreen>();
+
+            if (elementName == "Fragment")
+                return ScreenFactory.CreateScreen<FragmentScreen>();
 
             return screen;
         }
