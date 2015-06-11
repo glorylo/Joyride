@@ -5,7 +5,7 @@ using TechTalk.SpecFlow;
 namespace Joyride.Specflow.Steps
 {
     [Binding]
-    public class GestureSteps
+    public class GestureSteps : TechTalk.SpecFlow.Steps
     {
         [Given(@"I tap the ""([^""]*)"" (button|field|label|element)")]
         [When(@"I tap the ""([^""]*)"" (button|field|label|element)")]

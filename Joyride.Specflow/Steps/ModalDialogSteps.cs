@@ -7,7 +7,7 @@ using TechTalk.SpecFlow;
 namespace Joyride.Specflow.Steps
 {
     [Binding]
-    public class ModalDialogSteps
+    public class ModalDialogSteps : TechTalk.SpecFlow.Steps
     {
         #region Given/Whens
         [Given(@"I (accept|dismiss) the ""([^""]*)"" modal dialog")]

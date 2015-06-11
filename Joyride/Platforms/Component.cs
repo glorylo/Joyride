@@ -75,6 +75,15 @@ namespace Joyride.Platforms
             return (SizeOf(collectionName, timeoutSecs) == 0);
         }
 
+        public bool IsSelected(string elementName)
+        {
+            var element = FindElement(elementName);
+            if (element == null)
+                throw new NoSuchElementException("Unable to find element: " + elementName);
+
+            return element.Selected;
+        }
+
         public string GetElementAttribute(string elementName, string attributeName)
         {
             var element = FindElement(elementName);

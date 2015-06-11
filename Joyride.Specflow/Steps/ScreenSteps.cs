@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Joyride.Extensions;
 using Joyride.Platforms;
 using Joyride.Specflow.Configuration;
@@ -10,7 +9,7 @@ using TechTalk.SpecFlow;
 namespace Joyride.Specflow.Steps
 {
     [Binding]
-    public class ScreenSteps
+    public class ScreenSteps : TechTalk.SpecFlow.Steps
     {
         public static int TimeoutSecs = JoyrideConfiguration.TimeoutSecs;
         public static int NonExistenceTimeoutSecs = JoyrideConfiguration.NonexistenceTimeoutSecs;
@@ -105,8 +104,8 @@ namespace Joyride.Specflow.Steps
                 "Incorrectly on screen: " + Context.MobileApp.Screen.Name);
         }
         
-        [Then(@"I should see element ""([^""]*)"" with (.*) (equals|starts with|containing|matching) ""([^""]*)""")]
-        public void ThenIShouldSeeElementValueCompareWithText(string elementName, string attribute, string compareType, string text)
+        [Then(@"I (should|should not) see element ""([^""]*)"" with (.*) (equals|starts with|containing|matching) ""([^""]*)""")]
+        public void ThenIShouldSeeElementValueCompareWithText(string shouldOrShouldNot, string elementName, string attribute, string compareType, string text)
         {
             string attributeValue = null;            
             Context.MobileApp.Do<Screen>(s => attributeValue = s.GetElementAttribute(elementName, attribute));
@@ -114,8 +113,12 @@ namespace Joyride.Specflow.Steps
             if (attributeValue == null)
                 Assert.Fail("Unable to find attribute " + attribute + " for element: " + elementName);
 
-            Assert.That(attributeValue.CompareWith(text, compareType.ToCompareType()), Is.True,
-                "Unexpected text compare for attribute " + attribute + " with '" + attributeValue + "' is not " + compareType + " '" + text + "'");
+            if (shouldOrShouldNot == "should")
+              Assert.That(attributeValue.CompareWith(text, compareType.ToCompareType()), Is.True,
+                  "Unexpected text compare for attribute " + attribute + " with '" + attributeValue + "' is not " + compareType + " '" + text + "'");
+            else
+                Assert.That(attributeValue.CompareWith(text, compareType.ToCompareType()), Is.False,
+                    "Unexpected text compare for attribute " + attribute + " with '" + attributeValue + "' is " + compareType + " '" + text + "'");            
         }
 
 /*      

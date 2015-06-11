@@ -11,7 +11,9 @@ namespace Joyride.Specflow.Steps
     public class AndroidSteps : TechTalk.SpecFlow.Steps
     {
         public static int TimeoutSecs = JoyrideConfiguration.TimeoutSecs;
+
         #region Given/Whens
+
         [Given(@"I go back")]
         [When(@"I go back")]
         public void GivenITapOnTheAndroidDevicesBackButton()
@@ -53,10 +55,10 @@ namespace Joyride.Specflow.Steps
               Assert.IsFalse(hasLabel, "Expecting not to have a label that " + compare + " text: " + label);
         }
 
-        [Then(@"I (should|should not) see the ""([^""]*)"" element (checked|unchecked)")]
+        [Then(@"I (should|should not) see the ""([^""]*)"" element (checked|unchecked|enabled|disabled)")]
         public void ThenIShouldSeeElementEnabledOrDisabled(string shouldOrShouldNot, string elementName, string checkedOrUnchecked)
         {
-            var value = (checkedOrUnchecked == "checked") ? "true" : "false";
+            var value = (checkedOrUnchecked == "checked" || checkedOrUnchecked == "enabled").ToString().ToLower();
             Then(String.Format(@"I {0} see element ""{1}"" with {2} equals ""{3}""", shouldOrShouldNot, elementName, "checked", value));
         }
 

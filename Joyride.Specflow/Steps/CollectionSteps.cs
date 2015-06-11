@@ -13,7 +13,7 @@ using TechTalk.SpecFlow.Assist;
 namespace Joyride.Specflow.Steps
 {
     [Binding]
-    public class CollectionSteps
+    public class CollectionSteps : TechTalk.SpecFlow.Steps
     {
         #region Given/Whens
 

@@ -1,5 +1,4 @@
-﻿using System;
-using Joyride.Extensions;
+﻿using Joyride.Extensions;
 using Joyride.Platforms.Ios;
 using Joyride.Specflow.Configuration;
 using NUnit.Framework;
@@ -8,7 +7,7 @@ using TechTalk.SpecFlow;
 namespace Joyride.Specflow.Steps
 {
     [Binding, Scope(Tag = "ios")]
-    public class IosSteps
+    public class IosSteps : TechTalk.SpecFlow.Steps
     {
         public static int TimeoutSecs = JoyrideConfiguration.TimeoutSecs;
 

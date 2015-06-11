@@ -57,6 +57,21 @@ namespace Joyride.Platforms.Android
             return this;
         }
 
+         public override Screen SetCheckbox(string elementName, bool enabled = true)
+         {
+             var element = FindElement(elementName);
+
+             if (element == null)
+                 throw new NoSuchElementException("Cannot find element:  " + elementName);
+
+             var isChecked = element.GetAttribute("checked");
+             var selected = (isChecked != null && isChecked == "true");             
+             if ((enabled && !selected) || (!enabled && selected))
+                 element.Click();
+
+             return this;
+         }
+
         public override Screen EnterText(string elementName, string text)
         {
             var element = FindElement(elementName);

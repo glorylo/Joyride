@@ -8,7 +8,7 @@ using TechTalk.SpecFlow;
 namespace Joyride.Specflow.Steps
 {
     [Binding]
-    public class DebugSteps
+    public class DebugSteps : TechTalk.SpecFlow.Steps
     {
         public static string LogPath = JoyrideConfiguration.LogPath;
 

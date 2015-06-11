@@ -39,17 +39,23 @@ And I do a moderate scroll down
 When I tap the "Presentation" button
 Then I should be on the "Presentation" screen
 
-Scenario: Should set checkox to enabled
+Scenario: Should show label when checkox is enabled 
 Given I tap the "App" button
 And I tap the "Activity" button
 And I do a moderate scroll down
 And I tap the "Presentation" button
 When I check the "Show All Displays" checkbox
-#Then I should see element "Show All Displays" with checked equals "true"
-#Then I should see element "Show All Displays" checked
 Then I should see the "Show All Displays" element checked
+And I should see a label equals text "Display #0: Built-in Screen"
 
 
-
-
+Scenario: Should not show label when checkox is enabled 
+Given I tap the "App" button
+And I tap the "Activity" button
+And I do a moderate scroll down
+And I tap the "Presentation" button
+When I check the "Show All Displays" checkbox
+When I uncheck the "Show All Displays" checkbox
+Then I should not see the "Show All Displays" element checked
+And I should not see a label equals text "Display #0: Built-in Screen"
 

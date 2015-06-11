@@ -7,7 +7,7 @@ using TechTalk.SpecFlow;
 namespace Joyride.Specflow.Steps
 {
     [Binding]
-    public class WebviewSteps
+    public class WebviewSteps : TechTalk.SpecFlow.Steps
     {
         #region Given/Whens
 
