@@ -32,6 +32,18 @@ And I tap the "Alert Dialogs" button
 When I tap the "Ok Cancel Dialog" button
 Then I should see the "Lorem Ipsum" modal dialog ends with title text "cakso dodtos anr koop."
 
+Scenario: Should see body containing text in modal dialog 
+Given I tap the "App" button
+And I tap the "Alert Dialogs" button
+When I tap the "Ok Cancel Dialog With Long Message" button
+Then I should see the "Long Message" modal dialog containing body text "Swipontgwook proudgs"
+
+Scenario: Should see body starts with text in modal dialog 
+Given I tap the "App" button
+And I tap the "Alert Dialogs" button
+When I tap the "Ok Cancel Dialog With Long Message" button
+Then I should see the "Long Message" modal dialog starts with body text "Plloaso mako nuto"
+
 Scenario Outline: Should be able to accept or dismiss modal dialog
 Given I tap the "App" button
 And I tap the "Alert Dialogs" button
@@ -57,7 +69,6 @@ Given I tap the "App" button
 And I tap the "Alert Dialogs" button
 When I tap the "Ok Cancel Dialog With Long Message" button
 Then I should see the "Long Message" modal dialog
-
 
 Scenario Outline: Respond to with the long message modal dialog 
 Given I tap the "App" button
