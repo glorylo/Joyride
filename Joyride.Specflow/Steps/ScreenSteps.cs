@@ -58,8 +58,8 @@ namespace Joyride.Specflow.Steps
             }               
         }
 
-        [Then(@"I (should|should not) see the (field|element|label|button) ""([^""]*)""")]
-        public void ThenIShouldSeeElement(string shouldOrShouldNot, string elementType, string elementName)
+        [Then(@"I (should|should not) see the (?:button|field|label|element|link) ""([^""]*)""")]
+        public void ThenIShouldSeeElement(string shouldOrShouldNot, string elementName)
         {
             var elementVisible = false;
             if (shouldOrShouldNot == "should")

@@ -7,16 +7,16 @@ namespace Joyride.Specflow.Steps
     [Binding]
     public class GestureSteps : TechTalk.SpecFlow.Steps
     {
-        [Given(@"I tap the ""([^""]*)"" (button|field|label|element)")]
-        [When(@"I tap the ""([^""]*)"" (button|field|label|element)")]
-        public void WhenITapTheButton(string elementName, string elementType)
+        [Given(@"I tap the ""([^""]*)"" (?:button|field|label|element|link)")]
+        [When(@"I tap the ""([^""]*)"" (?:button|field|label|element|link)")]
+        public void WhenITapTheButton(string elementName)
         {
             Context.MobileApp.Do<IGesture>(i => i.Tap(elementName));
         }
 
-        [Given(@"I double tap the ""([^""]*)"" (button|field|label|element)")]
-        [When(@"I double tap the ""([^""]*)"" (button|field|label|element)")]
-        public void WhenIDoubleTap(string elementName, string elementType)
+        [Given(@"I double tap the ""([^""]*)"" (?:button|field|label|element|link)")]
+        [When(@"I double tap the ""([^""]*)"" (?:button|field|label|element|link)")]
+        public void WhenIDoubleTap(string elementName)
         {
             Context.MobileApp.Do<IGesture>(i => i.DoubleTap(elementName));
         }

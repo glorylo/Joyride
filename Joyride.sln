@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{7C4BAE
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joyride.Android.Tests", "Joyride.Android.Tests\Joyride.Android.Tests.csproj", "{4C48828E-2D9F-4695-83F5-8B67F0891971}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Android.Native", "Tests\Android.Native\Tests.Android.Native.csproj", "{4C48828E-2D9F-4695-83F5-8B67F0891971}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
