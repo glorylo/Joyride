@@ -1,4 +1,7 @@
-﻿using Joyride.Extensions;
+﻿using Joyride.Android.Tests.SampleApp.ApiDemo.Screens.Animation;
+using Joyride.Android.Tests.SampleApp.ApiDemo.Screens.App;
+using Joyride.Android.Tests.SampleApp.ApiDemo.Screens.Views;
+using Joyride.Extensions;
 using Joyride.Platforms;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
@@ -13,6 +16,9 @@ namespace Joyride.Android.Tests.SampleApp.ApiDemo.Screens
         [FindsBy(How = How.XPath, Using = "//*[@resource-id='android:id/text1' and @text='Animation']")]
         private IWebElement Animation;
 
+        [FindsBy(How = How.XPath, Using = "//*[@resource-id='android:id/text1' and @text='Views']")]
+        private IWebElement Views;
+
         public override Screen Tap(string elementName, bool precise = false)
         {
             var screen = base.Tap(elementName, precise);
@@ -23,6 +29,9 @@ namespace Joyride.Android.Tests.SampleApp.ApiDemo.Screens
 
                 case "Animation":
                     return ScreenFactory.CreateScreen<AnimationScreen>();
+
+                case "Views":
+                    return ScreenFactory.CreateScreen<ViewsScreen>();
 
                 default:
                     return screen;

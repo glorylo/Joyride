@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Joyride.Platforms;
+﻿using Joyride.Platforms;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace Joyride.Android.Tests.SampleApp.ApiDemo.Screens
+namespace Joyride.Android.Tests.SampleApp.ApiDemo.Screens.App
 {
     public class CustomTitleScreen : ApiDemoScreen
     {

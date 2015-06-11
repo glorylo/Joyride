@@ -74,18 +74,19 @@
     <Compile Include="SampleApp\ApiDemo\ModalDialogs\ApiDemoModalDialog.cs" />
     <Compile Include="SampleApp\ApiDemo\ModalDialogs\LongMessageModalDialog.cs" />
     <Compile Include="SampleApp\ApiDemo\ModalDialogs\LoremIpsumModalDialog.cs" />
-    <Compile Include="SampleApp\ApiDemo\Screens\ActivityScreen.cs" />
-    <Compile Include="SampleApp\ApiDemo\Screens\AlertDialogsScreen.cs" />
-    <Compile Include="SampleApp\ApiDemo\Screens\AnimationScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\App\ActivityScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\App\AlertDialogsScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\Animation\AnimationScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\ApiDemoScreen.cs" />
-    <Compile Include="SampleApp\ApiDemo\Screens\AppScreen.cs" />
-    <Compile Include="SampleApp\ApiDemo\Screens\ContextMenuScreen.cs" />
-    <Compile Include="SampleApp\ApiDemo\Screens\CustomTitleScreen.cs" />
-    <Compile Include="SampleApp\ApiDemo\Screens\DefaultLayoutAnimationsScreen.cs" />
-    <Compile Include="SampleApp\ApiDemo\Screens\FragmentScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\App\AppScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\App\ContextMenuScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\App\CustomTitleScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\Animation\DefaultLayoutAnimationsScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\App\FragmentScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\MainScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\NullApiDemoScreen.cs" />
-    <Compile Include="SampleApp\ApiDemo\Screens\PresentationScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\App\PresentationScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\Views\ViewsScreen.cs" />
     <Compile Include="Specs\Collections.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

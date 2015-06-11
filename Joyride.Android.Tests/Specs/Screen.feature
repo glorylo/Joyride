@@ -54,3 +54,8 @@ Scenario: Navigate to Default Layout Animations screen
 And I tap the "Animation" button
 When I tap the "Default Layout Animations" button
 Then I should be on the "Default Layout Animations" screen
+
+Scenario: Navigate to Views screen
+And I scroll the screen down
+And I tap the "Views" button
+Then I should be on the "Views" screen

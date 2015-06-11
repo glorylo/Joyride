@@ -33,7 +33,7 @@ namespace Joyride.Android.Tests.Specs
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Gestures", "In order to use the api demo app\nAs a user\nI want to be able to use gestures", ProgrammingLanguage.CSharp, new string[] {
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Gestures", "In order to use the api demo app\r\nAs a user\r\nI want to be able to use gestures", ProgrammingLanguage.CSharp, new string[] {
                         "android"});
             testRunner.OnFeatureStart(featureInfo);
         }

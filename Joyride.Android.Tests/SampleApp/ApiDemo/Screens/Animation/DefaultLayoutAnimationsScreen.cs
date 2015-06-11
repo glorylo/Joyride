@@ -3,7 +3,7 @@ using Joyride.Extensions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace Joyride.Android.Tests.SampleApp.ApiDemo.Screens
+namespace Joyride.Android.Tests.SampleApp.ApiDemo.Screens.Animation
 {
     public class DefaultLayoutAnimationsScreen : ApiDemoScreen
     {

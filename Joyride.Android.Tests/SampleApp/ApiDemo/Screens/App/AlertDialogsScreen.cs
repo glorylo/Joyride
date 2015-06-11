@@ -3,7 +3,7 @@ using Joyride.Platforms;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace Joyride.Android.Tests.SampleApp.ApiDemo.Screens
+namespace Joyride.Android.Tests.SampleApp.ApiDemo.Screens.App
 {
     public class AlertDialogsScreen : ApiDemoScreen
     {
