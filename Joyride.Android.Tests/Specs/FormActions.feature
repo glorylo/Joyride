@@ -18,6 +18,12 @@ And I tap the "Activity" button
 When I tap the "Custom Title" button
 Then I should be on the "Custom Title" screen
 
+Scenario: Should be able to see an Left Title label present on screen
+Given I tap the "App" button
+And I tap the "Activity" button
+When I tap the "Custom Title" button
+Then the element "Left Title" should be present
+
 Scenario: Should be able to enter text and verify saved changes
 Given I tap the "App" button
 And I tap the "Activity" button
