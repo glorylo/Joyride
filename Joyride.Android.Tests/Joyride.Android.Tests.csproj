@@ -84,15 +84,20 @@
     <Compile Include="SampleApp\ApiDemo\Screens\MainScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\NullApiDemoScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\PresentationScreen.cs" />
+    <Compile Include="Specs\Collections.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Collections.feature</DependentUpon>
+    </Compile>
     <Compile Include="Specs\Gestures.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Gestures.feature</DependentUpon>
     </Compile>
-    <Compile Include="Specs\UiControl.feature.cs">
+    <Compile Include="Specs\UiControls.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>UiControl.feature</DependentUpon>
+      <DependentUpon>UiControls.feature</DependentUpon>
     </Compile>
     <Compile Include="Specs\ModalDialog.feature.cs">
       <AutoGen>True</AutoGen>
@@ -109,13 +114,17 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Specs\Collections.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Collections.feature.cs</LastGenOutput>
+    </None>
     <None Include="Specs\Gestures.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Gestures.feature.cs</LastGenOutput>
     </None>
-    <None Include="Specs\UiControl.feature">
+    <None Include="Specs\UiControls.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>UiControl.feature.cs</LastGenOutput>
+      <LastGenOutput>UiControls.feature.cs</LastGenOutput>
     </None>
     <None Include="Specs\ModalDialog.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

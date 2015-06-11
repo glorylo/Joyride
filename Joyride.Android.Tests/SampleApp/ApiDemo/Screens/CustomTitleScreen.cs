@@ -42,6 +42,7 @@ namespace Joyride.Android.Tests.SampleApp.ApiDemo.Screens
 
         public override Screen GoBack()
         {
+            Driver.Navigate().Back();
             return ScreenFactory.CreateScreen<ActivityScreen>();
         }
     }

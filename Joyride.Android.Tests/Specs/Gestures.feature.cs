@@ -136,31 +136,6 @@ testRunner.Then("I should see \"2\" items in \"Menu\" collection", ((string)(nul
 #line hidden
             this.ScenarioCleanup();
         }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Should be able to tap an item in a collection")]
-        public virtual void ShouldBeAbleToTapAnItemInACollection()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should be able to tap an item in a collection", ((string[])(null)));
-#line 29
-this.ScenarioSetup(scenarioInfo);
-#line 7
-this.FeatureBackground();
-#line 30
-testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 31
-testRunner.And("I tap the \"Fragment\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 32
-testRunner.And("I tap the \"Context Menu\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 33
-testRunner.And("I tap the \"Long Press\" button and hold for \"4\" seconds", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 34
-testRunner.When("I tap the \"1\" item in the \"Menu\" collection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 35
-testRunner.Then("I should be on the \"Context Menu\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            this.ScenarioCleanup();
-        }
     }
 }
 #pragma warning restore

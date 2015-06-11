@@ -26,7 +26,7 @@ namespace Joyride.Android.Tests.Specs
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "UiControl.feature"
+#line 1 "UiControls.feature"
 #line hidden
         
         [NUnit.Framework.TestFixtureSetUpAttribute()]
@@ -231,7 +231,7 @@ testRunner.And("I tap the \"Presentation\" button", ((string)(null)), ((TechTalk
 #line 57
 testRunner.When("I check the \"Show All Displays\" checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 58
-testRunner.When("I uncheck the \"Show All Displays\" checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.And("I uncheck the \"Show All Displays\" checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 59
 testRunner.Then("I should not see the \"Show All Displays\" element checked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 60

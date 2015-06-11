@@ -26,10 +26,3 @@ When I tap the "Long Press" button and hold for "4" seconds
 Then I should see "2" items in "Menu" collection
 
 
-Scenario: Should be able to tap an item in a collection
-Given I tap the "App" button
-And I tap the "Fragment" button
-And I tap the "Context Menu" button
-And I tap the "Long Press" button and hold for "4" seconds
-When I tap the "1" item in the "Menu" collection
-Then I should be on the "Context Menu" screen
