@@ -244,7 +244,7 @@ namespace Joyride.Platforms
         }
         #endregion 
 
-        #region Form Actions
+        #region UI Controls
 
         public virtual Screen EnterText(string elementName, string text)
         {

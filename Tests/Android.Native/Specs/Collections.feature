@@ -85,21 +85,21 @@ And I inspect the number of items in collection "Buttons"
 When I tap up to "3" item(s) in the "Buttons" collection
 Then I should see "3" less item(s) in "Buttons" collection
 
-Scenario: Collections should contain an item with equals text
+Scenario: Collections should contain an item equals text
 Given I tap the "App" button
 And I tap the "Activity" button
 And I scroll the screen down
 When I tap the "Quick Contacts Demo" button
 Then I should be on the "Quick Contacts Demo" screen
-Then I should see an item in collection "Contacts" with text equals "Kingsley"
+And I should see an item in collection "First Names" with text equals "Kingsley"
 
-Scenario: Collections should contain an item with starts with text
+Scenario: Collections should contain an item starts with text
 Given I tap the "App" button
 And I tap the "Activity" button
 And I scroll the screen down
 When I tap the "Quick Contacts Demo" button
 Then I should be on the "Quick Contacts Demo" screen
-Then I should see an item in collection "Contacts" with text starts with "Kings"
+And I should see an item in collection "First Names" with text starts with "Kings"
 
 Scenario: Collections should contain an item with containing text
 Given I tap the "App" button
@@ -107,7 +107,7 @@ And I tap the "Activity" button
 And I scroll the screen down
 When I tap the "Quick Contacts Demo" button
 Then I should be on the "Quick Contacts Demo" screen
-Then I should see an item in collection "Contacts" with text containing "ingsl"
+And I should see an item in collection "First Names" with text containing "ingsl"
 
 Scenario: Collections should contain an item with matching text
 Given I tap the "App" button
@@ -115,4 +115,36 @@ And I tap the "Activity" button
 And I scroll the screen down
 When I tap the "Quick Contacts Demo" button
 Then I should be on the "Quick Contacts Demo" screen
-Then I should see an item in collection "Contacts" with text matching "sley$"
+And I should see an item in collection "First Names" with text matching "sley$"
+
+Scenario: Collections should not contain an item that equals text
+Given I tap the "App" button
+And I tap the "Activity" button
+And I scroll the screen down
+When I tap the "Quick Contacts Demo" button
+Then I should be on the "Quick Contacts Demo" screen
+And I should not see an item in collection "First Names" with text equals "Xingsley"
+
+Scenario: Should text within collection equals text
+Given I tap the "App" button
+And I tap the "Activity" button
+And I scroll the screen down
+When I tap the "Quick Contacts Demo" button
+Then I should be on the "Quick Contacts Demo" screen
+And I should see the label equals text "Kingsley" within the "Contacts" collection
+
+Scenario: Should text within collection containing text
+Given I tap the "App" button
+And I tap the "Activity" button
+And I scroll the screen down
+When I tap the "Quick Contacts Demo" button
+Then I should be on the "Quick Contacts Demo" screen
+And I should see the label equals text "ingsl" within the "Contacts" collection
+
+Scenario: Should text within collection starts with text
+Given I tap the "App" button
+And I tap the "Activity" button
+And I scroll the screen down
+When I tap the "Quick Contacts Demo" button
+Then I should be on the "Quick Contacts Demo" screen
+And I should see the label starts with text "ingsl" within the "Contacts" collection

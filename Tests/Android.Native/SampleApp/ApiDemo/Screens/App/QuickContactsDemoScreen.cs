@@ -9,8 +9,11 @@ namespace Tests.Android.Native.SampleApp.ApiDemo.Screens.App
     {
 
         [FindsBy(How = How.XPath, Using = "//*[@resource-id='android:id/list']//android.widget.TextView")]
-        private IList<IWebElement> Contacts;
+        private IList<IWebElement> FirstNames;
 
+        [FindsBy(How = How.XPath, Using = "//*[@resource-id='android:id/list']/android.widget.RelativeLayout")]
+        private IList<IWebElement> Contacts;
+        
         public override bool IsOnScreen(int timeOutSecs)
         {
             var xpath = @"//android.widget.TextView[@text='App/Activity/QuickContactsDemo']";

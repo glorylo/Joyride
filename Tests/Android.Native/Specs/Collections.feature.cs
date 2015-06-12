@@ -309,10 +309,10 @@ testRunner.Then("I should see \"3\" less item(s) in \"Buttons\" collection", ((s
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Collections should contain an item with equals text")]
-        public virtual void CollectionsShouldContainAnItemWithEqualsText()
+        [NUnit.Framework.DescriptionAttribute("Collections should contain an item equals text")]
+        public virtual void CollectionsShouldContainAnItemEqualsText()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Collections should contain an item with equals text", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Collections should contain an item equals text", ((string[])(null)));
 #line 88
 this.ScenarioSetup(scenarioInfo);
 #line 7
@@ -328,16 +328,16 @@ testRunner.When("I tap the \"Quick Contacts Demo\" button", ((string)(null)), ((
 #line 93
 testRunner.Then("I should be on the \"Quick Contacts Demo\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 94
-testRunner.Then("I should see an item in collection \"Contacts\" with text equals \"Kingsley\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("I should see an item in collection \"First Names\" with text equals \"Kingsley\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Collections should contain an item with starts with text")]
-        public virtual void CollectionsShouldContainAnItemWithStartsWithText()
+        [NUnit.Framework.DescriptionAttribute("Collections should contain an item starts with text")]
+        public virtual void CollectionsShouldContainAnItemStartsWithText()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Collections should contain an item with starts with text", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Collections should contain an item starts with text", ((string[])(null)));
 #line 96
 this.ScenarioSetup(scenarioInfo);
 #line 7
@@ -353,7 +353,7 @@ testRunner.When("I tap the \"Quick Contacts Demo\" button", ((string)(null)), ((
 #line 101
 testRunner.Then("I should be on the \"Quick Contacts Demo\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 102
-testRunner.Then("I should see an item in collection \"Contacts\" with text starts with \"Kings\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("I should see an item in collection \"First Names\" with text starts with \"Kings\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -378,7 +378,7 @@ testRunner.When("I tap the \"Quick Contacts Demo\" button", ((string)(null)), ((
 #line 109
 testRunner.Then("I should be on the \"Quick Contacts Demo\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 110
-testRunner.Then("I should see an item in collection \"Contacts\" with text containing \"ingsl\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("I should see an item in collection \"First Names\" with text containing \"ingsl\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -403,7 +403,107 @@ testRunner.When("I tap the \"Quick Contacts Demo\" button", ((string)(null)), ((
 #line 117
 testRunner.Then("I should be on the \"Quick Contacts Demo\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 118
-testRunner.Then("I should see an item in collection \"Contacts\" with text matching \"sley$\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("I should see an item in collection \"First Names\" with text matching \"sley$\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Collections should not contain an item that equals text")]
+        public virtual void CollectionsShouldNotContainAnItemThatEqualsText()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Collections should not contain an item that equals text", ((string[])(null)));
+#line 120
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 121
+testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 122
+testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 123
+testRunner.And("I scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 124
+testRunner.When("I tap the \"Quick Contacts Demo\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 125
+testRunner.Then("I should be on the \"Quick Contacts Demo\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 126
+testRunner.And("I should not see an item in collection \"First Names\" with text equals \"Xingsley\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Should text within collection equals text")]
+        public virtual void ShouldTextWithinCollectionEqualsText()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should text within collection equals text", ((string[])(null)));
+#line 128
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 129
+testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 130
+testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 131
+testRunner.And("I scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 132
+testRunner.When("I tap the \"Quick Contacts Demo\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 133
+testRunner.Then("I should be on the \"Quick Contacts Demo\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 134
+testRunner.And("I should see the label equals text \"Kingsley\" within the \"Contacts\" collection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Should text within collection containing text")]
+        public virtual void ShouldTextWithinCollectionContainingText()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should text within collection containing text", ((string[])(null)));
+#line 136
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 137
+testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 138
+testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 139
+testRunner.And("I scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 140
+testRunner.When("I tap the \"Quick Contacts Demo\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 141
+testRunner.Then("I should be on the \"Quick Contacts Demo\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 142
+testRunner.And("I should see the label equals text \"ingsl\" within the \"Contacts\" collection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Should text within collection starts with text")]
+        public virtual void ShouldTextWithinCollectionStartsWithText()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should text within collection starts with text", ((string[])(null)));
+#line 144
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 145
+testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 146
+testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 147
+testRunner.And("I scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 148
+testRunner.When("I tap the \"Quick Contacts Demo\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 149
+testRunner.Then("I should be on the \"Quick Contacts Demo\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 150
+testRunner.And("I should see the label starts with text \"ingsl\" within the \"Contacts\" collection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

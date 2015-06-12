@@ -31,6 +31,9 @@ namespace Joyride.Specflow.Steps
         #endregion
         #region Thens
 
+
+        #region Collections 
+
         // only xpath is supported so the single quote character is not allowed.
         [Then(@"I (should|should not) see the label (equals|starts with|containing) text ""([^""']*)"" within the ""([^""]*)"" collection")]
         public void ThenIShouldSeeLabelWithinCollection(string shouldOrShouldNot, string compare, string label, string collectionName)
@@ -42,6 +45,8 @@ namespace Joyride.Specflow.Steps
             else
                 Assert.IsFalse(hasLabel, "Expecting not to have a label that " + compare + " text: " + label + " within collection:  " + collectionName);
         }
+
+        #endregion
 
         [Then(@"I (should|should not) see a label (equals|starts with|containing|matching) text ""([^""]*)""")]
         public void ThenIShouldSeeLabel(string shouldOrShouldNot, string compare, string label)
@@ -55,6 +60,8 @@ namespace Joyride.Specflow.Steps
               Assert.IsFalse(hasLabel, "Expecting not to have a label that " + compare + " text: " + label);
         }
 
+        # region UI Controls 
+
         [Then(@"I (should|should not) see the ""([^""]*)"" (?:element|checkbox|switch) (checked|unchecked|enabled|disabled)")]
         public void ThenIShouldSeeElementEnabledOrDisabled(string shouldOrShouldNot, string elementName, string checkedOrUnchecked)
         {
@@ -66,8 +73,10 @@ namespace Joyride.Specflow.Steps
             if (shouldOrShouldNot == "should")
                 Assert.IsTrue(actualValue == value);
             else
-                Assert.IsFalse(actualValue == value);            
+                Assert.IsFalse(actualValue == value);
         }
+
+        #endregion
 
         #endregion
     }
