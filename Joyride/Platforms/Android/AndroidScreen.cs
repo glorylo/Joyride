@@ -11,7 +11,9 @@ namespace Joyride.Platforms.Android
     {
         protected static ScreenFactory ScreenFactory = new AndroidScreenFactory();
         protected static new AndroidDriver Driver = (AndroidDriver) RemoteMobileDriver.GetInstance();
-        
+
+        public abstract Screen GoBack();
+
         public virtual void HideKeyboard()
         {
             // suppress any odd appium errors
@@ -136,14 +138,18 @@ namespace Joyride.Platforms.Android
             return texts != null && texts.Count != 0;
         }
 
-        public abstract Screen GoBack();
-
         public override Screen Rotate(ScreenOrientation orientation)
         {
             base.Rotate(orientation);
             // allow time to render
             Driver.WaitFor(TimeSpan.FromMilliseconds(500));
             return this;
+        }
+
+        public virtual bool IsChecked(string elementName)
+        {
+            var value = GetElementAttribute(elementName, "checked");
+            return (value == "true");
         }
 
     }

@@ -11,7 +11,7 @@ namespace Joyride.Specflow.Steps
     public class AndroidSteps : TechTalk.SpecFlow.Steps
     {
         public static int TimeoutSecs = JoyrideConfiguration.TimeoutSecs;
-        public static int InspectTimeoutSecs = JoyrideConfiguration.QuickInspectTimeoutSecs;
+        public static int QuickInspectTimeoutSecs = JoyrideConfiguration.QuickInspectTimeoutSecs;
 
         #region Given/Whens
 
@@ -37,7 +37,7 @@ namespace Joyride.Specflow.Steps
         public void ThenIShouldSeeLabelWithinCollection(string shouldOrShouldNot, string compare, string label, string collectionName)
         {
             var hasLabel = false;
-            Context.MobileApp.Do<AndroidScreen>(s => hasLabel = s.HasLabelInCollection(collectionName, label, compare.ToCompareType(), InspectTimeoutSecs));
+            Context.MobileApp.Do<AndroidScreen>(s => hasLabel = s.HasLabelInCollection(collectionName, label, compare.ToCompareType(), QuickInspectTimeoutSecs));
             if (shouldOrShouldNot == "should")
                 Assert.IsTrue(hasLabel, "Expecting to have a label that " + compare + " text: " + label + " within collection:  " + collectionName);
             else
@@ -56,11 +56,18 @@ namespace Joyride.Specflow.Steps
               Assert.IsFalse(hasLabel, "Expecting not to have a label that " + compare + " text: " + label);
         }
 
-        [Then(@"I (should|should not) see the ""([^""]*)"" element (checked|unchecked|enabled|disabled)")]
+        [Then(@"I (should|should not) see the ""([^""]*)"" (?:element|checkbox|switch) (checked|unchecked|enabled|disabled)")]
         public void ThenIShouldSeeElementEnabledOrDisabled(string shouldOrShouldNot, string elementName, string checkedOrUnchecked)
         {
-            var value = (checkedOrUnchecked == "checked" || checkedOrUnchecked == "enabled").ToString().ToLower();
-            Then(String.Format(@"I {0} see element ""{1}"" with {2} equals ""{3}""", shouldOrShouldNot, elementName, "checked", value));
+            var value = (checkedOrUnchecked == "checked" || checkedOrUnchecked == "enabled");
+            
+            var actualValue = false;
+            Context.MobileApp.Do<AndroidScreen>( s => actualValue = s.IsChecked(elementName));
+
+            if (shouldOrShouldNot == "should")
+                Assert.IsTrue(actualValue == value);
+            else
+                Assert.IsFalse(actualValue == value);            
         }
 
         #endregion

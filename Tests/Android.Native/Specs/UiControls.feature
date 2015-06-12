@@ -27,7 +27,7 @@ And I tap the "Activity" button
 And I do a moderate scroll down
 And I tap the "Presentation" button
 When I check the "Show All Displays" checkbox
-Then I should see the "Show All Displays" element checked
+Then I should see the "Show All Displays" checkbox checked
 And I should see a label equals text "Display #0: Built-in Screen"
 
 Scenario: Should not show label when checkox is enabled 
@@ -37,6 +37,6 @@ And I do a moderate scroll down
 And I tap the "Presentation" button
 And I check the "Show All Displays" checkbox
 When I uncheck the "Show All Displays" checkbox
-Then I should not see the "Show All Displays" element checked
+Then I should not see the "Show All Displays" checkbox checked
 And I should not see a label equals text "Display #0: Built-in Screen"
 

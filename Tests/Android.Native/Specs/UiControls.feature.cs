@@ -141,7 +141,7 @@ testRunner.And("I tap the \"Presentation\" button", ((string)(null)), ((TechTalk
 #line 29
 testRunner.When("I check the \"Show All Displays\" checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 30
-testRunner.Then("I should see the \"Show All Displays\" element checked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I should see the \"Show All Displays\" checkbox checked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 31
 testRunner.And("I should see a label equals text \"Display #0: Built-in Screen\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -170,7 +170,7 @@ testRunner.And("I check the \"Show All Displays\" checkbox", ((string)(null)), (
 #line 39
 testRunner.When("I uncheck the \"Show All Displays\" checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 40
-testRunner.Then("I should not see the \"Show All Displays\" element checked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I should not see the \"Show All Displays\" checkbox checked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 41
 testRunner.And("I should not see a label equals text \"Display #0: Built-in Screen\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden

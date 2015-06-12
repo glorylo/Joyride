@@ -89,9 +89,6 @@ namespace Joyride.Specflow.Steps
             string attributeValue = null;            
             Context.MobileApp.Do<Screen>(s => attributeValue = s.GetElementAttribute(elementName, attribute));
 
-            if (attributeValue == null)
-                Assert.Fail("Unable to find attribute " + attribute + " for element: " + elementName);
-
             if (shouldOrShouldNot == "should")
               Assert.That(attributeValue.CompareWith(text, compareType.ToCompareType()), Is.True,
                   "Unexpected text compare for attribute " + attribute + " with '" + attributeValue + "' is not " + compareType + " '" + text + "'");

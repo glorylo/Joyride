@@ -89,7 +89,7 @@ namespace Joyride.Platforms
             var element = FindElement(elementName);
 
             if (element == null)
-                return null;
+                 throw new NoSuchElementException("Unable to find element:  " + elementName);                
 
             var attribValue = element.GetAttribute(attributeName);
             return (attribValue == null) ? null : attribValue.Trim();
