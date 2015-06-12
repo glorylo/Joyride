@@ -148,3 +148,27 @@ And I scroll the screen down
 When I tap the "Quick Contacts Demo" button
 Then I should be on the "Quick Contacts Demo" screen
 And I should see the label starts with text "ingsl" within the "Contacts" collection
+
+Scenario: Should see all badge and firstname properties for all contacts
+Given I tap the "App" button
+And I tap the "Activity" button
+And I scroll the screen down
+When I tap the "Quick Contacts Demo" button
+Then I should be on the "Quick Contacts Demo" screen
+And I should see all the following properties within the collection "Contacts"
+| Property Name | Mandatory |
+| Badge         | true      |
+| First Name    | true      |
+
+Scenario: Should see all contacts meeting conditions either firstname is Freddie or Kingsley
+Given I tap the "App" button
+And I tap the "Activity" button
+And I scroll the screen down
+When I tap the "Quick Contacts Demo" button
+Then I should be on the "Quick Contacts Demo" screen
+And I should see all the following properties within the collection "Contacts" meeting the conditions
+| Property Name | Mandatory | Condition                                           |
+| Badge         | true      |                                                     |
+| First Name    | true      | FirstName == "Freddie" \|\| FirstName == "Kingsley" |
+
+

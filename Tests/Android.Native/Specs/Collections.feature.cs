@@ -507,6 +507,82 @@ testRunner.And("I should see the label starts with text \"ingsl\" within the \"C
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Should see all badge and firstname properties for all contacts")]
+        public virtual void ShouldSeeAllBadgeAndFirstnamePropertiesForAllContacts()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should see all badge and firstname properties for all contacts", ((string[])(null)));
+#line 152
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 153
+testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 154
+testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 155
+testRunner.And("I scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 156
+testRunner.When("I tap the \"Quick Contacts Demo\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 157
+testRunner.Then("I should be on the \"Quick Contacts Demo\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Property Name",
+                        "Mandatory"});
+            table1.AddRow(new string[] {
+                        "Badge",
+                        "true"});
+            table1.AddRow(new string[] {
+                        "First Name",
+                        "true"});
+#line 158
+testRunner.And("I should see all the following properties within the collection \"Contacts\"", ((string)(null)), table1, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Should see all contacts meeting conditions either firstname is Freddie or Kingsle" +
+            "y")]
+        public virtual void ShouldSeeAllContactsMeetingConditionsEitherFirstnameIsFreddieOrKingsley()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should see all contacts meeting conditions either firstname is Freddie or Kingsle" +
+                    "y", ((string[])(null)));
+#line 163
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 164
+testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 165
+testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 166
+testRunner.And("I scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 167
+testRunner.When("I tap the \"Quick Contacts Demo\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 168
+testRunner.Then("I should be on the \"Quick Contacts Demo\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Property Name",
+                        "Mandatory",
+                        "Condition"});
+            table2.AddRow(new string[] {
+                        "Badge",
+                        "true",
+                        ""});
+            table2.AddRow(new string[] {
+                        "First Name",
+                        "true",
+                        "FirstName == \"Freddie\" || FirstName == \"Kingsley\""});
+#line 169
+testRunner.And("I should see all the following properties within the collection \"Contacts\" meetin" +
+                    "g the conditions", ((string)(null)), table2, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

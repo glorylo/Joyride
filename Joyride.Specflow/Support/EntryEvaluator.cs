@@ -11,7 +11,6 @@ namespace Joyride.Specflow.Support
 
         public static bool MeetsCondition(PropertyCondition propCondition, IDictionary<string, object> entry)
         {
-
             var propertyName = propCondition.PropertyName.Dehumanize();
             var condition = propCondition.Condition;
             var tryParse = PredicateParser<dynamic>.TryParse(condition);
