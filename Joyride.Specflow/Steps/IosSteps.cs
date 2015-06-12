@@ -10,6 +10,7 @@ namespace Joyride.Specflow.Steps
     public class IosSteps : TechTalk.SpecFlow.Steps
     {
         public static int TimeoutSecs = JoyrideConfiguration.TimeoutSecs;
+        public static int InspectTimeoutSecs = JoyrideConfiguration.QuickInspectTimeoutSecs;
 
         #region Given/Whens
 
@@ -37,7 +38,7 @@ namespace Joyride.Specflow.Steps
         public void ThenIShouldSeeLabelWithinCollection(string shouldOrShouldNot, string compare, string label, string collectionName)
         {
             var hasLabel = false;
-            Context.MobileApp.Do<IosScreen>(s => hasLabel = s.HasLabelInCollection(collectionName, label, compare.ToCompareType()));
+            Context.MobileApp.Do<IosScreen>(s => hasLabel = s.HasLabelInCollection(collectionName, label, compare.ToCompareType(), InspectTimeoutSecs));
             if (shouldOrShouldNot == "should")
                 Assert.IsTrue(hasLabel, "Expecting to have a label that " + compare + " text: " + label + " within collection:  " + collectionName);
             else

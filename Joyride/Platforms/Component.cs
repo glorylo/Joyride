@@ -188,7 +188,7 @@ namespace Joyride.Platforms
             return attribute.Using;
         }
         
-        internal protected Tuple<IWebElement, int, string, string> FindElementWithinCollection(string collectionName, string relativeXpath, int timeoutSecs = 5)
+        internal protected Tuple<IWebElement, int, string, string> FindElementWithinCollection(string collectionName, string relativeXpath, int timeoutSecs)
         {           
             var size = SizeOf(collectionName);
             // xpath is 1-based index
@@ -201,7 +201,7 @@ namespace Joyride.Platforms
             return null;
         }
 
-        internal protected Tuple<IWebElement, int, string, string> FindElementWithinCollection(string collectionName, int index, string relativeXpath, int timeoutSecs = 5)
+        internal protected Tuple<IWebElement, int, string, string> FindElementWithinCollection(string collectionName, int index, string relativeXpath, int timeoutSecs)
         {
             var attribute = GetElementFindByAttribute(collectionName);
 

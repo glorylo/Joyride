@@ -8,7 +8,7 @@ namespace Joyride.Specflow.Steps
     [Binding]
     public class GestureSteps : TechTalk.SpecFlow.Steps
     {
-        public static int ScrollUntilTimeoutSecs = JoyrideConfiguration.ScrollUntilTimeoutSecs;
+        public static int ScrollUntilTimeoutSecs = JoyrideConfiguration.QuickInspectTimeoutSecs;
         public static int MaxRetries = JoyrideConfiguration.MaxRetries;
 
         [Given(@"I tap the ""([^""]*)"" (?:button|field|label|element|link)")]
