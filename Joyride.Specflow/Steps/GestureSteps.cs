@@ -67,20 +67,16 @@ namespace Joyride.Specflow.Steps
             Context.MobileApp.Do<IGesture>(i => i.Swipe(directionToSwipe));
         }
 
-        //[Given(@"I scroll the screen (left|right|up|down) until I see element ""([^""]*)""")]
         [Given(@"I (?:(slowly|moderately) )?scroll the screen (left|right|up|down) until I see element ""([^""]*)""")]
         [When(@"I (?:(slowly|moderately) )?scroll the screen (left|right|up|down) until I see element ""([^""]*)""")]
         public void GivenIScrollUntil(string speed, string direction, string elementName)
         {
             var directionToScroll = (Direction) Enum.Parse(typeof(Direction), direction, true);
-            var scale = 1.0;
             var durationMillSecs = 500;
             if (speed != String.Empty)
-            {
-                scale = (speed == "slowly") ? 0.75 : 0.9;
-                durationMillSecs = (speed == "slowly") ?  1250: 750;
-            }
-            Context.MobileApp.Do<IGesture>(i => i.ScrollUntil(elementName, directionToScroll, MaxRetries, ScrollUntilTimeoutSecs, scale, durationMillSecs));
+                durationMillSecs = (speed == "slowly") ?  2500 : 750;
+
+            Context.MobileApp.Do<IGesture>(i => i.ScrollUntil(elementName, directionToScroll, MaxRetries, ScrollUntilTimeoutSecs, 1.0, durationMillSecs));
         }
 
         [Given(@"I pinch the screen to zoom (out|in)")]
