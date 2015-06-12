@@ -139,7 +139,7 @@ And I tap the "Activity" button
 And I scroll the screen down
 When I tap the "Quick Contacts Demo" button
 Then I should be on the "Quick Contacts Demo" screen
-And I should see the label equals text "ingsl" within the "Contacts" collection
+And I should see the label containing text "ingsl" within the "Contacts" collection
 
 Scenario: Should text within collection starts with text
 Given I tap the "App" button
@@ -147,7 +147,7 @@ And I tap the "Activity" button
 And I scroll the screen down
 When I tap the "Quick Contacts Demo" button
 Then I should be on the "Quick Contacts Demo" screen
-And I should see the label starts with text "ingsl" within the "Contacts" collection
+And I should see the label starts with text "Kingsl" within the "Contacts" collection
 
 Scenario: Should see all badge and firstname properties for all contacts
 Given I tap the "App" button

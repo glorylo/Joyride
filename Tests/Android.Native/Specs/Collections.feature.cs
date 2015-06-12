@@ -478,7 +478,7 @@ testRunner.When("I tap the \"Quick Contacts Demo\" button", ((string)(null)), ((
 #line 141
 testRunner.Then("I should be on the \"Quick Contacts Demo\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 142
-testRunner.And("I should see the label equals text \"ingsl\" within the \"Contacts\" collection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the label containing text \"ingsl\" within the \"Contacts\" collection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -503,7 +503,8 @@ testRunner.When("I tap the \"Quick Contacts Demo\" button", ((string)(null)), ((
 #line 149
 testRunner.Then("I should be on the \"Quick Contacts Demo\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 150
-testRunner.And("I should see the label starts with text \"ingsl\" within the \"Contacts\" collection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the label starts with text \"Kingsl\" within the \"Contacts\" collection" +
+                    "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
