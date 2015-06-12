@@ -32,12 +32,11 @@ namespace Joyride.Extensions
 
         public static void SetImplicitWait(this IWebDriver driver, TimeSpan span)
         {
-            try
-            {
+            try {
                 driver.Manage().Timeouts().ImplicitlyWait(span);
             }
-            catch // suppress errors for now
-            {
+            // suppress errors for now 
+            catch {
                 Trace.WriteLine("Unable to set timeout to:  " + span);
             } 
         }
@@ -89,6 +88,15 @@ namespace Joyride.Extensions
         public static IList<IWebElement> FindElements(this RemoteWebDriver driver, By by, int timeoutSecs)
         {
             return FindElementsWithTimeout(driver, () => driver.FindElementsWithMethod(new Func<By, IList<IWebElement>>(driver.FindElements), by), timeoutSecs);
+        }
+
+        public static IWebElement FindElementWithImplicitWait(this RemoteWebDriver driver, By by)
+        {
+            return driver.FindElementWithMethod(new Func<By, IWebElement>(driver.FindElement), by);
+        }
+        public static IList<IWebElement> FindElementsWithImplicitWait(this RemoteWebDriver driver, By by)
+        {
+            return driver.FindElementsWithMethod(new Func<By, IWebElement>(driver.FindElement), by);
         }
 
         public static IWebElement FindElementWithMethod(this RemoteWebDriver driver, Delegate findMethod,

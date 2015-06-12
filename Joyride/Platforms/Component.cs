@@ -75,12 +75,21 @@ namespace Joyride.Platforms
             return (SizeOf(collectionName, timeoutSecs) == 0);
         }
 
+        public bool IsSelected(string elementName)
+        {
+            var element = FindElement(elementName);
+            if (element == null)
+                throw new NoSuchElementException("Unable to find element: " + elementName);
+
+            return element.Selected;
+        }
+
         public string GetElementAttribute(string elementName, string attributeName)
         {
             var element = FindElement(elementName);
 
             if (element == null)
-                return null;
+                 throw new NoSuchElementException("Unable to find element:  " + elementName);                
 
             var attribValue = element.GetAttribute(attributeName);
             return (attribValue == null) ? null : attribValue.Trim();
@@ -101,7 +110,7 @@ namespace Joyride.Platforms
 
         internal protected IWebElement GetElementInCollection(string collectionName, int index, bool last = false)
         {
-            var collection = FindElements(collectionName, DefaultWaitSeconds);
+            var collection = FindElements(collectionName);
 
             if (collection == null)
                 throw new NoSuchElementException("Cannot find collection:  " + collectionName);
@@ -121,7 +130,7 @@ namespace Joyride.Platforms
 
         internal protected IWebElement GetElementInCollection(string collectionName, string text, CompareType compareType)
         {
-            var collection = FindElements(collectionName, DefaultWaitSeconds);
+            var collection = FindElements(collectionName);
             if (collection == null)
                 return null;
 
@@ -149,7 +158,7 @@ namespace Joyride.Platforms
             return element.GetAttribute(attributeName).Trim();
         }
 
-        public bool ElementIsVisible(string elementName, int timeoutSecs=DefaultWaitSeconds)
+        public bool ElementIsVisible(string elementName, int timeoutSecs)
         {
             var element = FindElement(elementName, timeoutSecs);
 
@@ -159,7 +168,7 @@ namespace Joyride.Platforms
             return element.Displayed;
         }
 
-        public bool ElementIsPresent(string elementName, int timeoutSecs = DefaultWaitSeconds)
+        public bool ElementIsPresent(string elementName, int timeoutSecs)
         {
             var element = FindElement(elementName, timeoutSecs);
             return (element != null);
@@ -179,7 +188,7 @@ namespace Joyride.Platforms
             return attribute.Using;
         }
         
-        internal protected Tuple<IWebElement, int, string, string> FindElementWithinCollection(string collectionName, string relativeXpath, int timeoutSecs = 5)
+        internal protected Tuple<IWebElement, int, string, string> FindElementWithinCollection(string collectionName, string relativeXpath, int timeoutSecs)
         {           
             var size = SizeOf(collectionName);
             // xpath is 1-based index
@@ -192,7 +201,7 @@ namespace Joyride.Platforms
             return null;
         }
 
-        internal protected Tuple<IWebElement, int, string, string> FindElementWithinCollection(string collectionName, int index, string relativeXpath, int timeoutSecs = 5)
+        internal protected Tuple<IWebElement, int, string, string> FindElementWithinCollection(string collectionName, int index, string relativeXpath, int timeoutSecs)
         {
             var attribute = GetElementFindByAttribute(collectionName);
 

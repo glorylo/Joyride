@@ -1,22 +1,26 @@
 ﻿using System;
 using Joyride.Platforms;
+using Joyride.Specflow.Configuration;
 using TechTalk.SpecFlow;
 
 namespace Joyride.Specflow.Steps
 {
     [Binding]
-    public class GestureSteps
+    public class GestureSteps : TechTalk.SpecFlow.Steps
     {
-        [Given(@"I tap the ""([^""]*)"" (button|field|label|element)")]
-        [When(@"I tap the ""([^""]*)"" (button|field|label|element)")]
-        public void WhenITapTheButton(string elementName, string elementType)
+        public static int ScrollUntilTimeoutSecs = JoyrideConfiguration.QuickInspectTimeoutSecs;
+        public static int MaxRetries = JoyrideConfiguration.MaxRetries;
+
+        [Given(@"I tap the ""([^""]*)"" (?:button|field|label|element|link)")]
+        [When(@"I tap the ""([^""]*)"" (?:button|field|label|element|link)")]
+        public void WhenITapTheButton(string elementName)
         {
             Context.MobileApp.Do<IGesture>(i => i.Tap(elementName));
         }
 
-        [Given(@"I double tap the ""([^""]*)"" (button|field|label|element)")]
-        [When(@"I double tap the ""([^""]*)"" (button|field|label|element)")]
-        public void WhenIDoubleTap(string elementName, string elementType)
+        [Given(@"I double tap the ""([^""]*)"" (?:button|field|label|element|link)")]
+        [When(@"I double tap the ""([^""]*)"" (?:button|field|label|element|link)")]
+        public void WhenIDoubleTap(string elementName)
         {
             Context.MobileApp.Do<IGesture>(i => i.DoubleTap(elementName));
         }
@@ -63,12 +67,16 @@ namespace Joyride.Specflow.Steps
             Context.MobileApp.Do<IGesture>(i => i.Swipe(directionToSwipe));
         }
 
-        [Given(@"I scroll the screen (left|right|up|down) until I see element ""([^""]*)""")]
-        [When(@"I scroll the screen (left|right|up|down) until I see element ""([^""]*)""")]
-        public void GivenIScrollUntil(string direction, string elementName)
+        [Given(@"I (?:(slowly|moderately) )?scroll the screen (left|right|up|down) until I see element ""([^""]*)""")]
+        [When(@"I (?:(slowly|moderately) )?scroll the screen (left|right|up|down) until I see element ""([^""]*)""")]
+        public void GivenIScrollUntil(string speed, string direction, string elementName)
         {
             var directionToScroll = (Direction) Enum.Parse(typeof(Direction), direction, true);
-            Context.MobileApp.Do<IGesture>(i => i.ScrollUntil(elementName, directionToScroll));
+            var durationMillSecs = 500;
+            if (speed != String.Empty)
+                durationMillSecs = (speed == "slowly") ?  3000 : 750;
+
+            Context.MobileApp.Do<IGesture>(i => i.ScrollUntil(elementName, directionToScroll, MaxRetries, ScrollUntilTimeoutSecs, 1.0, durationMillSecs));
         }
 
         [Given(@"I pinch the screen to zoom (out|in)")]

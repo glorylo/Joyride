@@ -3,7 +3,7 @@
 namespace Joyride.Specflow.Steps
 {
     [Binding]
-    public class MobileAppSteps
+    public class MobileAppSteps : TechTalk.SpecFlow.Steps
     {
         #region Given/Whens
         [Given(@"I launch the ""([^""]*)"" mobile application")]

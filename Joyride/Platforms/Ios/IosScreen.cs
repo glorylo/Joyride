@@ -35,7 +35,7 @@ namespace Joyride.Platforms.Ios
         }
 
         //TODO: needs to be tested with ios step in joyride.specflow
-        public virtual bool HasLabelInCollection(string collectionName, string label, CompareType compareType)
+        public virtual bool HasLabelInCollection(string collectionName, string label, CompareType compareType, int timeoutSecs)
         {
             var xpath = "//*";
             switch (compareType)
@@ -55,7 +55,7 @@ namespace Joyride.Platforms.Ios
                 default:
                     throw new NotImplementedException("Other text compares are not implemented");
             }
-            var tuple = FindElementWithinCollection(collectionName, xpath);
+            var tuple = FindElementWithinCollection(collectionName, xpath, timeoutSecs);
             return (tuple != null);
         }
 

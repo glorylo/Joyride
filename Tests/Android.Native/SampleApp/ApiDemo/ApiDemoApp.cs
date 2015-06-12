@@ -1,7 +1,7 @@
-﻿using Joyride.Android.Tests.SampleApp.ApiDemo.Screens;
-using Joyride.Platforms.Android;
+﻿using Joyride.Platforms.Android;
+using Tests.Android.Native.SampleApp.ApiDemo.Screens;
 
-namespace Joyride.Android.Tests.SampleApp.ApiDemo
+namespace Tests.Android.Native.SampleApp.ApiDemo
 {
     public class ApiDemoApp : AndroidMobileApplication
     {

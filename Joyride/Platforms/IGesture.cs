@@ -12,6 +12,6 @@ namespace Joyride.Platforms
         Screen Scroll(string elementName, Direction direction, double scale=1.0, long durationMilliSecs = 500);
         Screen Swipe(Direction direction, double scale=1.0, long durationMilliSecs = 500);
         Screen Swipe(string elementName, Direction direction, double scale=1.0, long durationMilliSecs = 500);
-        Screen ScrollUntil(string elementName, Direction direction, double scale=1.0, long durationMilliSecs = 500, int maxRetries = 60);
+        Screen ScrollUntil(string elementName, Direction direction, int maxRetries, int timeoutSecs, double scale = 1.0, long durationMilliSecs = 500);
     }
 }

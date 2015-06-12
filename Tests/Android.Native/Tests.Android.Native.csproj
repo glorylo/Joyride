@@ -6,8 +6,8 @@
     <ProjectGuid>{4C48828E-2D9F-4695-83F5-8B67F0891971}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Joyride.Android.Tests</RootNamespace>
-    <AssemblyName>Joyride.Android.Tests</AssemblyName>
+    <RootNamespace>Tests.Android.Native</RootNamespace>
+    <AssemblyName>Tests.Android.Native</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -71,38 +71,88 @@
   <ItemGroup>
     <Compile Include="SampleApp\ApiDemo\ApiDemoApp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SampleApp\ApiDemo\ModalDialogs\ApiDemoModalDialog.cs" />
+    <Compile Include="SampleApp\ApiDemo\ModalDialogs\LongMessageModalDialog.cs" />
+    <Compile Include="SampleApp\ApiDemo\ModalDialogs\LoremIpsumModalDialog.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\App\ActivityScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\App\AlertDialogsScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\Animation\AnimationScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\ApiDemoScreen.cs" />
-    <Compile Include="SampleApp\ApiDemo\Screens\AppScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\App\AppScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\App\ContextMenuScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\App\CustomTitleScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\Animation\DefaultLayoutAnimationsScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\App\FragmentScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\App\QuickContactsDemoScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\MainScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\NullApiDemoScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\App\PresentationScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\Views\LayoutsScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\Views\LongScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\Views\ScrollViewScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\Views\ViewsScreen.cs" />
+    <Compile Include="Specs\Collections.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Collections.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Specs\Gestures.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Gestures.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Specs\ModalDialog.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModalDialog.feature</DependentUpon>
+    </Compile>
     <Compile Include="Specs\Screen.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Screen.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Specs\UiControls.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UiControls.feature</DependentUpon>
     </Compile>
     <Compile Include="Steps\SpecflowHooks.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Specs\Collections.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Collections.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Specs\Gestures.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Gestures.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Specs\UiControls.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>UiControls.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Specs\ModalDialog.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ModalDialog.feature.cs</LastGenOutput>
+    </None>
     <None Include="Specs\Screen.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Screen.feature.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Joyride.Specflow\Joyride.Specflow.csproj">
+    <ProjectReference Include="..\..\Joyride.Specflow\Joyride.Specflow.csproj">
       <Project>{514cb12a-9ad2-4ba9-9e29-d2f2a67781e0}</Project>
       <Name>Joyride.Specflow</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Joyride\Joyride.csproj">
+    <ProjectReference Include="..\..\Joyride\Joyride.csproj">
       <Project>{6d170d85-095c-4ba3-87ab-0410210d3113}</Project>
       <Name>Joyride</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SampleApp\ApiDemo\ModalDialogs\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

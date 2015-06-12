@@ -1,6 +1,6 @@
 ﻿using Joyride.Platforms;
 
-namespace Joyride.Android.Tests.SampleApp.ApiDemo.Screens
+namespace Tests.Android.Native.SampleApp.ApiDemo.Screens
 {
     public class NullApiDemoScreen : ApiDemoScreen
     {

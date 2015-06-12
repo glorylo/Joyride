@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Joyride.Extensions;
 using Joyride.Platforms;
 using Joyride.Specflow.Configuration;
@@ -10,7 +9,7 @@ using TechTalk.SpecFlow;
 namespace Joyride.Specflow.Steps
 {
     [Binding]
-    public class ScreenSteps
+    public class ScreenSteps : TechTalk.SpecFlow.Steps
     {
         public static int TimeoutSecs = JoyrideConfiguration.TimeoutSecs;
         public static int NonExistenceTimeoutSecs = JoyrideConfiguration.NonexistenceTimeoutSecs;
@@ -24,26 +23,6 @@ namespace Joyride.Specflow.Steps
             var mode = orientation == "landscape" ? ScreenOrientation.Landscape : ScreenOrientation.Portrait;
             Context.MobileApp.Do<Screen>(s => s.Rotate(mode));
         }
-
-
-        [Given(@"I enter ""([^""]*)"" in the ""([^""]*)"" field")]
-        [When(@"I enter ""([^""]*)"" in the ""([^""]*)"" field")]
-        public void GivenICanEnterInTheField(string fieldValue, string fieldName)
-        {
-            Context.MobileApp.Do<Screen>(s => s.EnterText(fieldName, fieldValue));
-        }
-
-                
-        [Given(@"I (uncheck|check) the ""([^""]*)"" checkbox")]
-        [When(@"I (uncheck|check) the ""([^""]*)"" checkbox")]
-        public void WhenICheckSomeCheckbox(string checkOrUnchecked, string checkboxName)
-        {
-            if (checkOrUnchecked == "check")
-                Context.MobileApp.Do<Screen>(s => s.SetCheckbox(checkboxName));
-            else
-                Context.MobileApp.Do<Screen>(s => s.SetCheckbox(checkboxName, false));
-        }
-
 
         #endregion
 
@@ -69,24 +48,23 @@ namespace Joyride.Specflow.Steps
             var elementPresent = false;
             if (shouldOrShouldNot == "should")
             {
-                Context.MobileApp.Do<Screen>(s => elementPresent = s.ElementIsPresent(elementName));
+                Context.MobileApp.Do<Screen>(s => elementPresent = s.ElementIsPresent(elementName, TimeoutSecs));
                 Assert.IsTrue(elementPresent);
             }
             else
             {
                 Context.MobileApp.Do<Screen>(s => elementPresent = s.ElementIsPresent(elementName, NonExistenceTimeoutSecs));
                 Assert.IsFalse(elementPresent); 
-            }
-               
+            }               
         }
 
-        [Then(@"I (should|should not) see the (field|element|label|button) ""([^""]*)""")]
-        public void ThenIShouldSeeElement(string shouldOrShouldNot, string elementType, string elementName)
+        [Then(@"I (should|should not) see the (?:button|field|label|element|link) ""([^""]*)""")]
+        public void ThenIShouldSeeElement(string shouldOrShouldNot, string elementName)
         {
             var elementVisible = false;
             if (shouldOrShouldNot == "should")
             {
-                Context.MobileApp.Do<Screen>(s => elementVisible = s.ElementIsVisible(elementName));
+                Context.MobileApp.Do<Screen>(s => elementVisible = s.ElementIsVisible(elementName, TimeoutSecs));
                 Assert.IsTrue(elementVisible);
             }
             else
@@ -105,17 +83,18 @@ namespace Joyride.Specflow.Steps
                 "Incorrectly on screen: " + Context.MobileApp.Screen.Name);
         }
         
-        [Then(@"I should see element ""([^""]*)"" with (.*) (equals|starts with|containing|matching) ""([^""]*)""")]
-        public void ThenIShouldSeeElementValueCompareWithText(string elementName, string attribute, string compareType, string text)
+        [Then(@"I (should|should not) see element ""([^""]*)"" with (.*) (equals|starts with|containing|matching) ""([^""]*)""")]
+        public void ThenIShouldSeeElementValueCompareWithText(string shouldOrShouldNot, string elementName, string attribute, string compareType, string text)
         {
             string attributeValue = null;            
             Context.MobileApp.Do<Screen>(s => attributeValue = s.GetElementAttribute(elementName, attribute));
 
-            if (attributeValue == null)
-                Assert.Fail("Unable to find attribute " + attribute + " for element: " + elementName);
-
-            Assert.That(attributeValue.CompareWith(text, compareType.ToCompareType()), Is.True,
-                "Unexpected text compare for attribute " + attribute + " with '" + attributeValue + "' is not " + compareType + " '" + text + "'");
+            if (shouldOrShouldNot == "should")
+              Assert.That(attributeValue.CompareWith(text, compareType.ToCompareType()), Is.True,
+                  "Unexpected text compare for attribute " + attribute + " with '" + attributeValue + "' is not " + compareType + " '" + text + "'");
+            else
+                Assert.That(attributeValue.CompareWith(text, compareType.ToCompareType()), Is.False,
+                    "Unexpected text compare for attribute " + attribute + " with '" + attributeValue + "' is " + compareType + " '" + text + "'");            
         }
 
 /*      

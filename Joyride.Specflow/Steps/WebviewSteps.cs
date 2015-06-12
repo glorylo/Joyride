@@ -1,22 +1,22 @@
-﻿using Joyride.Extensions;
+﻿using System;
+using Joyride.Extensions;
 using Joyride.Platforms;
-using Joyride.Specflow.Support;
 using NUnit.Framework;
 using TechTalk.SpecFlow;
 
 namespace Joyride.Specflow.Steps
 {
     [Binding]
-    public class WebviewSteps
+    public class WebviewSteps : TechTalk.SpecFlow.Steps
     {
         #region Given/Whens
 
-        [Given(@"I select (""(.*?)""|{(.*?)}) for ""([^""]*)""")]
-        [When(@"I select (""(.*?)""|{(.*?)}) for ""([^""]*)""")]
-        public void WhenISelectOptionForDropdown(string wholeValue, string value, string valueWithCurly, string dropDownList)
+        [Given(@"I select (?:""(.*?)""|{(.*?)}) for ""([^""]*)""")]
+        [When(@"I select (?:""(.*?)""|{(.*?)}) for ""([^""]*)""")]
+        public void WhenISelectOptionForDropdown(string quotedValue, string curlyValue, string dropDownList)
         {
-            var extractedValue = StepsHelper.ExtractValue(value, valueWithCurly);
-            Context.MobileApp.Do<Screen>(s => s.SelectOption(dropDownList, extractedValue));
+            var value = (quotedValue != String.Empty) ? quotedValue : curlyValue;
+            Context.MobileApp.Do<Screen>(s => s.SelectOption(dropDownList, value));
         }
 
         #endregion

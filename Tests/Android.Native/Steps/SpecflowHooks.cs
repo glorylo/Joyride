@@ -1,12 +1,12 @@
 ﻿using System.IO;
-using Joyride.Android.Tests.SampleApp.ApiDemo;
+using Joyride;
 using Joyride.Specflow;
 using Joyride.Specflow.Configuration;
 using Joyride.Specflow.Support;
 using TechTalk.SpecFlow;
-using Joyride.Android.Tests.SampleApp;
+using Tests.Android.Native.SampleApp.ApiDemo;
 
-namespace Joyride.Android.Tests.Steps
+namespace Tests.Android.Native.Steps
 {
     [Binding]
     public class SpecFlowHooks
