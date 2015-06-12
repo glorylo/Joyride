@@ -102,7 +102,7 @@
     <Compile Include="Steps\WebviewSteps.cs" />
     <Compile Include="Support\PropertyCondition.cs" />
     <Compile Include="Support\ScreenshotCapturer.cs" />
-    <Compile Include="Support\StepsHelper.cs" />
+    <Compile Include="Support\EntryEvaluator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Joyride\Joyride.csproj">

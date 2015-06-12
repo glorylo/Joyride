@@ -39,7 +39,7 @@ namespace Joyride.Specflow.Steps
         public void GivenITapTheItemByIndexInCollection(int ordinal, string collectionName)
         {
             if (ordinal < 1)
-                throw new IndexOutOfRangeException("Expecting max count to be greater than 1. Received: " + ordinal);
+                throw new IndexOutOfRangeException("Expecting ordinal to be greater than 0. Received: " + ordinal);
 
             Context.MobileApp.Do<Screen>(s => s.TapInCollection(collectionName, ordinal));
             
@@ -64,9 +64,10 @@ namespace Joyride.Specflow.Steps
         [When(@"I inspect the number of items in collection ""([^""]*)""")]
         public void GivenIInspectNumberOfItemsInCollection(string collectionName)
         {
-            var collectionCount = Context.MobileApp.Screen.SizeOf(collectionName);
+            var count = 0;
+            Context.MobileApp.Do<Screen>(s => count = s.SizeOf(collectionName));
             var collectionKey = collectionName;
-            Context.SetValue(collectionKey, collectionCount);
+            Context.SetValue(collectionKey, count);
         }
 
 
@@ -227,7 +228,7 @@ namespace Joyride.Specflow.Steps
                             if (string.IsNullOrEmpty(c.Condition))
                                 continue;
 
-                            if (!StepsHelper.EvaluateCondition(c, e))
+                            if (!EntryEvaluator.MeetsCondition(c, e))
                                 conditionsMeet = false;
 
                         }
