@@ -18,6 +18,8 @@ namespace Joyride.Specflow.Configuration
 
         public static int TimeoutSecs = 30;
         public static int NonexistenceTimeoutSecs = 15;
+        public static int MaxRetries = 30;
+        public static int ScrollUntilTimeoutSecs = 2;
 
         public static string ScreenshotPath { get; private set; }
         public static string LogPath { get; private set; }

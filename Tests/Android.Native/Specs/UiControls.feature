@@ -21,13 +21,6 @@ And I enter "New Left Title" in the "Left" field
 When I tap the "Change Left" button
 Then I should see the label "Left Title" with text equals "New Left Title"
 
-Scenario: Navigate to Presentation Screen
-Given I tap the "App" button
-And I tap the "Activity" button
-And I do a moderate scroll down
-When I tap the "Presentation" button
-Then I should be on the "Presentation" screen
-
 Scenario: Should show label when checkox is enabled 
 Given I tap the "App" button
 And I tap the "Activity" button

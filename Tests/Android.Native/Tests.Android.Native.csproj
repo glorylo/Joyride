@@ -86,6 +86,9 @@
     <Compile Include="SampleApp\ApiDemo\Screens\MainScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\NullApiDemoScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\App\PresentationScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\Views\LayoutsScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\Views\LongScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\Views\ScrollViewScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\Views\ViewsScreen.cs" />
     <Compile Include="Specs\Collections.feature.cs">
       <AutoGen>True</AutoGen>

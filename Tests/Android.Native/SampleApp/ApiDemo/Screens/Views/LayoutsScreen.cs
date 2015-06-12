@@ -4,13 +4,11 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace Tests.Android.Native.SampleApp.ApiDemo.Screens.Views
 {
-    public class ViewsScreen : ApiDemoScreen
+    public class LayoutsScreen : ApiDemoScreen
     {
-        [FindsBy(How = How.XPath, Using = "//*[@resource-id='android:id/text1' and @text='Animation']")]
-        private IWebElement Animation;
+        [FindsBy(How = How.XPath, Using = "//*[@resource-id='android:id/text1' and @text='ScrollView']")]
+        private IWebElement ScrollView;
 
-        [FindsBy(How = How.XPath, Using = "//*[@resource-id='android:id/text1' and @text='Layouts']")]
-        private IWebElement Layouts;
 
         public override Screen Tap(string elementName, bool precise = false)
         {
@@ -18,8 +16,8 @@ namespace Tests.Android.Native.SampleApp.ApiDemo.Screens.Views
 
             switch (elementName)
             {
-                case "Layouts":
-                    return ScreenFactory.CreateScreen<LayoutsScreen>();
+                case "Scroll View":
+                    return ScreenFactory.CreateScreen<ScrollViewScreen>();
 
                 default:
                     return screen;
@@ -28,12 +26,12 @@ namespace Tests.Android.Native.SampleApp.ApiDemo.Screens.Views
 
         public override bool IsOnScreen(int timeOutSecs)
         {
-            return ElementExists("Animation", timeOutSecs);
+            return ElementExists("Scroll View", timeOutSecs);
         }
 
         public override string Name
         {
-            get { return "Views"; }
+            get { return "Layouts"; }
         }
     }
 }

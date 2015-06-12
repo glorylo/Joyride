@@ -66,14 +66,11 @@ And I tap the "Fragment" button
 When I tap the "Context Menu" button
 Then I should be on the "Context Menu" screen
 
-Scenario: Navigate to Views screen
-And I scroll the screen down
-And I tap the "Views" button
-Then I should be on the "Views" screen
-
-Scenario: Navigate to Layouts screen
-And I scroll the screen down
+Scenario:  Navigate to the Long Screen
+Given I scroll the screen down
 And I tap the "Views" button
 And I scroll the screen down
-When I tap the "Layouts" button
-Then I should be on the "button" screen
+And I tap the "Layouts" button
+And I tap the "Scroll View" button
+When I tap the "Long" button
+Then I should be on the "Long" screen

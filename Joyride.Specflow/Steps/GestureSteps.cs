@@ -1,5 +1,6 @@
 ﻿using System;
 using Joyride.Platforms;
+using Joyride.Specflow.Configuration;
 using TechTalk.SpecFlow;
 
 namespace Joyride.Specflow.Steps
@@ -7,6 +8,9 @@ namespace Joyride.Specflow.Steps
     [Binding]
     public class GestureSteps : TechTalk.SpecFlow.Steps
     {
+        public static int ScrollUntilTimeoutSecs = JoyrideConfiguration.ScrollUntilTimeoutSecs;
+        public static int MaxRetries = JoyrideConfiguration.MaxRetries;
+
         [Given(@"I tap the ""([^""]*)"" (?:button|field|label|element|link)")]
         [When(@"I tap the ""([^""]*)"" (?:button|field|label|element|link)")]
         public void WhenITapTheButton(string elementName)
@@ -68,7 +72,7 @@ namespace Joyride.Specflow.Steps
         public void GivenIScrollUntil(string direction, string elementName)
         {
             var directionToScroll = (Direction) Enum.Parse(typeof(Direction), direction, true);
-            Context.MobileApp.Do<IGesture>(i => i.ScrollUntil(elementName, directionToScroll));
+            Context.MobileApp.Do<IGesture>(i => i.ScrollUntil(elementName, directionToScroll, MaxRetries, ScrollUntilTimeoutSecs));
         }
 
         [Given(@"I pinch the screen to zoom (out|in)")]

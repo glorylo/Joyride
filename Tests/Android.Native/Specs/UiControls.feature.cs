@@ -122,10 +122,10 @@ testRunner.Then("I should see the label \"Left Title\" with text equals \"New Le
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Navigate to Presentation Screen")]
-        public virtual void NavigateToPresentationScreen()
+        [NUnit.Framework.DescriptionAttribute("Should show label when checkox is enabled")]
+        public virtual void ShouldShowLabelWhenCheckoxIsEnabled()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Navigate to Presentation Screen", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should show label when checkox is enabled", ((string[])(null)));
 #line 24
 this.ScenarioSetup(scenarioInfo);
 #line 7
@@ -137,35 +137,12 @@ testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.Spe
 #line 27
 testRunner.And("I do a moderate scroll down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 28
-testRunner.When("I tap the \"Presentation\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 29
-testRunner.Then("I should be on the \"Presentation\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Should show label when checkox is enabled")]
-        public virtual void ShouldShowLabelWhenCheckoxIsEnabled()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should show label when checkox is enabled", ((string[])(null)));
-#line 31
-this.ScenarioSetup(scenarioInfo);
-#line 7
-this.FeatureBackground();
-#line 32
-testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 33
-testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 34
-testRunner.And("I do a moderate scroll down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 35
 testRunner.And("I tap the \"Presentation\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 36
+#line 29
 testRunner.When("I check the \"Show All Displays\" checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 37
+#line 30
 testRunner.Then("I should see the \"Show All Displays\" element checked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 38
+#line 31
 testRunner.And("I should see a label equals text \"Display #0: Built-in Screen\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -176,25 +153,25 @@ testRunner.And("I should see a label equals text \"Display #0: Built-in Screen\"
         public virtual void ShouldNotShowLabelWhenCheckoxIsEnabled()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should not show label when checkox is enabled", ((string[])(null)));
-#line 40
+#line 33
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 41
+#line 34
 testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 42
+#line 35
 testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 43
+#line 36
 testRunner.And("I do a moderate scroll down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 44
+#line 37
 testRunner.And("I tap the \"Presentation\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 45
+#line 38
 testRunner.And("I check the \"Show All Displays\" checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 46
+#line 39
 testRunner.When("I uncheck the \"Show All Displays\" checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 47
+#line 40
 testRunner.Then("I should not see the \"Show All Displays\" element checked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 48
+#line 41
 testRunner.And("I should not see a label equals text \"Display #0: Built-in Screen\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

@@ -223,9 +223,9 @@ namespace Joyride.Platforms
             return this;
         }
 
-        public virtual Screen ScrollUntil(string elementName, Direction direction, double scale=1.0, long durationMilliSecs = 500, int maxRetries = 60)
+        public virtual Screen ScrollUntil(string elementName, Direction direction, int maxRetries, int timeoutSecs, double scale=1.0, long durationMilliSecs = 500)
         {
-            var element = FindElement(elementName, 3);
+            var element = FindElement(elementName, timeoutSecs);
 
             if (element.IsPresent() && element.Displayed)
                 return this;
@@ -234,7 +234,7 @@ namespace Joyride.Platforms
             while (numRetries <= maxRetries)
             {
                 Driver.Scroll(direction, scale, durationMilliSecs);
-                element = FindElement(elementName, 3);
+                element = FindElement(elementName, timeoutSecs);
                 if (element.IsPresent() && element.Displayed)
                     return this;
 
