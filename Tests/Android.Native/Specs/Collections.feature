@@ -84,3 +84,35 @@ And I tap the "Add Button" button
 And I inspect the number of items in collection "Buttons"
 When I tap up to "3" item(s) in the "Buttons" collection
 Then I should see "3" less item(s) in "Buttons" collection
+
+Scenario: Collections should contain an item with equals text
+Given I tap the "App" button
+And I tap the "Activity" button
+And I scroll the screen down
+When I tap the "Quick Contacts Demo" button
+Then I should be on the "Quick Contacts Demo" screen
+Then I should see an item in collection "Contacts" with text equals "Kingsley"
+
+Scenario: Collections should contain an item with starts with text
+Given I tap the "App" button
+And I tap the "Activity" button
+And I scroll the screen down
+When I tap the "Quick Contacts Demo" button
+Then I should be on the "Quick Contacts Demo" screen
+Then I should see an item in collection "Contacts" with text starts with "Kings"
+
+Scenario: Collections should contain an item with containing text
+Given I tap the "App" button
+And I tap the "Activity" button
+And I scroll the screen down
+When I tap the "Quick Contacts Demo" button
+Then I should be on the "Quick Contacts Demo" screen
+Then I should see an item in collection "Contacts" with text containing "ingsl"
+
+Scenario: Collections should contain an item with matching text
+Given I tap the "App" button
+And I tap the "Activity" button
+And I scroll the screen down
+When I tap the "Quick Contacts Demo" button
+Then I should be on the "Quick Contacts Demo" screen
+Then I should see an item in collection "Contacts" with text matching "sley$"

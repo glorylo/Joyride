@@ -12,6 +12,9 @@ namespace Tests.Android.Native.SampleApp.ApiDemo.Screens.App
         [FindsBy(How = How.XPath, Using = "//android.widget.TextView[@text='Presentation']")]
         private IWebElement Presentation;
 
+        [FindsBy(How = How.XPath, Using = "//android.widget.TextView[@text='QuickContactsDemo']")]
+        private IWebElement QuickContactsDemo;
+
         public override bool IsOnScreen(int timeOutSecs)
         {
             // not reliable 
@@ -28,8 +31,12 @@ namespace Tests.Android.Native.SampleApp.ApiDemo.Screens.App
             if (elementName == "Presentation")
                 return ScreenFactory.CreateScreen<PresentationScreen>();
 
+            if (elementName == "Quick Contacts Demo")
+                return ScreenFactory.CreateScreen<QuickContactsDemoScreen>();
+
             return screen;
         }
+
         public override string Name
         {
             get { return "Activity"; }

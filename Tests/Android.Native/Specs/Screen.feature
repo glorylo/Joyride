@@ -74,3 +74,10 @@ And I tap the "Layouts" button
 And I tap the "Scroll View" button
 When I tap the "Long" button
 Then I should be on the "Long" screen
+
+Scenario: Navigate to Quick Contact Demo Screen
+Given I tap the "App" button
+And I tap the "Activity" button
+And I scroll the screen down
+When I tap the "Quick Contacts Demo" button
+Then I should be on the "Quick Contacts Demo" screen

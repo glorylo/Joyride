@@ -83,6 +83,7 @@
     <Compile Include="SampleApp\ApiDemo\Screens\App\CustomTitleScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\Animation\DefaultLayoutAnimationsScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\App\FragmentScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\App\QuickContactsDemoScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\MainScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\NullApiDemoScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\App\PresentationScreen.cs" />

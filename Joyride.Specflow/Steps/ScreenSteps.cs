@@ -48,7 +48,7 @@ namespace Joyride.Specflow.Steps
             var elementPresent = false;
             if (shouldOrShouldNot == "should")
             {
-                Context.MobileApp.Do<Screen>(s => elementPresent = s.ElementIsPresent(elementName));
+                Context.MobileApp.Do<Screen>(s => elementPresent = s.ElementIsPresent(elementName, TimeoutSecs));
                 Assert.IsTrue(elementPresent);
             }
             else
@@ -64,7 +64,7 @@ namespace Joyride.Specflow.Steps
             var elementVisible = false;
             if (shouldOrShouldNot == "should")
             {
-                Context.MobileApp.Do<Screen>(s => elementVisible = s.ElementIsVisible(elementName));
+                Context.MobileApp.Do<Screen>(s => elementVisible = s.ElementIsVisible(elementName, TimeoutSecs));
                 Assert.IsTrue(elementVisible);
             }
             else

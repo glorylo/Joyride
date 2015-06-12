@@ -1,5 +1,4 @@
-﻿using System;
-using Joyride.Extensions;
+﻿using Joyride.Extensions;
 using Joyride.Platforms.Android;
 using Joyride.Specflow.Configuration;
 using NUnit.Framework;
