@@ -74,7 +74,7 @@ namespace Joyride.Specflow.Steps
             var directionToScroll = (Direction) Enum.Parse(typeof(Direction), direction, true);
             var durationMillSecs = 500;
             if (speed != String.Empty)
-                durationMillSecs = (speed == "slowly") ?  2500 : 750;
+                durationMillSecs = (speed == "slowly") ?  3000 : 750;
 
             Context.MobileApp.Do<IGesture>(i => i.ScrollUntil(elementName, directionToScroll, MaxRetries, ScrollUntilTimeoutSecs, 1.0, durationMillSecs));
         }
