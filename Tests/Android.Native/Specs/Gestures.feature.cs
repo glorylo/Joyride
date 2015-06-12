@@ -184,10 +184,10 @@ testRunner.Then("I should be on the \"Layouts\" screen", ((string)(null)), ((Tec
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Scroll until Button 63 is visible")]
-        public virtual void ScrollUntilButton63IsVisible()
+        [NUnit.Framework.DescriptionAttribute("Slowly scroll until Button 63 is visible")]
+        public virtual void SlowlyScrollUntilButton63IsVisible()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Scroll until Button 63 is visible", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Slowly scroll until Button 63 is visible", ((string[])(null)));
 #line 42
 this.ScenarioSetup(scenarioInfo);
 #line 7
@@ -205,8 +205,66 @@ testRunner.And("I tap the \"Scroll View\" button", ((string)(null)), ((TechTalk.
 #line 48
 testRunner.And("I tap the \"Long\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 49
-testRunner.When("I scroll the screen down until I see element \"Button 63\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.When("I slowly scroll the screen down until I see element \"Button 63\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 50
+testRunner.Then("I should see the button \"Button 63\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Moderately scroll until Button 63 is visible")]
+        public virtual void ModeratelyScrollUntilButton63IsVisible()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Moderately scroll until Button 63 is visible", ((string[])(null)));
+#line 52
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 53
+testRunner.And("I scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 54
+testRunner.And("I tap the \"Views\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 55
+testRunner.And("I scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 56
+testRunner.And("I tap the \"Layouts\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 57
+testRunner.And("I tap the \"Scroll View\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 58
+testRunner.And("I tap the \"Long\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 59
+testRunner.When("I moderately scroll the screen down until I see element \"Button 63\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 60
+testRunner.Then("I should see the button \"Button 63\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Scroll until Button 63 is visible")]
+        public virtual void ScrollUntilButton63IsVisible()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Scroll until Button 63 is visible", ((string[])(null)));
+#line 62
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 63
+testRunner.And("I scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 64
+testRunner.And("I tap the \"Views\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 65
+testRunner.And("I scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 66
+testRunner.And("I tap the \"Layouts\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 67
+testRunner.And("I tap the \"Scroll View\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 68
+testRunner.And("I tap the \"Long\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 69
+testRunner.When("I scroll the screen down until I see element \"Button 63\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 70
 testRunner.Then("I should see the button \"Button 63\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
