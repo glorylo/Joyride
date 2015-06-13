@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Joyride")]
-[assembly: AssemblyDescription("A cross platform mobile framework (android and ios) for automating acceptance tests")]
+[assembly: AssemblyDescription("A cross platform mobile framework for automating acceptance tests")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Glory Lo")]
 [assembly: AssemblyProduct("Joyride")]

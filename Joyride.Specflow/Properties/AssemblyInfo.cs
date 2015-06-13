@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Joyride.Specflow")]
-[assembly: AssemblyDescription("A Behavior Driven Development (BDD) binding layer on top of Joyride.")]
+[assembly: AssemblyDescription("Joyride's Behavior Driven Development (BDD) binding layer with built-in mobile steps")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Glory Lo")]
 [assembly: AssemblyProduct("Joyride.Specflow")]
