@@ -22,7 +22,11 @@ Joyride.Specflow is the Behaviour Driven Development (BDD) layer that supplies a
 
 # Installation
 
-
+You can install the packages via nuget's Package Manager Console
+```
+PM> Install-Package Joyride
+PM> Install-Package Joyride.Specflow
+```
 
 
 
