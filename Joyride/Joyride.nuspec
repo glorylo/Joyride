@@ -21,8 +21,12 @@
 	</dependencies>
 	
     <description>$description$</description>
-    <releaseNotes>Initial release</releaseNotes>
+    <releaseNotes>
+    0.0.1 
+       - Initial release
+
+	   </releaseNotes>
     <copyright>Copyright 2015</copyright>
-    <tags>mobile bdd behaviour driven development appium selenium ios android automation acceptance automation specs</tags>
+    <tags>joyride mobile bdd behaviour driven development pageobjects appium selenium ios android automation acceptance tests specs</tags>
   </metadata>
 </package>

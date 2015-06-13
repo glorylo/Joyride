@@ -26,9 +26,13 @@
 	</dependencies>	
 	
     <description>$description$</description>
-    <releaseNotes>Initial release</releaseNotes>
+    <releaseNotes>
+    0.0.1 
+       - Initial release
+	
+	</releaseNotes>
     <copyright>Copyright 2015</copyright>
-    <tags>native hybrid mobile bdd behaviour driven development appium selenium ios android automation acceptance automation specs</tags>
+    <tags>native hybrid mobile bdd behaviour driven development appium selenium ios android automation acceptance specs specflow nunit joyride</tags>
   </metadata>
   	<files>
 	<file src="content\**\*" target="content\" />
