@@ -53,6 +53,7 @@ _ReSharper*/
 #NuGet
 .nuget/
 packages/
+*.nupkg
 
 #ncrunch
 *ncrunch*
@@ -60,3 +61,8 @@ packages/
 
 # visual studio database projects
 *.dbmdl
+
+# Log and screenshot files
+
+**/Screenshots/*.png
+**/Logs/

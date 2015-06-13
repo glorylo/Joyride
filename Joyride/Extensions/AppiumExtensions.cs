@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
@@ -70,46 +69,14 @@ namespace Joyride.Extensions
             driver.Tap(element.GetCenter());
         }
 
-        //TODO:  does not work.  Appears to be an appium bug.
-        public static void DoubleTap(this AppiumDriver driver, Point point)
-        {
-
-/*
-            new TouchAction(driver)
-                .Press(point.X, point.Y)
-                .Wait(200)
-                .Release()
-                .Wait(300)
-                .Press(0, 0)
-                .Wait(200)
-                .Release()
-                .Perform();
- */
-
-            new TouchAction(driver)
-                .Tap(point.X, point.Y, count: 2)
-                .Perform(); 
-         }
         public static void DoubleTap(this AppiumDriver driver, IWebElement element)
         {
-            driver.DoubleTap(element.GetCenter());
+           var center = element.GetCenter();
+           new TouchAction(driver).
+               Tap(element, center.X, center.Y, 2)
+               .Perform();            
         }
         
-        //TODO: does not work
-        public static void ScrollToVisible(this AppiumDriver driver, IWebElement element)
-        {
-            //var scrollLength = 0;
-            //if (element.Location.Y < 0)
-            //    scrollLength = RemoteDriver.ScreenSize.Height + (-1*element.Location.Y);
-
-            var args = new Dictionary<string, string>
-            {
-                {"direction", "up"},
-                {"element", element.GetIdForElement()}
-            };
-            driver.ExecuteScript("mobile: scrollTo", args);   
-        }
-
         public static void TapAndHold(this AppiumDriver driver, IWebElement element, int seconds, bool precise=false)
         {
             if (precise)

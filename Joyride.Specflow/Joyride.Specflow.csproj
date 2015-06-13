@@ -84,19 +84,25 @@
     <Compile Include="Configuration\DeviceElementCollection.cs" />
     <Compile Include="Configuration\IosElement.cs" />
     <Compile Include="Configuration\JoyrideConfiguration.cs" />
+    <None Include="Content\App.config.install.xdt" />
+    <None Include="Content\App.config.uninstall.xdt" />
+    <None Include="Content\Steps\SpecFlowHooks.cs.pp" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Configuration\JoyrideSectionHandler.cs" />
     <Compile Include="Steps\AndroidSteps.cs" />
     <Compile Include="Steps\DebugSteps.cs" />
     <Compile Include="Steps\CollectionSteps.cs" />
+    <Compile Include="Steps\UiControlSteps.cs" />
+    <Compile Include="Steps\GestureSteps.cs" />
     <Compile Include="Steps\IosSteps.cs" />
     <Compile Include="Steps\MobileAppSteps.cs" />
     <Compile Include="Steps\ModalDialogSteps.cs" />
     <Compile Include="Steps\ScreenSteps.cs" />
+    <Compile Include="Steps\WebviewSteps.cs" />
     <Compile Include="Support\PropertyCondition.cs" />
     <Compile Include="Support\ScreenshotCapturer.cs" />
-    <Compile Include="Support\StepsHelper.cs" />
+    <Compile Include="Support\EntryEvaluator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Joyride\Joyride.csproj">
@@ -108,6 +114,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\Specs\" />
     <Folder Include="Extensions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

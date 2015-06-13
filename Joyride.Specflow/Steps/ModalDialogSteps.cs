@@ -7,7 +7,7 @@ using TechTalk.SpecFlow;
 namespace Joyride.Specflow.Steps
 {
     [Binding]
-    public class ModalDialogSteps
+    public class ModalDialogSteps : TechTalk.SpecFlow.Steps
     {
         #region Given/Whens
         [Given(@"I (accept|dismiss) the ""([^""]*)"" modal dialog")]
@@ -36,12 +36,16 @@ namespace Joyride.Specflow.Steps
 
         #region Thens
 
-        [Then(@"I should see any modal dialog")]
-        public void ThenIShouldSeeModalDialog()
+        [Then(@"I (should|should not) see any modal dialog")]
+        public void ThenIShouldSeeModalDialog(string shouldOrShouldNot)
         {
             IModalDialog dialog = null;
             Context.MobileApp.Do<IDetectModalDialog>(i => dialog = i.DetectModalDialog());
-            Assert.IsTrue(dialog != null);
+
+            if (shouldOrShouldNot == "should")
+              Assert.IsTrue(dialog != null);
+            else
+              Assert.IsFalse(dialog != null);
         }
 
         [Then(@"I (should|should not) see the ""([^""]*)"" modal dialog")]
@@ -57,7 +61,7 @@ namespace Joyride.Specflow.Steps
 
         }
 
-        [Then(@"I should see the ""([^""]*)"" modal dialog (equals|starts with|containing|matching) (body|title) text ""([^""]*)""")]
+        [Then(@"I should see the ""([^""]*)"" modal dialog (equals|ends with|starts with|containing|matching) (body|title) text ""([^""]*)""")]
         public void ThenIShouldSeeTheSpecificModalDialogWithText(string modalDialogName, string compareType, string bodyOrTitle, string text)
         {
             IModalDialog dialog = null;

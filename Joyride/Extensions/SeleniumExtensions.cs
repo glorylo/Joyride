@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Reflection;
 using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
@@ -33,13 +32,12 @@ namespace Joyride.Extensions
 
         public static void SetImplicitWait(this IWebDriver driver, TimeSpan span)
         {
-            try
-            {
+            try {
                 driver.Manage().Timeouts().ImplicitlyWait(span);
             }
-            catch // suppress errors for now
-            {
-                Debug.WriteLine("Unable to set timeout to:  " + span);
+            // suppress errors for now 
+            catch {
+                Trace.WriteLine("Unable to set timeout to:  " + span);
             } 
         }
                 
@@ -90,6 +88,15 @@ namespace Joyride.Extensions
         public static IList<IWebElement> FindElements(this RemoteWebDriver driver, By by, int timeoutSecs)
         {
             return FindElementsWithTimeout(driver, () => driver.FindElementsWithMethod(new Func<By, IList<IWebElement>>(driver.FindElements), by), timeoutSecs);
+        }
+
+        public static IWebElement FindElementWithImplicitWait(this RemoteWebDriver driver, By by)
+        {
+            return driver.FindElementWithMethod(new Func<By, IWebElement>(driver.FindElement), by);
+        }
+        public static IList<IWebElement> FindElementsWithImplicitWait(this RemoteWebDriver driver, By by)
+        {
+            return driver.FindElementsWithMethod(new Func<By, IWebElement>(driver.FindElement), by);
         }
 
         public static IWebElement FindElementWithMethod(this RemoteWebDriver driver, Delegate findMethod,
@@ -165,13 +172,5 @@ namespace Joyride.Extensions
             return new Point(x, y);
         }
 
-        public static string GetIdForElement(this IWebElement element)
-        {
-            var fieldInfo = typeof (RemoteWebElement).GetField("elementId",
-                BindingFlags.NonPublic | BindingFlags.Instance);
-            if (fieldInfo != null)
-                return (string) fieldInfo.GetValue(element);
-            return null;
-        }
     }
 }
