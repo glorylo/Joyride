@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Joyride by glorylo</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Joyride</h1>
+        <h2>A cross platform mobile framework for automating acceptance tests using appium</h2>
+        <a href="https://github.com/glorylo/Joyride" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a id="motivation" class="anchor" href="#motivation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Motivation</h1>
+
+<p>You have the same mobile application across ios and android.  As both the apps evolve, you want to write automated acceptance tests and ensure feature parity between the two.  With Joyride you can write beautiful specs sharing the same underlying code!  </p>
+
+<p>The typical use cases include sharing the same "steps" code and underlying business models, thereby simplifying much of the duplicated work had you worked with two separate projects.  </p>
+
+<p>Joyride attempts to supply much of the boilerplate code with "good defaults" to get you quickly started.  </p>
+
+<p>Get excited and jump start you automation efforts!  </p>
+
+<h1>
+<a id="overview" class="anchor" href="#overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h1>
+
+<p>Joyride follows the same tried-and-true "pageobjects" pattern adopted  for mobile.  It supplies basic touch gestures in interacting with native and hybrid mobile applications.  This is built on top of <a href="http://appium.io">Appium</a>. </p>
+
+<p>Combined with Joyride.Specflow, the Behaviour Driven Development (BDD) binding layer, it supplies a stock of useful actions such as gestures (swipe, scroll, tap, etc) </p>
+
+<h1>
+<a id="features" class="anchor" href="#features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features</h1>
+
+<p>Here are some of the features included with Joyride</p>
+
+<ul>
+<li>Built-in starter configuration to quickly get you up and running.</li>
+<li>Support for mostly native actions for ios and android.  Currently hybrid apps have limited support thus far.</li>
+<li>Handling of collection of elements</li>
+<li>Smart element and collection mappings</li>
+<li>Predefined steps for interacting with different widgets such as checkboxes, entering text, etc.</li>
+<li>Handling of modal dialogs</li>
+<li>Detection of modal dialogs and screens</li>
+<li>Predefined debugging steps </li>
+<li>Predefined gestures steps</li>
+<li>Screen captures on error</li>
+<li>ios and android specific steps.  For example, android has a "back" button.</li>
+<li>And more...</li>
+</ul>
+
+<h1>
+<a id="examples" class="anchor" href="#examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Examples</h1>
+
+<p>Joyride.Specflow makes use of gherkin syntax for a human-readable specification.  </p>
+
+<p>Add the appropriate tag to add platform specific steps</p>
+
+<div class="highlight highlight-gherkin"><pre><span class="pl-c"># Comment out and add the appropriate tag for your platform</span>
+<span class="pl-c"># @android or @ios</span>
+<span class="pl-k">Feature</span>:<span class="pl-s"> My First Feature</span>
+    In order to do usercase on my app
+    As a user
+    <span class="pl-k">I </span>want to be do X</pre></div>
+
+<p>Here are some examples of the specifications you can write:</p>
+
+<div class="highlight highlight-gherkin"><pre><span class="pl-k">Scenario</span>:<span class="pl-s"> Should be able to tap the item by index in a collection</span>
+<span class="pl-k">Given </span>I tap the <span class="pl-s">"App"</span> button
+<span class="pl-k">And </span>I tap the <span class="pl-s">"Fragment"</span> button
+<span class="pl-k">And </span>I tap the <span class="pl-s">"Context Menu"</span> button
+<span class="pl-k">And </span>I tap the <span class="pl-s">"Long Press"</span> button and hold for <span class="pl-s">"4"</span> seconds
+<span class="pl-k">When </span>I tap the <span class="pl-s">"2nd"</span> item in the <span class="pl-s">"Menu"</span> collection
+<span class="pl-k">Then </span>I should be on the <span class="pl-s">"Context Menu"</span> screen</pre></div>
+
+<div class="highlight highlight-gherkin"><pre><span class="pl-k">Scenario</span>:<span class="pl-s"> Should see title containing text in modal dialog</span>
+<span class="pl-k">Given </span>I tap the <span class="pl-s">"App"</span> button
+<span class="pl-k">And </span>I tap the <span class="pl-s">"Alert Dialogs"</span> button
+<span class="pl-k">When </span>I tap the <span class="pl-s">"Ok Cancel Dialog"</span> button
+<span class="pl-k">Then </span>I should see the <span class="pl-s">"Lorem Ipsum"</span> modal dialog containing title text <span class="pl-s">"Plloaso mako nuto siwuf"</span>
+</pre></div>
+
+<div class="highlight highlight-gherkin"><pre><span class="pl-k">Scenario</span>:<span class="pl-s"> Should be able to double tap </span>
+<span class="pl-k">Given </span>I tap the <span class="pl-s">"Animation"</span> button
+<span class="pl-k">And </span>I tap the <span class="pl-s">"Default Layout Animations"</span> button
+<span class="pl-k">When </span>I double tap the <span class="pl-s">"Add Button"</span> button
+<span class="pl-k">Then </span>I should see <span class="pl-s">"2"</span> items in <span class="pl-s">"Buttons"</span> collection</pre></div>
+
+<h1>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h1>
+
+<p>You can install the packages via nuget's Package Manager Console</p>
+
+<pre><code>PM&gt; Install-Package Joyride
+PM&gt; Install-Package Joyride.Specflow
+</code></pre>
+
+<h3>
+<a id="dependencies" class="anchor" href="#dependencies" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dependencies</h3>
+
+<ul>
+<li>Humanizer</li>
+<li>PredicateParser</li>
+<li>HandyConfig</li>
+<li>Appium.WebDriver</li>
+<li>Selenium.WebDriver</li>
+<li>Selenium.Support</li>
+<li>Newtonsoft.Json</li>
+<li>NUnit</li>
+<li>SpecFlow</li>
+<li>SpecFlow.NUnit</li>
+</ul>
+
+<p>More to come... stay tuned!!!</p>
+
+<p>Have fun! </p>
+
+<p>Glory</p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/glorylo/Joyride/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/glorylo/Joyride/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/glorylo/Joyride"></a> is maintained by <a href="https://github.com/glorylo">glorylo</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
