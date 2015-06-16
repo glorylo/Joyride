@@ -245,10 +245,10 @@ testRunner.Then("I should not see \"1\" items in \"Buttons\" collection", ((stri
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Should not see 3 more added to saved collection size")]
-        public virtual void ShouldNotSee3MoreAddedToSavedCollectionSize()
+        [NUnit.Framework.DescriptionAttribute("Should see 3 more added to saved collection size")]
+        public virtual void ShouldSee3MoreAddedToSavedCollectionSize()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should not see 3 more added to saved collection size", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should see 3 more added to saved collection size", ((string[])(null)));
 #line 65
 this.ScenarioSetup(scenarioInfo);
 #line 7
@@ -276,10 +276,10 @@ testRunner.Then("I should see \"3\" more item(s) in \"Buttons\" collection", ((s
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Should not see 3 less items to saved collection size")]
-        public virtual void ShouldNotSee3LessItemsToSavedCollectionSize()
+        [NUnit.Framework.DescriptionAttribute("Should see 3 less items to saved collection size")]
+        public virtual void ShouldSee3LessItemsToSavedCollectionSize()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should not see 3 less items to saved collection size", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should see 3 less items to saved collection size", ((string[])(null)));
 #line 76
 this.ScenarioSetup(scenarioInfo);
 #line 7
