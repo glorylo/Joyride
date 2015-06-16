@@ -72,7 +72,7 @@ Then I should see the "Lorem Ipsum" modal dialog containing title text "Plloaso 
 
 ```gherkin
 Scenario: Should be able to double tap 
-And I tap the "Animation" button
+Given I tap the "Animation" button
 And I tap the "Default Layout Animations" button
 When I double tap the "Add Button" button
 Then I should see "2" items in "Buttons" collection
