@@ -1,12 +1,93 @@
 
 
-# Introduction
+# Motivation
 
-Joyride is a "pageobjects" framework for mobile.  It supplies some of the basic touch gestures in interacting with native and hybrid mobile applications.  This is built on top of [Appium](http://appium.io).  Currently the platforms iOS and Android is supported.
+You have the same mobile application across ios and android.  As both the apps evolve, you want to write automated acceptance tests and ensure feature parity between the two.  With Joyride you can write beautiful specs sharing the same underlying code!  
 
-Joyride.Specflow is the Behaviour Driven Development (BDD) layer that supplies a stock of useful actions such as tap and entering text, etc.  
+The typical use cases include sharing the same "steps" code and underlying business models, thereby simplifying much of the duplicated work had you worked with two separate projects.  
 
-# Dependencies
+Joyride attempts to supply much of the boilerplate code with "good defaults" to get you quickly started.  
+
+Get excited and jump start you automation efforts!  
+
+# Overview
+
+Joyride follows the same tried-and-true "pageobjects" pattern adopted  for mobile.  It supplies basic touch gestures in interacting with native and hybrid mobile applications.  This is built on top of [Appium](http://appium.io). 
+
+Combined with Joyride.Specflow, the Behaviour Driven Development (BDD) binding layer, it supplies a stock of useful actions such as gestures (swipe, scroll, tap, etc) 
+
+
+# Features
+
+Here are some of the features included with Joyride
+
+- Built-in starter configuration to quickly get you up and running.
+- Support for mostly native actions for ios and android.  Currently hybrid apps have limited support thus far.
+- Handling of collection of elements
+- Smart element and collection mappings
+- Predefined steps for interacting with different widgets such as checkboxes, entering text, etc.
+- Handling of modal dialogs
+- Detection of modal dialogs and screens
+- Predefined debugging steps 
+- Predefined gestures steps
+- Screen captures on error
+- ios and android specific steps.  For example, android has a "back" button.
+- And more...
+
+# Examples
+
+Joyride.Specflow makes use of gherkin syntax for a human-readable specification.  
+
+Add the appropriate tag to add platform specific steps
+
+```gherkin
+# Comment out and add the appropriate tag for your platform
+# @android or @ios
+Feature: My First Feature
+	In order to do usercase on my app
+	As a user
+	I want to be do X
+```
+
+Here are some examples of the specifications you can write:
+
+```gherkin
+Scenario: Should be able to tap the item by index in a collection
+Given I tap the "App" button
+And I tap the "Fragment" button
+And I tap the "Context Menu" button
+And I tap the "Long Press" button and hold for "4" seconds
+When I tap the "2nd" item in the "Menu" collection
+Then I should be on the "Context Menu" screen
+```
+
+```gherkin
+Scenario: Should see title containing text in modal dialog
+Given I tap the "App" button
+And I tap the "Alert Dialogs" button
+When I tap the "Ok Cancel Dialog" button
+Then I should see the "Lorem Ipsum" modal dialog containing title text "Plloaso mako nuto siwuf"
+
+```
+
+```gherkin
+Scenario: Should be able to double tap 
+And I tap the "Animation" button
+And I tap the "Default Layout Animations" button
+When I double tap the "Add Button" button
+Then I should see "2" items in "Buttons" collection
+```
+
+# Installation
+
+You can install the packages via nuget's Package Manager Console
+
+```
+PM> Install-Package Joyride
+PM> Install-Package Joyride.Specflow
+```
+
+### Dependencies
 
 * Humanizer
 * PredicateParser
@@ -18,15 +99,6 @@ Joyride.Specflow is the Behaviour Driven Development (BDD) layer that supplies a
 * NUnit
 * SpecFlow
 * SpecFlow.NUnit
-
-
-# Installation
-
-You can install the packages via nuget's Package Manager Console
-```
-PM> Install-Package Joyride
-PM> Install-Package Joyride.Specflow
-```
 
 
 
