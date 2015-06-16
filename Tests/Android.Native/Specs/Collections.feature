@@ -62,7 +62,7 @@ When I tap the "Add Button" button
 And I tap the "Add Button" button
 Then I should not see "1" items in "Buttons" collection
 
-Scenario: Should not see 3 more added to saved collection size
+Scenario: Should see 3 more added to saved collection size
 And I tap the "Animation" button
 And I tap the "Default Layout Animations" button
 And I tap the "Add Button" button
@@ -73,7 +73,7 @@ And I tap the "Add Button" button
 And I tap the "Add Button" button
 Then I should see "3" more item(s) in "Buttons" collection
 
-Scenario: Should not see 3 less items to saved collection size
+Scenario: Should see 3 less items to saved collection size
 And I tap the "Animation" button
 And I tap the "Default Layout Animations" button
 And I tap the "Add Button" button
