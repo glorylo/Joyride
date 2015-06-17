@@ -10,22 +10,23 @@
    ```
 2. Create your first screen that appears when your app launches.  Each screen needs a Name and a implementation of the IsOnScreen method.  
    ```csharp
-        public class FirstScreen : MyCoolAndroidScreen 
+      public class FirstScreen : MyCoolAndroidScreen 
+      {
+         public override string Name
+         {
+            get { return "First Screen" }
+         }
 
-           public override string Name
-           {
-              get { return "First Screen" }
-           }
+         public override bool IsOnScreen(int timeOutSecs)  
+         {
+            throw new NotImplementedException();
+         }
 
-           public override bool IsOnScreen(int timeOutSecs)  
-           {
-              throw new NotImplementedException();
-           }
-
-           public override Screen GoBack()
-           {
-              throw new NotImplementedException();
-           }
+         public override Screen GoBack()
+         {
+            throw new NotImplementedException();
+         }
+      }
    ```
    Ideally, it would be great to have your in house developers create identifiers for all your screens.  This makes things significantly easier when trying to detect which screen you are on.
     
@@ -34,8 +35,8 @@
    The MyCoolAndroidScreen class is a good place to provide default implementation, especially if the implementation is mostly the same across all your screens.
 3. Create a Null Screen, for situations when your the screen shown is unknown.   
    ```csharp
-    public class NullMyCoolAndroidScreen : MyCoolAndroidScreen
-    {
+     public class NullMyCoolAndroidScreen : MyCoolAndroidScreen
+     {
         public override string Name
         {
             get { return "Null"; }
@@ -51,13 +52,12 @@
             Driver.Navigate().Back();            
             return this;
         }
-    }
-
+     } 
    ```
 4. Back to your MyCoolApp, we will initialize the starting screen.  Conversely, when the app is closed, we will set the screen to the Null screen.  We initiate screens using the ScreenFactory.
    ```csharp 
-    public class MyCoolApp : AndroidMobileApplication
-    {
+     public class MyCoolApp : AndroidMobileApplication
+     {
         public override string Identifier { get { return "com.my.cool.app"; }}
 
         public override void Launch()
@@ -71,8 +71,7 @@
             base.Close();
             CurrentScreen = ScreenFactory.CreateScreen<NullMyCoolAndroidScreen>();
         }
-
-    }
+     }
    ```
    CurrentScreen is a property that holds the screen as it transitions when the user work through your app.  
 5. You now write a scenario to check if the launch sets the appropriate current screen.
@@ -80,7 +79,6 @@
     Scenario: Launching the app should be on first screen
     Given I launch the "My Cool App" mobile application
     Then I should be on the "First Screen" screen
-
    ```
    When the *Then* step is executed, it makes an invocation to IsOnScreen and asserts that the screen is being displayed.
 
