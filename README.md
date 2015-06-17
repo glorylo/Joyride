@@ -4,7 +4,7 @@
 
 # Motivation
 
-You have the same mobile application across ios and android.  As both the apps evolve, you want to write automated acceptance tests and ensure feature parity between the two.  With Joyride you can write beautiful specs sharing the same underlying code!  
+You have the same mobile application across ios and android.  You want to write automated acceptance tests and ensure feature parity between the two.  With Joyride you can write beautiful specs sharing the same underlying code.  
 
 The typical use cases include sharing the same "steps" code and underlying business models, thereby simplifying much of the duplicated work had you worked with two separate projects.  
 
@@ -109,8 +109,14 @@ Joyride.Specflow:  ![#](https://img.shields.io/nuget/v/Joyride.Specflow.svg?styl
 
 
 
-More to come... stay tuned!!!
+# Resources
 
+
+
+
+# License
+
+Joyride uses the BSD License.
 
 
 Have fun! 
