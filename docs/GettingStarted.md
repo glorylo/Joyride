@@ -32,7 +32,7 @@ Joyride uses NUnit for the testing framework.  The [NUnit Test Runner](http://nu
 
 Your target mobile app.  
 
-A real device.  If available, we prefer testing a real device over emulator or simulator.  If you are using a a device, ensure your device is setup properly for your environment.  
+A real device.  If available, we prefer testing a real device over emulator or simulator.  If you are using a device, ensure your device is setup properly for your environment.  
 
 ##### Android Devices
 * Ensure you are able to see the device using 'adb devices' on android.  
@@ -100,15 +100,15 @@ A real device.  If available, we prefer testing a real device over emulator or s
    ```
    All the settings under capabilities map directly to [Appiums Capabilities](http://appium.io/slate/en/master/?csharp#appium-server-capabilities).  The settings are bundled together using [HandyConfig](https://www.nuget.org/packages/HandyConfig/). 
 
-   The *capabilities* section includes global capabilities.  Joyride prefers to launch the app, manually by setting *autolaunch* to false.  Note the *type="System.Boolean"*.  You have to supply the correct type for the capabilities.  For example, you want the *newCommandTimeout* capability with a value of "70", also include *type=System.Int32*.  If the *type* is not specified, the *"System.String"* is used as the default.
+   The *capabilities* section includes global capabilities.  Joyride prefers to launch the app manually by setting *autolaunch* to false.  Note the *type="System.Boolean"*.  You have to supply the correct type for the capabilities.  For example, you want the *newCommandTimeout* capability with a value of "70", also include *type=System.Int32*.  If the *type* is not specified, the *"System.String"* is used as the default.
 
    The *android* and *ios* includes their respective platform capabilities. You can safely remove the section for the unused platform.  Update it with the appropriate app identifier, *bundleId* for *ios* or *appPackage* for *android*.  
 
-   Similarily, create a device target with device specfic capabilities.  If the same capabilitiy is specified here, it will supersede the capability setting before it.  Note the *name* of the device.  
+   Similarly, create a device target with device specfic capabilities.  If the same capabilitiy is specified here, it will supersede the capability setting before it.  Note the *name* of the device.  
 
    Lastly, review the *servers*.  The default runs on *dev* for localhost.  However, if you will be running on iOS you will be specifying a separate mac machine running the appium server.  
 
-7. Modify the config settings in Steps\SpecflowHooks.cs file by updating the TargetPlatform to bei ther Platform.Android or Platform.Ios.  Also update the target device and ensure the correct server is used. 
+7. Modify the config settings in Steps\SpecflowHooks.cs file by updating the TargetPlatform to either Platform.Android or Platform.Ios.  Also update the target device and ensure the correct server is used. 
    ```csharp
         public const Platform TargetPlatform = Platform.Android;  // update either Platform.Android or Platform.Ios
 
@@ -129,11 +129,13 @@ A real device.  If available, we prefer testing a real device over emulator or s
    {
         Context.Driver = RemoteMobileDriver.GetInstance();
         // Add your test app here
-        // Context.MobileApp = new TestApp();  
+        // Context.MobileApp = new TestApp();
+        Context.MobileApp = new MyCoolApp();  
    }
 
    ```
-   If you are creating an app you want to eventually share code, it is base to create a separate project for this.  Subclass the appropriate platform for your app.  Use AndroidMobileApplication or IosMobileApplication.
+   If you are creating an app you want to eventually share code, it is best to create a separate project for this.  Create a  new project in VS and add a new class.  Subclass the appropriate platform for your app.  Use AndroidMobileApplication or IosMobileApplication.
+
    ```csharp 
     public class MyCoolApp : AndroidMobileApplication
     {
@@ -141,9 +143,10 @@ A real device.  If available, we prefer testing a real device over emulator or s
 
     }
    ```
+
    Update SpecflowHooks with the appropriate new app.
 
-9. The first spec is created for you under Specs\FirstSpec.feature.  Add the appropriate tag, either @andrioid or @ios.   
+9. The first spec is created for you under Specs\FirstSpec.feature.  Add the appropriate tag, either @android or @ios.   
    ```gherkin 
    # Comment out and add the appropriate tag for your platform
    # @android or @ios
@@ -159,6 +162,6 @@ A real device.  If available, we prefer testing a real device over emulator or s
    And I take a screenshot
 
    ```
-   This first spec will simply launch your app and take a screenshot.  
+   This first spec will simply launch your app and take a screen shot.  
 10.  Build your project and run your first test.  
 11.  If all goes well, you have just ran your first test!

@@ -51,7 +51,7 @@ Feature: My First Feature
 	I want to be do X
 ```
 
-Here are some examples of the specifications you can write:
+Here are some examples of the specifications you can write, all using Joyride's predefined steps:
 
 ```gherkin
 Scenario: Should be able to tap the item by index in a collection
@@ -111,12 +111,24 @@ Joyride.Specflow:  ![#](https://img.shields.io/nuget/v/Joyride.Specflow.svg?styl
 
 # Resources
 
+[Getting Started](https://github.com/glorylo/Joyride/blob/develop/docs/GettingStarted.md)
 
+[Creating Your First Screen](https://github.com/glorylo/Joyride/blob/develop/docs/CreatingYourFirstScreen.md)
 
+[Predefined Steps](https://github.com/glorylo/Joyride/blob/develop/docs/PredefinedSteps.md)
+
+[Element And Collection Mappings](https://github.com/glorylo/Joyride/blob/develop/docs/ElementAndCollectionMappings.md)
+
+[Handling Modal Dialogs](https://github.com/glorylo/Joyride/blob/develop/docs/HandlingModalDialogs.md)
+
+[Gestures](https://github.com/glorylo/Joyride/blob/develop/docs/Gestures.md)
+
+[Creating Shared Custom Steps](https://github.com/glorylo/Joyride/blob/develop/docs/CreatingSharedCustomSteps.md)
 
 # License
 
 Joyride uses the BSD License.
+
 
 
 Have fun! 
