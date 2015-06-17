@@ -27,7 +27,7 @@ You can then overlay any screen with application specific features via interface
     }
 ```   
 
-You then create an *LoginScreen* for both andriod and ios implementing the *ILogin* interface.  Create a custom step that binds to use the method to this interface like so:
+You then create a *LoginScreen* for both andriod and ios implementing the *ILogin* interface.  Create a binding custom step to use the method to this interface like so:
 
 ```csharp
    [Given(@"I login as user ""([^""]*)"" with password ""([^""]*)"")]
@@ -63,7 +63,7 @@ And I login as user "tommy" with password "secret"
 Here are some of the features included with Joyride
 
 - Built-in starter configuration to quickly get you up and running.
-- Support for mostly native actions for ios and android.  Currently hybrid apps have limited support thus far.
+- Support for mostly native actions for ios and android.  Currently hybrid apps have limited support.
 - Handling of collection of elements
 - Smart element and collection mappings
 - Predefined steps for interacting with different widgets such as checkboxes, entering text, etc.
