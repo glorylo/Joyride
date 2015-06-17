@@ -30,12 +30,12 @@ You can then overlay any screen with application specific features via interface
 You then create an *LoginScreen* for both andriod and ios implementing the *ILogin* interface.  Create a custom step that binds to use the method to this interface like so:
 
 ```csharp
-        [Given(@"I login as user ""([^""]*)"" with password ""([^""]*)"")]
-        [When(@"I login as user ""([^""]*)"" with password ""([^""]*)"")]
-        public void GivenILogin(string username, string password)
-        {
-            Context.MobileApp.Do<ILogin>(i => i.LoginAs(username, password));
-        }
+   [Given(@"I login as user ""([^""]*)"" with password ""([^""]*)"")]
+   [When(@"I login as user ""([^""]*)"" with password ""([^""]*)"")]
+   public void GivenILogin(string username, string password)
+   {
+       Context.MobileApp.Do<ILogin>(i => i.LoginAs(username, password));
+   }
 ```
 
 Your specs for Android look like so:
@@ -57,6 +57,7 @@ And I login as user "tommy" with password "secret"
   
 ```
 
+
 # Features
 
 Here are some of the features included with Joyride
@@ -75,7 +76,6 @@ Here are some of the features included with Joyride
 - And more...
 
 # Examples 
-
 
 
 Add the appropriate tag to add platform specific steps
@@ -118,7 +118,8 @@ When I double tap the "Add Button" button
 Then I should see "2" items in "Buttons" collection
 ```
 
-See a listing of the [Predefined Steps](https://github.com/glorylo/Joyride/blob/develop/docs/PredefinedSteps.md)
+See a listing of the [Predefined Steps](https://github.com/glorylo/Joyride/blob/develop/docs/PredefinedSteps.md),
+[Ios Predefined Steps](https://github.com/glorylo/Joyride/blob/develop/docs/IosPredefinedSteps.md), [Android Predefined Steps](https://github.com/glorylo/Joyride/blob/develop/docs/AndroidPredefinedSteps.md), and [Webview Predefined Steps](https://github.com/glorylo/Joyride/blob/develop/docs/WebviewPredefinedSteps.md) 
 
 # Installation
 
