@@ -48,7 +48,7 @@ Then I fail the scenario with reason "<reason>"
 
 ```gherkin
 Given I tap the "<element>" button
-Given I double tap the "<element>" button"
+Given I double tap the "<element>" button
 Given I tap the "<element>" button and hold for "<secs>" seconds
 Given I scroll the screen <direction>
 Given I do a (slight|moderate) scroll <direction>
