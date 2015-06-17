@@ -40,7 +40,7 @@ A real device.  If available, we prefer testing a real device over emulator or s
 * Disabling the lock screen
 * Bumping Display setting such as the idle time before the phone sleeps to 30 minutes
 
-#### iOS Devices
+##### iOS Devices
 * Enabled UI Automation.  Settings -> Developer -> Enable UI Automation
 * Have brew installed and install Webkit Debug Proxy for hybrid apps (brew install ios_webkit_debug_proxy)
 * Turn on web inspector on Safari. Settings -> Safari -> Advanced -> Web Inspector ON
