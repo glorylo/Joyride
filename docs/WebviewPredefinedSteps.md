@@ -1,12 +1,12 @@
 # iOS Steps
 
-#### Given and Whens
+##### Given and Whens
 ```gherkin
 Given I select "<value>" for "<dropdown>"
 ```
 
 
-#### Thens
+##### Thens
 
 ```gherkin
 Then I should see selected drop down "<dropdown>" (equals|containing) "<text>"

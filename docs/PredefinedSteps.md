@@ -1,7 +1,7 @@
 # Mobile Application Steps
 
 
-#### Given and Whens
+##### Given and Whens
 ```gherkin
 Given I launch the "<mobile name>" mobile application
 Given I close the mobile application
@@ -10,7 +10,7 @@ Given I close the mobile application
 
 # Screen Steps
 
-#### Given and Whens
+##### Given and Whens
 
 ```gherkin
 Given I rotate the screen to <orientation> orientation
@@ -18,7 +18,7 @@ Given I rotate the screen to <orientation> orientation
 
 ```
 
-#### Thens
+##### Thens
 
 The *Then* steps are used for assertions.  Most of the them a **should not** equivalent.  For example, you can use the two steps below:
 
@@ -44,7 +44,7 @@ Then I fail the scenario with reason "<reason>"
 # Gestures
 
 
-#### Given and Whens
+##### Given and Whens
 
 ```gherkin
 Given I tap the "<element>" button
@@ -53,23 +53,23 @@ Given I tap the "<element>" button and hold for "<secs>" seconds
 Given I scroll the screen <direction>
 Given I do a (slight|moderate) scroll <direction>
 Given I swipe the screen <direction>
-Given I scroll the screen <direction> until I see element "<element>
+Given I scroll the screen <direction> until I see element "<element>"
 Given I pinch the screen to zoom <direction>
 ```
 
 
 # Collections
 
-#### Given and Whens
+##### Given and Whens
 ```gherkin
 Given I tap the "(first|most recent|last)" item in the "<collection>" collection
-Given I tap the "<ordinal>" item in the "<collection>" collection"
+Given I tap the "<ordinal>" item in the "<collection>" collection
 Given I tap up to "<number>" item(s) in the "<collection>" collection
 Given I inspect the number of items in collection "<collection>"
 
 ```
 
-#### Then
+##### Then
 
 
 ```gherkin
@@ -100,7 +100,7 @@ Given I take a screenshot
 
 # Modal Dialogs
 
-#### Given and Whens
+##### Given and Whens
 
 ```gherkin
 Given I (accept|dismiss) the "<modal dialog>" modal dialog
@@ -108,7 +108,7 @@ Given I (accept|dismiss) any modal dialog
 Given I respond to the "<response>" modal dialog with "<modal dialog>"
 ```
 
-#### Thens
+##### Thens
 
 ```gherkin
 
@@ -122,7 +122,7 @@ Then I should see the "<modal dialog>" modal dialog (equals|ends with|starts wit
 # UI Controls
 
 
-### # Given and Whens
+##### Given and Whens
 ```gherkin
 Given I enter "<text>" in the "<text field>" field
 Given I (uncheck|check) the "<checkbox>" checkbox
