@@ -84,4 +84,4 @@
    ```
    When the *Then* step is executed, it makes an invocation to IsOnScreen and asserts that the screen is being displayed.
 
-6. If all is well, running your test should pass.  
+6. If all is well, running your test should pass!  
