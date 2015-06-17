@@ -111,13 +111,13 @@ Joyride.Specflow:  ![#](https://img.shields.io/nuget/v/Joyride.Specflow.svg?styl
 
 # Resources
 
-[Getting Started](https://github.com/glorylo/Joyride/blob/develop/docs/GettingStarted.md)
-[Creating Your First Screen](https://github.com/glorylo/Joyride/blob/develop/docs/CreatingYourFirstScreen.md)
-[Predefined Steps](https://github.com/glorylo/Joyride/blob/develop/docs/PredefinedSteps.md)
-[Element And Collection Mappings](https://github.com/glorylo/Joyride/blob/develop/docs/ElementAndCollectionMappings.md)
-[Handling Modal Dialogs](https://github.com/glorylo/Joyride/blob/develop/docs/HandlingModalDialogs.md)
-[Gestures](https://github.com/glorylo/Joyride/blob/develop/docs/Gestures.md)
-[Creating Shared Custom Steps](https://github.com/glorylo/Joyride/blob/develop/docs/CreatingSharedCustomSteps.md)
+- [Getting Started](https://github.com/glorylo/Joyride/blob/develop/docs/GettingStarted.md)
+- [Creating Your First Screen](https://github.com/glorylo/Joyride/blob/develop/docs/CreatingYourFirstScreen.md)
+- [Predefined Steps](https://github.com/glorylo/Joyride/blob/develop/docs/PredefinedSteps.md)
+- [Element And Collection Mappings](https://github.com/glorylo/Joyride/blob/develop/docs/ElementAndCollectionMappings.md)
+- [Handling Modal Dialogs](https://github.com/glorylo/Joyride/blob/develop/docs/HandlingModalDialogs.md)
+- [Gestures](https://github.com/glorylo/Joyride/blob/develop/docs/Gestures.md)
+- [Creating Shared Custom Steps](https://github.com/glorylo/Joyride/blob/develop/docs/CreatingSharedCustomSteps.md)
 
 # License
 
