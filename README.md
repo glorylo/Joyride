@@ -30,8 +30,8 @@ You can then overlay any screen with application specific features via interface
 You then create a *LoginScreen* for both andriod and ios implementing the *ILogin* interface.  Create a binding custom step to use the method to this interface like so:
 
 ```csharp
-   [Given(@"I login as user ""([^""]*)"" with password ""([^""]*)"")]
-   [When(@"I login as user ""([^""]*)"" with password ""([^""]*)"")]
+   [Given(@"I login as user ""([^""]*)"" with password ""([^""]*)""")]
+   [When(@"I login as user ""([^""]*)"" with password ""([^""]*)""")]
    public void GivenILogin(string username, string password)
    {
        Context.MobileApp.Do<ILogin>(i => i.LoginAs(username, password));
