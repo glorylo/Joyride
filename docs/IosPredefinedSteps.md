@@ -1,6 +1,6 @@
 # iOS Steps
 
-Add the @ios tag for your feature to unlock android specific steps
+Add the @ios tag for your feature to unlock ios specific steps
 
 ##### Given and Whens
 ```gherkin
