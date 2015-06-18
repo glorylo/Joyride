@@ -4,7 +4,7 @@
 
 # Motivation
 
-You have the same mobile application across ios and android.  You want to write automated acceptance tests and ensure feature parity between the two.  With Joyride you can write near identical specs for both apps sharing much of the underlying code,   
+You have the same mobile application across ios and android.  You want to write automated acceptance tests and ensure feature parity between the two.  With Joyride you can write near identical specs for both apps sharing much of the underlying code.   
 
 You can also leverage shared code between the two test suites.  The typical use cases include sharing business models, user profiles, and so on thereby simplifying much of the duplicated work had you worked with two separate projects.  
 
@@ -72,7 +72,7 @@ Here are some of the features included with Joyride
 - Predefined debugging steps 
 - Predefined gestures steps
 - Screen captures on error
-- ios and android specific steps.  For example, android has a "back" button.
+- ios and android specific steps.  For example, android has a "back" button
 - And more...
 
 # Examples 
@@ -119,7 +119,7 @@ Then I should see "2" items in "Buttons" collection
 ```
 
 See a listing of the [Predefined Steps](https://github.com/glorylo/Joyride/blob/develop/docs/PredefinedSteps.md),
-[Ios Predefined Steps](https://github.com/glorylo/Joyride/blob/develop/docs/IosPredefinedSteps.md), [Android Predefined Steps](https://github.com/glorylo/Joyride/blob/develop/docs/AndroidPredefinedSteps.md), and [Webview Predefined Steps](https://github.com/glorylo/Joyride/blob/develop/docs/WebviewPredefinedSteps.md) 
+[Ios Steps](https://github.com/glorylo/Joyride/blob/develop/docs/IosPredefinedSteps.md), [Android Steps](https://github.com/glorylo/Joyride/blob/develop/docs/AndroidPredefinedSteps.md), and [Webview Steps](https://github.com/glorylo/Joyride/blob/develop/docs/WebviewPredefinedSteps.md) 
 
 # Installation
 
@@ -155,9 +155,9 @@ Joyride.Specflow:  ![#](https://img.shields.io/nuget/v/Joyride.Specflow.svg?styl
 - [Getting Started](https://github.com/glorylo/Joyride/blob/develop/docs/GettingStarted.md)
 - [Creating Your First Screen](https://github.com/glorylo/Joyride/blob/develop/docs/CreatingYourFirstScreen.md)
 - [Predefined Steps](https://github.com/glorylo/Joyride/blob/develop/docs/PredefinedSteps.md)
-- [Ios Predefined Steps](https://github.com/glorylo/Joyride/blob/develop/docs/IosPredefinedSteps.md)
-- [Android Predefined Steps](https://github.com/glorylo/Joyride/blob/develop/docs/AndroidPredefinedSteps.md)
-- [Webview Predefined Steps](https://github.com/glorylo/Joyride/blob/develop/docs/WebviewPredefinedSteps.md)
+- [Ios Steps](https://github.com/glorylo/Joyride/blob/develop/docs/IosPredefinedSteps.md)
+- [Android Steps](https://github.com/glorylo/Joyride/blob/develop/docs/AndroidPredefinedSteps.md)
+- [Webview Steps](https://github.com/glorylo/Joyride/blob/develop/docs/WebviewPredefinedSteps.md)
 - [Element And Collection Mappings](https://github.com/glorylo/Joyride/blob/develop/docs/ElementAndCollectionMappings.md)
 - [Handling Modal Dialogs](https://github.com/glorylo/Joyride/blob/develop/docs/HandlingModalDialogs.md)
 - [Gestures](https://github.com/glorylo/Joyride/blob/develop/docs/Gestures.md)
