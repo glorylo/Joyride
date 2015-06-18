@@ -57,6 +57,33 @@ And I login as user "tommy" with password "secret"
   
 ```
 
+In fact, Joyride achieves much of the cross platform compatibility in the same manner.  Here's the actual code for "tap" and "swipe".
+
+```csharp
+   [Given(@"I tap the ""([^""]*)"" (?:button|field|label|element|link)")]
+   [When(@"I tap the ""([^""]*)"" (?:button|field|label|element|link)")]
+   public void WhenITapTheButton(string elementName)
+   {
+      Context.MobileApp.Do<IGesture>(i => i.Tap(elementName));
+   }
+```
+
+```csharp
+   [Given(@"I swipe the screen (left|right|up|down)")]
+   [When(@"I swipe the screen (left|right|up|down)")]
+   public void GivenISwipeScreenInDirection(string direction)
+   {
+       var directionToSwipe = (Direction) Enum.Parse(typeof(Direction), direction, true);
+       Context.MobileApp.Do<IGesture>(i => i.Swipe(directionToSwipe));
+   }
+```
+
+Your specs using "tap" and "swipe" steps:
+```gherkin
+Given I tap the "Inbox" button
+And I swipe the screen right
+```
+
 
 # Features
 
