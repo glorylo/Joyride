@@ -1,7 +1,7 @@
 # Creating Your First Screen
 
 1. Continuing after the "Getting Started" Guide, we'll create our first screen.  
-   Create an abstract base class to AndroidScreen.  This base class will be used to anything globally for all your application's screens.
+   Create an abstract base class to AndroidScreen.  This base class will be used for anything globally for all your application's screens.  
    ```csharp
       public abstract class MyCoolAndroidScreen : AndroidScreen 
       { 
