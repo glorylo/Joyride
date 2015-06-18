@@ -1,5 +1,7 @@
 # iOS Steps
 
+Add the @ios tag for your feature to unlock android specific steps
+
 ##### Given and Whens
 ```gherkin
 Given I drag the "<slider>" slider with value "<value>"
