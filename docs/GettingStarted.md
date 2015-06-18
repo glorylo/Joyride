@@ -54,7 +54,7 @@ A real device.  If available, we prefer testing a real device over emulator or s
 2. Create a test project
 3. Install Joyride.Specflow using via Nuget
 4. From here, Joyride will install the other dependencies which include NUnit, Specflow, Joyride, etc.
-5. Joyride adds several directories: Logs, Screenshots, Steps, and Specs.  The "Logs" and "Screenshots" folder store tracing dom data and screenshots respectively.  The "Steps" folder should include your custom "step" binding code for your specs (stored in "Secs"and files to your project:  App.config, Steps\SpecflowHooks.cs and a template Specs\FirstSpec.feature file.
+5. Joyride adds several directories: Logs, Screenshots, Steps, and Specs.  The "Logs" and "Screenshots" folder store tracing dom data and screenshots respectively.  The "Steps" folder should include your custom "step" binding code for your specs.  The "Specs" folder contains all your .feature files.  After the install, you should see these key files:  App.config, Steps\SpecflowHooks.cs and a template Specs\FirstSpec.feature file.
 6. Modify the App.config with the appropriate settings under the joyride section. The template provides the following:
   ```xml
     <joyride>
