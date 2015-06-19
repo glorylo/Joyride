@@ -22,6 +22,9 @@
 	
     <description>$description$</description>
     <releaseNotes>
+    0.0.2 
+       - fixed EnterText and added EnterTextBySetValue for iOS
+
     0.0.1 
        - Initial release
 
