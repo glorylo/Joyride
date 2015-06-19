@@ -28,8 +28,8 @@ namespace Joyride.Specflow.Steps
 
         #region Thens
 
-        [Then(@"I should see the label ""([^""]*)"" with text (equals|starts with|containing) ""([^""]*)""")]
-        public void ThenIShouldSeeLabelWithText(string elementName, string compareType, string text)
+        [Then(@"I (should|should not) see the label ""([^""]*)"" with text (equals|starts with|containing) ""([^""]*)""")]
+        public void ThenIShouldSeeLabelWithText(string shouldOrShouldNot, string elementName, string compareType, string text)
         {
             string actualLabel = null;
             Context.MobileApp.Do<Screen>(s => actualLabel = s.GetElementText(elementName));
@@ -38,8 +38,13 @@ namespace Joyride.Specflow.Steps
             if (actualLabel == null)
                 Assert.Fail("Unable to find value for element: " + elementName);
 
-            Assert.That(actualLabel.CompareWith(text, compareType.ToCompareType()), Is.True,
-               "Unexpected text compare with '" + actualLabel + "' is not " + compareType + " '" + text + "'");
+            if (shouldOrShouldNot == "should")
+              Assert.That(actualLabel.CompareWith(text, compareType.ToCompareType()), Is.True,
+                 "Unexpected text compare with '" + actualLabel + "' is not " + compareType + " '" + text + "'");
+            else
+              Assert.That(actualLabel.CompareWith(text, compareType.ToCompareType()), Is.False,
+               "Unexpected text compare with '" + actualLabel + "' is " + compareType + " '" + text + "'");
+
         }
 
         [Then(@"the element ""([^""]*)"" (should|should not) be present")]

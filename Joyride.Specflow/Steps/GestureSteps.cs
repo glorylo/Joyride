@@ -25,8 +25,8 @@ namespace Joyride.Specflow.Steps
             Context.MobileApp.Do<IGesture>(i => i.DoubleTap(elementName));
         }
 
-        [Given(@"I tap the ""([^""]*)"" button and hold for ""(\d+)"" seconds")]
-        [When(@"I tap the ""([^""]*)"" button and hold for ""(\d+)"" seconds")]
+        [Given(@"I tap the ""([^""]*)"" (?:button|field|label|element|link) and hold for ""(\d+)"" seconds")]
+        [When(@"I tap the ""([^""]*)"" (?:button|field|label|element|link) and hold for ""(\d+)"" seconds")]
         public void WhenITapAndHoldTheButton(string elementName, int seconds)
         {
             Context.MobileApp.Do<IGesture>(i => i.TapAndHold(elementName, seconds));
