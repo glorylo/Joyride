@@ -79,13 +79,16 @@ namespace Joyride.Specflow.Steps
             }                
         }
 
-        [Then(@"I should be on the ""([^""]*)"" screen")]
-        public void ThenIShouldBeOnSomeScreen(string screen)
+        [Then(@"I (should|should not) be on the ""([^""]*)"" screen")]
+        public void ThenIShouldBeOnSomeScreen(string shouldOrShouldNot, string screen)
         {
             var onScreen = false;
             Context.MobileApp.Do<Screen>(s => onScreen = s.Name.Equals(screen) && s.IsOnScreen(TimeoutSecs));
-            Assert.IsTrue(onScreen,
-                "Incorrectly on screen: " + Context.MobileApp.Screen.Name);
+
+            if (shouldOrShouldNot == "should")
+               Assert.IsTrue(onScreen, "Incorrectly on screen: " + Context.MobileApp.Screen.Name);
+            else
+               Assert.IsFalse(onScreen, "Unexpected to be on a screen other than: " + Context.MobileApp.Screen.Name);
         }
         
         [Then(@"I (should|should not) see element ""([^""]*)"" with (.*) (equals|starts with|containing|matching) ""([^""]*)""")]
