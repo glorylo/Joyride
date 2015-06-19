@@ -35,6 +35,10 @@ Given I tap the "App" button
 When I go back
 Then I should be on the "Main" screen
 
+Scenario: Should not be on Activity screen
+Given I tap the "App" button
+Then I should not be on the "Activity" screen
+
 Scenario: Navigate to Activity screen
 Given I tap the "App" button
 When I tap the "Activity" button

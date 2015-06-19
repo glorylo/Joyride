@@ -169,10 +169,10 @@ testRunner.Then("I should be on the \"Main\" screen", ((string)(null)), ((TechTa
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Navigate to Activity screen")]
-        public virtual void NavigateToActivityScreen()
+        [NUnit.Framework.DescriptionAttribute("Should not be on Activity screen")]
+        public virtual void ShouldNotBeOnActivityScreen()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Navigate to Activity screen", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should not be on Activity screen", ((string[])(null)));
 #line 38
 this.ScenarioSetup(scenarioInfo);
 #line 7
@@ -180,8 +180,25 @@ this.FeatureBackground();
 #line 39
 testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 40
+testRunner.Then("I should not be on the \"Activity\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Navigate to Activity screen")]
+        public virtual void NavigateToActivityScreen()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Navigate to Activity screen", ((string[])(null)));
+#line 42
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 43
+testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 44
 testRunner.When("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 41
+#line 45
 testRunner.Then("I should be on the \"Activity\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -192,17 +209,17 @@ testRunner.Then("I should be on the \"Activity\" screen", ((string)(null)), ((Te
         public virtual void NavigateToCustomTitleScreen()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Navigate to Custom Title screen", ((string[])(null)));
-#line 43
+#line 47
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 44
+#line 48
 testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 45
+#line 49
 testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 46
+#line 50
 testRunner.When("I tap the \"Custom Title\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 47
+#line 51
 testRunner.Then("I should be on the \"Custom Title\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -213,13 +230,13 @@ testRunner.Then("I should be on the \"Custom Title\" screen", ((string)(null)), 
         public virtual void NavigateToAnimationScreen()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Navigate to Animation screen", ((string[])(null)));
-#line 49
+#line 53
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 50
+#line 54
 testRunner.Given("I tap the \"Animation\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 51
+#line 55
 testRunner.Then("I should be on the \"Animation\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -230,15 +247,15 @@ testRunner.Then("I should be on the \"Animation\" screen", ((string)(null)), ((T
         public virtual void NavigateToDefaultLayoutAnimationsScreen()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Navigate to Default Layout Animations screen", ((string[])(null)));
-#line 53
+#line 57
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 54
+#line 58
 testRunner.Given("I tap the \"Animation\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 55
+#line 59
 testRunner.When("I tap the \"Default Layout Animations\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 56
+#line 60
 testRunner.Then("I should be on the \"Default Layout Animations\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -249,15 +266,15 @@ testRunner.Then("I should be on the \"Default Layout Animations\" screen", ((str
         public virtual void NavigateToFragmentScreen()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Navigate to Fragment Screen", ((string[])(null)));
-#line 58
+#line 62
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 59
+#line 63
 testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 60
+#line 64
 testRunner.When("I tap the \"Fragment\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 61
+#line 65
 testRunner.Then("I should be on the \"Fragment\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -268,17 +285,17 @@ testRunner.Then("I should be on the \"Fragment\" screen", ((string)(null)), ((Te
         public virtual void NavigateToContextMenuScreen()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Navigate to Context Menu Screen", ((string[])(null)));
-#line 63
+#line 67
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 64
+#line 68
 testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 65
+#line 69
 testRunner.And("I tap the \"Fragment\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 66
+#line 70
 testRunner.When("I tap the \"Context Menu\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 67
+#line 71
 testRunner.Then("I should be on the \"Context Menu\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -289,23 +306,23 @@ testRunner.Then("I should be on the \"Context Menu\" screen", ((string)(null)), 
         public virtual void NavigateToTheLongScreen()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Navigate to the Long Screen", ((string[])(null)));
-#line 69
+#line 73
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 70
-testRunner.Given("I scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 71
-testRunner.And("I tap the \"Views\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 72
-testRunner.And("I scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 73
-testRunner.And("I tap the \"Layouts\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 74
-testRunner.And("I tap the \"Scroll View\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 75
-testRunner.When("I tap the \"Long\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.And("I tap the \"Views\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 76
+testRunner.And("I scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 77
+testRunner.And("I tap the \"Layouts\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 78
+testRunner.And("I tap the \"Scroll View\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 79
+testRunner.When("I tap the \"Long\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 80
 testRunner.Then("I should be on the \"Long\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -316,19 +333,19 @@ testRunner.Then("I should be on the \"Long\" screen", ((string)(null)), ((TechTa
         public virtual void NavigateToQuickContactDemoScreen()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Navigate to Quick Contact Demo Screen", ((string[])(null)));
-#line 78
+#line 82
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 79
-testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 80
-testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 81
-testRunner.And("I scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 82
-testRunner.When("I tap the \"Quick Contacts Demo\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 83
+testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 84
+testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 85
+testRunner.And("I scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 86
+testRunner.When("I tap the \"Quick Contacts Demo\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 87
 testRunner.Then("I should be on the \"Quick Contacts Demo\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
