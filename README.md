@@ -73,8 +73,8 @@ In fact, Joyride achieves much of the cross platform compatibility in the same m
    [When(@"I swipe the screen (left|right|up|down)")]
    public void GivenISwipeScreenInDirection(string direction)
    {
-       var directionToSwipe = (Direction) Enum.Parse(typeof(Direction), direction, true);
-       Context.MobileApp.Do<IGesture>(i => i.Swipe(directionToSwipe));
+       var dir = (Direction) Enum.Parse(typeof(Direction), direction, true);
+       Context.MobileApp.Do<IGesture>(i => i.Swipe(dir));
    }
 ```
 
@@ -129,11 +129,18 @@ Then I should be on the "Context Menu" screen
 ```
 
 ```gherkin
-Scenario: Should see title containing text in modal dialog
+Scenario Outline: Respond to with the long message modal dialog 
 Given I tap the "App" button
 And I tap the "Alert Dialogs" button
-When I tap the "Ok Cancel Dialog" button
-Then I should see the "Lorem Ipsum" modal dialog containing title text "Plloaso mako nuto siwuf"
+And I tap the "Ok Cancel Dialog With Long Message" button
+When I respond to the "Long Message" modal dialog with "<response>"
+Then I should be on the "Alert Dialogs" screen
+
+Examples: 
+| response  |
+| Something |
+| Ok        |
+| Cancel    |
 
 ```
 
