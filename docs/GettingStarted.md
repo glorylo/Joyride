@@ -54,8 +54,8 @@ A real device.  If available, we prefer testing a real device over emulator or s
 2. Create a test project
 3. Install Joyride.Specflow using via Nuget
 4. From here, Joyride will install the other dependencies which include NUnit, Specflow, Joyride, etc.
-5. Joyride adds several directories: Logs, Screenshots, Steps, and Specs.  The "Logs" and "Screenshots" folder store tracing dom data and screenshots respectively.  The "Steps" folder should include your custom "step" binding code for your specs.  The "Specs" folder contains all your .feature files.  After the install, you should see these key files:  App.config, Steps\SpecflowHooks.cs and a template Specs\FirstSpec.feature file.
-6. Modify the App.config with the appropriate settings under the joyride section. The template provides the following:
+5. Joyride adds several directories: Logs, Screenshots, Steps, and Specs.  The "Logs" and "Screenshots" folder store tracing dom data and screenshots respectively.  The "Steps" folder should include your custom "step" binding code for your specs.  The "Specs" folder contains all your .feature files.  After the install, you should see these key files:  *App.config*, *Steps\SpecflowHooks.cs* and a template *Specs\FirstSpec.feature* file.
+6. Modify the *App.config* with the appropriate settings under the joyride section. The template provides the following:
   ```xml
     <joyride>
        <capabilities>
@@ -100,15 +100,15 @@ A real device.  If available, we prefer testing a real device over emulator or s
    ```
    All the settings under capabilities map directly to [Appiums Capabilities](http://appium.io/slate/en/master/?csharp#appium-server-capabilities).  The settings are bundled together using [HandyConfig](https://www.nuget.org/packages/HandyConfig/). 
 
-   The *capabilities* section includes global capabilities.  Joyride prefers to launch the app manually by setting *autolaunch* to false.  Note the *type="System.Boolean"*.  You have to supply the correct type for the capabilities.  For example, you want the *newCommandTimeout* capability with a value of "70", also include *type=System.Int32*.  If the *type* is not specified, the *"System.String"* is used as the default.
+   The *capabilities* section includes global capabilities.  Joyride prefers to launch the app manually by setting *autoLaunch* to false.  Note the *type="System.Boolean"*.  You have to supply the correct type for the capabilities.  For example, you want the *newCommandTimeout* capability with a value of "70", also include *type="System.Int32"*.  If the *type* is not specified, the *"System.String"* is used as the default.
 
    The *android* and *ios* includes their respective platform capabilities. You can safely remove the section for the unused platform.  Update it with the appropriate app identifier, *bundleId* for *ios* or *appPackage* for *android*.  
 
-   Similarly, create a device target with device specfic capabilities.  If the same capabilitiy is specified here, it will supersede the capability setting before it.  Note the *name* of the device.  
+   Similarly, create a *device* target with device specfic capabilities.  If the same capabilitiy is specified here, it will supersede the capability setting before it.  Note the *name* of the device.  
 
    Lastly, review the *servers*.  The default runs on *dev* for localhost.  However, if you will be running on iOS you will be specifying a separate mac machine running the appium server.  
 
-7. Modify the config settings in Steps\SpecflowHooks.cs file by updating the TargetPlatform to either Platform.Android or Platform.Ios.  Also update the target device and ensure the correct server is used. 
+7. Modify the config settings in *Steps\SpecflowHooks.cs* file by updating the *TargetPlatform* to either *Platform.Android* or *Platform.Ios*.  Also update the target device and ensure the correct server is used. 
    ```csharp
         public const Platform TargetPlatform = Platform.Android;  // update either Platform.Android or Platform.Ios
 
@@ -122,7 +122,7 @@ A real device.  If available, we prefer testing a real device over emulator or s
             RemoteMobileDriver.Initialize(server, TargetPlatform, capabilities);
         }
    ```
-8. Define a an new app.  In Steps\SpecflowHooks.cs, the new app will be used to set Context.MobileApp as below.  
+8. Define a new app.  In *Steps\SpecflowHooks.cs*, the new app will be used to set Context.MobileApp as below.  
    ```csharp
    [BeforeScenario]
    public void BeforeScenario()
@@ -134,19 +134,18 @@ A real device.  If available, we prefer testing a real device over emulator or s
    }
 
    ```
-   If you are creating an app you want to eventually share code, it is best to create a separate project for this.  Create a  new project in VS and add a new class.  Subclass the appropriate platform for your app.  Use AndroidMobileApplication or IosMobileApplication.
+   If you are creating an app you want to eventually share code, it is best to create a separate project for this.  Create a  new project in VS and add a new class.  Subclass the appropriate platform for your app.  Use *AndroidMobileApplication* or *IosMobileApplication*.
 
    ```csharp 
     public class MyCoolApp : AndroidMobileApplication
     {
         public override string Identifier { get { return "com.my.cool.app"; }}
-
     }
    ```
 
    Update SpecflowHooks with the appropriate new app.
 
-9. The first spec is created for you under Specs\FirstSpec.feature.  Add the appropriate tag, either @android or @ios.   
+9. The first spec is created for you under *Specs\FirstSpec.feature*.  Add the appropriate tag, either *@android* or *@ios*.   
    ```gherkin 
    # Comment out and add the appropriate tag for your platform
    # @android or @ios
