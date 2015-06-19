@@ -27,7 +27,7 @@ You can then overlay any screen with application specific features via interface
     }
 ```   
 
-You then create a *LoginScreen* for both andriod and ios implementing the *ILogin* interface.  Create a binding custom step to use the method to this interface like so:
+You then create a *LoginScreen* for both android and ios implementing the *ILogin* interface.  Create a binding custom step to use the method to this interface like:
 
 ```csharp
    [Given(@"I login as user ""([^""]*)"" with password ""([^""]*)""")]
@@ -38,7 +38,7 @@ You then create a *LoginScreen* for both andriod and ios implementing the *ILogi
    }
 ```
 
-Your specs for Android look like so:
+Your specs for Android look like:
 ```gherkin
 Scenario: Should Login in successfully 
 Given I launch the "My Cool Android App" mobile application
@@ -47,7 +47,7 @@ And I login as user "tommy" with password "secret"
   
 ```
 
-Your specs for iOS look like so:
+Your specs for iOS look like:
 
 ```gherkin
 Scenario: Should Login in successfully 
