@@ -9,7 +9,7 @@
          Screen LoginAs(string name, string password);
       }
    ```
-   Another benefit of the interfaces is for situations where you have two apps, iOS and Android, and they each have their own release timelines.  If one feature is implemented on one app over other, it is self evident by the interfaces one screen implements.  If the missing feature eventually gets added to the app, instantly the step code is available and all that is needed is for the screens to implement the said interface.
+   Another benefit of the interfaces is for situations where you have two apps, iOS and Android, and they each have their own release timelines.  If one feature is implemented on one app over the other, it is self evident by the interfaces one screen implements.  When the missing feature eventually does get added, instantly the step code is available and all that is needed is for the screens to implement the said interface.
 3. Have your *LoginScreen* screens implement the *ILogin* interface.
 4. Create another separate project to hold only the shared steps.  You will not need the *Specs* folder, *App.config* nor the *SpecflowHooks.cs* file.  Create a new class file such as *LoginSteps.cs* with a binding to that interface method.
 
