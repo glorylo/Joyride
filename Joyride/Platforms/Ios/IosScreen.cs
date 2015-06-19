@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Drawing;
-using System.Linq;
 using System.Text.RegularExpressions;
 using Joyride.Extensions;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.iOS;
 
 namespace Joyride.Platforms.Ios
@@ -24,12 +24,24 @@ namespace Joyride.Platforms.Ios
             return this;
         }
 
+        protected Screen EnterTextBySetValue(string elementName, string text)
+        {
+            var element = FindCachedElement(elementName) as AppiumWebElement;
+            if (element == null)
+                throw new NoSuchElementException("Unable to find element " + elementName);
+
+            element.SetImmediateValue(text);
+            return this;
+        }
+
         public override Screen EnterText(string elementName, string text)
         {
             var element = FindElement(elementName);
             if (element == null)
                 throw new NoSuchElementException("Unable to find element " + elementName);
-
+            
+            element.Click();
+            element.Clear();
             element.SendKeys(text);
             return this;
         }
