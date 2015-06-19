@@ -181,7 +181,7 @@
       public override Screen AcceptModalDialog(bool accept)
       {
          return AcceptModalDialogs(accept, 
-            typeof (EnableLocationModalDialog),
+            typeof (EnableLocationPermissionModalDialog),
             typeof (EnablePhotosPermissionModalDialog),
             typeof (EnableAccessContactPermissionModalDialog));
       }
