@@ -27,7 +27,7 @@ Without elements to interact our specs would be pretty bland.  Each screen you d
    ```
    
 ### Add Cache Lookup   
-1. Certain elements are often repeated access while remaining on the same screen.  In such situations, you can add cache lookup to the element.  
+1. Certain elements are often repeated accessed while remaining on the same screen.  In such situations, you can add cache lookup to the element.  
    ```csharp
       public class DefaultLayoutAnimationsScreen : ApiDemoScreen
       {
