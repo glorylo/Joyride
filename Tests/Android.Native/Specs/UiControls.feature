@@ -11,7 +11,7 @@ Scenario: Should be able to see an Left Title label present on screen
 Given I tap the "App" button
 And I tap the "Activity" button
 When I tap the "Custom Title" button
-Then the element "Left Title" should be present
+Then the field "Left Title" should be present
 
 
 Scenario: Should not see left title label change 

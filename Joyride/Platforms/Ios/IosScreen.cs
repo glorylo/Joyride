@@ -106,7 +106,7 @@ namespace Joyride.Platforms.Ios
             return element.Text;
         }
 
-
+        // TODO: Not reliable.  
         public virtual void HideKeyboard()
         {
             var windowSize = Driver.ScreenSize();

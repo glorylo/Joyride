@@ -47,7 +47,7 @@ namespace Joyride.Specflow.Steps
 
         }
 
-        [Then(@"the element ""([^""]*)"" (should|should not) be present")]
+        [Then(@"the (?:button|field|label|element|link) ""([^""]*)"" (should|should not) be present")]
         public void ThenIShouldSeeElementIsPresent(string elementName, string shouldOrShouldNot)
         {
             var elementPresent = false;

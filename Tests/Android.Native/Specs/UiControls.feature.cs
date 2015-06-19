@@ -91,7 +91,7 @@ testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.Spe
 #line 13
 testRunner.When("I tap the \"Custom Title\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 14
-testRunner.Then("the element \"Left Title\" should be present", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("the field \"Left Title\" should be present", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
