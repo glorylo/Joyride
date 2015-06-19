@@ -28,8 +28,8 @@ namespace Joyride.Specflow.Steps
 
         #region Thens
 
-        [Then(@"I should see the label ""([^""]*)"" with text (equals|starts with|containing) ""([^""]*)""")]
-        public void ThenIShouldSeeLabelWithText(string elementName, string compareType, string text)
+        [Then(@"I (should|should not) see the label ""([^""]*)"" with text (equals|starts with|containing) ""([^""]*)""")]
+        public void ThenIShouldSeeLabelWithText(string shouldOrShouldNot, string elementName, string compareType, string text)
         {
             string actualLabel = null;
             Context.MobileApp.Do<Screen>(s => actualLabel = s.GetElementText(elementName));
@@ -38,11 +38,16 @@ namespace Joyride.Specflow.Steps
             if (actualLabel == null)
                 Assert.Fail("Unable to find value for element: " + elementName);
 
-            Assert.That(actualLabel.CompareWith(text, compareType.ToCompareType()), Is.True,
-               "Unexpected text compare with '" + actualLabel + "' is not " + compareType + " '" + text + "'");
+            if (shouldOrShouldNot == "should")
+              Assert.That(actualLabel.CompareWith(text, compareType.ToCompareType()), Is.True,
+                 "Unexpected text compare with '" + actualLabel + "' is not " + compareType + " '" + text + "'");
+            else
+              Assert.That(actualLabel.CompareWith(text, compareType.ToCompareType()), Is.False,
+               "Unexpected text compare with '" + actualLabel + "' is " + compareType + " '" + text + "'");
+
         }
 
-        [Then(@"the element ""([^""]*)"" (should|should not) be present")]
+        [Then(@"the (?:button|field|label|element|link|checkbox|switch) ""([^""]*)"" (should|should not) be present")]
         public void ThenIShouldSeeElementIsPresent(string elementName, string shouldOrShouldNot)
         {
             var elementPresent = false;
@@ -58,7 +63,7 @@ namespace Joyride.Specflow.Steps
             }               
         }
 
-        [Then(@"I (should|should not) see the (?:button|field|label|element|link) ""([^""]*)""")]
+        [Then(@"I (should|should not) see the (?:button|field|label|element|link|checkbox|switch) ""([^""]*)""")]
         public void ThenIShouldSeeElement(string shouldOrShouldNot, string elementName)
         {
             var elementVisible = false;
@@ -74,13 +79,16 @@ namespace Joyride.Specflow.Steps
             }                
         }
 
-        [Then(@"I should be on the ""([^""]*)"" screen")]
-        public void ThenIShouldBeOnSomeScreen(string screen)
+        [Then(@"I (should|should not) be on the ""([^""]*)"" screen")]
+        public void ThenIShouldBeOnSomeScreen(string shouldOrShouldNot, string screen)
         {
             var onScreen = false;
             Context.MobileApp.Do<Screen>(s => onScreen = s.Name.Equals(screen) && s.IsOnScreen(TimeoutSecs));
-            Assert.IsTrue(onScreen,
-                "Incorrectly on screen: " + Context.MobileApp.Screen.Name);
+
+            if (shouldOrShouldNot == "should")
+               Assert.IsTrue(onScreen, "Incorrectly on screen: " + Context.MobileApp.Screen.Name);
+            else
+               Assert.IsFalse(onScreen, "Unexpected to be on a screen other than: " + Context.MobileApp.Screen.Name);
         }
         
         [Then(@"I (should|should not) see element ""([^""]*)"" with (.*) (equals|starts with|containing|matching) ""([^""]*)""")]

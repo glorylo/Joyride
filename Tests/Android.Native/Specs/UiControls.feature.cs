@@ -91,7 +91,30 @@ testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.Spe
 #line 13
 testRunner.When("I tap the \"Custom Title\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 14
-testRunner.Then("the element \"Left Title\" should be present", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("the field \"Left Title\" should be present", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Should not see left title label change")]
+        public virtual void ShouldNotSeeLeftTitleLabelChange()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should not see left title label change", ((string[])(null)));
+#line 17
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 18
+testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 19
+testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 20
+testRunner.And("I tap the \"Custom Title\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 21
+testRunner.When("I enter \"New Left Title\" in the \"Left\" field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 22
+testRunner.Then("I should not see the label \"Left Title\" with text equals \"New Left Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -101,21 +124,21 @@ testRunner.Then("the element \"Left Title\" should be present", ((string)(null))
         public virtual void ShouldBeAbleToEnterTextAndVerifySavedChanges()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should be able to enter text and verify saved changes", ((string[])(null)));
-#line 16
+#line 24
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 17
+#line 25
 testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 18
+#line 26
 testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 19
+#line 27
 testRunner.And("I tap the \"Custom Title\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 20
+#line 28
 testRunner.And("I enter \"New Left Title\" in the \"Left\" field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 21
+#line 29
 testRunner.When("I tap the \"Change Left\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 22
+#line 30
 testRunner.Then("I should see the label \"Left Title\" with text equals \"New Left Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -126,23 +149,23 @@ testRunner.Then("I should see the label \"Left Title\" with text equals \"New Le
         public virtual void ShouldShowLabelWhenCheckoxIsEnabled()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should show label when checkox is enabled", ((string[])(null)));
-#line 24
+#line 32
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 25
+#line 33
 testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 26
+#line 34
 testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 27
+#line 35
 testRunner.And("I do a moderate scroll down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 28
+#line 36
 testRunner.And("I tap the \"Presentation\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 29
+#line 37
 testRunner.When("I check the \"Show All Displays\" checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 30
+#line 38
 testRunner.Then("I should see the \"Show All Displays\" checkbox checked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 31
+#line 39
 testRunner.And("I should see a label equals text \"Display #0: Built-in Screen\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -153,25 +176,25 @@ testRunner.And("I should see a label equals text \"Display #0: Built-in Screen\"
         public virtual void ShouldNotShowLabelWhenCheckoxIsEnabled()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should not show label when checkox is enabled", ((string[])(null)));
-#line 33
+#line 41
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 34
+#line 42
 testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 35
+#line 43
 testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 36
+#line 44
 testRunner.And("I do a moderate scroll down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 37
+#line 45
 testRunner.And("I tap the \"Presentation\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 38
+#line 46
 testRunner.And("I check the \"Show All Displays\" checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 39
+#line 47
 testRunner.When("I uncheck the \"Show All Displays\" checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 40
+#line 48
 testRunner.Then("I should not see the \"Show All Displays\" checkbox checked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 41
+#line 49
 testRunner.And("I should not see a label equals text \"Display #0: Built-in Screen\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

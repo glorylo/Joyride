@@ -86,13 +86,23 @@
     <Compile Include="Configuration\JoyrideConfiguration.cs" />
     <None Include="Content\App.config.install.xdt" />
     <None Include="Content\App.config.uninstall.xdt" />
+    <None Include="Content\Specs\FirstSpec.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>FirstSpec.feature.cs</LastGenOutput>
+    </None>
     <None Include="Content\Steps\SpecFlowHooks.cs.pp" />
+    <Compile Include="Content\Specs\FirstSpec.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FirstSpec.feature</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Configuration\JoyrideSectionHandler.cs" />
     <Compile Include="Steps\AndroidSteps.cs" />
     <Compile Include="Steps\DebugSteps.cs" />
     <Compile Include="Steps\CollectionSteps.cs" />
+    <Compile Include="Steps\DeprecatedSteps.cs" />
     <Compile Include="Steps\UiControlSteps.cs" />
     <Compile Include="Steps\GestureSteps.cs" />
     <Compile Include="Steps\IosSteps.cs" />
@@ -114,7 +124,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\Specs\" />
     <Folder Include="Extensions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

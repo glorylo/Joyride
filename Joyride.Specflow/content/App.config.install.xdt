@@ -50,9 +50,9 @@
     </servers>  
   </joyride>
 
-  <specFlow>
-    <unitTestProvider name="NUnit"/>
-    <stepAssemblies xdt:Transform="Insert">
+  <specFlow xdt:Transform="Replace">
+    <unitTestProvider name="NUnit" />
+    <stepAssemblies>
       <stepAssembly assembly="Joyride.Specflow" />
     </stepAssemblies>
   </specFlow>
