@@ -30,7 +30,7 @@
    When I go back
    ```
    
-   this will be invoked to detect any screen as the default.
+   it will invoke the default detect code below:
    ```csharp
       public override Screen GoBack()
       {
@@ -46,6 +46,7 @@
 5. If a screen transitions from a selected set of screens you can restrict detection similarly to dialogs. Simply provide a list of screens you wish to detect **in that order**.  
 
    ```csharp
+      // Overriding MyCoolAndroidScreen's default GoBack()
       public override Screen GoBack()
       {
           Driver.Navigate().Back();
