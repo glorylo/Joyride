@@ -184,6 +184,7 @@ Joyride.Specflow:  ![#](https://img.shields.io/nuget/v/Joyride.Specflow.svg?styl
 - [Element And Collection Mappings](https://github.com/glorylo/Joyride/blob/develop/docs/ElementAndCollectionMappings.md)
 - [Gestures](https://github.com/glorylo/Joyride/blob/develop/docs/Gestures.md)
 - [Handling Modal Dialogs](https://github.com/glorylo/Joyride/blob/develop/docs/HandlingModalDialogs.md)
+- [Screen Detection](https://github.com/glorylo/Joyride/blob/develop/docs/ScreenDetection.md) 
 - [Creating Shared Custom Steps](https://github.com/glorylo/Joyride/blob/develop/docs/CreatingSharedCustomSteps.md)
 - [Predefined Steps](https://github.com/glorylo/Joyride/blob/develop/docs/PredefinedSteps.md)
    - [Ios Steps](https://github.com/glorylo/Joyride/blob/develop/docs/IosPredefinedSteps.md)
