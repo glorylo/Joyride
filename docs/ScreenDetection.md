@@ -1,6 +1,6 @@
 # Screen Detection
 
-1. Screen detection uses the same mechanism as modal dialog detection.  Although there are no steps that makes use of it, there may be cases where you want to use screen detection internally such as the Android's back button or where there are various possible branching transitions. 
+1. Screen detection uses the same mechanism as modal dialog detection.  Although there are no steps that makes use of it explicitly, there may be cases where you want to use screen detection internally such as the Android's back button or where there are various possible branching transitions. 
 2. In your base screen add screen detection with the following
    ```csharp
       public abstract class MyCoolAndroidScreen : AndroidScreen 
@@ -42,6 +42,11 @@
    ```csharp
       [Detect(Priority = 30)]
       public class InboxScreen : MyCoolAndroidScreen
+   ```
+   Also add a priority for your null screen such that it will be the last in terms of priority:
+   ```csharp
+   [Detect(Priority = 105)]
+   public class NullMyCoolAndroidScreen : MyCoolAndroidScreen
    ```
 5. If a screen transitions from a selected set of screens you can restrict detection similarly to dialogs. Simply provide a list of screens you wish to detect **in that order**.  
 
