@@ -144,6 +144,7 @@
    On Android, you would need to manually tap on the buttons such as "Ok" and "Cancel".  On iOS, you can use switch contexts and accept or dismiss the dialog:
    
    ```csharp
+        // on an iOS modal dialog
         public override Screen Accept()
         {
             Driver.SwitchTo().Alert().Accept(); 
@@ -175,7 +176,7 @@
    ```
    The priority queue ranges from normal range of 1 - 100, where the lower the higher priority.  You may have a several modal dialogs with the same priority and in which case their order of detection within each other is randomized. Without adding a *Detect* attribute, the detection of that particular modal dialog is dropped to the bottom of the queue of 100.  If you want something to be last in detection, simply give it a priority value of over 100.
    
-2. Some screens you want to restrict the dialogs to a subset for detection.  Let's say you have a particular screen, which only has a set of modal dialogs appear on load.  If the *I dismiss any modal dialog* step is used, you can restrict the particular screen to dismissing any of the subset in the **order of dialogs to detect**.  You can override that AcceptModalDialog:
+2. Some screens you want to restrict the dialogs to a subset for detection.  Let's say you have a particular screen, which only has a set of modal dialogs appear on load.  If the *I dismiss any modal dialog* step is used, you can restrict the particular screen to dismissing any of the subset in the **order of dialogs to detect**.  You can override the AcceptModalDialog method:
    ```csharp
       public override Screen AcceptModalDialog(bool accept)
       {
