@@ -13,14 +13,12 @@ Given I close the mobile application
 ##### Given and Whens
 
 ```gherkin
-Given I rotate the screen to <orientation> orientation
-
-
+Given I rotate the screen to <orientation> orientation # orientation can be landscape or portrait
 ```
 
 ##### Thens
 
-The *Then* steps are used for assertions.  Most of the them a **should not** equivalent.  For example, you can use the two steps below:
+The *Then* steps are used for assertions.  Most of the them have a **should not** equivalent.  For example, you can use the two steps below:
 
 ```gherkin
 # using should
@@ -38,7 +36,6 @@ Then I should see the element "<element>"
 Then I should be on the "<screen>" screen
 Then I should see element "<element>" with <attribute> (equals|starts with|containing|matching) "<text>"
 Then I fail the scenario with reason "<reason>"
-
 ```
 
 # Gestures
@@ -94,9 +91,7 @@ Given I dump DOM trace
 Given I dump DOM trace in webview
 Given I wait for "<secs>" seconds
 Given I take a screenshot
-
 ```
-
 
 # Modal Dialogs
 
