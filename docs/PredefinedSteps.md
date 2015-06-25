@@ -100,7 +100,7 @@ Given I take a screenshot
 ```gherkin
 Given I (accept|dismiss) the "<modal dialog>" modal dialog
 Given I (accept|dismiss) any modal dialog
-Given I respond to the "<response>" modal dialog with "<modal dialog>"
+Given I respond to the "<modal dialog>" modal dialog with "<response>"
 ```
 
 ##### Thens
