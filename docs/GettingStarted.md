@@ -102,7 +102,7 @@ A real device.  If available, we prefer testing a real device over emulator or s
 
    The *capabilities* section includes global capabilities.  Joyride prefers to launch the app manually by setting *autoLaunch* to false.  Note the *type="System.Boolean"*.  You have to supply the correct type for the capabilities.  For example, you want the *newCommandTimeout* capability with a value of "70", also include *type="System.Int32"*.  If the *type* is not specified, the *"System.String"* is used as the default.
 
-   The *android* and *ios* includes their respective platform capabilities. You can safely remove the section for the unused platform.  Update it with the appropriate app identifier, *bundleId* for *ios* or *appPackage* for *android*.  
+   The *android* and *ios* includes their respective platform capabilities. You can safely remove the section for the unused platform.  Update your app identifier with the appropriate *bundleId* for *ios* or *appPackage* for *android*.  
 
    Similarly, create a *device* target with device specfic capabilities.  If the same capabilitiy is specified here, it will supersede the capability setting before it.  Note the *name* of the device.  
 
