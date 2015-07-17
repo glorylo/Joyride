@@ -51,12 +51,12 @@ namespace Joyride.Specflow.Steps
                 Context.MobileApp.Do<IGesture>(i => i.Scroll(directionToScroll, 0.75));
         }
 
-        [Given(@"I scroll the ""([^""]*)"" (left|right|up|down)")]
-        [When(@"I scroll the ""([^""]*)"" (left|right|up|down)")]
+        [Given(@"I swipe the ""([^""]*)"" (left|right|up|down)")]
+        [When(@"I swipe the ""([^""]*)"" (left|right|up|down)")]
         public void GivenIScrollElementinDirection(string elementName, string direction)
         {
             var directionToScroll = (Direction) Enum.Parse(typeof(Direction), direction, true);
-            Context.MobileApp.Do<IGesture>(i => i.Scroll(elementName, directionToScroll));
+            Context.MobileApp.Do<IGesture>(i => i.Swipe(elementName, directionToScroll));
         }
 
         [Given(@"I swipe the screen (left|right|up|down)")]

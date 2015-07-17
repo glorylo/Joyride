@@ -122,11 +122,7 @@ namespace Joyride.Platforms
         {
             var elements = FindElements(collectionName);
             var element = GetElementInCollection(elements, oridinal, last);
-            var padding = 35;
-
-
-            var center = element.GetCenter();
-            new TouchAction(Driver).Press(center.X, center.Y).Wait(500).MoveTo(0 + padding, center.Y).Release().Perform();
+            Driver.Swipe(element, direction);
             return this;
         }
 
@@ -216,15 +212,6 @@ namespace Joyride.Platforms
         public virtual Screen Scroll(Direction direction, double scale=1.0, long durationMilliSecs = 500)
         {
             Driver.Scroll(direction, scale, durationMilliSecs);
-            return this;
-        }
-
-        public virtual Screen Scroll(string elementName, Direction direction, double scale=1.0, long durationMilliSecs = 500)
-        {
-            var element = FindElement(elementName);
-            if (element == null)
-                throw new NoSuchElementException("Cannot find element:  " + elementName);
-            Driver.Scroll(element, direction, scale, durationMilliSecs);
             return this;
         }
 
