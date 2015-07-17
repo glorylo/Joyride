@@ -171,4 +171,13 @@ And I should see all the following properties within the collection "Contacts" m
 | Badge         | true      |                                                     |
 | First Name    | true      | FirstName == "Freddie" \|\| FirstName == "Kingsley" |
 
+Scenario: Should swipe item in collection 
+Given I tap the "App" button
+And I tap the "Notification" button
+And I tap the "Incoming Message" button
+And I tap the "Show App Notification" button
+And I pull the screen down
+And I inspect the number of items in collection "Notifications"
+When I swipe right the "1st" item in the "Notifications" collection
+Then I should see "1" less item(s) in "Notifications" collection
 

@@ -271,10 +271,10 @@ testRunner.Then("I should see the button \"Button 63\"", ((string)(null)), ((Tec
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Pull the Screen down")]
-        public virtual void PullTheScreenDown()
+        [NUnit.Framework.DescriptionAttribute("Pull the Screen down and up")]
+        public virtual void PullTheScreenDownAndUp()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Pull the Screen down", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Pull the Screen down and up", ((string[])(null)));
 #line 72
 this.ScenarioSetup(scenarioInfo);
 #line 7

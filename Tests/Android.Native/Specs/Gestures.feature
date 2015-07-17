@@ -69,7 +69,7 @@ And I tap the "Long" button
 When I scroll the screen down until I see element "Button 63"
 Then I should see the button "Button 63"
 
-Scenario: Pull the Screen down
+Scenario: Pull the Screen down and up
 Given I tap the "App" button
 And I tap the "Notification" button
 And I tap the "Incoming Message" button
