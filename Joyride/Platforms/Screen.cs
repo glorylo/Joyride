@@ -223,7 +223,7 @@ namespace Joyride.Platforms
 
         public virtual Screen Swipe(string elementName, Direction direction, double scale=1.0, long durationMilliSecs = 500)
         {
-            var element = FindElement(elementName);
+            var element = FindCachedElement(elementName);
             if (element == null)
                 throw new NoSuchElementException("Cannot find element:  " + elementName);
             Driver.Swipe(element, direction, scale, durationMilliSecs);

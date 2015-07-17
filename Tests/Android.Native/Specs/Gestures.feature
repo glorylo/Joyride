@@ -78,3 +78,11 @@ And I wait for "2" seconds
 When I pull the screen up
 Then I should be on the "Incoming Message" screen
 
+Scenario: Should swipe an element 
+Given I tap the "App" button
+And I tap the "Notification" button
+And I tap the "Incoming Message" button
+And I tap the "Show App Notification" button
+And I pull the screen down
+When I swipe the "Joe Notification" left
+
