@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using Joyride.Platforms;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
@@ -16,6 +17,9 @@ namespace Tests.Android.Native.SampleApp.ApiDemo.Screens.App
         [FindsBy(How = How.XPath, Using = "//*[@resource-id='android:id/text1' and @text='Fragment']")]
         private IWebElement Fragment;
 
+        [FindsBy(How = How.XPath, Using = "//*[@resource-id='android:id/text1' and @text='Notification']")]
+        private IWebElement Notification;
+
         public override Screen Tap(string elementName, bool precise = false)
         {
             var screen = base.Tap(elementName, precise);
@@ -28,6 +32,9 @@ namespace Tests.Android.Native.SampleApp.ApiDemo.Screens.App
 
             if (elementName == "Fragment")
                 return ScreenFactory.CreateScreen<FragmentScreen>();
+
+            if (elementName == "Notification")
+                return ScreenFactory.CreateScreen<NotificationScreen>();
 
             return screen;
         }

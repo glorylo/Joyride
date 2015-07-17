@@ -58,6 +58,23 @@ namespace Joyride.Extensions
             driver.Context = NativeAppContext;
         }
 
+        public static void EnsureInOutDirection(Direction direction)
+        {
+            if (direction != Direction.In || direction != Direction.Out)
+                throw new ArgumentException("Unexpected direction: " + direction);
+        }
+
+        public static void EnsureNotInOutDirection(Direction direction)
+        {
+            if (direction == Direction.In || direction == Direction.Out)
+                throw new ArgumentException("Unexpected direction: " + direction);
+        }
+
+        public static void EnsureScaleRange(double scale)
+        {
+            if (scale > 1.0 || scale < 0)
+                throw new ArgumentOutOfRangeException("Zoom only scales to 0.0 - 1.0.  Scale of " + scale + " is out of range.");
+        }
 
         public static void Tap(this AppiumDriver driver, Point location)
         {
@@ -146,13 +163,45 @@ namespace Joyride.Extensions
 
         public static void Swipe(this AppiumDriver driver, Direction direction, double scale=1.0, long durationMilliSecs=500)
         {
+            EnsureScaleRange(scale);
+            EnsureNotInOutDirection(direction);
             Swipe(driver, direction, driver.ScreenSize(), scale, durationMilliSecs);
         }
-
+       
         public static void Swipe(this AppiumDriver driver, IWebElement element, Direction direction, double scale = 1.0, long durationMilliSecs = 500)
         {
-            var size = CalculateVisibleElementSize(driver, element);
-            Swipe(driver, direction, size, scale, durationMilliSecs, element.Location.X, element.Location.Y);
+            EnsureNotInOutDirection(direction);
+            EnsureScaleRange(scale);
+            var center = element.GetCenter();
+            
+            double startX = center.X, startY = center.Y;
+            double endX = 1.0, endY = 1.0;
+
+            switch (direction)
+            {
+                case Direction.Down:
+                    endY = driver.ScreenSize().Height - 1.0;
+                    endX = startX;
+                    break;
+                case Direction.Up:
+                    endX = startX;
+                    break;
+
+                case Direction.Left:
+                    endY = startY;
+                    break;
+                case Direction.Right:
+                    endY = startY;
+                    endX = driver.ScreenSize().Width - 1.0;
+                    break;
+            }
+
+            new TouchAction(driver)
+                .Press(startX, startY)
+                .Wait(durationMilliSecs)
+                .MoveTo(endX, endY)
+                .Release()
+                .Perform();
         }
 
         private static Size CalculateVisibleElementSize(AppiumDriver driver, IWebElement element)
@@ -168,9 +217,8 @@ namespace Joyride.Extensions
 
         public static void PinchToZoom(this AppiumDriver driver, Direction direction, double scale = 1.0)
         {
-            if (scale > 1.0 || scale < 0)
-                throw new ArgumentOutOfRangeException("Zoom only scales to 0.0 - 1.0.  Scale of " + scale + " is out of range.");
-            
+            EnsureScaleRange(scale);          
+            EnsureInOutDirection(direction);
             var windowSize = driver.ScreenSize();
             var windowCenter = new Point(windowSize.Width / 2, windowSize.Height / 2);
             var upperLeft = new Point(windowCenter.X - windowSize.Width / 4, windowCenter.Y - windowSize.Height / 4);
@@ -233,14 +281,10 @@ namespace Joyride.Extensions
 
         public static void Scroll(this AppiumDriver driver, Direction direction, double scale=1.0, long durationMilliSecs = 2000)
         {
+            EnsureNotInOutDirection(direction);
+            EnsureScaleRange(scale);            
             var directionToSwipe = ConvertDirectionToSwipe(direction);
             driver.Swipe(directionToSwipe, scale, durationMilliSecs);
-        }
-
-        public static void Scroll(this AppiumDriver driver, IWebElement element, Direction direction, double scale = 1.0, long durationMilliSecs = 500)
-        {
-            var directionToSwipe = ConvertDirectionToSwipe(direction);
-            driver.Swipe(element, directionToSwipe, scale, durationMilliSecs);
         }
 
         public static bool ElementWithinBounds(this AppiumDriver driver, IWebElement element)
@@ -276,6 +320,57 @@ namespace Joyride.Extensions
                 Trace.WriteLine("Unexpected error in saving screenshot to: " + pathAndFilename);
                 Trace.Write("Stacktrace:  " + e.StackTrace);
             }
+        }
+
+        public static void SwipeFromEdge(this AppiumDriver driver, Direction direction, int durationMillsecs = 1000,
+            double scale = 1.0)
+        {
+            EnsureNotInOutDirection(direction);
+            double startX= 1.0, endX = 1.0, startY = 1.0, endY = 1.0;
+
+            var size = driver.ScreenSize();
+            switch (direction)
+            {
+                case Direction.Down:
+                    startX = size.Width/2;
+                    endX = startX;
+                    endY = scale*size.Height - 1.0;
+                    break;
+                case Direction.Up:
+                    startX = size.Width/2;
+                    endX = startX;
+                    startY = size.Height - 1.0;
+                    endY = scale * 1.0;
+                    break;
+                case Direction.Left:
+                    startX = size.Width - 1.0;
+                    startY = size.Height/2 - 1.0;
+                    endY = startY;
+                    break;            
+                case Direction.Right:
+                    endX = size.Width - 1.0;
+                    startY = size.Height/2 - 1.0;
+                    endY = startY;
+                    break;
+            }
+            
+
+            new TouchAction(driver)
+                .Press(startX, startY)
+                .Wait(durationMillsecs)
+                .MoveTo(endX, endY)
+                .Release()
+                .Perform();
+
+        }
+        
+        public static void PullScreen(this AppiumDriver driver, Direction direction, int durationMillsecs=1000, double scale=1.0)
+        {
+
+            EnsureNotInOutDirection(direction);
+            if ((direction == Direction.Left) || (direction == Direction.Right))
+              throw new ArgumentException("Unexpected direction: " + direction);
+            SwipeFromEdge(driver, direction, durationMillsecs, scale);
         }
 
     }

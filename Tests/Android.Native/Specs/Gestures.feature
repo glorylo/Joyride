@@ -68,3 +68,21 @@ And I tap the "Scroll View" button
 And I tap the "Long" button
 When I scroll the screen down until I see element "Button 63"
 Then I should see the button "Button 63"
+
+Scenario: Pull the Screen down and up
+Given I tap the "App" button
+And I tap the "Notification" button
+And I tap the "Incoming Message" button
+And I pull the screen down
+And I wait for "2" seconds
+When I pull the screen up
+Then I should be on the "Incoming Message" screen
+
+Scenario: Should swipe an element 
+Given I tap the "App" button
+And I tap the "Notification" button
+And I tap the "Incoming Message" button
+And I tap the "Show App Notification" button
+And I pull the screen down
+When I swipe the "Joe Notification" left
+

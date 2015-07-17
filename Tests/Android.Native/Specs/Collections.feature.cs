@@ -584,6 +584,35 @@ testRunner.And("I should see all the following properties within the collection 
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Should swipe item in collection")]
+        public virtual void ShouldSwipeItemInCollection()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should swipe item in collection", ((string[])(null)));
+#line 174
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 175
+testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 176
+testRunner.And("I tap the \"Notification\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 177
+testRunner.And("I tap the \"Incoming Message\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 178
+testRunner.And("I tap the \"Show App Notification\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 179
+testRunner.And("I pull the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 180
+testRunner.And("I inspect the number of items in collection \"Notifications\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 181
+testRunner.When("I swipe right the \"1st\" item in the \"Notifications\" collection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 182
+testRunner.Then("I should see \"1\" less item(s) in \"Notifications\" collection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
