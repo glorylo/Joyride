@@ -4,6 +4,7 @@ using System.Linq;
 using Joyride.Extensions;
 using Joyride.Interfaces;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Appium.MultiTouch;
 using OpenQA.Selenium.Support.UI;
 
 namespace Joyride.Platforms
@@ -109,6 +110,25 @@ namespace Joyride.Platforms
         #endregion
 
         #region Gestures
+
+        public virtual Screen Pull(Direction direction, int durationMillSecs = 1000)
+        {
+            Driver.PullScreen(direction, durationMillSecs);
+            Driver.WaitFor(TimeSpan.FromSeconds(1));
+            return this;
+        }
+
+        public Screen SwipeInCollection(string collectionName, Direction direction, int oridinal = 1, bool last = false)
+        {
+            var elements = FindElements(collectionName);
+            var element = GetElementInCollection(elements, oridinal, last);
+            var padding = 35;
+
+
+            var center = element.GetCenter();
+            new TouchAction(Driver).Press(center.X, center.Y).Wait(500).MoveTo(0 + padding, center.Y).Release().Perform();
+            return this;
+        }
 
         internal protected void TapInWebview(string elementName)
         {

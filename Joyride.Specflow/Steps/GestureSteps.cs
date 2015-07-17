@@ -87,5 +87,13 @@ namespace Joyride.Specflow.Steps
             Context.MobileApp.Do<IGesture>(i => i.PinchToZoom(direction));
         }
 
+        [Given(@"I pull the screen (up|down)")]
+        [When(@"I pull the screen (up|down)")]
+        public void WhenIPullTheScreen(string direction)
+        {
+            var dir = (Direction) Enum.Parse(typeof (Direction), direction, true);
+            Context.MobileApp.Do<IGesture>(i => i.Pull(dir));
+        }
+
     }
 }

@@ -4,6 +4,7 @@ namespace Joyride.Platforms
 
     public interface IGesture
     {
+        Screen Pull(Direction direction, int durationMillSecs = 1000);
         Screen Tap(string elementName, bool precise = false);    
         Screen DoubleTap(string elementName);
         Screen TapAndHold(string elementName, int seconds);

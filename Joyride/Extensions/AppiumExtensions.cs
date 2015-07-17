@@ -278,5 +278,26 @@ namespace Joyride.Extensions
             }
         }
 
+        public static void PullScreen(this AppiumDriver driver, Direction direction, int durationMillsecs=1000)
+        {
+
+            if ((direction == Direction.Left) || (direction == Direction.Right) || 
+                (direction == Direction.In) || (direction == Direction.Out))
+              throw new ArgumentException("Unexpected direction: " + direction);
+
+            var size = driver.ScreenSize();
+
+            var startY = (direction == Direction.Down) ? 1 : size.Height - 1;
+            var endY = (direction == Direction.Down) ? size.Height - 1 : 1;
+
+            new TouchAction(driver)
+                .Press(size.Width / 2, startY)
+                .Wait(durationMillsecs)
+                .MoveTo(size.Width / 2, endY)
+                .Release()
+                .Perform();
+
+        }
+
     }
 }
