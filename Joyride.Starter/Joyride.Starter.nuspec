@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+	<authors>Glory Lo</authors>
+    <owners>Glory Lo</owners>
+	<projectUrl>http://glorylo.github.io/Joyride/</projectUrl>
+    <licenseUrl>https://raw.githubusercontent.com/glorylo/Joyride/master/LICENSE.txt</licenseUrl>    	
+    <iconUrl>https://raw.githubusercontent.com/glorylo/Joyride/master/Assets/images/icon_joyride.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+	
+	<dependencies>
+	  <dependency id="Joyride.Specflow" version="0.0.3" />
+	</dependencies>	
+	
+    <description>$description$</description>
+    <releaseNotes>Initial release of Joyride starter project </releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <tags>starter native hybrid mobile bdd behaviour driven development appium selenium ios android automation acceptance specs specflow nunit joyride joyride.specflow</tags>
+
+  </metadata>
+  <files>
+	<file src="content\**\*" target="content\" />
+  </files>
+
+</package>
