@@ -152,5 +152,12 @@ namespace Joyride.Platforms.Android
             return (value == "true");
         }
 
+        public override Screen Pull(Direction direction, int durationMillSecs = 1000)
+        {
+            var screen = base.Pull(direction, durationMillSecs);
+            Driver.WaitFor(TimeSpan.FromMilliseconds(500));
+            return screen;
+        }
+
     }
 }
