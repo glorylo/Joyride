@@ -323,7 +323,7 @@ namespace Joyride.Extensions
         }
 
         public static void SwipeFromEdge(this AppiumDriver driver, Direction direction, int durationMillsecs = 1000,
-            double scale = 1.0)
+            double scale = 1.0, double offset=0)
         {
             EnsureNotInOutDirection(direction);
             double startX= 1.0, endX = 1.0, startY = 1.0, endY = 1.0;
@@ -334,22 +334,25 @@ namespace Joyride.Extensions
                 case Direction.Down:
                     startX = size.Width/2;
                     endX = startX;
+                    startY += offset;
                     endY = scale*size.Height - 1.0;
                     break;
                 case Direction.Up:
                     startX = size.Width/2;
                     endX = startX;
-                    startY = size.Height - 1.0;
-                    endY = scale * 1.0;
+                    startY = size.Height - 1.0 - offset;
+                    endY = (size.Height - (scale*size.Height)) + 1.0;
                     break;
                 case Direction.Left:
-                    startX = size.Width - 1.0;
-                    startY = size.Height/2 - 1.0;
+                    startX = size.Width - 1.0 - offset;
+                    endX = (size.Width - (scale * size.Width)) + 1.0;
+                    startY = size.Height/2 ;
                     endY = startY;
                     break;            
                 case Direction.Right:
-                    endX = size.Width - 1.0;
-                    startY = size.Height/2 - 1.0;
+                    startX += offset;
+                    endX = (size.Width * scale) - 1.0;
+                    startY = size.Height/2;
                     endY = startY;
                     break;
             }
@@ -364,13 +367,13 @@ namespace Joyride.Extensions
 
         }
         
-        public static void PullScreen(this AppiumDriver driver, Direction direction, int durationMillsecs=1000, double scale=1.0)
+        public static void PullScreen(this AppiumDriver driver, Direction direction, int durationMillsecs=1000, double scale=1.0, double offset=0)
         {
 
             EnsureNotInOutDirection(direction);
             if ((direction == Direction.Left) || (direction == Direction.Right))
               throw new ArgumentException("Unexpected direction: " + direction);
-            SwipeFromEdge(driver, direction, durationMillsecs, scale);
+            SwipeFromEdge(driver, direction, durationMillsecs, scale, offset);
         }
 
     }
