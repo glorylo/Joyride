@@ -28,6 +28,8 @@
     <description>$description$</description>
     <releaseNotes>
 0.0.3
+- moved starter project files into separate package:  Joyride.Starter
+- joyride.specflow can now safely upgrade from previous versions
 - added steps to swipe elements and pull down screen
 	
 0.0.2

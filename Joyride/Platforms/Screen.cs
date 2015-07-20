@@ -114,7 +114,7 @@ namespace Joyride.Platforms
         public virtual Screen Pull(Direction direction, int durationMillSecs = 1000)
         {
             Driver.PullScreen(direction, durationMillSecs);
-            Driver.WaitFor(TimeSpan.FromSeconds(1));
+            Driver.WaitFor(TimeSpan.FromMilliseconds(500));
             return this;
         }
 
