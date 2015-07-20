@@ -50,6 +50,8 @@ Given I tap the "<element>" button and hold for "<secs>" seconds
 Given I scroll the screen <direction>
 Given I do a (slight|moderate) scroll <direction>
 Given I swipe the screen <direction>
+Given I swipe the "<element>" <direction>
+Given I pull the screen <direction>
 Given I scroll the screen <direction> until I see element "<element>"
 Given I pinch the screen to zoom <direction>
 ```
@@ -61,6 +63,7 @@ Given I pinch the screen to zoom <direction>
 ```gherkin
 Given I tap the "(first|most recent|last)" item in the "<collection>" collection
 Given I tap the "<ordinal>" item in the "<collection>" collection
+Given I swipe <direction> the "<ordinal>" item in the "<collection>" collection
 Given I tap up to "<number>" item(s) in the "<collection>" collection
 Given I inspect the number of items in collection "<collection>"
 
