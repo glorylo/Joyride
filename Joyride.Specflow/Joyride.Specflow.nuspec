@@ -29,7 +29,7 @@
     <releaseNotes>
 0.0.3
 - moved starter project files into separate package:  Joyride.Starter
-- joyride.specflow can now safely upgrade from previous versions
+- joyride.specflow now only contains the assembly.  If you are upgrading, backup your app.config file.  Moving forward you can simply upgrade without your config files being affected 
 - added steps to swipe elements and pull down screen
 	
 0.0.2
