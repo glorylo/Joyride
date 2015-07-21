@@ -17,6 +17,14 @@ namespace Joyride.Specflow.Steps
     {
         #region Given/Whens
 
+        [Given(@"I swipe (left|right|up|down) the ""(\d+)(?:(?:st|nd|rd|th)?)"" item in the ""([^""]*)"" collection")]
+        [When(@"I swipe (left|right|up|down) the ""(\d+)(?:(?:st|nd|rd|th)?)"" item in the ""([^""]*)"" collection")]
+        public void GivenISwipeTheItemInTheCollection(string direction, int ordinal, string collectionName)
+        {
+            var dir = (Direction) Enum.Parse(typeof (Direction), direction, true);
+            Context.MobileApp.Do<Screen>(s => s.SwipeInCollection(collectionName, dir, ordinal));
+        }
+        
         [Given(@"I tap the ""(first|most recent|last)"" item in the ""([^""]*)"" collection")]
         [When(@"I tap the ""(first|most recent|last)"" item in the ""([^""]*)"" collection")]
         public void GivenITapTheItemInTheCollection(string ordinal, string collectionName)

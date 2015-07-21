@@ -13,14 +13,12 @@ Given I close the mobile application
 ##### Given and Whens
 
 ```gherkin
-Given I rotate the screen to <orientation> orientation
-
-
+Given I rotate the screen to <orientation> orientation # orientation can be landscape or portrait
 ```
 
 ##### Thens
 
-The *Then* steps are used for assertions.  Most of the them a **should not** equivalent.  For example, you can use the two steps below:
+The *Then* steps are used for assertions.  Most of the them have a **should not** equivalent.  For example, you can use the two steps below:
 
 ```gherkin
 # using should
@@ -38,7 +36,6 @@ Then I should see the element "<element>"
 Then I should be on the "<screen>" screen
 Then I should see element "<element>" with <attribute> (equals|starts with|containing|matching) "<text>"
 Then I fail the scenario with reason "<reason>"
-
 ```
 
 # Gestures
@@ -53,6 +50,8 @@ Given I tap the "<element>" button and hold for "<secs>" seconds
 Given I scroll the screen <direction>
 Given I do a (slight|moderate) scroll <direction>
 Given I swipe the screen <direction>
+Given I swipe the "<element>" <direction>
+Given I pull the screen <direction>
 Given I scroll the screen <direction> until I see element "<element>"
 Given I pinch the screen to zoom <direction>
 ```
@@ -64,6 +63,7 @@ Given I pinch the screen to zoom <direction>
 ```gherkin
 Given I tap the "(first|most recent|last)" item in the "<collection>" collection
 Given I tap the "<ordinal>" item in the "<collection>" collection
+Given I swipe <direction> the "<ordinal>" item in the "<collection>" collection
 Given I tap up to "<number>" item(s) in the "<collection>" collection
 Given I inspect the number of items in collection "<collection>"
 
@@ -94,9 +94,7 @@ Given I dump DOM trace
 Given I dump DOM trace in webview
 Given I wait for "<secs>" seconds
 Given I take a screenshot
-
 ```
-
 
 # Modal Dialogs
 
@@ -105,7 +103,7 @@ Given I take a screenshot
 ```gherkin
 Given I (accept|dismiss) the "<modal dialog>" modal dialog
 Given I (accept|dismiss) any modal dialog
-Given I respond to the "<response>" modal dialog with "<modal dialog>"
+Given I respond to the "<modal dialog>" modal dialog with "<response>"
 ```
 
 ##### Thens

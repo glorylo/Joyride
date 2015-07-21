@@ -4,6 +4,7 @@ using System.Linq;
 using Joyride.Extensions;
 using Joyride.Interfaces;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Appium.MultiTouch;
 using OpenQA.Selenium.Support.UI;
 
 namespace Joyride.Platforms
@@ -110,6 +111,20 @@ namespace Joyride.Platforms
 
         #region Gestures
 
+        public virtual Screen Pull(Direction direction, int durationMillSecs = 1000)
+        {
+            Driver.PullScreen(direction, durationMillSecs);
+            return this;
+        }
+
+        public Screen SwipeInCollection(string collectionName, Direction direction, int oridinal = 1, bool last = false)
+        {
+            var elements = FindElements(collectionName);
+            var element = GetElementInCollection(elements, oridinal, last);
+            Driver.Swipe(element, direction);
+            return this;
+        }
+
         internal protected void TapInWebview(string elementName)
         {
             Driver.DoActionInWebView(() =>
@@ -199,15 +214,6 @@ namespace Joyride.Platforms
             return this;
         }
 
-        public virtual Screen Scroll(string elementName, Direction direction, double scale=1.0, long durationMilliSecs = 500)
-        {
-            var element = FindElement(elementName);
-            if (element == null)
-                throw new NoSuchElementException("Cannot find element:  " + elementName);
-            Driver.Scroll(element, direction, scale, durationMilliSecs);
-            return this;
-        }
-
         public virtual Screen Swipe(Direction direction, double scale=1.0, long durationMilliSecs = 500)
         {
             Driver.Swipe(direction, scale, durationMilliSecs);
@@ -216,7 +222,7 @@ namespace Joyride.Platforms
 
         public virtual Screen Swipe(string elementName, Direction direction, double scale=1.0, long durationMilliSecs = 500)
         {
-            var element = FindElement(elementName);
+            var element = FindCachedElement(elementName);
             if (element == null)
                 throw new NoSuchElementException("Cannot find element:  " + elementName);
             Driver.Swipe(element, direction, scale, durationMilliSecs);

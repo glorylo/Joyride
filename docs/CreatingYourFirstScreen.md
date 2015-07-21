@@ -33,7 +33,7 @@
    If you are using Android, supply a *GoBack()* method.  This method handles the transition when the Android button redirects the user to another screen.  
 
    The MyCoolAndroidScreen class is a good place to provide default implementation, especially if the implementation is mostly the same across all your screens.
-3. Create a Null Screen, for situations when your the screen shown is unknown.   
+3. Create a Null Screen, for situations when the screen shown is unknown.   
    ```csharp
      public class NullMyCoolAndroidScreen : MyCoolAndroidScreen
      {

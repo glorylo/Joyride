@@ -52,10 +52,10 @@ A real device.  If available, we prefer testing a real device over emulator or s
   
 1. Launch Visual Studio and create new solution.
 2. Create a test project
-3. Install Joyride.Specflow using via Nuget
-4. From here, Joyride will install the other dependencies which include NUnit, Specflow, Joyride, etc.
+3. Install Joyride.Starter using Nuget
+4. From here, Joyride.Starter will install the other dependencies which include NUnit, Specflow, Joyride, Joyride.Specflow etc.
 5. Joyride adds several directories: Logs, Screenshots, Steps, and Specs.  The "Logs" and "Screenshots" folder store tracing dom data and screenshots respectively.  The "Steps" folder should include your custom "step" binding code for your specs.  The "Specs" folder contains all your .feature files.  After the install, you should see these key files:  *App.config*, *Steps\SpecflowHooks.cs* and a template *Specs\FirstSpec.feature* file.
-6. Modify the *App.config* with the appropriate settings under the joyride section. The template provides the following:
+6. Modify the *App.config* with the appropriate settings under the *joyride* section. The template provides the following:
   ```xml
     <joyride>
        <capabilities>
@@ -102,7 +102,7 @@ A real device.  If available, we prefer testing a real device over emulator or s
 
    The *capabilities* section includes global capabilities.  Joyride prefers to launch the app manually by setting *autoLaunch* to false.  Note the *type="System.Boolean"*.  You have to supply the correct type for the capabilities.  For example, you want the *newCommandTimeout* capability with a value of "70", also include *type="System.Int32"*.  If the *type* is not specified, the *"System.String"* is used as the default.
 
-   The *android* and *ios* includes their respective platform capabilities. You can safely remove the section for the unused platform.  Update it with the appropriate app identifier, *bundleId* for *ios* or *appPackage* for *android*.  
+   The *android* and *ios* includes their respective platform capabilities. You can safely remove the section for the unused platform.  Update your app identifier with the appropriate *bundleId* for *ios* or *appPackage* for *android*.  
 
    Similarly, create a *device* target with device specfic capabilities.  If the same capabilitiy is specified here, it will supersede the capability setting before it.  Note the *name* of the device.  
 

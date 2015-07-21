@@ -157,17 +157,24 @@ See a listing of the [Predefined Steps](https://github.com/glorylo/Joyride/blob/
 
 # Installation
 
-You can install the packages via nuget's Package Manager Console
+You can install the core packages via nuget's Package Manager Console
 
 ```
 PM> Install-Package Joyride
 PM> Install-Package Joyride.Specflow
 ```
 
+You can also install the starter package for your project:
+```
+PM> Install-Package Joyride.Starter
+```
+
+
 ### Current Versions
 
 Joyride:  ![#](https://img.shields.io/nuget/v/Joyride.svg?style=flat)</div><br/>
 Joyride.Specflow:  ![#](https://img.shields.io/nuget/v/Joyride.Specflow.svg?style=flat)</div><br/>
+Joyride.Starter:  ![#](https://img.shields.io/nuget/v/Joyride.Starter.svg?style=flat)</div><br/>
 
 ### Dependencies
 
