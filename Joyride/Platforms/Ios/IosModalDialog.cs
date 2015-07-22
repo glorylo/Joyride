@@ -13,7 +13,7 @@ namespace Joyride.Platforms.Ios
         {
             get
             {
-                var element = Driver.FindElement(By.XPath("//UIAAlert//UIAStaticText[1]"), DefaultWaitSeconds);
+                var element = Driver.FindElementWithImplicitWait(By.XPath("//UIAAlert/UIAScrollView/UIAStaticText[1]"));
                 return (element == null) ? null : element.Text;
             }
         }
@@ -22,7 +22,7 @@ namespace Joyride.Platforms.Ios
         {
             get
             {
-                var element = Driver.FindElement(By.XPath("//UIAAlert//UIAStaticText[2]"), DefaultWaitSeconds);
+                var element = Driver.FindElementWithImplicitWait(By.XPath("//UIAAlert/UIAScrollView/UIAStaticText[2]"));
                 return (element == null) ? null : element.Text;
             }
         }
