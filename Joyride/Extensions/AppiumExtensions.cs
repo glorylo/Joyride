@@ -60,7 +60,7 @@ namespace Joyride.Extensions
 
         public static void EnsureInOutDirection(Direction direction)
         {
-            if (direction != Direction.In || direction != Direction.Out)
+            if (direction != Direction.In && direction != Direction.Out)
                 throw new ArgumentException("Unexpected direction: " + direction);
         }
 

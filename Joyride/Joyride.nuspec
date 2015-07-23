@@ -22,14 +22,16 @@
 	
     <description>$description$</description>
     <releaseNotes>
+0.0.4
+- updated default ios modal dialog body and title text 
+- include symbols wth package
+
 0.0.3
 - modified IGesture and added swiping elements
 
 0.0.2 
 - fixed EnterText and added EnterTextBySetValue for iOS
 
-0.0.1 
-- Initial release
 	   </releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>joyride mobile bdd behaviour driven development pageobjects appium selenium ios android automation acceptance tests specs</tags>
