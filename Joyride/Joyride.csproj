@@ -105,6 +105,7 @@
     <Compile Include="Support\Util.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Joyride.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

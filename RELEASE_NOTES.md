@@ -1,6 +1,10 @@
 
 # Release History
 
+### Version 0.0.4
+- updated default ios title and body text for modal dialogs
+- added symbols with package 
+
 ### Version 0.0.3
 - modified IGesture and added swiping elements 
 - moved starter project files into separate package:  Joyride.Starter 
