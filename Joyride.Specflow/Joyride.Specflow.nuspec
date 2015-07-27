@@ -22,11 +22,14 @@
       <dependency id="Selenium.WebDriver" version="2.45.0" />
       <dependency id="SpecFlow" version="1.9.0"  />
       <dependency id="SpecFlow.NUnit" version="1.1.1" />
-	  <dependency id="Joyride" version="0.0.4" />
+	  <dependency id="Joyride" version="0.0.6" />
 	</dependencies>	
 	
     <description>$description$</description>
     <releaseNotes>
+0.0.5
+- added Then steps to verify elements in a table 
+
 0.0.4
 - include symbols with package
 
