@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Linq;
 using Joyride.Platforms;
 using Joyride.Specflow.Configuration;
+using NUnit.Framework;
+using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 
 namespace Joyride.Specflow.Steps
@@ -95,5 +98,28 @@ namespace Joyride.Specflow.Steps
             Context.MobileApp.Do<IGesture>(i => i.Pull(dir));
         }
 
+        #region Thens
+        [Then(@"I (?:(slowly|moderately) )?scroll the screen (left|right|up|down) until I see the following elements")]
+        public void ThenIScrollUntil(string speed, string direction, Table table)
+        {
+            var directionToScroll = (Direction)Enum.Parse(typeof(Direction), direction, true);
+            var durationMillSecs = 500;
+            if (speed != String.Empty)
+                durationMillSecs = (speed == "slowly") ? 3000 : 750;
+
+            var header = table.Header.First();
+            var elements = table.Rows.Select(r => r[header]).ToList();
+
+            foreach (var e in elements)
+            {
+                var elementName = e;
+                var scrollUntil = new TestDelegate(() => Context.MobileApp.Do<IGesture>(i => i.ScrollUntil(elementName, 
+                                  directionToScroll, MaxRetries, ScrollUntilTimeoutSecs,
+                                  1.0, durationMillSecs)));
+                Assert.DoesNotThrow(scrollUntil, "Unexpected element not found: " + elementName);
+            }
+        }
+
+        #endregion
     }
 }

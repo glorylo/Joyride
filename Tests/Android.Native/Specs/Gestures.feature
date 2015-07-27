@@ -49,6 +49,24 @@ And I tap the "Long" button
 When I slowly scroll the screen down until I see element "Button 63"
 Then I should see the button "Button 63"
 
+Scenario:  Slowly scroll until all elements present
+Given I scroll the screen down
+And I tap the "Views" button
+And I scroll the screen down
+And I tap the "Layouts" button
+And I tap the "Scroll View" button
+When I tap the "Long" button
+Then I slowly scroll the screen down until I see the following elements
+| Element   |
+| Button 1  |
+| Button 15 |
+| Button 25 |
+| Button 35 |
+| Button 45 |
+| Button 55 |
+| Button 63 |
+ 
+ 
 Scenario:  Moderately scroll until Button 63 is visible
 Given I scroll the screen down
 And I tap the "Views" button
