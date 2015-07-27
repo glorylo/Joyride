@@ -322,7 +322,7 @@ namespace Joyride.Extensions
             }
         }
 
-        public static void SwipeFromEdge(this AppiumDriver driver, Direction direction, int durationMillsecs = 1000,
+        public static void SwipeFromEdge(this AppiumDriver driver, Direction direction, long durationMillsecs = 1000,
             double scale = 1.0, double offset=0)
         {
             EnsureNotInOutDirection(direction);
@@ -367,7 +367,7 @@ namespace Joyride.Extensions
 
         }
         
-        public static void PullScreen(this AppiumDriver driver, Direction direction, int durationMillsecs=1000, double scale=1.0, double offset=0)
+        public static void PullScreen(this AppiumDriver driver, Direction direction, long durationMillsecs=1000, double scale=1.0, double offset=0)
         {
 
             EnsureNotInOutDirection(direction);
