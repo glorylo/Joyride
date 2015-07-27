@@ -229,7 +229,8 @@ namespace Joyride.Platforms
             return this;
         }
 
-        public virtual Screen ScrollUntil(string elementName, Direction direction, int maxRetries, int timeoutSecs, double scale=1.0, long durationMilliSecs = 500)
+        protected Screen ScrollUntil(string elementName, Direction direction, int maxRetries, int timeoutSecs,
+            Action<Direction, double, long> customScroll, double scale = 1.0, long durationMilliSecs = 500)
         {
             var element = FindElement(elementName, timeoutSecs);
 
@@ -239,7 +240,7 @@ namespace Joyride.Platforms
 
             while (numRetries <= maxRetries)
             {
-                Driver.Scroll(direction, scale, durationMilliSecs);
+                customScroll(direction, scale, durationMilliSecs);
                 element = FindElement(elementName, timeoutSecs);
                 if (element.IsPresent() && element.Displayed)
                     return this;
@@ -247,6 +248,12 @@ namespace Joyride.Platforms
                 numRetries++;
             }
             throw new NoSuchElementException("Unable to find visible element: " + elementName);
+            
+        }
+
+        public virtual Screen ScrollUntil(string elementName, Direction direction, int maxRetries, int timeoutSecs, double scale=1.0, long durationMilliSecs = 500)
+        {
+            return ScrollUntil(elementName, direction, maxRetries, timeoutSecs, (dir, s, duration) => Driver.Scroll(dir, s, duration), scale, durationMilliSecs);
         }
         #endregion 
 
