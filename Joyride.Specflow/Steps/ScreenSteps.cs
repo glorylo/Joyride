@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Linq;
 using Joyride.Extensions;
 using Joyride.Platforms;
 using Joyride.Specflow.Configuration;
@@ -121,6 +122,50 @@ namespace Joyride.Specflow.Steps
         public void ThenIFailScenario(string reason)
         {
             Assert.Fail(reason);
+        }
+
+        [Then(@"I (should|should not) see the following elements")]
+        public void ThenIShouldSeeAllTheFollowingElements(string shouldOrShouldNot, Table table)
+        {
+            var header = table.Header.First();
+            var elements = table.Rows.Select(r => r[header]).ToList();
+            var timeoutSecs = (shouldOrShouldNot == "should")
+                ? TimeoutSecs
+                : NonExistenceTimeoutSecs;
+
+            foreach (var e in elements)
+            {
+                var foundElement = false;
+                var elementName = e;
+                Context.MobileApp.Do<Screen>(s => foundElement = s.ElementIsVisible(elementName, timeoutSecs));
+
+                if (shouldOrShouldNot == "should")
+                    Assert.IsTrue(foundElement, "Unexpected element not visible: " + elementName);
+                else
+                    Assert.IsFalse(foundElement, "Unexpected element is visible: " + elementName);
+            }
+        }
+
+        [Then(@"the following elements (should|should not) be present")]
+        public void ThenIShouldSeeAllTheFollowingElementsPresent(string shouldOrShouldNot, Table table)
+        {
+            var header = table.Header.First();
+            var elements = table.Rows.Select(r => r[header]).ToList();
+            var timeoutSecs = (shouldOrShouldNot == "should")
+                ? TimeoutSecs
+                : NonExistenceTimeoutSecs;
+
+            foreach (var e in elements)
+            {
+                var foundElement = false;
+                var elementName = e;
+                Context.MobileApp.Do<Screen>(s => foundElement = s.ElementIsPresent(elementName, timeoutSecs));
+
+                if (shouldOrShouldNot == "should")
+                    Assert.IsTrue(foundElement, "Unexpected element not present: " + elementName);
+                else
+                    Assert.IsFalse(foundElement, "Unexpected element is present: " + elementName);
+            }
         }
 
         #endregion

@@ -350,6 +350,56 @@ testRunner.Then("I should be on the \"Quick Contacts Demo\" screen", ((string)(n
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Should see the following elements")]
+        public virtual void ShouldSeeTheFollowingElements()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should see the following elements", ((string[])(null)));
+#line 89
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 90
+testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Element"});
+            table1.AddRow(new string[] {
+                        "Activity"});
+            table1.AddRow(new string[] {
+                        "Fragment"});
+            table1.AddRow(new string[] {
+                        "Notification"});
+#line 91
+testRunner.Then("I should see the following elements", ((string)(null)), table1, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Should not have the following elements present")]
+        public virtual void ShouldNotHaveTheFollowingElementsPresent()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should not have the following elements present", ((string[])(null)));
+#line 97
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 98
+testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 99
+testRunner.When("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Element"});
+            table2.AddRow(new string[] {
+                        "Quick Contacts Demo"});
+#line 100
+testRunner.Then("the following elements should not be present", ((string)(null)), table2, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
