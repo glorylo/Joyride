@@ -1,6 +1,9 @@
 
 # Release History
 
+### Version 0.0.5
+- added Then steps to verify elements from a table
+
 ### Version 0.0.4
 - updated default ios title and body text for modal dialogs
 - added symbols with package 

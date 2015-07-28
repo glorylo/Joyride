@@ -85,3 +85,19 @@ And I tap the "Activity" button
 And I scroll the screen down
 When I tap the "Quick Contacts Demo" button
 Then I should be on the "Quick Contacts Demo" screen
+
+Scenario: Should see the following elements
+Given I tap the "App" button
+Then I should see the following elements
+| Element      |
+| Activity     |
+| Fragment     |
+| Notification |
+
+Scenario: Should not have the following elements present
+Given I tap the "App" button
+When I tap the "Activity" button
+Then the following elements should not be present
+| Element  |
+| Quick Contacts Demo |
+

@@ -213,10 +213,10 @@ testRunner.Then("I should see the button \"Button 63\"", ((string)(null)), ((Tec
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Moderately scroll until Button 63 is visible")]
-        public virtual void ModeratelyScrollUntilButton63IsVisible()
+        [NUnit.Framework.DescriptionAttribute("Slowly scroll until all elements present")]
+        public virtual void SlowlyScrollUntilAllElementsPresent()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Moderately scroll until Button 63 is visible", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Slowly scroll until all elements present", ((string[])(null)));
 #line 52
 this.ScenarioSetup(scenarioInfo);
 #line 7
@@ -232,10 +232,54 @@ testRunner.And("I tap the \"Layouts\" button", ((string)(null)), ((TechTalk.Spec
 #line 57
 testRunner.And("I tap the \"Scroll View\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 58
-testRunner.And("I tap the \"Long\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.When("I tap the \"Long\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Element"});
+            table1.AddRow(new string[] {
+                        "Button 1"});
+            table1.AddRow(new string[] {
+                        "Button 15"});
+            table1.AddRow(new string[] {
+                        "Button 25"});
+            table1.AddRow(new string[] {
+                        "Button 35"});
+            table1.AddRow(new string[] {
+                        "Button 45"});
+            table1.AddRow(new string[] {
+                        "Button 55"});
+            table1.AddRow(new string[] {
+                        "Button 63"});
 #line 59
+testRunner.Then("I slowly scroll the screen down until I see the following elements", ((string)(null)), table1, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Moderately scroll until Button 63 is visible")]
+        public virtual void ModeratelyScrollUntilButton63IsVisible()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Moderately scroll until Button 63 is visible", ((string[])(null)));
+#line 70
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 71
+testRunner.Given("I scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 72
+testRunner.And("I tap the \"Views\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 73
+testRunner.And("I scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 74
+testRunner.And("I tap the \"Layouts\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 75
+testRunner.And("I tap the \"Scroll View\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 76
+testRunner.And("I tap the \"Long\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 77
 testRunner.When("I moderately scroll the screen down until I see element \"Button 63\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 60
+#line 78
 testRunner.Then("I should see the button \"Button 63\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -246,25 +290,25 @@ testRunner.Then("I should see the button \"Button 63\"", ((string)(null)), ((Tec
         public virtual void ScrollUntilButton63IsVisible()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Scroll until Button 63 is visible", ((string[])(null)));
-#line 62
+#line 80
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 63
+#line 81
 testRunner.Given("I scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 64
+#line 82
 testRunner.And("I tap the \"Views\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 65
+#line 83
 testRunner.And("I scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 66
+#line 84
 testRunner.And("I tap the \"Layouts\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 67
+#line 85
 testRunner.And("I tap the \"Scroll View\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 68
+#line 86
 testRunner.And("I tap the \"Long\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 69
+#line 87
 testRunner.When("I scroll the screen down until I see element \"Button 63\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 70
+#line 88
 testRunner.Then("I should see the button \"Button 63\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -275,23 +319,23 @@ testRunner.Then("I should see the button \"Button 63\"", ((string)(null)), ((Tec
         public virtual void PullTheScreenDownAndUp()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Pull the Screen down and up", ((string[])(null)));
-#line 72
+#line 90
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 73
+#line 91
 testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 74
+#line 92
 testRunner.And("I tap the \"Notification\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 75
+#line 93
 testRunner.And("I tap the \"Incoming Message\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 76
+#line 94
 testRunner.And("I pull the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 77
+#line 95
 testRunner.And("I wait for \"2\" seconds", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 78
+#line 96
 testRunner.When("I pull the screen up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 79
+#line 97
 testRunner.Then("I should be on the \"Incoming Message\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -302,21 +346,21 @@ testRunner.Then("I should be on the \"Incoming Message\" screen", ((string)(null
         public virtual void ShouldSwipeAnElement()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should swipe an element", ((string[])(null)));
-#line 81
+#line 99
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 82
+#line 100
 testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 83
+#line 101
 testRunner.And("I tap the \"Notification\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 84
+#line 102
 testRunner.And("I tap the \"Incoming Message\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 85
+#line 103
 testRunner.And("I tap the \"Show App Notification\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 86
+#line 104
 testRunner.And("I pull the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 87
+#line 105
 testRunner.When("I swipe the \"Joe Notification\" left", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             this.ScenarioCleanup();
