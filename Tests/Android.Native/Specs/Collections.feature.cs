@@ -226,19 +226,19 @@ testRunner.Then("I should see \"1\" items in \"Buttons\" collection", ((string)(
         public virtual void ShouldNotSeePreviousSizeOfCollection()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should not see previous size of collection", ((string[])(null)));
-#line 58
+#line 57
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 59
+#line 58
 testRunner.Given("I tap the \"Animation\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 60
+#line 59
 testRunner.And("I tap the \"Default Layout Animations\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 61
+#line 60
 testRunner.When("I tap the \"Add Button\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 62
+#line 61
 testRunner.And("I tap the \"Add Button\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 63
+#line 62
 testRunner.Then("I should not see \"1\" items in \"Buttons\" collection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -249,28 +249,28 @@ testRunner.Then("I should not see \"1\" items in \"Buttons\" collection", ((stri
         public virtual void ShouldSee3MoreAddedToSavedCollectionSize()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should see 3 more added to saved collection size", ((string[])(null)));
-#line 65
+#line 64
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 66
+#line 65
 testRunner.Given("I tap the \"Animation\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 67
+#line 66
 testRunner.And("I tap the \"Default Layout Animations\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 67
+testRunner.And("I tap the \"Add Button\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 68
 testRunner.And("I tap the \"Add Button\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 69
-testRunner.And("I tap the \"Add Button\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 70
 testRunner.And("I inspect the number of items in collection \"Buttons\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 71
+#line 70
 testRunner.When("I tap the \"Add Button\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 71
+testRunner.And("I tap the \"Add Button\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 72
 testRunner.And("I tap the \"Add Button\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 73
-testRunner.And("I tap the \"Add Button\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 74
-testRunner.Then("I should see \"3\" more item(s) in \"Buttons\" collection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I should see \"3\" more items in \"Buttons\" collection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -280,14 +280,16 @@ testRunner.Then("I should see \"3\" more item(s) in \"Buttons\" collection", ((s
         public virtual void ShouldSee3LessItemsToSavedCollectionSize()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should see 3 less items to saved collection size", ((string[])(null)));
-#line 76
+#line 75
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 77
+#line 76
 testRunner.Given("I tap the \"Animation\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 78
+#line 77
 testRunner.And("I tap the \"Default Layout Animations\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 78
+testRunner.And("I tap the \"Add Button\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 79
 testRunner.And("I tap the \"Add Button\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 80
@@ -297,13 +299,11 @@ testRunner.And("I tap the \"Add Button\" button", ((string)(null)), ((TechTalk.S
 #line 82
 testRunner.And("I tap the \"Add Button\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 83
-testRunner.And("I tap the \"Add Button\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 84
 testRunner.And("I inspect the number of items in collection \"Buttons\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 84
+testRunner.When("I tap up to \"3\" items in the \"Buttons\" collection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 85
-testRunner.When("I tap up to \"3\" item(s) in the \"Buttons\" collection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 86
-testRunner.Then("I should see \"3\" less item(s) in \"Buttons\" collection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I should see \"3\" less items in \"Buttons\" collection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -313,21 +313,21 @@ testRunner.Then("I should see \"3\" less item(s) in \"Buttons\" collection", ((s
         public virtual void CollectionsShouldContainAnItemEqualsText()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Collections should contain an item equals text", ((string[])(null)));
-#line 88
+#line 87
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 89
+#line 88
 testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 90
+#line 89
 testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 91
+#line 90
 testRunner.And("I scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 92
+#line 91
 testRunner.When("I tap the \"Quick Contacts Demo\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 93
+#line 92
 testRunner.Then("I should be on the \"Quick Contacts Demo\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 94
+#line 93
 testRunner.And("I should see an item in collection \"First Names\" with text equals \"Kingsley\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -338,21 +338,21 @@ testRunner.And("I should see an item in collection \"First Names\" with text equ
         public virtual void CollectionsShouldContainAnItemStartsWithText()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Collections should contain an item starts with text", ((string[])(null)));
-#line 96
+#line 95
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 97
+#line 96
 testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 98
+#line 97
 testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 99
+#line 98
 testRunner.And("I scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 100
+#line 99
 testRunner.When("I tap the \"Quick Contacts Demo\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 101
+#line 100
 testRunner.Then("I should be on the \"Quick Contacts Demo\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 102
+#line 101
 testRunner.And("I should see an item in collection \"First Names\" with text starts with \"Kings\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -363,21 +363,21 @@ testRunner.And("I should see an item in collection \"First Names\" with text sta
         public virtual void CollectionsShouldContainAnItemWithContainingText()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Collections should contain an item with containing text", ((string[])(null)));
-#line 104
+#line 103
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 105
+#line 104
 testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 106
+#line 105
 testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 107
+#line 106
 testRunner.And("I scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 108
+#line 107
 testRunner.When("I tap the \"Quick Contacts Demo\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 109
+#line 108
 testRunner.Then("I should be on the \"Quick Contacts Demo\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 110
+#line 109
 testRunner.And("I should see an item in collection \"First Names\" with text containing \"ingsl\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -388,21 +388,21 @@ testRunner.And("I should see an item in collection \"First Names\" with text con
         public virtual void CollectionsShouldContainAnItemWithMatchingText()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Collections should contain an item with matching text", ((string[])(null)));
-#line 112
+#line 111
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 113
+#line 112
 testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 114
+#line 113
 testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 115
+#line 114
 testRunner.And("I scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 116
+#line 115
 testRunner.When("I tap the \"Quick Contacts Demo\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 117
+#line 116
 testRunner.Then("I should be on the \"Quick Contacts Demo\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 118
+#line 117
 testRunner.And("I should see an item in collection \"First Names\" with text matching \"sley$\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -413,21 +413,21 @@ testRunner.And("I should see an item in collection \"First Names\" with text mat
         public virtual void CollectionsShouldNotContainAnItemThatEqualsText()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Collections should not contain an item that equals text", ((string[])(null)));
-#line 120
+#line 119
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 121
+#line 120
 testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 122
+#line 121
 testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 123
+#line 122
 testRunner.And("I scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 124
+#line 123
 testRunner.When("I tap the \"Quick Contacts Demo\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 125
+#line 124
 testRunner.Then("I should be on the \"Quick Contacts Demo\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 126
+#line 125
 testRunner.And("I should not see an item in collection \"First Names\" with text equals \"Xingsley\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -438,21 +438,21 @@ testRunner.And("I should not see an item in collection \"First Names\" with text
         public virtual void ShouldTextWithinCollectionEqualsText()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should text within collection equals text", ((string[])(null)));
-#line 128
+#line 127
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 129
+#line 128
 testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 130
+#line 129
 testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 131
+#line 130
 testRunner.And("I scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 132
+#line 131
 testRunner.When("I tap the \"Quick Contacts Demo\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 133
+#line 132
 testRunner.Then("I should be on the \"Quick Contacts Demo\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 134
+#line 133
 testRunner.And("I should see the label equals text \"Kingsley\" within the \"Contacts\" collection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -463,21 +463,21 @@ testRunner.And("I should see the label equals text \"Kingsley\" within the \"Con
         public virtual void ShouldTextWithinCollectionContainingText()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should text within collection containing text", ((string[])(null)));
-#line 136
+#line 135
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 137
+#line 136
 testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 138
+#line 137
 testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 139
+#line 138
 testRunner.And("I scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 140
+#line 139
 testRunner.When("I tap the \"Quick Contacts Demo\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 141
+#line 140
 testRunner.Then("I should be on the \"Quick Contacts Demo\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 142
+#line 141
 testRunner.And("I should see the label containing text \"ingsl\" within the \"Contacts\" collection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -488,21 +488,21 @@ testRunner.And("I should see the label containing text \"ingsl\" within the \"Co
         public virtual void ShouldTextWithinCollectionStartsWithText()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should text within collection starts with text", ((string[])(null)));
-#line 144
+#line 143
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 145
+#line 144
 testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 146
+#line 145
 testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 147
+#line 146
 testRunner.And("I scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 148
+#line 147
 testRunner.When("I tap the \"Quick Contacts Demo\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 149
+#line 148
 testRunner.Then("I should be on the \"Quick Contacts Demo\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 150
+#line 149
 testRunner.And("I should see the label starts with text \"Kingsl\" within the \"Contacts\" collection" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -514,19 +514,19 @@ testRunner.And("I should see the label starts with text \"Kingsl\" within the \"
         public virtual void ShouldSeeAllBadgeAndFirstnamePropertiesForAllContacts()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should see all badge and firstname properties for all contacts", ((string[])(null)));
-#line 152
+#line 151
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 153
+#line 152
 testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 154
+#line 153
 testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 155
+#line 154
 testRunner.And("I scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 156
+#line 155
 testRunner.When("I tap the \"Quick Contacts Demo\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 157
+#line 156
 testRunner.Then("I should be on the \"Quick Contacts Demo\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -538,7 +538,7 @@ testRunner.Then("I should be on the \"Quick Contacts Demo\" screen", ((string)(n
             table1.AddRow(new string[] {
                         "First Name",
                         "true"});
-#line 158
+#line 157
 testRunner.And("I should see all the following properties within the collection \"Contacts\"", ((string)(null)), table1, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -551,19 +551,19 @@ testRunner.And("I should see all the following properties within the collection 
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should see all contacts meeting conditions either firstname is Freddie or Kingsle" +
                     "y", ((string[])(null)));
-#line 163
+#line 162
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 164
+#line 163
 testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 165
+#line 164
 testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 166
+#line 165
 testRunner.And("I scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 167
+#line 166
 testRunner.When("I tap the \"Quick Contacts Demo\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 168
+#line 167
 testRunner.Then("I should be on the \"Quick Contacts Demo\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -578,7 +578,7 @@ testRunner.Then("I should be on the \"Quick Contacts Demo\" screen", ((string)(n
                         "First Name",
                         "true",
                         "FirstName == \"Freddie\" || FirstName == \"Kingsley\""});
-#line 169
+#line 168
 testRunner.And("I should see all the following properties within the collection \"Contacts\" meetin" +
                     "g the conditions", ((string)(null)), table2, "And ");
 #line hidden
@@ -590,26 +590,26 @@ testRunner.And("I should see all the following properties within the collection 
         public virtual void ShouldSwipeItemInCollection()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should swipe item in collection", ((string[])(null)));
-#line 174
+#line 173
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 175
+#line 174
 testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 176
+#line 175
 testRunner.And("I tap the \"Notification\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 177
+#line 176
 testRunner.And("I tap the \"Incoming Message\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 178
+#line 177
 testRunner.And("I tap the \"Show App Notification\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 179
+#line 178
 testRunner.And("I pull the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 180
+#line 179
 testRunner.And("I inspect the number of items in collection \"Notifications\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 181
+#line 180
 testRunner.When("I swipe right the \"1st\" item in the \"Notifications\" collection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 182
-testRunner.Then("I should see \"1\" less item(s) in \"Notifications\" collection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 181
+testRunner.Then("I should see \"1\" less item in \"Notifications\" collection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
