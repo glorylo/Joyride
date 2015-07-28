@@ -58,8 +58,10 @@ Given I scroll the screen <direction> until I see element "<element>"
 Given I pinch the screen to zoom <direction>
 ```
 ##### Then
-Then I (slowly|moderately) scroll the screen <direction> until I see the following elements
 
+```gherkin
+Then I (slowly|moderately) scroll the screen <direction> until I see the following elements
+```
 
 # Collections
 

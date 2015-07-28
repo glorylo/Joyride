@@ -16,7 +16,7 @@
 	</dependencies>	
 	
     <description>$description$</description>
-    <releaseNotes>Initial release of Joyride starter project </releaseNotes>
+    <releaseNotes>Starter package installing the latest version of Joyride</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>starter native hybrid mobile bdd behaviour driven development appium selenium ios android automation acceptance specs specflow nunit joyride joyride.specflow</tags>
 
