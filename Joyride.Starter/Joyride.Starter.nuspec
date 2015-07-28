@@ -12,11 +12,11 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
 	
 	<dependencies>
-	  <dependency id="Joyride.Specflow" version="0.0.5" />
+	  <dependency id="Joyride.Specflow" version="0.0.6" />
 	</dependencies>	
 	
     <description>$description$</description>
-    <releaseNotes>Starter package installing the latest version of Joyride</releaseNotes>
+    <releaseNotes>Starter package installing the latest version of Joyride.  Only used for installing joyride for new projects and not to be used with upgrading existing projects.</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>starter native hybrid mobile bdd behaviour driven development appium selenium ios android automation acceptance specs specflow nunit joyride joyride.specflow</tags>
 
