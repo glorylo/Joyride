@@ -1,6 +1,9 @@
 
 # Release History
 
+### Version 0.0.6
+- updated collection steps for better readibility of plural/singular items
+
 ### Version 0.0.5
 - added Then steps to verify elements from a table
 

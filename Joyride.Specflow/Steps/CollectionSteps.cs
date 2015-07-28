@@ -53,8 +53,8 @@ namespace Joyride.Specflow.Steps
             
         }
 
-        [Given(@"I tap up to ""(\d+)"" item\(s\) in the ""([^""]*)"" collection")]
-        [When(@"I tap up to ""(\d+)"" item\(s\) in the ""([^""]*)"" collection")]
+        [Given(@"I tap up to ""(\d+)"" (?:item|items) in the ""([^""]*)"" collection")]
+        [When(@"I tap up to ""(\d+)"" (?:item|items) in the ""([^""]*)"" collection")]
         public void GivenITapUpToXItemsInTheCollection(int times, string collectionName)
         {
             if (times < 1)
@@ -137,7 +137,7 @@ namespace Joyride.Specflow.Steps
                   "The number of items (" + actualSize + ") in '" + collectionName + "' is not greater than " + size);
         }
 
-        [Then(@"I should see ""(\d+)"" (less|more) item\(s\) in ""([^""]*)"" collection")]
+        [Then(@"I should see ""(\d+)"" (less|more) (?:item|items) in ""([^""]*)"" collection")]
         public void ThenIShouldSeeMoreLessItems(int difference, string lessOrMore, string collectionName)
         {
             var actualSize = 0;

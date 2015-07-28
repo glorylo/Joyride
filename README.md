@@ -119,6 +119,16 @@ Feature: My First Feature
 Here are some examples of the specifications you can write, all using Joyride's predefined steps:
 
 ```gherkin
+Scenario: Should see the following elements
+Given I tap the "App" button
+Then I should see the following elements
+| Element      |
+| Activity     |
+| Fragment     |
+| Notification |
+```
+
+```gherkin
 Scenario: Should be able to tap the item by index in a collection
 Given I tap the "App" button
 And I tap the "Fragment" button

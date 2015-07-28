@@ -70,7 +70,7 @@ Then I (slowly|moderately) scroll the screen <direction> until I see the followi
 Given I tap the "(first|most recent|last)" item in the "<collection>" collection
 Given I tap the "<ordinal>" item in the "<collection>" collection
 Given I swipe <direction> the "<ordinal>" item in the "<collection>" collection
-Given I tap up to "<number>" item(s) in the "<collection>" collection
+Given I tap up to "<number>" items in the "<collection>" collection
 Given I inspect the number of items in collection "<collection>"
 
 ```
@@ -83,7 +83,7 @@ Then I should see an item in collection "<collection>" with text (equals|starts 
 Then I should see "<number>" items in "<collection>" collection
 Then I should see the collection "<collection>" is (not empty|empty)
 Then I should see the number of items in the collection "<collection>" to be (less than|greater than) "<number>"
-Then I should see "<number>" (less|more) item(s) in "<collection>" collection
+Then I should see "<number>" (less|more) items in "<collection>" collection
 Then there should exists "<property>" within the collection "<collection>"
 Then I should see all the following properties within the collection "<collection>"
 Then I should see all the following properties within the collection "<collection>" meeting the conditions

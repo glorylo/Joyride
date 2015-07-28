@@ -54,7 +54,6 @@ And I tap the "Default Layout Animations" button
 When I tap the "Add Button" button
 Then I should see "1" items in "Buttons" collection
 
-
 Scenario: Should not see previous size of collection
 Given I tap the "Animation" button
 And I tap the "Default Layout Animations" button
@@ -71,7 +70,7 @@ And I inspect the number of items in collection "Buttons"
 When I tap the "Add Button" button
 And I tap the "Add Button" button
 And I tap the "Add Button" button
-Then I should see "3" more item(s) in "Buttons" collection
+Then I should see "3" more items in "Buttons" collection
 
 Scenario: Should see 3 less items to saved collection size
 Given I tap the "Animation" button
@@ -82,8 +81,8 @@ And I tap the "Add Button" button
 And I tap the "Add Button" button
 And I tap the "Add Button" button
 And I inspect the number of items in collection "Buttons"
-When I tap up to "3" item(s) in the "Buttons" collection
-Then I should see "3" less item(s) in "Buttons" collection
+When I tap up to "3" items in the "Buttons" collection
+Then I should see "3" less items in "Buttons" collection
 
 Scenario: Collections should contain an item equals text
 Given I tap the "App" button
@@ -179,5 +178,5 @@ And I tap the "Show App Notification" button
 And I pull the screen down
 And I inspect the number of items in collection "Notifications"
 When I swipe right the "1st" item in the "Notifications" collection
-Then I should see "1" less item(s) in "Notifications" collection
+Then I should see "1" less item in "Notifications" collection
 
