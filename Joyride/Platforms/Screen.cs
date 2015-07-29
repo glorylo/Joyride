@@ -111,7 +111,7 @@ namespace Joyride.Platforms
 
         #region Gestures
 
-        public virtual Screen Pull(Direction direction, int durationMillSecs = 1000)
+        public virtual Screen Pull(Direction direction, long durationMillSecs = 1000)
         {
             Driver.PullScreen(direction, durationMillSecs);
             return this;
