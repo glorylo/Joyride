@@ -239,7 +239,7 @@ testRunner.When("I tap the \"Add Button\" button", ((string)(null)), ((TechTalk.
 #line 61
 testRunner.And("I tap the \"Add Button\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 62
-testRunner.Then("I should not see \"1\" items in \"Buttons\" collection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I should not see \"1\" item in \"Buttons\" collection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
