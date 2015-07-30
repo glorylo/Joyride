@@ -34,7 +34,7 @@ Then I should see the label "<label>" with text (equals|starts with|containing) 
 Then the element "<element>" should be present
 Then I should see the element "<element>"
 Then I should be on the "<screen>" screen
-Then I should see element "<element>" with <attribute> (equals|starts with|containing|matching) "<text>"
+Then I should see the text of element "<element>" (equals|starts with|containing|matching) "<text>"
 Then I fail the scenario with reason "<reason>"
 Then the following elements should be present
 Then I should see the following elements
