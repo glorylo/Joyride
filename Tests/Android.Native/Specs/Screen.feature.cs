@@ -400,6 +400,66 @@ testRunner.Then("the following elements should not be present", ((string)(null))
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Should see element Button equals text")]
+        public virtual void ShouldSeeElementButtonEqualsText()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should see element Button equals text", ((string[])(null)));
+#line 104
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 105
+testRunner.Then("I should see the text of element \"Animation\" equals \"Animation\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Should see element Button starts with text")]
+        public virtual void ShouldSeeElementButtonStartsWithText()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should see element Button starts with text", ((string[])(null)));
+#line 107
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 108
+testRunner.Then("I should see the text of element \"Animation\" starts with \"Ani\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Should see element Button containing text")]
+        public virtual void ShouldSeeElementButtonContainingText()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should see element Button containing text", ((string[])(null)));
+#line 110
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 111
+testRunner.Then("I should see the text of element \"Animation\" containing \"mation\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Should see element Button matching text")]
+        public virtual void ShouldSeeElementButtonMatchingText()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should see element Button matching text", ((string[])(null)));
+#line 113
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 114
+testRunner.Then("I should see the text of element \"Animation\" matching \"tion$\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

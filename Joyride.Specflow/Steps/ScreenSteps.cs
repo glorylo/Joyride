@@ -91,19 +91,19 @@ namespace Joyride.Specflow.Steps
             else
                Assert.IsFalse(onScreen, "Unexpected to be on a screen other than: " + Context.MobileApp.Screen.Name);
         }
-        
-        [Then(@"I (should|should not) see element ""([^""]*)"" with (.*) (equals|starts with|containing|matching) ""([^""]*)""")]
-        public void ThenIShouldSeeElementValueCompareWithText(string shouldOrShouldNot, string elementName, string attribute, string compareType, string text)
+
+        [Then(@"I (should|should not) see the text of element ""([^""]*)"" (equals|starts with|containing|matching) ""([^""]*)""")]
+        public void ThenIShouldSeeElementValueCompareWithText(string shouldOrShouldNot, string elementName, string compareType, string text)
         {
-            string attributeValue = null;            
-            Context.MobileApp.Do<Screen>(s => attributeValue = s.GetElementAttribute(elementName, attribute));
+            string actualText = null;
+            Context.MobileApp.Do<Screen>(s => actualText = s.GetElementText(elementName));
 
             if (shouldOrShouldNot == "should")
-              Assert.That(attributeValue.CompareWith(text, compareType.ToCompareType()), Is.True,
-                  "Unexpected text compare for attribute " + attribute + " with '" + attributeValue + "' is not " + compareType + " '" + text + "'");
+                Assert.That(actualText != null && actualText.CompareWith(text, compareType.ToCompareType()), Is.True,
+                    "Unexpected text compare for with actual text '" + actualText + "' is not " + compareType + " '" + text + "'");
             else
-                Assert.That(attributeValue.CompareWith(text, compareType.ToCompareType()), Is.False,
-                    "Unexpected text compare for attribute " + attribute + " with '" + attributeValue + "' is " + compareType + " '" + text + "'");            
+                Assert.That(actualText != null && actualText.CompareWith(text, compareType.ToCompareType()), Is.False,
+                    "Unexpected text compare for with actual text " + actualText + "' is " + compareType + " '" + text + "'");
         }
 
 /*      
