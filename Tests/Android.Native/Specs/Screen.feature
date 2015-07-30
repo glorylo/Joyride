@@ -101,3 +101,14 @@ Then the following elements should not be present
 | Element  |
 | Quick Contacts Demo |
 
+Scenario: Should see element Button equals text
+Then I should see the text of element "Animation" equals "Animation"
+
+Scenario: Should see element Button starts with text
+Then I should see the text of element "Animation" starts with "Ani"
+
+Scenario: Should see element Button containing text
+Then I should see the text of element "Animation" containing "mation"
+
+Scenario: Should see element Button matching text
+Then I should see the text of element "Animation" matching "tion$"

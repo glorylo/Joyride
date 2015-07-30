@@ -95,7 +95,7 @@ namespace Joyride.Specflow.Steps
               Assert.IsFalse(hasText);
         }
 
-        [Then(@"I (should|should not) see ""(\d+)"" items in ""([^""]*)"" collection")]
+        [Then(@"I (should|should not) see ""(\d+)"" (?:item|items) in ""([^""]*)"" collection")]
         public void ThenIShouldSeeNumberOfItemsInCollection(string shouldOrShouldNot, int size, string collectionName)
         {
             var actualSize = 0;

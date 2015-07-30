@@ -59,7 +59,7 @@ Given I tap the "Animation" button
 And I tap the "Default Layout Animations" button
 When I tap the "Add Button" button
 And I tap the "Add Button" button
-Then I should not see "1" items in "Buttons" collection
+Then I should not see "1" item in "Buttons" collection
 
 Scenario: Should see 3 more added to saved collection size
 Given I tap the "Animation" button

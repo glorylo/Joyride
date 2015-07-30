@@ -22,18 +22,13 @@
 	
     <description>$description$</description>
     <releaseNotes>
+0.0.7
+- minor change to IGesture
+
 0.0.6
 - minor change to duration parameter to long
 
-0.0.5 
-- allow custom scroll to be used in scroll until
-
-0.0.4
-- updated default ios modal dialog body and title text 
-- include symbols wth package
-
-
-	   </releaseNotes>
+    </releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>joyride mobile bdd behaviour driven development pageobjects appium selenium ios android automation acceptance tests specs</tags>
   </metadata>
