@@ -27,6 +27,12 @@
 	
     <description>$description$</description>
     <releaseNotes>
+0.0.8
+- verifying element text step can be now use curly braces
+- added slowly scroll screen
+- removed unused steps; old steps are tagged with deprecated
+
+
 0.0.7 
 - replaced a Then step on verifying element text
 
