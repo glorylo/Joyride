@@ -21,14 +21,14 @@ When I double tap the "Add Button" button
 Then I should see "2" items in "Buttons" collection
 
 Scenario: Slight scroll to navigate to Views screen
-Given I do a slight scroll down
+Given I slowly scroll the screen down
 When I tap the "Views" button
 Then I should be on the "Views" screen
 
 Scenario: Moderate scroll to navigate to Presentation Screen
 Given I tap the "App" button
 And I tap the "Activity" button
-And I do a moderate scroll down
+And I moderately scroll the screen down
 When I tap the "Presentation" button
 Then I should be on the "Presentation" screen
 

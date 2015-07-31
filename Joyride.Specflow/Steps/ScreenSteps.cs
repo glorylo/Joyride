@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using Joyride.Extensions;
 using Joyride.Platforms;
@@ -29,23 +30,20 @@ namespace Joyride.Specflow.Steps
 
         #region Thens
 
-        [Then(@"I (should|should not) see the label ""([^""]*)"" with text (equals|starts with|containing) ""([^""]*)""")]
-        public void ThenIShouldSeeLabelWithText(string shouldOrShouldNot, string elementName, string compareType, string text)
-        {
-            string actualLabel = null;
-            Context.MobileApp.Do<Screen>(s => actualLabel = s.GetElementText(elementName));
-            Trace.Write("Actual Label is:  " + actualLabel);
 
-            if (actualLabel == null)
-                Assert.Fail("Unable to find value for element: " + elementName);
+        [Then(@"I (should|should not) see the text of (?:button|field|label|element|link) ""([^""]*)"" (equals|starts with|containing|matching) (?:""(.*?)""|{(.*?)})")]
+        public void ThenIShouldSeeElementValueCompareWithText(string shouldOrShouldNot, string elementName, string compareType, string quotedText, string curlyText)
+        {
+            var text = (quotedText != String.Empty) ? quotedText : curlyText;
+            string actualText = null;
+            Context.MobileApp.Do<Screen>(s => actualText = s.GetElementText(elementName));
 
             if (shouldOrShouldNot == "should")
-              Assert.That(actualLabel.CompareWith(text, compareType.ToCompareType()), Is.True,
-                 "Unexpected text compare with '" + actualLabel + "' is not " + compareType + " '" + text + "'");
+                Assert.That(actualText != null && actualText.CompareWith(text, compareType.ToCompareType()), Is.True,
+                    "Unexpected text compare for with actual text '" + actualText + "' is not " + compareType + " '" + text + "'");
             else
-              Assert.That(actualLabel.CompareWith(text, compareType.ToCompareType()), Is.False,
-               "Unexpected text compare with '" + actualLabel + "' is " + compareType + " '" + text + "'");
-
+                Assert.That(actualText != null && actualText.CompareWith(text, compareType.ToCompareType()), Is.False,
+                    "Unexpected text compare for with actual text " + actualText + "' is " + compareType + " '" + text + "'");
         }
 
         [Then(@"the (?:button|field|label|element|link|checkbox|switch) ""([^""]*)"" (should|should not) be present")]
@@ -90,20 +88,6 @@ namespace Joyride.Specflow.Steps
                Assert.IsTrue(onScreen, "Incorrectly on screen: " + Context.MobileApp.Screen.Name);
             else
                Assert.IsFalse(onScreen, "Unexpected to be on a screen other than: " + Context.MobileApp.Screen.Name);
-        }
-
-        [Then(@"I (should|should not) see the text of element ""([^""]*)"" (equals|starts with|containing|matching) ""([^""]*)""")]
-        public void ThenIShouldSeeElementValueCompareWithText(string shouldOrShouldNot, string elementName, string compareType, string text)
-        {
-            string actualText = null;
-            Context.MobileApp.Do<Screen>(s => actualText = s.GetElementText(elementName));
-
-            if (shouldOrShouldNot == "should")
-                Assert.That(actualText != null && actualText.CompareWith(text, compareType.ToCompareType()), Is.True,
-                    "Unexpected text compare for with actual text '" + actualText + "' is not " + compareType + " '" + text + "'");
-            else
-                Assert.That(actualText != null && actualText.CompareWith(text, compareType.ToCompareType()), Is.False,
-                    "Unexpected text compare for with actual text " + actualText + "' is " + compareType + " '" + text + "'");
         }
 
 /*      
