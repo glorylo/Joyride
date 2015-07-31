@@ -128,7 +128,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
 #line 24
-testRunner.Given("I do a slight scroll down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I slowly scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 25
 testRunner.When("I tap the \"Views\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 26
@@ -151,7 +151,7 @@ testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFl
 #line 30
 testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 31
-testRunner.And("I do a moderate scroll down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I moderately scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 32
 testRunner.When("I tap the \"Presentation\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 33

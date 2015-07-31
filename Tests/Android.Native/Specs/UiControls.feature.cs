@@ -114,7 +114,7 @@ testRunner.And("I tap the \"Custom Title\" button", ((string)(null)), ((TechTalk
 #line 21
 testRunner.When("I enter \"New Left Title\" in the \"Left\" field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 22
-testRunner.Then("I should not see the label \"Left Title\" with text equals \"New Left Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I should not see the text of element \"Left Title\" equals \"New Left Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -139,7 +139,7 @@ testRunner.And("I enter \"New Left Title\" in the \"Left\" field", ((string)(nul
 #line 29
 testRunner.When("I tap the \"Change Left\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 30
-testRunner.Then("I should see the label \"Left Title\" with text equals \"New Left Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I should see the text of element \"Left Title\" equals \"New Left Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -158,7 +158,7 @@ testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFl
 #line 34
 testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 35
-testRunner.And("I do a moderate scroll down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I moderately scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 36
 testRunner.And("I tap the \"Presentation\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 37
@@ -185,7 +185,7 @@ testRunner.Given("I tap the \"App\" button", ((string)(null)), ((TechTalk.SpecFl
 #line 43
 testRunner.And("I tap the \"Activity\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 44
-testRunner.And("I do a moderate scroll down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I moderately scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 45
 testRunner.And("I tap the \"Presentation\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 46

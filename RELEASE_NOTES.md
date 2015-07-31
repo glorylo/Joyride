@@ -1,11 +1,17 @@
 
 # Release History
 
+
+### Version 0.0.8
+- verifying element text step can be now use curly braces
+- added slowly scroll screen
+- removed unused steps; old steps are tagged with deprecated
+ 
 ### Version 0.0.7
 - replaced a Then step on verifying element text
 
 ### Version 0.0.6
-- updated collection steps for better readibility of plural/singular items
+- updated collection steps for better readability of plural/singular items
 
 ### Version 0.0.5
 - added Then steps to verify elements from a table

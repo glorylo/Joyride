@@ -111,4 +111,4 @@ Scenario: Should see element Button containing text
 Then I should see the text of element "Animation" containing "mation"
 
 Scenario: Should see element Button matching text
-Then I should see the text of element "Animation" matching "tion$"
+Then I should see the text of element "Animation" matching {tion$}
