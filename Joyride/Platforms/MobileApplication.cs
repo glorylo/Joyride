@@ -7,6 +7,8 @@ namespace Joyride.Platforms
 {
     public abstract class MobileApplication : IMobileApplication
     {
+        protected static int MaxLaunchRetries = 5;
+        protected static double RetryDelaySecs = 2;
         protected Screen CurrentScreen;
         protected int TransitionDelayMs = 0;
         abstract public string Identifier { get; }
@@ -15,7 +17,25 @@ namespace Joyride.Platforms
 
         public virtual void Launch()
         {
-            Driver.LaunchApp();
+            var retries = 0;
+            do
+            {
+                try
+                {
+                    Driver.LaunchApp();
+                    return;
+                }
+                catch (Exception e)
+                {
+                    retries++;
+                    Trace.WriteLine("Failed to launch app.  Retries: " + retries);
+                    Driver.WaitFor(TimeSpan.FromSeconds(RetryDelaySecs));
+
+                    if (retries == MaxLaunchRetries)
+                        throw;
+                }
+
+            } while (retries < MaxLaunchRetries);
         }
 
         public virtual void Close()
