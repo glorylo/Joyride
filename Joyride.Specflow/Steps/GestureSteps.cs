@@ -68,7 +68,7 @@ namespace Joyride.Specflow.Steps
         public void GivenIScrollScreenInDirectionXTimes(string speed, string direction, int times)
         {
             if (times < 2)
-                throw new ArgumentException("times have to be greater than 2");
+                throw new ArgumentException("times have to be greater than 1");
 
             var directionToScroll = (Direction)Enum.Parse(typeof(Direction), direction, true);
             var durationMillSecs = GetDurationMilliSeconds(speed);
