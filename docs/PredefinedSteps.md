@@ -30,7 +30,6 @@ Then the element "Sign Up" should not be present
 
 
 ```gherkin
-Then I should see the label "<label>" with text (equals|starts with|containing) "<text>"
 Then the element "<element>" should be present
 Then I should see the element "<element>"
 Then I should be on the "<screen>" screen
