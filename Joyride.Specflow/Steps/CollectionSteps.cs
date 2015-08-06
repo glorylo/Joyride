@@ -83,9 +83,10 @@ namespace Joyride.Specflow.Steps
 
         #region #Thens
 
-        [Then(@"I (should|should not) see an item in collection ""([^""]*)"" with text (equals|starts with|containing|matching) ""([^""]*)""")]
-        public void ThenIShouldSeeItemInCollectionWithText(string shouldOrShouldNot, string collectionName, string compareType, string text)
+        [Then(@"I (should|should not) see an item in collection ""([^""]*)"" with text (equals|starts with|containing|matching) (?:""(.*?)""|{(.*?)})")]
+        public void ThenIShouldSeeItemInCollectionWithText(string shouldOrShouldNot, string collectionName, string compareType, string quotedText, string curlyText)
         {
+            var text = (quotedText != String.Empty) ? quotedText : curlyText;
             var hasText = false;
             Context.MobileApp.Do<Screen>(s => hasText = s.HasTextInCollection(collectionName, text, compareType.ToCompareType()));
 
