@@ -35,20 +35,50 @@ namespace Joyride.Specflow.Steps
             Context.MobileApp.Do<IGesture>(i => i.TapAndHold(elementName, seconds));
         }
 
+        private static double GetScale(string speed)
+        {
+            var scale = 1.0;
+            // slowly is 0.75; anythign else (i.e. moderately is 0.85)
+            if (speed != String.Empty)
+                scale = (speed == "slowly") ? 0.75 : 0.85;
+            return scale;
+        }
+
+        private static long GetDurationMilliSeconds(string speed)
+        {
+            var durationMillSecs = 500;
+            // slowly is 3000; anythign else (i.e. moderately is 1500)
+            if (speed != String.Empty)
+               durationMillSecs = (speed == "slowly") ? 3000 : 1500;
+            return durationMillSecs;
+        }
+
         [Given(@"I (?:(slowly|moderately) )?scroll the screen (left|right|up|down)")]
         [When(@"I (?:(slowly|moderately) )?scroll the screen (left|right|up|down)")]
         public void GivenIScrollScreenInDirection(string speed, string direction)
         {
             var directionToScroll = (Direction) Enum.Parse(typeof(Direction), direction, true);
-            var durationMillSecs = 500;
-            var scale = 1.0;
-            if (speed != String.Empty)
-            {
-                durationMillSecs = (speed == "slowly") ? 3000 : 1500;
-                scale = (speed == "slowly") ? 0.75 : 0.85;
-            }
-
+            var durationMillSecs = GetDurationMilliSeconds(speed);
+            var scale = GetScale(speed);
             Context.MobileApp.Do<IGesture>(i => i.Scroll(directionToScroll, scale, durationMillSecs));
+        }
+
+        [Given(@"I (?:(slowly|moderately) )?scroll the screen (left|right|up|down) ""(\d+)"" times")]
+        [When(@"I (?:(slowly|moderately) )?scroll the screen (left|right|up|down) ""(\d+)"" times")]
+        public void GivenIScrollScreenInDirectionXTimes(string speed, string direction, int times)
+        {
+            if (times < 2)
+                throw new ArgumentException("times have to be greater than 2");
+
+            var directionToScroll = (Direction)Enum.Parse(typeof(Direction), direction, true);
+            var durationMillSecs = GetDurationMilliSeconds(speed);
+            var scale = GetScale(speed);
+
+            Context.MobileApp.Do<IGesture>(i =>
+            {
+                for (var t = 0; t < times; t++)
+                    i.Scroll(directionToScroll, scale, durationMillSecs);                
+            });
         }
 
         [Given(@"I swipe the ""([^""]*)"" (left|right|up|down)")]
@@ -72,11 +102,10 @@ namespace Joyride.Specflow.Steps
         public void GivenIScrollUntil(string speed, string direction, string elementName)
         {
             var directionToScroll = (Direction) Enum.Parse(typeof(Direction), direction, true);
-            var durationMillSecs = 500;
-            if (speed != String.Empty)
-                durationMillSecs = (speed == "slowly") ? 3000 : 1500;
+            var durationMillSecs = GetDurationMilliSeconds(speed);
+            var scale = GetScale(speed);
 
-            Context.MobileApp.Do<IGesture>(i => i.ScrollUntil(elementName, directionToScroll, MaxRetries, ScrollUntilTimeoutSecs, 1.0, durationMillSecs));
+            Context.MobileApp.Do<IGesture>(i => i.ScrollUntil(elementName, directionToScroll, MaxRetries, ScrollUntilTimeoutSecs, scale, durationMillSecs));
         }
 
         [Given(@"I pinch the screen to zoom (out|in)")]
