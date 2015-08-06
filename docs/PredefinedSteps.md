@@ -50,6 +50,7 @@ Given I tap the "<element>" button
 Given I double tap the "<element>" button
 Given I tap the "<element>" button and hold for "<secs>" seconds
 Given I (slowly|moderately) scroll the screen <direction>
+Given I (slowly|moderately) scroll the screen <direction> "<times>" times
 Given I swipe the screen <direction>
 Given I swipe the "<element>" <direction>
 Given I pull the screen <direction>
