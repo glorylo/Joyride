@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using Joyride.Extensions;
 using Joyride.Interfaces;
 using OpenQA.Selenium;
@@ -127,7 +128,7 @@ namespace Joyride.Platforms
 
         internal protected void TapInWebview(string elementName)
         {
-            Driver.DoActionInWebView(() =>
+            DoActionInWebView(() =>
             {
                 var element = FindElement(elementName);
                 if (element == null)
@@ -292,7 +293,7 @@ namespace Joyride.Platforms
         // only works in webview currently
         public virtual Screen SelectOption(string elementName, string value)
         {
-            Driver.DoActionInWebView(() =>
+            DoActionInWebView(() =>
             {
                 var selectElement = FindElement(elementName);
                 if (selectElement == null)
@@ -308,7 +309,7 @@ namespace Joyride.Platforms
         public virtual string GetSelectedOption(string elementName)
         {
             string selected = null;
-            Driver.DoActionInWebView(() =>
+            DoActionInWebView(() =>
             {
                 var selectElement = FindElement(elementName);
                 if (selectElement == null)
@@ -331,7 +332,7 @@ namespace Joyride.Platforms
         public string GetSourceWebView()
         {
             string source = null;
-            Driver.DoActionInWebView(() => { source = GetSource(); });
+            DoActionInWebView(() => { source = GetSource(); });
             return source;
         }
 

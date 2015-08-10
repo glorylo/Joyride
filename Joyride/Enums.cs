@@ -1,6 +1,12 @@
 ﻿
 namespace Joyride
 {
+    public enum View
+    {
+        Native,
+        Webview
+    }
+    
     public enum Platform
     {
         Android,

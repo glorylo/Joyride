@@ -25,7 +25,7 @@ namespace Joyride.Platforms
                     Driver.LaunchApp();
                     return;
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     retries++;
                     Trace.WriteLine("Failed to launch app.  Retries: " + retries);

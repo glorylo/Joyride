@@ -14,9 +14,28 @@ namespace Joyride.Platforms
 {
     abstract public class Component
     {
+        private string _currentView;
         public const int DefaultWaitSeconds = RemoteMobileDriver.DefaultWaitSeconds;
         abstract public string Name { get; }
-        static protected AppiumDriver Driver { get { return RemoteMobileDriver.GetInstance(); } }
+        protected static AppiumDriver Driver { get { return RemoteMobileDriver.GetInstance(); } }
+
+        protected View GetCurrentView(bool force = false)
+        {
+            if (force)
+                _currentView = Driver.Context;
+            _currentView = _currentView ?? Driver.Context;
+            return Driver.IsNative(_currentView) ? View.Native : View.Webview;
+        }
+
+        protected void SetCurrentView(View view)
+        {
+            _currentView = view == View.Native ? Driver.SwitchToNative() : Driver.SwitchToWebview();
+        }
+
+        public bool IsNativeView(bool force)
+        {
+            return GetCurrentView(force) == View.Native;
+        }
 
         internal protected IWebElement FindElement(string elementName)
         {
@@ -150,7 +169,7 @@ namespace Joyride.Platforms
             {
                 element = GetElementInCollection(collectionName, index);
             }
-            catch (NoSuchElementException e)
+            catch (NoSuchElementException)
             {
                 Trace.WriteLine("Unable to get element in collection " + collectionName + " at index " + index);
                 return null;
@@ -174,15 +193,9 @@ namespace Joyride.Platforms
             return (element != null);
         }
 
-        internal protected FindsByAttribute GetElementFindByAttribute(string elementOrCollectionName)
-        {
-            var member = Util.GetMemberInfo(this, elementOrCollectionName.Dehumanize(), BindingFlags.NonPublic);
-            return member == null ? null : member.GetCustomAttribute<FindsByAttribute>();
-        }
-
         internal protected string GetElementFindBySelector(string elementOrCollectionName)
         {
-            var attribute = GetElementFindByAttribute(elementOrCollectionName);
+            var attribute = Util.GetMemberCustomAttribute<FindsByAttribute>(this, elementOrCollectionName.Dehumanize(), BindingFlags.NonPublic);
             if (attribute == null)
                 return null;
             return attribute.Using;
@@ -203,7 +216,7 @@ namespace Joyride.Platforms
 
         internal protected Tuple<IWebElement, int, string, string> FindElementWithinCollection(string collectionName, int index, string relativeXpath, int timeoutSecs)
         {
-            var attribute = GetElementFindByAttribute(collectionName);
+            var attribute = Util.GetMemberCustomAttribute<FindsByAttribute>(this, collectionName.Dehumanize(), BindingFlags.NonPublic);
 
             if (attribute == null || attribute.How != How.XPath)
                 throw new ArgumentException("Only collection with find by xpath selector is supported.  Ensure the collection, " + collectionName + ", is using xpath");
@@ -238,6 +251,18 @@ namespace Joyride.Platforms
             PageFactory.InitElements(Driver, this);
         }
 
-
+        protected void DoActionInWebView(Action action, bool force=false, int maxRetries = 3)
+        {
+            if (IsNativeView(force))
+            {
+                SetCurrentView(View.Webview);
+                action();
+                SetCurrentView(View.Native);
+            }
+            else
+            {
+                action();
+            }
+        }
     }
 }
