@@ -14,4 +14,4 @@ And I tap the "Views" button
 And I scroll the screen down until I see element "Webview"
 When I tap the "Webview" button
 Then I should be on the "Webview" screen
-And I should see the label "Hello World"
+#And I should see the label "Hello World"

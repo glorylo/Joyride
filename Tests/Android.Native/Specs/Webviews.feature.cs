@@ -94,8 +94,6 @@ testRunner.And("I scroll the screen down until I see element \"Webview\"", ((str
 testRunner.When("I tap the \"Webview\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 16
 testRunner.Then("I should be on the \"Webview\" screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 17
-testRunner.And("I should see the label \"Hello World\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
