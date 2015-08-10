@@ -93,6 +93,7 @@
     <Compile Include="SampleApp\ApiDemo\Screens\Views\LongScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\Views\ScrollViewScreen.cs" />
     <Compile Include="SampleApp\ApiDemo\Screens\Views\ViewsScreen.cs" />
+    <Compile Include="SampleApp\ApiDemo\Screens\Views\WebviewScreen.cs" />
     <Compile Include="Specs\Collections.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -117,6 +118,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>UiControls.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Specs\Webviews.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Webviews.feature</DependentUpon>
     </Compile>
     <Compile Include="Steps\ApiDemoSteps.cs" />
     <Compile Include="Steps\SpecflowHooks.cs" />
@@ -143,6 +149,10 @@
     <None Include="Specs\Screen.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Screen.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Specs\Webviews.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Webviews.feature.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
