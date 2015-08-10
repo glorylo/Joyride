@@ -27,9 +27,10 @@ namespace Joyride.Platforms
             return Driver.IsNative(_currentView) ? View.Native : View.Webview;
         }
 
-        protected void SetCurrentView(View view)
+        protected void SetCurrentView(View view, bool force=false)
         {
-            _currentView = view == View.Native ? Driver.SwitchToNative() : Driver.SwitchToWebview();
+            if (GetCurrentView(force) != view)
+              _currentView = view == View.Native ? Driver.SwitchToNative() : Driver.SwitchToWebview();
         }
 
         public bool IsNativeView(bool force)
@@ -37,15 +38,61 @@ namespace Joyride.Platforms
             return GetCurrentView(force) == View.Native;
         }
 
-        internal protected IWebElement FindElement(string elementName)
+        public bool IsWebview(string elementOrCollectionName)
+        {
+            var attribute = Util.GetMemberCustomAttribute<WebviewAttribute>(this, elementOrCollectionName.Dehumanize(),
+                BindingFlags.NonPublic);
+            return attribute != null;
+        }
+
+        internal protected IWebElement RetrieveElement(string elementName)
         {
             var element = (IWebElement) Util.GetMemberValue(this, elementName.Dehumanize(), BindingFlags.NonPublic);
 
-            if (element != null && element.IsPresent()) 
-                return element;
+            if (element == null)
+                return null;
 
-            Trace.WriteLine("Unable to access element:  " + elementName);
-            return null;
+            bool isPresent;
+            if (IsWebview(elementName))
+            {
+                SetCurrentView(View.Webview);
+                isPresent = element.IsPresent(); 
+                SetCurrentView(View.Native);
+            }
+            else
+                isPresent = element.IsPresent(); // determine if the element is present by retrieving it.
+            
+            return (isPresent ? element : null);
+        }
+
+        internal protected IList<IWebElement> RetrieveElements(string collectionName)
+        {
+            var elements =
+                (IList<IWebElement>) Util.GetMemberValue(this, collectionName.Dehumanize(), BindingFlags.NonPublic);
+
+            if (elements == null)
+                return null;
+
+            bool isPresent;
+
+            if (IsWebview(collectionName))
+            {
+                SetCurrentView(View.Webview);
+                isPresent = elements.GetEnumerator().MoveNext();
+                SetCurrentView(View.Native);
+            }
+            else
+                isPresent = elements.GetEnumerator().MoveNext(); // determine if the element is present by retrieving it.
+
+            return (isPresent ? elements : null);
+        } 
+
+        internal protected IWebElement FindElement(string elementName)
+        {
+            var element = RetrieveElement(elementName);
+            if (element == null)
+              Trace.WriteLine("Unable to access element:  " + elementName);  
+            return element;
         }
 
         internal protected IWebElement FindCachedElement(string elementName)
@@ -60,14 +107,12 @@ namespace Joyride.Platforms
 
         internal protected IList<IWebElement> FindElements(string collectionName)
         {
-            var elements =
-                (IList<IWebElement>) Util.GetMemberValue(this, collectionName.Dehumanize(), BindingFlags.NonPublic);
+            var elements = RetrieveElements(collectionName);
 
-            if (elements != null && elements.GetEnumerator().MoveNext()) 
-                return elements;
+            if (elements == null)
+              Trace.WriteLine("Unable to access the collection: " + collectionName);
 
-            Trace.WriteLine("Unable to access the collection: " + collectionName);
-            return null;
+            return elements;
         }
 
         internal protected IList<IWebElement> FindElements(string collectionName, int timeoutSecs)
