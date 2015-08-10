@@ -14,28 +14,27 @@ namespace Joyride.Platforms
 {
     abstract public class Component
     {
-        private string _currentView;
         public const int DefaultWaitSeconds = RemoteMobileDriver.DefaultWaitSeconds;
         abstract public string Name { get; }
         protected static AppiumDriver Driver { get { return RemoteMobileDriver.GetInstance(); } }
 
-        protected View GetCurrentView(bool force = false)
+        protected View GetCurrentView()
         {
-            if (force)
-                _currentView = Driver.Context;
-            _currentView = _currentView ?? Driver.Context;
-            return Driver.IsNative(_currentView) ? View.Native : View.Webview;
+            return Driver.IsNative() ? View.Native : View.Webview;
         }
 
-        protected void SetCurrentView(View view, bool force=false)
+        protected void SetCurrentView(View view)
         {
-            if (GetCurrentView(force) != view)
-              _currentView = view == View.Native ? Driver.SwitchToNative() : Driver.SwitchToWebview();
+            if (GetCurrentView() == view) return;
+            if (view == View.Native)
+                Driver.SwitchToNative();
+            else
+                Driver.SwitchToWebview();
         }
 
-        public bool IsNativeView(bool force)
+        public bool IsNativeView()
         {
-            return GetCurrentView(force) == View.Native;
+            return GetCurrentView() == View.Native;
         }
 
         public bool IsWebview(string elementOrCollectionName)
@@ -296,9 +295,9 @@ namespace Joyride.Platforms
             PageFactory.InitElements(Driver, this);
         }
 
-        protected void DoActionInWebView(Action action, bool force=false, int maxRetries = 3)
+        protected void DoActionInWebView(Action action, int maxRetries = 3)
         {
-            if (IsNativeView(force))
+            if (IsNativeView())
             {
                 SetCurrentView(View.Webview);
                 action();

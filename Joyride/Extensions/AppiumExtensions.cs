@@ -32,9 +32,9 @@ namespace Joyride.Extensions
             return new Point(centerX, centerY);
         }
 
-        public static bool IsNative(this AppiumDriver driver, string context)
+        public static bool IsNative(this AppiumDriver driver)
         {
-            return context == NativeAppContext;
+            return driver.Context == NativeAppContext;
         }
 
         public static void SwitchTo(this AppiumDriver driver, string context, int maxRetries)
