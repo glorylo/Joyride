@@ -51,19 +51,28 @@ namespace Joyride.Platforms
             if (element == null)
                 return null;
 
-            bool isPresent;
             if (IsWebview(elementName))
             {
-                SetCurrentView(View.Webview);
-                isPresent = element.IsPresent(); 
-                SetCurrentView(View.Native);
+                Trace.WriteLine("Require switching to webview for element: " + elementName);
+                Driver.DoActionInWebView(() =>
+                {
+                    element = (element.IsPresent())
+                        ? Util.GetMemberValue(element, "WrappedElement") as IWebElement
+                        : null;
+                });
             }
             else
-                isPresent = element.IsPresent(); // determine if the element is present by retrieving it.
-            
-            return (isPresent ? element : null);
+            {
+                element = (element.IsPresent())
+                    ? Util.GetMemberValue(element, "WrappedElement") as IWebElement
+                    : null;
+            }
+
+            return element;
         }
 
+
+        //TODO: Not tested
         internal protected IList<IWebElement> RetrieveElements(string collectionName)
         {
             var elements =
@@ -72,16 +81,23 @@ namespace Joyride.Platforms
             if (elements == null)
                 return null;
 
-            bool isPresent;
+            bool isPresent = false;
 
             if (IsWebview(collectionName))
             {
-                SetCurrentView(View.Webview);
-                isPresent = elements.GetEnumerator().MoveNext();
-                SetCurrentView(View.Native);
+                Driver.DoActionInWebView(() =>
+                {
+                    isPresent = elements.GetEnumerator().MoveNext();
+//                    if (isPresent)
+//                        elements = Util.GetMemberValue(elements, "ElementList", BindingFlags.NonPublic) as IList<IWebElement>;
+                });
             }
             else
+            {
                 isPresent = elements.GetEnumerator().MoveNext(); // determine if the element is present by retrieving it.
+//                if (isPresent)
+//                    elements = Util.GetMemberValue(elements, "ElementList", BindingFlags.NonPublic) as IList<IWebElement>;                   
+            }
 
             return (isPresent ? elements : null);
         } 
@@ -92,16 +108,6 @@ namespace Joyride.Platforms
             if (element == null)
               Trace.WriteLine("Unable to access element:  " + elementName);  
             return element;
-        }
-
-        internal protected IWebElement FindCachedElement(string elementName)
-        {
-            var element = FindElement(elementName);
-
-            if (element == null)
-              return null;
-
-            return Util.GetMemberValue(element, "WrappedElement") as IWebElement;
         }
 
         internal protected IList<IWebElement> FindElements(string collectionName)
@@ -129,8 +135,10 @@ namespace Joyride.Platforms
             var collection = FindElements(collectionName, timeoutSecs);
 
             if (collection == null)
-                return 0;   
-            return collection.Count;            
+                return 0;
+            var size = collection.Count;
+            Trace.WriteLine("Found collection '" + collectionName + "' with number of items: " + size);
+            return size;            
         }
 
         public bool IsEmpty(string collectionName, int timeoutSecs = DefaultWaitSeconds)
@@ -149,6 +157,7 @@ namespace Joyride.Platforms
 
         public string GetElementAttribute(string elementName, string attributeName)
         {
+
             var element = FindElement(elementName);
 
             if (element == null)
@@ -295,10 +304,11 @@ namespace Joyride.Platforms
             PageFactory.InitElements(Driver, this);
         }
 
+        //TODO: may remove
         protected void DoActionInWebView(Action action, int maxRetries = 3)
         {
             if (IsNativeView())
-            {
+            {                
                 SetCurrentView(View.Webview);
                 action();
                 SetCurrentView(View.Native);

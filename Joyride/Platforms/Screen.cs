@@ -128,7 +128,7 @@ namespace Joyride.Platforms
 
         internal protected void TapInWebview(string elementName)
         {
-            DoActionInWebView(() =>
+            Driver.DoActionInWebView(() =>
             {
                 var element = FindElement(elementName);
                 if (element == null)
@@ -155,7 +155,7 @@ namespace Joyride.Platforms
 
         public virtual Screen DoubleTap(string elementName)
         {
-            var element = FindCachedElement(elementName);
+            var element = FindElement(elementName);
 
             if (element == null)
                 throw new NoSuchElementException("Cannot find element:  " + elementName);
@@ -166,7 +166,7 @@ namespace Joyride.Platforms
 
         public virtual Screen TapAndHold(string elementName, int seconds)
         {
-            var element = FindCachedElement(elementName);
+            var element = FindElement(elementName);
 
             if (element == null)
                 throw new NoSuchElementException("Cannot find element:  " + elementName);
@@ -223,7 +223,7 @@ namespace Joyride.Platforms
 
         public virtual Screen Swipe(string elementName, Direction direction, double scale=1.0, long durationMilliSecs = 500)
         {
-            var element = FindCachedElement(elementName);
+            var element = FindElement(elementName);
             if (element == null)
                 throw new NoSuchElementException("Cannot find element:  " + elementName);
             Driver.Swipe(element, direction, scale, durationMilliSecs);
@@ -293,7 +293,7 @@ namespace Joyride.Platforms
         // only works in webview currently
         public virtual Screen SelectOption(string elementName, string value)
         {
-            DoActionInWebView(() =>
+            Driver.DoActionInWebView(() =>
             {
                 var selectElement = FindElement(elementName);
                 if (selectElement == null)
@@ -309,7 +309,7 @@ namespace Joyride.Platforms
         public virtual string GetSelectedOption(string elementName)
         {
             string selected = null;
-            DoActionInWebView(() =>
+            Driver.DoActionInWebView(() =>
             {
                 var selectElement = FindElement(elementName);
                 if (selectElement == null)
@@ -332,7 +332,7 @@ namespace Joyride.Platforms
         public string GetSourceWebView()
         {
             string source = null;
-            DoActionInWebView(() => { source = GetSource(); });
+            Driver.DoActionInWebView(() => { source = GetSource(); });
             return source;
         }
 

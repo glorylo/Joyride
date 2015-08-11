@@ -22,11 +22,11 @@
 	
     <description>$description$</description>
     <releaseNotes>
+0.0.9 
+- updated retrieving the elements
+
 0.0.8
 - added retries launching the app 
-
-0.0.7
-- minor change to IGesture
 
     </releaseNotes>
     <copyright>Copyright 2015</copyright>

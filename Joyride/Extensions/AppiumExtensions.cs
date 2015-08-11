@@ -45,6 +45,7 @@ namespace Joyride.Extensions
                 try
                 {
                     driver.Context = context;
+                    Trace.WriteLine("Switched to context: " + context);
                     return;
                 }
                 catch (Exception)
