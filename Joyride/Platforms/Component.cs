@@ -51,22 +51,26 @@ namespace Joyride.Platforms
             if (element == null)
                 return null;
 
-            if (IsWebview(elementName))
-            {
-                Trace.WriteLine("Require switching to webview for element: " + elementName);
-                Driver.DoActionInWebView(() =>
-                {
-                    element = (element.IsPresent())
-                        ? Util.GetMemberValue(element, "WrappedElement") as IWebElement
-                        : null;
-                });
-            }
-            else
-            {
-                element = (element.IsPresent())
-                    ? Util.GetMemberValue(element, "WrappedElement") as IWebElement
-                    : null;
-            }
+//            if (IsWebview(elementName))
+//            {
+//                Trace.WriteLine("Require switching to webview for element: " + elementName);
+//                Driver.DoActionInWebView(() =>
+//                {
+//                    element = (element.IsPresent())
+//                        ? Util.GetMemberValue(element, "WrappedElement") as IWebElement
+//                        : null;
+//                });
+//            }
+//            else
+//            {
+//                element = (element.IsPresent())
+//                    ? Util.GetMemberValue(element, "WrappedElement") as IWebElement
+//                    : null;
+//            }
+
+            element = (element.IsPresent())
+                ? Util.GetMemberValue(element, "WrappedElement") as IWebElement
+                : null;
 
             return element;
         }
@@ -80,24 +84,24 @@ namespace Joyride.Platforms
             if (elements == null)
                 return null;
 
-            bool isPresent = false;
-
-            if (IsWebview(collectionName))
-            {
-                Driver.DoActionInWebView(() =>
-                {
-                    isPresent = elements.GetEnumerator().MoveNext();
+            //
+//            if (IsWebview(collectionName))
+//            {
+//                Driver.DoActionInWebView(() =>
+//                {
+//                    isPresent = elements.GetEnumerator().MoveNext();
 //                    if (isPresent)
 //                        elements = Util.GetMemberValue(elements, "ElementList", BindingFlags.NonPublic) as IList<IWebElement>;
-                });
-            }
-            else
-            {
-                isPresent = elements.GetEnumerator().MoveNext(); // determine if the element is present by retrieving it.
+//                });
+//            }
+//            else
+//            {
+//                isPresent = elements.GetEnumerator().MoveNext(); // determine if the element is present by retrieving it.
 //                if (isPresent)
 //                    elements = Util.GetMemberValue(elements, "ElementList", BindingFlags.NonPublic) as IList<IWebElement>;                   
-            }
+//            }
 
+            var isPresent = elements.GetEnumerator().MoveNext();
             return (isPresent ? elements : null);
         } 
 
