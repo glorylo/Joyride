@@ -18,12 +18,12 @@ namespace Joyride.Platforms
         abstract public string Name { get; }
         protected static AppiumDriver Driver { get { return RemoteMobileDriver.GetInstance(); } }
 
-        protected View GetCurrentView()
+        internal protected View GetCurrentView()
         {
             return Driver.IsNative() ? View.Native : View.Webview;
         }
 
-        protected void SetCurrentView(View view)
+        internal protected void SetCurrentView(View view)
         {
             if (GetCurrentView() == view) return;
             if (view == View.Native)
@@ -32,12 +32,12 @@ namespace Joyride.Platforms
                 Driver.SwitchToWebview();
         }
 
-        public bool IsNativeView()
+        internal protected bool IsNativeView()
         {
             return GetCurrentView() == View.Native;
         }
 
-        public bool IsWebview(string elementOrCollectionName)
+        protected internal bool IsWebview(string elementOrCollectionName)
         {
             var attribute = Util.GetMemberCustomAttribute<WebviewAttribute>(this, elementOrCollectionName.Dehumanize(),
                 BindingFlags.NonPublic);
@@ -72,7 +72,6 @@ namespace Joyride.Platforms
         }
 
 
-        //TODO: Not tested
         internal protected IList<IWebElement> RetrieveElements(string collectionName)
         {
             var elements =
@@ -130,7 +129,7 @@ namespace Joyride.Platforms
             return Driver.FindElementWithMethod(timeoutSecs, new Func<string, IWebElement>(FindElement), elementName);
         }
 
-        public int SizeOf(string collectionName, int timeoutSecs=DefaultWaitSeconds)
+        public virtual int SizeOf(string collectionName, int timeoutSecs=DefaultWaitSeconds)
         {
             var collection = FindElements(collectionName, timeoutSecs);
 
@@ -141,7 +140,7 @@ namespace Joyride.Platforms
             return size;            
         }
 
-        public bool IsEmpty(string collectionName, int timeoutSecs = DefaultWaitSeconds)
+        public virtual bool IsEmpty(string collectionName, int timeoutSecs = DefaultWaitSeconds)
         {
             return (SizeOf(collectionName, timeoutSecs) == 0);
         }
@@ -209,13 +208,13 @@ namespace Joyride.Platforms
             return collection.FirstOrDefault(e => e.Text.CompareWith(text, compareType));
         }
 
-        public bool HasTextInCollection(string collectionName, string text, CompareType compareType)
+        public virtual bool HasTextInCollection(string collectionName, string text, CompareType compareType)
         {
             var theElement = GetElementInCollection(collectionName, text, compareType);
             return (theElement != null);
         }
         
-        public string GetElementAttribute(string collectionName, int index, string attributeName)
+        public virtual string GetElementAttribute(string collectionName, int index, string attributeName)
         {
             IWebElement element;
             try
@@ -230,7 +229,7 @@ namespace Joyride.Platforms
             return element.GetAttribute(attributeName).Trim();
         }
 
-        public bool ElementIsVisible(string elementName, int timeoutSecs)
+        public virtual bool ElementIsVisible(string elementName, int timeoutSecs)
         {
             var element = FindElement(elementName, timeoutSecs);
 
@@ -240,7 +239,7 @@ namespace Joyride.Platforms
             return element.Displayed;
         }
 
-        public bool ElementIsPresent(string elementName, int timeoutSecs)
+        public virtual bool ElementIsPresent(string elementName, int timeoutSecs)
         {
             var element = FindElement(elementName, timeoutSecs);
             return (element != null);
@@ -288,7 +287,7 @@ namespace Joyride.Platforms
             return tuple == null ? null : tuple.Item3;
         }
 
-        public string GetElementText(string elementName)
+        public virtual string GetElementText(string elementName)
         {
             var element = FindElement(elementName);
             return element == null ? null : element.Text;
