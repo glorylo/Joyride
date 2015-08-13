@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
 using Joyride.Extensions;
 using Joyride.Interfaces;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Appium.MultiTouch;
 using OpenQA.Selenium.Support.UI;
 
 namespace Joyride.Platforms

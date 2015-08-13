@@ -16,7 +16,7 @@ namespace Joyride.Platforms
     {
         public const int DefaultWaitSeconds = RemoteMobileDriver.DefaultWaitSeconds;
         abstract public string Name { get; }
-        protected static AppiumDriver Driver { get { return RemoteMobileDriver.GetInstance(); } }
+        protected static AppiumDriver<IWebElement> Driver { get { return RemoteMobileDriver.GetInstance(); } }
 
         internal protected View GetCurrentView()
         {
@@ -69,11 +69,14 @@ namespace Joyride.Platforms
 //            }
 
             if (element.IsPresent())
+                
             {
                 Trace.WriteLine("Element: '" + elementName + "' is present");
+/*
                 element = Util.GetMemberValue(element, "WrappedElement", BindingFlags.Public, true) as IWebElement;
                 if (element == null)
                     Trace.WriteLine("Unexpected retrieval of wrapped element: " + elementName);
+*/
             }
             else
             {

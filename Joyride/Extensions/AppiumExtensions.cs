@@ -4,6 +4,9 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.Remoting;
+using Joyride.Support;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.MultiTouch;
@@ -18,26 +21,26 @@ namespace Joyride.Extensions
         //cache screen size for performance
         private static Size? _screenSize;
 
-        public static Size ScreenSize(this AppiumDriver driver)
+        public static Size ScreenSize(this AppiumDriver<IWebElement> driver)
         {
             var size = _screenSize ?? driver.Manage().Window.Size;
             _screenSize = size;
             return (Size) _screenSize;
         }
 
-        public static Point ScreenCenterPoint(this AppiumDriver driver)
+        public static Point ScreenCenterPoint(this AppiumDriver<IWebElement> driver)
         {
             var centerX = driver.ScreenSize().Width/2;
             var centerY = driver.ScreenSize().Height/2;
             return new Point(centerX, centerY);
         }
 
-        public static bool IsNative(this AppiumDriver driver)
+        public static bool IsNative(this AppiumDriver<IWebElement> driver)
         {
             return driver.Context == NativeAppContext;
         }
 
-        public static void SwitchTo(this AppiumDriver driver, string context, int maxRetries)
+        public static void SwitchTo(this AppiumDriver<IWebElement> driver, string context, int maxRetries)
         {
             var retries = 0;
             do
@@ -55,14 +58,14 @@ namespace Joyride.Extensions
                 }
             } while (retries < maxRetries);
         }
-       
-        public static string SwitchToNative(this AppiumDriver driver, int maxRetries = 3)
+
+        public static string SwitchToNative(this AppiumDriver<IWebElement> driver, int maxRetries = 3)
         {
             driver.SwitchTo(NativeAppContext, maxRetries);
             return NativeAppContext;
         }
 
-        public static string SwitchToWebview(this AppiumDriver driver, int maxRetries = 3)
+        public static string SwitchToWebview(this AppiumDriver<IWebElement> driver, int maxRetries = 3)
         {
             var contextCount = 1;
             var retries = 0;
@@ -87,7 +90,7 @@ namespace Joyride.Extensions
             return webViewContext;
         }
 
-        public static void DoActionInWebView(this AppiumDriver driver, Action action, int maxRetries=3)
+        public static void DoActionInWebView(this AppiumDriver<IWebElement> driver, Action action, int maxRetries = 3)
         {
             if (driver.Context != NativeAppContext)
                 action();
@@ -117,25 +120,37 @@ namespace Joyride.Extensions
                 throw new ArgumentOutOfRangeException("Zoom only scales to 0.0 - 1.0.  Scale of " + scale + " is out of range.");
         }
 
-        public static void Tap(this AppiumDriver driver, Point location)
+        public static void Tap(this AppiumDriver<IWebElement> driver, Point location)
         {
             new TouchAction(driver).Press(location.X, location.Y).Perform();
         }
 
-        public static void PreciseTap(this AppiumDriver driver, IWebElement element)
+        public static void PreciseTap(this AppiumDriver<IWebElement> driver, IWebElement element)
         {
             driver.Tap(element.GetCenter());
         }
 
-        public static void DoubleTap(this AppiumDriver driver, IWebElement element)
+        public static void DoubleTap(this AppiumDriver<IWebElement> driver, IWebElement element)
         {
            var center = element.GetCenter();
+            if (RemotingServices.IsTransparentProxy(element))
+            {
+                Trace.WriteLine("Detected proxy");
+//                var proxy = RemotingServices.GetRealProxy(element);
+//                var cachedElement = (IWebElement) Util.GetMemberValue(proxy, "cachedElement", BindingFlags.NonPublic);
+//                new TouchAction(driver).
+//                    Tap(cachedElement, center.X, center.Y, 2)
+//                    .Perform();            
+
+            }
+                  
+
            new TouchAction(driver).
                Tap(element, center.X, center.Y, 2)
                .Perform();            
         }
-        
-        public static void TapAndHold(this AppiumDriver driver, IWebElement element, int seconds, bool precise=false)
+
+        public static void TapAndHold(this AppiumDriver<IWebElement> driver, IWebElement element, int seconds, bool precise = false)
         {
             if (precise)
             {
@@ -156,7 +171,7 @@ namespace Joyride.Extensions
             }
         }
 
-        public static void Swipe(this AppiumDriver driver, Direction direction, Size dimension,
+        public static void Swipe(this AppiumDriver<IWebElement> driver, Direction direction, Size dimension,
              double scale=1.0, long durationMilliSecs = 500, int originX=0, int originY=0)
         {
             var center = new Point(originX + dimension.Width / 2, originY + dimension.Height / 2);
@@ -202,14 +217,14 @@ namespace Joyride.Extensions
                 .Release().Perform();
         }
 
-        public static void Swipe(this AppiumDriver driver, Direction direction, double scale=1.0, long durationMilliSecs=500)
+        public static void Swipe(this AppiumDriver<IWebElement> driver, Direction direction, double scale = 1.0, long durationMilliSecs = 500)
         {
             EnsureScaleRange(scale);
             EnsureNotInOutDirection(direction);
             Swipe(driver, direction, driver.ScreenSize(), scale, durationMilliSecs);
         }
-       
-        public static void Swipe(this AppiumDriver driver, IWebElement element, Direction direction, double scale = 1.0, long durationMilliSecs = 500)
+
+        public static void Swipe(this AppiumDriver<IWebElement> driver, IWebElement element, Direction direction, double scale = 1.0, long durationMilliSecs = 500)
         {
             EnsureNotInOutDirection(direction);
             EnsureScaleRange(scale);
@@ -245,7 +260,7 @@ namespace Joyride.Extensions
                 .Perform();
         }
 
-        private static Size CalculateVisibleElementSize(AppiumDriver driver, IWebElement element)
+        private static Size CalculateVisibleElementSize(AppiumDriver<IWebElement> driver, IWebElement element)
         {
             var size = element.Size;
             var lowerRight = new Point(element.Location.X + size.Width, element.Location.Y + size.Height);
@@ -256,7 +271,7 @@ namespace Joyride.Extensions
             return size;
         }
 
-        public static void PinchToZoom(this AppiumDriver driver, Direction direction, double scale = 1.0)
+        public static void PinchToZoom(this AppiumDriver<IWebElement> driver, Direction direction, double scale = 1.0)
         {
             EnsureScaleRange(scale);          
             EnsureInOutDirection(direction);
@@ -320,7 +335,7 @@ namespace Joyride.Extensions
             return directionToSwipe;
         }
 
-        public static void Scroll(this AppiumDriver driver, Direction direction, double scale=1.0, long durationMilliSecs = 2000)
+        public static void Scroll(this AppiumDriver<IWebElement> driver, Direction direction, double scale = 1.0, long durationMilliSecs = 2000)
         {
             EnsureNotInOutDirection(direction);
             EnsureScaleRange(scale);            
@@ -328,7 +343,7 @@ namespace Joyride.Extensions
             driver.Swipe(directionToSwipe, scale, durationMilliSecs);
         }
 
-        public static bool ElementWithinBounds(this AppiumDriver driver, IWebElement element)
+        public static bool ElementWithinBounds(this AppiumDriver<IWebElement> driver, IWebElement element)
         {
             if (element == null)
                 return false;
@@ -349,7 +364,7 @@ namespace Joyride.Extensions
             return true;
         }
 
-        public static void CaptureScreenshot(this AppiumDriver driver, string pathAndFilename, ImageFormat format)
+        public static void CaptureScreenshot(this AppiumDriver<IWebElement> driver, string pathAndFilename, ImageFormat format)
         {
             try
             {
@@ -363,7 +378,7 @@ namespace Joyride.Extensions
             }
         }
 
-        public static void SwipeFromEdge(this AppiumDriver driver, Direction direction, long durationMillsecs = 1000,
+        public static void SwipeFromEdge(this AppiumDriver<IWebElement> driver, Direction direction, long durationMillsecs = 1000,
             double scale = 1.0, double offset=0)
         {
             EnsureNotInOutDirection(direction);
@@ -407,8 +422,8 @@ namespace Joyride.Extensions
                 .Perform();
 
         }
-        
-        public static void PullScreen(this AppiumDriver driver, Direction direction, long durationMillsecs=1000, double scale=1.0, double offset=0)
+
+        public static void PullScreen(this AppiumDriver<IWebElement> driver, Direction direction, long durationMillsecs = 1000, double scale = 1.0, double offset = 0)
         {
 
             EnsureNotInOutDirection(direction);

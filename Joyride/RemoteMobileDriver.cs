@@ -1,5 +1,6 @@
 ﻿using System;
 using Joyride.Extensions;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Appium.iOS;
@@ -12,7 +13,7 @@ namespace Joyride
     {
 
         //TODO: Consider abstracting driver 
-        private static AppiumDriver _driver;
+        private static AppiumDriver<IWebElement> _driver;
 
         public const int DefaultWaitSeconds = 30;
         public static Platform Platform { get; set; }
@@ -27,10 +28,10 @@ namespace Joyride
             switch (platform)
             {
                 case Platform.Android:
-                    _driver = new AndroidDriver(hostUri, capabilities);
+                    _driver = new AndroidDriver<IWebElement>(hostUri, capabilities);
                     break;
                 case Platform.Ios:
-                    _driver = new IOSDriver(hostUri, capabilities);
+                    _driver = new IOSDriver<IWebElement>(hostUri, capabilities);
                     break;
                 default:
                     throw new Exception("Unsupported driver for platform:  " + platform);
@@ -39,7 +40,7 @@ namespace Joyride
             _driver.SetImplicitWait(TimeSpan.FromSeconds(DefaultWaitSeconds));
         }
 
-        public static AppiumDriver GetInstance()
+        public static AppiumDriver<IWebElement> GetInstance()
         {
             return _driver;
         }

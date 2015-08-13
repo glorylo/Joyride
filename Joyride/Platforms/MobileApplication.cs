@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using Joyride.Extensions;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 
 namespace Joyride.Platforms
@@ -13,7 +14,7 @@ namespace Joyride.Platforms
         protected int TransitionDelayMs = 0;
         abstract public string Identifier { get; }
         public Screen Screen { get { return CurrentScreen; }}
-        protected AppiumDriver Driver { get { return RemoteMobileDriver.GetInstance(); } }
+        protected AppiumDriver<IWebElement> Driver { get { return RemoteMobileDriver.GetInstance(); } }
 
         public virtual void Launch()
         {

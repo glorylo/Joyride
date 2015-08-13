@@ -10,7 +10,7 @@ namespace Joyride.Platforms.Android
     abstract public class AndroidScreen : Screen
     {
         protected static ScreenFactory ScreenFactory = new AndroidScreenFactory();
-        protected static new AndroidDriver Driver = (AndroidDriver) RemoteMobileDriver.GetInstance();
+        protected static new AndroidDriver<IWebElement> Driver = (AndroidDriver<IWebElement>)RemoteMobileDriver.GetInstance();
 
         public abstract Screen GoBack();
 

@@ -11,7 +11,7 @@ namespace Joyride.Platforms.Ios
     abstract public class IosScreen : Screen
     {
         protected static ScreenFactory ScreenFactory = new IosScreenFactory();
-        protected static new IOSDriver Driver = (IOSDriver) RemoteMobileDriver.GetInstance();
+        protected static new IOSDriver<IWebElement> Driver = (IOSDriver<IWebElement>)RemoteMobileDriver.GetInstance();
 
         public override Screen TapAndHold(string elementName, int seconds)
         {
