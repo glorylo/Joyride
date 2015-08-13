@@ -16,7 +16,7 @@ namespace Joyride.Specflow.Steps
         public void ThenIShouldSeeLabelWithText(string shouldOrShouldNot, string elementName, string compareType, string text)
         {
             string actualLabel = null;
-            Context.MobileApp.Do<Screen>(s => actualLabel = s.GetElementText(elementName));
+            Context.MobileApp.Do<Screen>(s => actualLabel = s.GetText(elementName));
             Trace.Write("Actual Label is:  " + actualLabel);
 
             if (actualLabel == null)

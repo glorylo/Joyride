@@ -24,7 +24,7 @@ namespace Tests.Android.Native.SampleApp.ApiDemo.Screens.App
 
         public override bool IsOnScreen(int timeOutSecs)
         {
-            return ElementExists("Show App Notification", timeOutSecs);
+            return Exists("Show App Notification", timeOutSecs);
         }
 
         public override string Name

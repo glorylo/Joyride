@@ -36,7 +36,7 @@ namespace Joyride.Specflow.Steps
         {
             var text = (quotedText != String.Empty) ? quotedText : curlyText;
             string actualText = null;
-            Context.MobileApp.Do<Screen>(s => actualText = s.GetElementText(elementName));
+            Context.MobileApp.Do<Screen>(s => actualText = s.GetText(elementName));
 
             if (shouldOrShouldNot == "should")
                 Assert.That(actualText != null && actualText.CompareWith(text, compareType.ToCompareType()), Is.True,
@@ -52,12 +52,12 @@ namespace Joyride.Specflow.Steps
             var elementPresent = false;
             if (shouldOrShouldNot == "should")
             {
-                Context.MobileApp.Do<Screen>(s => elementPresent = s.ElementIsPresent(elementName, TimeoutSecs));
+                Context.MobileApp.Do<Screen>(s => elementPresent = s.IsPresent(elementName, TimeoutSecs));
                 Assert.IsTrue(elementPresent);
             }
             else
             {
-                Context.MobileApp.Do<Screen>(s => elementPresent = s.ElementIsPresent(elementName, NonExistenceTimeoutSecs));
+                Context.MobileApp.Do<Screen>(s => elementPresent = s.IsPresent(elementName, NonExistenceTimeoutSecs));
                 Assert.IsFalse(elementPresent); 
             }               
         }
@@ -68,12 +68,12 @@ namespace Joyride.Specflow.Steps
             var elementVisible = false;
             if (shouldOrShouldNot == "should")
             {
-                Context.MobileApp.Do<Screen>(s => elementVisible = s.ElementIsVisible(elementName, TimeoutSecs));
+                Context.MobileApp.Do<Screen>(s => elementVisible = s.IsVisible(elementName, TimeoutSecs));
                 Assert.IsTrue(elementVisible);
             }
             else
             {
-                Context.MobileApp.Do<Screen>(s => elementVisible = s.ElementIsVisible(elementName, NonExistenceTimeoutSecs));
+                Context.MobileApp.Do<Screen>(s => elementVisible = s.IsVisible(elementName, NonExistenceTimeoutSecs));
                 Assert.IsFalse(elementVisible);
             }                
         }
@@ -121,7 +121,7 @@ namespace Joyride.Specflow.Steps
             {
                 var foundElement = false;
                 var elementName = e;
-                Context.MobileApp.Do<Screen>(s => foundElement = s.ElementIsVisible(elementName, timeoutSecs));
+                Context.MobileApp.Do<Screen>(s => foundElement = s.IsVisible(elementName, timeoutSecs));
 
                 if (shouldOrShouldNot == "should")
                     Assert.IsTrue(foundElement, "Unexpected element not visible: " + elementName);
@@ -143,7 +143,7 @@ namespace Joyride.Specflow.Steps
             {
                 var foundElement = false;
                 var elementName = e;
-                Context.MobileApp.Do<Screen>(s => foundElement = s.ElementIsPresent(elementName, timeoutSecs));
+                Context.MobileApp.Do<Screen>(s => foundElement = s.IsPresent(elementName, timeoutSecs));
 
                 if (shouldOrShouldNot == "should")
                     Assert.IsTrue(foundElement, "Unexpected element not present: " + elementName);

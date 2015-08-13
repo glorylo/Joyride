@@ -68,10 +68,18 @@ namespace Joyride.Platforms
 //                    : null;
 //            }
 
-            element = (element.IsPresent())
-                ? Util.GetMemberValue(element, "WrappedElement") as IWebElement
-                : null;
-
+            if (element.IsPresent())
+            {
+                Trace.WriteLine("Element: '" + elementName + "' is present");
+                element = Util.GetMemberValue(element, "WrappedElement", BindingFlags.Public, true) as IWebElement;
+                if (element == null)
+                    Trace.WriteLine("Unexpected retrieval of wrapped element: " + elementName);
+            }
+            else
+            {
+                Trace.WriteLine("Cannot find element:  '" + elementName + "' due to element not present");
+                element = null;
+            }
             return element;
         }
 
@@ -158,7 +166,7 @@ namespace Joyride.Platforms
             return element.Selected;
         }
 
-        public string GetElementAttribute(string elementName, string attributeName)
+        public string GetAttribute(string elementName, string attributeName)
         {
 
             var element = FindElement(elementName);
@@ -233,7 +241,25 @@ namespace Joyride.Platforms
             return element.GetAttribute(attributeName).Trim();
         }
 
-        public virtual bool ElementIsVisible(string elementName, int timeoutSecs)
+        public virtual bool IsSelected(string elementName, int timeoutSecs)
+        {
+            var element = FindElement(elementName, timeoutSecs);
+
+            if (element == null)
+                return false;
+            return element.Selected;
+        }
+
+        public virtual bool IsEnabled(string elementName, int timeoutSecs)
+        {
+            var element = FindElement(elementName, timeoutSecs);
+
+            if (element == null)
+                return false;
+            return element.Enabled;
+        }
+
+        public virtual bool IsVisible(string elementName, int timeoutSecs)
         {
             var element = FindElement(elementName, timeoutSecs);
 
@@ -243,13 +269,18 @@ namespace Joyride.Platforms
             return element.Displayed;
         }
 
-        public virtual bool ElementIsPresent(string elementName, int timeoutSecs)
+        public virtual bool Exists(string elementName, int timeoutSecs)
+        {
+            return IsPresent(elementName, timeoutSecs);
+        }
+
+        public virtual bool IsPresent(string elementName, int timeoutSecs)
         {
             var element = FindElement(elementName, timeoutSecs);
             return (element != null);
         }
 
-        internal protected string GetElementFindBySelector(string elementOrCollectionName)
+        internal protected string GetFindBySelector(string elementOrCollectionName)
         {
             var attribute = Util.GetMemberCustomAttribute<FindsByAttribute>(this, elementOrCollectionName.Dehumanize(), BindingFlags.NonPublic);
             if (attribute == null)
@@ -291,15 +322,10 @@ namespace Joyride.Platforms
             return tuple == null ? null : tuple.Item3;
         }
 
-        public virtual string GetElementText(string elementName)
+        public virtual string GetText(string elementName)
         {
             var element = FindElement(elementName);
             return element == null ? null : element.Text;
-        }
-
-        internal protected bool ElementExists(string elementName, int timeoutSecs)
-        {            
-            return Driver.ElementExists(timeoutSecs, new Func<string, IWebElement>(FindElement), elementName);
         }
 
         protected Component()

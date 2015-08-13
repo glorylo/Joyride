@@ -40,7 +40,7 @@ namespace Tests.Android.Native.SampleApp.ApiDemo.Screens.App
         }
         public override bool IsOnScreen(int timeOutSecs)
         {
-            return ElementExists("Activity", timeOutSecs);
+            return Exists("Activity", timeOutSecs);
         }
 
         public override string Name

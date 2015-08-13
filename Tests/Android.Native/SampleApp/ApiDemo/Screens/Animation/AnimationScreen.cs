@@ -11,7 +11,7 @@ namespace Tests.Android.Native.SampleApp.ApiDemo.Screens.Animation
 
         public override bool IsOnScreen(int timeOutSecs)
         {
-            return ElementExists("Default Layout Animations", timeOutSecs);
+            return Exists("Default Layout Animations", timeOutSecs);
         }
 
         public override Screen Tap(string elementName, bool precise = false)

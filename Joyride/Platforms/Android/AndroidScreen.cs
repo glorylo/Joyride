@@ -148,7 +148,7 @@ namespace Joyride.Platforms.Android
 
         public virtual bool IsChecked(string elementName)
         {
-            var value = GetElementAttribute(elementName, "checked");
+            var value = GetAttribute(elementName, "checked");
             return (value == "true");
         }
 

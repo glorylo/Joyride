@@ -15,7 +15,7 @@ namespace Tests.Android.Native.SampleApp.ApiDemo.Screens.App
         public override bool IsOnScreen(int timeOutSecs)
         {
             // not reliable 
-            return ElementExists("Context Menu", timeOutSecs); ;
+            return Exists("Context Menu", timeOutSecs); ;
         }
 
         public override Screen Tap(string elementName, bool precise = false)

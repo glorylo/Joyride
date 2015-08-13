@@ -26,7 +26,7 @@ namespace Tests.Android.Native.SampleApp.ApiDemo.Screens.App
 
         public override bool IsOnScreen(int timeOutSecs)
         {
-            return ElementExists("Change Left", timeOutSecs) && ElementExists("Change Right", timeOutSecs);
+            return Exists("Change Left", timeOutSecs) && Exists("Change Right", timeOutSecs);
         }
 
         public override string Name

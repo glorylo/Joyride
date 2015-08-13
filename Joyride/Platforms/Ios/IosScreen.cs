@@ -88,7 +88,7 @@ namespace Joyride.Platforms.Ios
 
         public virtual int CurrentPageOnIndictator(string elementName)
         {
-            var value = GetElementAttribute(elementName, "value");
+            var value = GetAttribute(elementName, "value");
             if (value == null)
                 throw new NoSuchElementException("Unable to get value for element:  " + elementName);
 

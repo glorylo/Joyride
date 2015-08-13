@@ -17,7 +17,7 @@ namespace Tests.Android.Native.SampleApp.ApiDemo.ModalDialogs
 
         public override bool IsOnScreen(int timoutSecs)
         {
-            var foundTitle = ElementExists("Alert Title", timoutSecs);
+            var foundTitle = Exists("Alert Title", timoutSecs);
             return foundTitle && AlertTitle.Text.StartsWith("Lorem ipsum dolor sit aie consectetur");
         }
 

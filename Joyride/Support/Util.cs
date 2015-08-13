@@ -26,7 +26,7 @@ namespace Joyride.Support
             return memberInfo;
         }
 
-        public static object GetMemberValue(object obj, string memberName, BindingFlags flags = BindingFlags.Public)
+        public static object GetMemberValue(object obj, string memberName, BindingFlags flags = BindingFlags.Public, bool suppressTrace=false)
         {
             var member = GetMemberInfo(obj, memberName, flags);
 
@@ -34,7 +34,7 @@ namespace Joyride.Support
 
             if (property != null)
             {
-                Trace.WriteLine("Found property with name:  " + memberName);
+                if (!suppressTrace) Trace.WriteLine("Found property with name:  " + memberName);
                 return property.GetValue(obj);
             }
 
@@ -42,11 +42,11 @@ namespace Joyride.Support
 
             if (field != null)
             {
-                Trace.WriteLine("Found field with name:  " + memberName);
+                if (!suppressTrace) Trace.WriteLine("Found field with name:  " + memberName);
                 return field.GetValue(obj);
             }
 
-            Trace.WriteLine("Unable to find member with name:  " + memberName);
+            if (!suppressTrace) Trace.WriteLine("Unable to find member with name:  " + memberName);
             return null;
         }
 
