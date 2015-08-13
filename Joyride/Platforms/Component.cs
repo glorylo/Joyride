@@ -16,39 +16,111 @@ namespace Joyride.Platforms
     {
         public const int DefaultWaitSeconds = RemoteMobileDriver.DefaultWaitSeconds;
         abstract public string Name { get; }
-        static protected AppiumDriver Driver { get { return RemoteMobileDriver.GetInstance(); } }
+        protected static AppiumDriver Driver { get { return RemoteMobileDriver.GetInstance(); } }
 
-        internal protected IWebElement FindElement(string elementName)
+        internal protected View GetCurrentView()
+        {
+            return Driver.IsNative() ? View.Native : View.Webview;
+        }
+
+        internal protected void SetCurrentView(View view)
+        {
+            if (GetCurrentView() == view) return;
+            if (view == View.Native)
+                Driver.SwitchToNative();
+            else
+                Driver.SwitchToWebview();
+        }
+
+        internal protected bool IsNativeView()
+        {
+            return GetCurrentView() == View.Native;
+        }
+
+        protected internal bool IsWebview(string elementOrCollectionName)
+        {
+            var attribute = Util.GetMemberCustomAttribute<WebviewAttribute>(this, elementOrCollectionName.Dehumanize(),
+                BindingFlags.NonPublic);
+            return attribute != null;
+        }
+
+        internal protected IWebElement RetrieveElement(string elementName)
         {
             var element = (IWebElement) Util.GetMemberValue(this, elementName.Dehumanize(), BindingFlags.NonPublic);
 
-            if (element != null && element.IsPresent()) 
-                return element;
-
-            Trace.WriteLine("Unable to access element:  " + elementName);
-            return null;
-        }
-
-        internal protected IWebElement FindCachedElement(string elementName)
-        {
-            var element = FindElement(elementName);
-
             if (element == null)
-              return null;
+                return null;
 
-            return Util.GetMemberValue(element, "WrappedElement") as IWebElement;
+//            if (IsWebview(elementName))
+//            {
+//                Trace.WriteLine("Require switching to webview for element: " + elementName);
+//                Driver.DoActionInWebView(() =>
+//                {
+//                    element = (element.IsPresent())
+//                        ? Util.GetMemberValue(element, "WrappedElement") as IWebElement
+//                        : null;
+//                });
+//            }
+//            else
+//            {
+//                element = (element.IsPresent())
+//                    ? Util.GetMemberValue(element, "WrappedElement") as IWebElement
+//                    : null;
+//            }
+
+            element = (element.IsPresent())
+                ? Util.GetMemberValue(element, "WrappedElement") as IWebElement
+                : null;
+
+            return element;
         }
 
-        internal protected IList<IWebElement> FindElements(string collectionName)
+
+        internal protected IList<IWebElement> RetrieveElements(string collectionName)
         {
             var elements =
                 (IList<IWebElement>) Util.GetMemberValue(this, collectionName.Dehumanize(), BindingFlags.NonPublic);
 
-            if (elements != null && elements.GetEnumerator().MoveNext()) 
-                return elements;
+            if (elements == null)
+                return null;
 
-            Trace.WriteLine("Unable to access the collection: " + collectionName);
-            return null;
+            //
+//            if (IsWebview(collectionName))
+//            {
+//                Driver.DoActionInWebView(() =>
+//                {
+//                    isPresent = elements.GetEnumerator().MoveNext();
+//                    if (isPresent)
+//                        elements = Util.GetMemberValue(elements, "ElementList", BindingFlags.NonPublic) as IList<IWebElement>;
+//                });
+//            }
+//            else
+//            {
+//                isPresent = elements.GetEnumerator().MoveNext(); // determine if the element is present by retrieving it.
+//                if (isPresent)
+//                    elements = Util.GetMemberValue(elements, "ElementList", BindingFlags.NonPublic) as IList<IWebElement>;                   
+//            }
+
+            var isPresent = elements.GetEnumerator().MoveNext();
+            return (isPresent ? elements : null);
+        } 
+
+        internal protected IWebElement FindElement(string elementName)
+        {
+            var element = RetrieveElement(elementName);
+            if (element == null)
+              Trace.WriteLine("Unable to access element:  " + elementName);  
+            return element;
+        }
+
+        internal protected IList<IWebElement> FindElements(string collectionName)
+        {
+            var elements = RetrieveElements(collectionName);
+
+            if (elements == null)
+              Trace.WriteLine("Unable to access the collection: " + collectionName);
+
+            return elements;
         }
 
         internal protected IList<IWebElement> FindElements(string collectionName, int timeoutSecs)
@@ -61,16 +133,18 @@ namespace Joyride.Platforms
             return Driver.FindElementWithMethod(timeoutSecs, new Func<string, IWebElement>(FindElement), elementName);
         }
 
-        public int SizeOf(string collectionName, int timeoutSecs=DefaultWaitSeconds)
+        public virtual int SizeOf(string collectionName, int timeoutSecs=DefaultWaitSeconds)
         {
             var collection = FindElements(collectionName, timeoutSecs);
 
             if (collection == null)
-                return 0;   
-            return collection.Count;            
+                return 0;
+            var size = collection.Count;
+            Trace.WriteLine("Found collection '" + collectionName + "' with number of items: " + size);
+            return size;            
         }
 
-        public bool IsEmpty(string collectionName, int timeoutSecs = DefaultWaitSeconds)
+        public virtual bool IsEmpty(string collectionName, int timeoutSecs = DefaultWaitSeconds)
         {
             return (SizeOf(collectionName, timeoutSecs) == 0);
         }
@@ -86,6 +160,7 @@ namespace Joyride.Platforms
 
         public string GetElementAttribute(string elementName, string attributeName)
         {
+
             var element = FindElement(elementName);
 
             if (element == null)
@@ -137,20 +212,20 @@ namespace Joyride.Platforms
             return collection.FirstOrDefault(e => e.Text.CompareWith(text, compareType));
         }
 
-        public bool HasTextInCollection(string collectionName, string text, CompareType compareType)
+        public virtual bool HasTextInCollection(string collectionName, string text, CompareType compareType)
         {
             var theElement = GetElementInCollection(collectionName, text, compareType);
             return (theElement != null);
         }
         
-        public string GetElementAttribute(string collectionName, int index, string attributeName)
+        public virtual string GetElementAttribute(string collectionName, int index, string attributeName)
         {
             IWebElement element;
             try
             {
                 element = GetElementInCollection(collectionName, index);
             }
-            catch (NoSuchElementException e)
+            catch (NoSuchElementException)
             {
                 Trace.WriteLine("Unable to get element in collection " + collectionName + " at index " + index);
                 return null;
@@ -158,7 +233,7 @@ namespace Joyride.Platforms
             return element.GetAttribute(attributeName).Trim();
         }
 
-        public bool ElementIsVisible(string elementName, int timeoutSecs)
+        public virtual bool ElementIsVisible(string elementName, int timeoutSecs)
         {
             var element = FindElement(elementName, timeoutSecs);
 
@@ -168,21 +243,15 @@ namespace Joyride.Platforms
             return element.Displayed;
         }
 
-        public bool ElementIsPresent(string elementName, int timeoutSecs)
+        public virtual bool ElementIsPresent(string elementName, int timeoutSecs)
         {
             var element = FindElement(elementName, timeoutSecs);
             return (element != null);
         }
 
-        internal protected FindsByAttribute GetElementFindByAttribute(string elementOrCollectionName)
-        {
-            var member = Util.GetMemberInfo(this, elementOrCollectionName.Dehumanize(), BindingFlags.NonPublic);
-            return member == null ? null : member.GetCustomAttribute<FindsByAttribute>();
-        }
-
         internal protected string GetElementFindBySelector(string elementOrCollectionName)
         {
-            var attribute = GetElementFindByAttribute(elementOrCollectionName);
+            var attribute = Util.GetMemberCustomAttribute<FindsByAttribute>(this, elementOrCollectionName.Dehumanize(), BindingFlags.NonPublic);
             if (attribute == null)
                 return null;
             return attribute.Using;
@@ -203,7 +272,7 @@ namespace Joyride.Platforms
 
         internal protected Tuple<IWebElement, int, string, string> FindElementWithinCollection(string collectionName, int index, string relativeXpath, int timeoutSecs)
         {
-            var attribute = GetElementFindByAttribute(collectionName);
+            var attribute = Util.GetMemberCustomAttribute<FindsByAttribute>(this, collectionName.Dehumanize(), BindingFlags.NonPublic);
 
             if (attribute == null || attribute.How != How.XPath)
                 throw new ArgumentException("Only collection with find by xpath selector is supported.  Ensure the collection, " + collectionName + ", is using xpath");
@@ -222,7 +291,7 @@ namespace Joyride.Platforms
             return tuple == null ? null : tuple.Item3;
         }
 
-        public string GetElementText(string elementName)
+        public virtual string GetElementText(string elementName)
         {
             var element = FindElement(elementName);
             return element == null ? null : element.Text;
@@ -238,6 +307,19 @@ namespace Joyride.Platforms
             PageFactory.InitElements(Driver, this);
         }
 
-
+        //TODO: may remove
+        protected void DoActionInWebView(Action action, int maxRetries = 3)
+        {
+            if (IsNativeView())
+            {                
+                SetCurrentView(View.Webview);
+                action();
+                SetCurrentView(View.Native);
+            }
+            else
+            {
+                action();
+            }
+        }
     }
 }

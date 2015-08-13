@@ -32,7 +32,37 @@ namespace Joyride.Extensions
             return new Point(centerX, centerY);
         }
 
-        public static void DoActionInWebView(this AppiumDriver driver, Action action, int maxRetries=3)
+        public static bool IsNative(this AppiumDriver driver)
+        {
+            return driver.Context == NativeAppContext;
+        }
+
+        public static void SwitchTo(this AppiumDriver driver, string context, int maxRetries)
+        {
+            var retries = 0;
+            do
+            {
+                try
+                {
+                    driver.Context = context;
+                    Trace.WriteLine("Switched to context: " + context);
+                    return;
+                }
+                catch (Exception)
+                {
+                    retries++;
+                    if (retries == maxRetries) throw;
+                }
+            } while (retries < maxRetries);
+        }
+       
+        public static string SwitchToNative(this AppiumDriver driver, int maxRetries = 3)
+        {
+            driver.SwitchTo(NativeAppContext, maxRetries);
+            return NativeAppContext;
+        }
+
+        public static string SwitchToWebview(this AppiumDriver driver, int maxRetries = 3)
         {
             var contextCount = 1;
             var retries = 0;
@@ -48,14 +78,25 @@ namespace Joyride.Extensions
                 retries++;
                 Trace.WriteLine("Unable to switch to web context.  Retries:  " + retries);
             }
-            
-            if (contextCount == 1)                
+
+            if (contextCount == 1)
                 throw new Exception("Unable to switch to webview");
 
             var webViewContext = contexts.Last();
-            driver.Context  = webViewContext;
-            action();
-            driver.Context = NativeAppContext;
+            driver.SwitchTo(webViewContext, maxRetries);
+            return webViewContext;
+        }
+
+        public static void DoActionInWebView(this AppiumDriver driver, Action action, int maxRetries=3)
+        {
+            if (driver.Context != NativeAppContext)
+                action();
+            else
+            {
+                driver.SwitchToWebview(maxRetries);
+                action();
+                driver.SwitchToNative(maxRetries);  
+            }              
         }
 
         public static void EnsureInOutDirection(Direction direction)

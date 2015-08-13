@@ -10,7 +10,7 @@ namespace Tests.Android.Native.SampleApp.ApiDemo.Screens.App
         [FindsBy(How = How.XPath, Using = "//*[@resource-id='io.appium.android.apis:id/notify_app']")]
         private IWebElement ShowAppNotification;
 
-        [FindsBy(How = How.XPath, Using = "//*[@resource-id='com.android.systemui:id/notification_stack_scroller']/android.widget.FrameLayout")]        
+        [FindsBy(How = How.XPath, Using = "//*[@resource-id='com.android.systemui:id/notification_stack_scroller']/android.widget.FrameLayout/android.view.View[@resource-id='com.android.systemui:id/backgroundNormal']")]        
         private IList<IWebElement> Notifications;
 
         [FindsBy(How = How.XPath, Using = "//*[@resource-id='com.android.systemui:id/notification_stack_scroller']/android.widget.FrameLayout[1]")]

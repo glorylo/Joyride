@@ -26,7 +26,7 @@ namespace Joyride.Platforms.Ios
 
         protected Screen EnterTextBySetValue(string elementName, string text)
         {
-            var element = FindCachedElement(elementName) as AppiumWebElement;
+            var element = FindElement(elementName) as AppiumWebElement;
             if (element == null)
                 throw new NoSuchElementException("Unable to find element " + elementName);
 

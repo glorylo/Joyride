@@ -12,6 +12,9 @@ namespace Tests.Android.Native.SampleApp.ApiDemo.Screens.Views
         [FindsBy(How = How.XPath, Using = "//*[@resource-id='android:id/text1' and @text='Layouts']")]
         private IWebElement Layouts;
 
+        [FindsBy(How = How.XPath, Using = "//*[@resource-id='android:id/text1' and @text='WebView']")]
+        private IWebElement Webview;
+
         public override Screen Tap(string elementName, bool precise = false)
         {
             var screen = base.Tap(elementName, precise);
@@ -20,6 +23,9 @@ namespace Tests.Android.Native.SampleApp.ApiDemo.Screens.Views
             {
                 case "Layouts":
                     return ScreenFactory.CreateScreen<LayoutsScreen>();
+
+                case "Webview":
+                    return ScreenFactory.CreateScreen<WebviewScreen>();
 
                 default:
                     return screen;

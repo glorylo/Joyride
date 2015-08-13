@@ -13,6 +13,12 @@ namespace Joyride.Support
             return method.DynamicInvoke(args);
         }
 
+        public static T GetMemberCustomAttribute<T>(object obj, string memberName, BindingFlags flags = BindingFlags.Public) where T : Attribute
+        {
+            var member = GetMemberInfo(obj, memberName, BindingFlags.NonPublic);
+            return member == null ? null : member.GetCustomAttribute<T>();
+        }
+
         public static MemberInfo GetMemberInfo(object obj, string memberName, BindingFlags flags = BindingFlags.Public)
         {
             var searchFlags = BindingFlags.Instance | BindingFlags.IgnoreCase | flags;
