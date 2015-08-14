@@ -8,6 +8,7 @@ using Joyride.Extensions;
 using Joyride.Support;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
+using OpenQA.Selenium.Appium.PageObjects;
 using OpenQA.Selenium.Support.PageObjects;
 
 namespace Joyride.Platforms
@@ -333,7 +334,7 @@ namespace Joyride.Platforms
 
         protected Component()
         {
-            PageFactory.InitElements(Driver, this);
+            PageFactory.InitElements(Driver, this, new AppiumPageObjectMemberDecorator());
         }
 
         //TODO: may remove

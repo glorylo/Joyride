@@ -32,9 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="appium-dotnet-driver, Version=1.4.0.2, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="appium-dotnet-driver, Version=1.4.0.3, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Appium.WebDriver.1.4.0.2\lib\net40\appium-dotnet-driver.dll</HintPath>
+      <HintPath>..\packages\Appium.WebDriver.1.4.0.3\lib\net40\appium-dotnet-driver.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Core">
       <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
