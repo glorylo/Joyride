@@ -22,6 +22,9 @@
 	
     <description>$description$</description>
     <releaseNotes>
+0.0.10
+- improved debug tracing
+
 0.0.9 
 - maintanence update
 
