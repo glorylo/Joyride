@@ -46,7 +46,7 @@ namespace Joyride.Platforms
 
         internal protected IWebElement RetrieveElement(string elementName)
         {
-            var element = (IWebElement) Util.GetMemberValue(this, elementName.Dehumanize(), BindingFlags.NonPublic);
+            var element = (IWebElement) Util.GetMemberValue(this, elementName.Dehumanize(), true, BindingFlags.NonPublic);
 
             if (element == null)
                 return null;
@@ -69,7 +69,7 @@ namespace Joyride.Platforms
 //            }
 
             element = (element.IsPresent())
-                ? Util.GetMemberValue(element, "WrappedElement") as IWebElement
+                ? Util.GetMemberValue(element, "WrappedElement", false) as IWebElement
                 : null;
 
             return element;
@@ -79,7 +79,7 @@ namespace Joyride.Platforms
         internal protected IList<IWebElement> RetrieveElements(string collectionName)
         {
             var elements =
-                (IList<IWebElement>) Util.GetMemberValue(this, collectionName.Dehumanize(), BindingFlags.NonPublic);
+                (IList<IWebElement>) Util.GetMemberValue(this, collectionName.Dehumanize(), true, BindingFlags.NonPublic);
 
             if (elements == null)
                 return null;
