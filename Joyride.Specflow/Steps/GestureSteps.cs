@@ -129,9 +129,8 @@ namespace Joyride.Specflow.Steps
         public void ThenIScrollUntil(string speed, string direction, Table table)
         {
             var directionToScroll = (Direction)Enum.Parse(typeof(Direction), direction, true);
-            var durationMillSecs = 500;
-            if (speed != String.Empty)
-                durationMillSecs = (speed == "slowly") ? 3000 : 750;
+            var durationMillSecs = GetDurationMilliSeconds(speed);
+            var scale = GetScale(speed);
 
             var header = table.Header.First();
             var elements = table.Rows.Select(r => r[header]).ToList();
@@ -141,7 +140,7 @@ namespace Joyride.Specflow.Steps
                 var elementName = e;
                 var scrollUntil = new TestDelegate(() => Context.MobileApp.Do<IGesture>(i => i.ScrollUntil(elementName, 
                                   directionToScroll, MaxRetries, ScrollUntilTimeoutSecs,
-                                  1.0, durationMillSecs)));
+                                  scale, durationMillSecs)));
                 Assert.DoesNotThrow(scrollUntil, "Unexpected element not found: " + elementName);
             }
         }

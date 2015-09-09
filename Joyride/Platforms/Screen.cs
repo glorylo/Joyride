@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using Joyride.Extensions;
 using Joyride.Interfaces;
 using OpenQA.Selenium;
@@ -154,7 +155,7 @@ namespace Joyride.Platforms
 
         public virtual Screen DoubleTap(string elementName)
         {
-            var element = FindCachedElement(elementName);
+            var element = FindElement(elementName);
 
             if (element == null)
                 throw new NoSuchElementException("Cannot find element:  " + elementName);
@@ -165,7 +166,7 @@ namespace Joyride.Platforms
 
         public virtual Screen TapAndHold(string elementName, int seconds)
         {
-            var element = FindCachedElement(elementName);
+            var element = FindElement(elementName);
 
             if (element == null)
                 throw new NoSuchElementException("Cannot find element:  " + elementName);
@@ -222,7 +223,7 @@ namespace Joyride.Platforms
 
         public virtual Screen Swipe(string elementName, Direction direction, double scale=1.0, long durationMilliSecs = 500)
         {
-            var element = FindCachedElement(elementName);
+            var element = FindElement(elementName);
             if (element == null)
                 throw new NoSuchElementException("Cannot find element:  " + elementName);
             Driver.Swipe(element, direction, scale, durationMilliSecs);
@@ -259,6 +260,18 @@ namespace Joyride.Platforms
 
         #region UI Controls
 
+        public virtual Screen ClearText(string elementName)
+        {
+            var element = FindElement(elementName);
+
+            if (element == null)
+                throw new NoSuchElementException("Cannot find element:  " + elementName);
+
+            element.Click();
+            element.Clear();
+            return this;
+        }
+
         public virtual Screen EnterText(string elementName, string text)
         {
             var element = FindElement(elementName);
@@ -266,6 +279,7 @@ namespace Joyride.Platforms
             if (element == null)
                 throw new NoSuchElementException("Cannot find element:  " + elementName);
 
+            element.Click();
             element.Clear();
             element.SendKeys(text);
             return this;

@@ -13,6 +13,13 @@ namespace Joyride.Specflow.Steps
             Context.MobileApp.Do<IUiControl>(i => i.EnterText(fieldName, fieldValue));
         }
 
+        [Given(@"I clear the text for field ""([^""]*)""")]
+        [When(@"I clear the text for field ""([^""]*)""")]
+        public void GivenIClearTextInTheField(string fieldName)
+        {
+            Context.MobileApp.Do<IUiControl>(i => i.ClearText(fieldName));
+        }
+        
         [Given(@"I (uncheck|check) the ""([^""]*)"" checkbox")]
         [When(@"I (uncheck|check) the ""([^""]*)"" checkbox")]
         public void WhenICheckSomeCheckbox(string checkOrUnchecked, string checkboxName)

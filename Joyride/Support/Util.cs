@@ -13,6 +13,12 @@ namespace Joyride.Support
             return method.DynamicInvoke(args);
         }
 
+        public static T GetMemberCustomAttribute<T>(object obj, string memberName, BindingFlags flags = BindingFlags.Public) where T : Attribute
+        {
+            var member = GetMemberInfo(obj, memberName, BindingFlags.NonPublic);
+            return member == null ? null : member.GetCustomAttribute<T>();
+        }
+
         public static MemberInfo GetMemberInfo(object obj, string memberName, BindingFlags flags = BindingFlags.Public)
         {
             var searchFlags = BindingFlags.Instance | BindingFlags.IgnoreCase | flags;
@@ -20,7 +26,7 @@ namespace Joyride.Support
             return memberInfo;
         }
 
-        public static object GetMemberValue(object obj, string memberName, BindingFlags flags = BindingFlags.Public)
+        public static object GetMemberValue(object obj, string memberName, bool includeTrace=true, BindingFlags flags = BindingFlags.Public)
         {
             var member = GetMemberInfo(obj, memberName, flags);
 
@@ -28,7 +34,7 @@ namespace Joyride.Support
 
             if (property != null)
             {
-                Trace.WriteLine("Found property with name:  " + memberName);
+                if (includeTrace) Trace.WriteLine("Found property with name:  " + memberName);
                 return property.GetValue(obj);
             }
 
@@ -36,11 +42,11 @@ namespace Joyride.Support
 
             if (field != null)
             {
-                Trace.WriteLine("Found field with name:  " + memberName);
+                if (includeTrace) Trace.WriteLine("Found field with name:  " + memberName);
                 return field.GetValue(obj);
             }
 
-            Trace.WriteLine("Unable to find member with name:  " + memberName);
+            if (includeTrace) Trace.WriteLine("Unable to find member with name:  " + memberName);
             return null;
         }
 

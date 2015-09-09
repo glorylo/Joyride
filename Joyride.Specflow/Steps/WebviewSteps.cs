@@ -29,11 +29,11 @@ namespace Joyride.Specflow.Steps
         {
             string selectedText = null;
             Context.MobileApp.Do<IWebview>(i => selectedText = i.GetSelectedOption(elementName));
-
+            var compareText = selectedText != null && selectedText.CompareWith(text, compare.ToCompareType());
             if (shouldOrShouldNot == "should")
-                Assert.IsTrue(selectedText != null && selectedText.CompareWith(text, compare.ToCompareType()));
+                Assert.IsTrue(compareText, "Unexpected actual text '" + selectedText + "' does not equal '" + text + "'");
             else
-                Assert.IsFalse(selectedText != null && selectedText.CompareWith(text, compare.ToCompareType()));
+                Assert.IsFalse(compareText, "Unexpected actual text '" + selectedText + "' equals '" + text + "'");
         }
         #endregion
     }

@@ -48,3 +48,10 @@ When I uncheck the "Show All Displays" checkbox
 Then I should not see the "Show All Displays" checkbox checked
 And I should not see a label equals text "Display #0: Built-in Screen"
 
+Scenario: Should be able to clear text 
+Given I tap the "App" button
+And I tap the "Activity" button
+And I tap the "Custom Title" button
+And I clear the text for field "Left"
+When I tap the "Change Left" button
+Then I should see the text of field "Left" cleared

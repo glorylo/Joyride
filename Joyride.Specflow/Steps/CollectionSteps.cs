@@ -215,6 +215,7 @@ namespace Joyride.Specflow.Steps
         public void ThenIShouldSeeTheFollowingPropertiesInCollectionMeetingCondition(string collectionName, Table table)
         {
             var conditionsMeet = true;
+            var errorMsg = "";
             Context.MobileApp.Do<IEntryEnumerable>(i =>
             {
                 var conditions = table.CreateSet<PropertyCondition>();
@@ -231,6 +232,13 @@ namespace Joyride.Specflow.Steps
                     {
                         var property = c.PropertyName.Dehumanize();
                         var foundProperty = Util.HasMember(e, property);
+
+                        if (c.Mandatory && !foundProperty)
+                        {
+                            errorMsg = "Property (" + c.PropertyName + ") should mandatory but is not found.";
+                            conditionsMeet = false;
+                        }
+
                         if (foundProperty)
                         {
                             object value = Util.GetDynamicMemberValue(e, property);
@@ -238,18 +246,16 @@ namespace Joyride.Specflow.Steps
                                 continue;
 
                             if (!EntryEvaluator.MeetsCondition(c, e))
+                            {
+                                errorMsg = "Property failed to meet condition: " + c.PropertyName;
                                 conditionsMeet = false;
-
+                            }
                         }
-
-                        if (c.Mandatory && !foundProperty)
-                            conditionsMeet = false;
                     }
-                }                
-                Assert.IsTrue(conditionsMeet);
+                }
+                Assert.IsTrue(conditionsMeet, errorMsg);
             });
         }
-
 
         #endregion
 
