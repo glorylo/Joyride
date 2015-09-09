@@ -22,14 +22,11 @@
 	
     <description>$description$</description>
     <releaseNotes>
+0.0.11
+- added clear text
+
 0.0.10
 - improved debug tracing
-
-0.0.9 
-- maintanence update
-
-0.0.8
-- added retries launching the app 
 
     </releaseNotes>
     <copyright>Copyright 2015</copyright>
