@@ -260,12 +260,25 @@ namespace Joyride.Platforms
 
         #region UI Controls
 
+        public virtual Screen ClearText(string elementName)
+        {
+            var element = FindElement(elementName);
+
+            if (element == null)
+                throw new NoSuchElementException("Cannot find element:  " + elementName);
+
+            element.Click();
+            element.Clear();
+            return this;
+        }
+
         public virtual Screen EnterText(string elementName, string text)
         {
             var element = FindElement(elementName);
 
             if (element == null)
                 throw new NoSuchElementException("Cannot find element:  " + elementName);
+
 
             element.Clear();
             element.SendKeys(text);
