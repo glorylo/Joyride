@@ -34,15 +34,10 @@ namespace Joyride.Platforms.Ios
             return this;
         }
 
+        // TODO: Not needed but may need to change
         public override Screen EnterText(string elementName, string text)
         {
-            var element = FindElement(elementName);
-            if (element == null)
-                throw new NoSuchElementException("Unable to find element " + elementName);
-            
-            element.Click();
-            element.Clear();
-            element.SendKeys(text);
+            base.EnterText(elementName, text);
             return this;
         }
 

@@ -41,14 +41,7 @@ namespace Joyride.Platforms.Android
 
         public override Screen EnterText(string elementName, string text)
         {
-            var element = FindElement(elementName);
-
-            if (element == null)
-                throw new NoSuchElementException("Cannot find element:  " + elementName);
-
-            element.Click();
-            element.Clear();
-            element.SendKeys(text);
+            base.EnterText(elementName, text);
             HideKeyboard();
             return this;
         }
