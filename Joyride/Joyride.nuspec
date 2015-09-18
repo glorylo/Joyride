@@ -22,11 +22,12 @@
 	
     <description>$description$</description>
     <releaseNotes>
+0.0.12
+- added element disable / enabled
+
 0.0.11
 - added clear text
 
-0.0.10
-- improved debug tracing
 
     </releaseNotes>
     <copyright>Copyright 2015</copyright>
