@@ -165,6 +165,19 @@ namespace Joyride.Specflow.Steps
             }
         }
 
+        [Then(@"I (should|should not) see the (?:element|button|field|label|link) ""([^""]*)"" (enabled|disabled)")]
+        public void ThenIShouldSeeElementEnabled(string shouldOrShouldNot, string elementName, string enabledOrDisabled)
+        {
+            var enabled = enabledOrDisabled == "enabled";
+            var actualEnabled = false;
+
+            Context.MobileApp.Do<Screen>(s => actualEnabled = s.IsEnabled(elementName));
+            if (shouldOrShouldNot == "should")
+                Assert.IsTrue(actualEnabled == enabled);
+            else
+                Assert.IsFalse(actualEnabled == enabled);
+        }
+
         #endregion
 
     }
