@@ -45,18 +45,6 @@ namespace Joyride.Specflow.Steps
                 Assert.IsFalse(hasLabel, "Expecting not to have a label that " + compare + " text: " + label + " within collection:  " + collectionName);
         }
 
-        [Then(@"I should see the ""(\d+)"" in collection ""([^""]*)"" with (name|value) (equals|starts with|containing|matching) ""([^""]*)""")]
-        public void ThenIShouldSeeElementAttributeValueInCollectionCompareWithText(int index, string collectionName, string nameOrValue, string compareType, string text)
-        {
-            var attributeValue = Context.MobileApp.Screen.GetElementAttribute(collectionName, index, nameOrValue);
-
-            if (attributeValue == null)
-                Assert.Fail("Unable to find attribute '" + nameOrValue + "' for '" + index + "' item in " + collectionName);
-
-            Assert.That(attributeValue.CompareWith(text, compareType.ToCompareType()), Is.True,
-                "Unexpected text compare with '" + attributeValue + "' is not + " + compareType + " '" + text + "'");
-        }
-
         [Then(@"I (should|should not) see the navigation bar title ""([^""]*)""")]
         public void ThenIShouldScreenWithTitle(string shouldOrShouldNot, string title)
         {
@@ -68,7 +56,19 @@ namespace Joyride.Specflow.Steps
               Assert.IsFalse(screenTitlebar == title, "Expected title to be not equal to '" + title + "' but actual title is '" + screenTitlebar + "'");
         }
 
+        [Then(@"I (should|should not) see the current page of ""(\d+)"" for element ""([^""]*)""")]
+        public void ThenIShouldSeePageIndicator(string shouldOrShouldNot, int page, string elementName)
+        {
 
+            var actualPageIndicator = 0;
+            Context.MobileApp.Do<IosScreen>(i => actualPageIndicator = i.CurrentPageOnIndictator(elementName));
+
+            if (shouldOrShouldNot == "should")
+                Assert.IsTrue(actualPageIndicator == page, "Unexpected page indicator of "  + actualPageIndicator + ".  Expecting:  " + page);
+            else
+                Assert.IsFalse(actualPageIndicator == page, "Unexpected page indicator of " + actualPageIndicator + " equals " + page);
+
+        }
         #endregion
     }
 }
