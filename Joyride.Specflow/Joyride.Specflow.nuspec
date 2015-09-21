@@ -27,12 +27,12 @@
 	
     <description>$description$</description>
     <releaseNotes>
+0.0.12
+- added page indicator step
+- moved a step for getting attributes in collection on ios to be deprecated
 
 0.0.11
 - added element disable / enabled step
-
-0.0.10
-- added clear text step
 
 
     </releaseNotes>
