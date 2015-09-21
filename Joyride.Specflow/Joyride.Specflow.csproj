@@ -109,7 +109,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Joyride.Specflow.nuspec" />
+    <None Include="Joyride.Specflow.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
