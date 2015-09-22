@@ -213,25 +213,34 @@ namespace Joyride.Extensions
         {
             EnsureNotInOutDirection(direction);
             EnsureScaleRange(scale);
-            var center = element.GetCenter();
-            
-            double startX = center.X, startY = center.Y;
+
+            var upperLeft = element.Location;
+            var size = element.Size;
+            var offsetX = size.Width/3.0;
+            var offsetY = size.Height/3.0;
+
+            double startX = upperLeft.X + size.Width / 2, startY = upperLeft.Y + size.Height / 2;
             double endX = 1.0, endY = 1.0;
 
             switch (direction)
             {
                 case Direction.Down:
+                    startY -= offsetY;
                     endY = driver.ScreenSize().Height - 1.0;
                     endX = startX;
                     break;
                 case Direction.Up:
+                    startY += offsetY;
                     endX = startX;
                     break;
 
                 case Direction.Left:
+                    startX += offsetX;
+                    endX = 1.0;
                     endY = startY;
                     break;
                 case Direction.Right:
+                    startX -= offsetX;
                     endY = startY;
                     endX = driver.ScreenSize().Width - 1.0;
                     break;
