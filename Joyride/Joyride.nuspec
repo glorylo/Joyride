@@ -22,11 +22,12 @@
 	
     <description>$description$</description>
     <releaseNotes>
+      
+0.0.13
+- increased range of swiping elements
+
 0.0.12
 - added element disable / enabled
-
-0.0.11
-- added clear text
 
 
     </releaseNotes>
