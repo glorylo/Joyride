@@ -160,9 +160,10 @@ namespace Joyride.Extensions
              double scale=1.0, long durationMilliSecs = 500, int originX=0, int originY=0)
         {
             var center = new Point(originX + dimension.Width / 2, originY + dimension.Height / 2);
-            var startDeltaX = dimension.Width / 5;
+            var startDeltaX = dimension.Width / 3;
             var endDeltaX = dimension.Width / 2;
-            var startDeltaY = dimension.Height / 8;
+            // need to take into account when keyboard is present.
+            var startDeltaY = dimension.Height / 7;
             var endDeltaY = dimension.Height / 2;
 
             switch (direction)

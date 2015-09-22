@@ -248,8 +248,10 @@ namespace Joyride.Platforms
 
             if (element == null)
                 return false;
-
-            return element.Displayed;
+            
+            var visible = element.Displayed;
+            Trace.WriteLine("Element (" + elementName + ") visibility:  " + visible);
+            return visible;
         }
 
         public virtual bool ElementIsPresent(string elementName, int timeoutSecs)
