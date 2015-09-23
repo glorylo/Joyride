@@ -155,7 +155,9 @@ namespace Joyride.Platforms
             if (element == null)
                 throw new NoSuchElementException("Unable to find element: " + elementName);
 
-            return element.Selected;
+            var selected = element.Selected;
+            Trace.WriteLine("Element (" + elementName + ") selected:  " + selected);            
+            return selected;
         }
 
         public virtual bool IsEnabled(string elementName)
@@ -164,7 +166,9 @@ namespace Joyride.Platforms
             if (element == null)
                 throw new NoSuchElementException("Unable to find element: " + elementName);
 
-            return element.Enabled;
+            var enabled = element.Enabled;
+            Trace.WriteLine("Element (" + elementName + ") enabled:  " + enabled);
+            return enabled;
         }
 
         public virtual string GetElementAttribute(string elementName, string attributeName)
