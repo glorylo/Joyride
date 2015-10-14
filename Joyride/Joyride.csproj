@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\AndroidDriverExtension.cs" />
+    <Compile Include="Extensions\IosDriverExtension.cs" />
     <Compile Include="Extensions\TextCompareExtensions.cs" />
     <Compile Include="Interfaces\IDetectModalDialog.cs" />
     <Compile Include="Interfaces\IEntryEnumerable.cs" />
