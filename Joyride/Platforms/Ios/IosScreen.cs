@@ -26,7 +26,14 @@ namespace Joyride.Platforms.Ios
 
         protected Screen EnterTextBySendKeys(string elementName, string text)
         {
-            return EnterText(elementName, text);
+            var element = FindElement(elementName);
+            if (element == null)
+                throw new NoSuchElementException("Cannot find element:  " + elementName);
+
+            element.Click();
+            element.Clear();
+            element.SendKeys(text);
+            return this;
         }  
 
         protected Screen EnterTextBySetValue(string elementName, string text)
