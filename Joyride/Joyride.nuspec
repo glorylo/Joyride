@@ -23,12 +23,13 @@
     <description>$description$</description>
     <releaseNotes>
 
-0.0.15
-- ios apps include transition deley of 1500 ms as default
+0.0.17
+- fixed to send keys bug
 
-0.0.14
-- increased range of scrolling vertically 
-- improved tracing
+0.0.16 
+- added hasText method for ios
+
+
 
     </releaseNotes>
     <copyright>Copyright 2015</copyright>
