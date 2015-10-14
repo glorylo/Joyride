@@ -49,15 +49,15 @@ namespace Joyride.Specflow.Steps
         #endregion
 
         [Then(@"I (should|should not) see a label (equals|starts with|containing|matching) text ""([^""]*)""")]
-        public void ThenIShouldSeeLabel(string shouldOrShouldNot, string compare, string label)
+        public void ThenIShouldSeeLabel(string shouldOrShouldNot, string compare, string text)
         {
             var hasLabel = false;
-            Context.MobileApp.Do<AndroidScreen>(s => hasLabel = s.HasLabel(label, compare.ToCompareType(), TimeoutSecs));
+            Context.MobileApp.Do<AndroidScreen>(s => hasLabel = s.HasLabel(text, compare.ToCompareType(), TimeoutSecs));
 
             if (shouldOrShouldNot == "should")
-              Assert.IsTrue(hasLabel, "Expecting to have a label that " + compare + " text: " + label);
+              Assert.IsTrue(hasLabel, "Expecting to have a label that " + compare + " text: " + text);
             else
-              Assert.IsFalse(hasLabel, "Expecting not to have a label that " + compare + " text: " + label);
+              Assert.IsFalse(hasLabel, "Expecting not to have a label that " + compare + " text: " + text);
         }
 
         # region UI Controls 

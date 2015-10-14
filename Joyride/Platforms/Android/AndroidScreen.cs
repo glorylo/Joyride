@@ -46,9 +46,9 @@ namespace Joyride.Platforms.Android
             return this;
         }
 
-        public virtual bool HasLabel(string label, CompareType compareType, int timeoutSecs)
+        public virtual bool HasLabel(string text, CompareType compareType, int timeoutSecs)
         {
-            return HasText(label, compareType, timeoutSecs) || HasContentDesc(label, compareType, timeoutSecs);
+            return HasText(text, compareType, timeoutSecs) || HasContentDesc(text, compareType, timeoutSecs);
         }
 
         public virtual bool HasLabelInCollection(string collectionName, string label, CompareType compareType, int timeoutSecs)
