@@ -36,7 +36,7 @@ namespace Joyride.Specflow.Steps
         public void ThenIShouldSeeLabel(string shouldOrShouldNot, string compare, string text)
         {
             var hasLabel = false;
-            Context.MobileApp.Do<IosScreen>(s => hasLabel = s.HasLabel(text, compare.ToCompareType(), 5));
+            Context.MobileApp.Do<IosScreen>(s => hasLabel = s.HasLabel(text, compare.ToCompareType(), TimeoutSecs));
 
             if (shouldOrShouldNot == "should")
                 Assert.IsTrue(hasLabel, "Expecting to have a label that " + compare + " text: " + text);
