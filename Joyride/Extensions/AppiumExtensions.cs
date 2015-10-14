@@ -160,9 +160,10 @@ namespace Joyride.Extensions
              double scale=1.0, long durationMilliSecs = 500, int originX=0, int originY=0)
         {
             var center = new Point(originX + dimension.Width / 2, originY + dimension.Height / 2);
-            var startDeltaX = dimension.Width / 5;
+            var startDeltaX = dimension.Width / 3;
             var endDeltaX = dimension.Width / 2;
-            var startDeltaY = dimension.Height / 8;
+            // need to take into account when keyboard is present.
+            var startDeltaY = dimension.Height / 7;
             var endDeltaY = dimension.Height / 2;
 
             switch (direction)
@@ -213,25 +214,34 @@ namespace Joyride.Extensions
         {
             EnsureNotInOutDirection(direction);
             EnsureScaleRange(scale);
-            var center = element.GetCenter();
-            
-            double startX = center.X, startY = center.Y;
+
+            var upperLeft = element.Location;
+            var size = element.Size;
+            var offsetX = size.Width/3.0;
+            var offsetY = size.Height/3.0;
+
+            double startX = upperLeft.X + size.Width / 2, startY = upperLeft.Y + size.Height / 2;
             double endX = 1.0, endY = 1.0;
 
             switch (direction)
             {
                 case Direction.Down:
+                    startY -= offsetY;
                     endY = driver.ScreenSize().Height - 1.0;
                     endX = startX;
                     break;
                 case Direction.Up:
+                    startY += offsetY;
                     endX = startX;
                     break;
 
                 case Direction.Left:
+                    startX += offsetX;
+                    endX = 1.0;
                     endY = startY;
                     break;
                 case Direction.Right:
+                    startX -= offsetX;
                     endY = startY;
                     endX = driver.ScreenSize().Width - 1.0;
                     break;

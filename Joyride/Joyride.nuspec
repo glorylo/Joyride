@@ -22,11 +22,13 @@
 	
     <description>$description$</description>
     <releaseNotes>
-0.0.12
-- added element disable / enabled
 
-0.0.11
-- added clear text
+0.0.17
+- fixed to send keys bug
+
+0.0.16 
+- added hasText method for ios
+
 
 
     </releaseNotes>
