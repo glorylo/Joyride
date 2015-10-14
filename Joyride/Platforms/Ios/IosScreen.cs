@@ -24,6 +24,11 @@ namespace Joyride.Platforms.Ios
             return this;
         }
 
+        protected Screen EnterTextBySendKeys(string elementName, string text)
+        {
+            return EnterText(elementName, text);
+        }  
+
         protected Screen EnterTextBySetValue(string elementName, string text)
         {
             var element = FindElement(elementName) as AppiumWebElement;
@@ -40,7 +45,7 @@ namespace Joyride.Platforms.Ios
             base.EnterText(elementName, text);
             return this;
         }
-
+        
         //TODO: needs to be tested with ios step in joyride.specflow
         public virtual bool HasLabelInCollection(string collectionName, string label, CompareType compareType, int timeoutSecs)
         {
@@ -120,6 +125,45 @@ namespace Joyride.Platforms.Ios
             var pointBehindKeyboard = new Point(windowSize.Width / 2, windowSize.Height / 3);
             Driver.Tap(pointBehindKeyboard);
         }
+
+        public virtual bool HasLabel(string text, CompareType compareType, int timeoutSecs)
+        {
+            var compareStr = "";
+            switch (compareType)
+            {
+                case CompareType.StartsWith:
+                    compareStr = "BEGINSWITH";
+                    break;
+
+                case CompareType.EndsWith:
+                    compareStr = "ENDSWITH";
+                    break;
+
+                case CompareType.Equals:
+                    compareStr = "==";
+                    break;
+
+                case CompareType.Matching:
+                    compareStr = "MATCHES";
+                    break;
+
+                case CompareType.Containing:
+                    compareStr = "CONTAINS";
+                    break;
+
+                default:
+                    throw new ArgumentException("Unsupported compare type: " + compareType);
+            }
+
+            var escapedText = text.Replace(@"\", "")   // do not allow backstash chars
+                              .Replace(@"'", @"\\'")   // replace single quotes with escaped backstash + single quote
+                              .Replace(@"""", @"\"""); // replace with unescaped backslash (due to delimited by single quotes) + double quote
+            var selector = String.Format(@".getFirstWithPredicate(""ANY staticTexts.label {0} '{1}'"")", compareStr, escapedText);
+
+            var element = Driver.FindElementByIosUIAutomation(selector, timeoutSecs);
+            return element != null;
+        }
+   
 
     }
 }

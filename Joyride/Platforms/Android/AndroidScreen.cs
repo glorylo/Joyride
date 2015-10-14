@@ -103,26 +103,26 @@ namespace Joyride.Platforms.Android
             return texts != null && texts.Count != 0;
         }
 
-        internal protected bool HasText(string label, CompareType compareType, int timeoutSecs)
+        internal protected bool HasText(string text, CompareType compareType, int timeoutSecs)
         {
             IList<IWebElement> texts = null;
             switch (compareType)
             {
                 case CompareType.Equals:
-                    texts = Driver.FindElementsByAndroidUIAutomator(@"new UiSelector().text(""" + label + @""")", timeoutSecs);
+                    texts = Driver.FindElementsByAndroidUIAutomator(@"new UiSelector().text(""" + text + @""")", timeoutSecs);
                     break;
 
                 case CompareType.StartsWith:
                     texts =
-                        Driver.FindElementsByAndroidUIAutomator(@"new UiSelector().textStartsWith(""" + label + @""")", timeoutSecs);
+                        Driver.FindElementsByAndroidUIAutomator(@"new UiSelector().textStartsWith(""" + text + @""")", timeoutSecs);
                     break;
 
                 case CompareType.Matching:
-                    texts = Driver.FindElementsByAndroidUIAutomator(@"new UiSelector().textMatches(""" + label + @""")", timeoutSecs);
+                    texts = Driver.FindElementsByAndroidUIAutomator(@"new UiSelector().textMatches(""" + text + @""")", timeoutSecs);
                     break;
 
                 case CompareType.Containing:
-                    texts = Driver.FindElementsByAndroidUIAutomator(@"new UiSelector().textContains(""" + label + @""")", timeoutSecs);
+                    texts = Driver.FindElementsByAndroidUIAutomator(@"new UiSelector().textContains(""" + text + @""")", timeoutSecs);
                     break;
                 default:
                     throw new NotImplementedException("Not implemented compare type: " + compareType);
