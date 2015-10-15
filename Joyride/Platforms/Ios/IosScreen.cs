@@ -162,8 +162,8 @@ namespace Joyride.Platforms.Ios
                     throw new ArgumentException("Unsupported compare type: " + compareType);
             }
 
-            var escapedText = text.Replace(@"\", "")   // do not allow backstash chars
-                              .Replace(@"'", @"\\'")   // replace single quotes with escaped backstash + single quote
+            var escapedText = text.Replace(@"\", "")   // do not allow backslash chars
+                              .Replace(@"'", @"\\'")   // replace single quotes with escaped backslash + single quote
                               .Replace(@"""", @"\"""); // replace with unescaped backslash (due to delimited by single quotes) + double quote
             var selector = String.Format(@".getFirstWithPredicate(""ANY staticTexts.label {0} '{1}'"")", compareStr, escapedText);
 

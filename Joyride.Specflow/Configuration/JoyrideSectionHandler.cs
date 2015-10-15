@@ -10,6 +10,9 @@ namespace Joyride.Specflow.Configuration
         
         [ConfigurationProperty("servers", IsRequired = true)]
         public HandyConfigElement Servers { get { return (HandyConfigElement) base["servers"]; } }
+
+        [ConfigurationProperty("run-settings", IsRequired = true)]
+        public HandyConfigElement RunSettings { get { return (HandyConfigElement) base["run-settings"]; } }
     }
 
 }
