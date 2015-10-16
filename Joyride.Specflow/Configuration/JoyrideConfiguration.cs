@@ -15,7 +15,7 @@ namespace Joyride.Specflow.Configuration
         private static readonly NameValueTypeElementCollection AndroidCapabilities = Config.Capabilities.Android.NameValueTypes;
         private static readonly NameValueTypeElementCollection IosCapabilities = Config.Capabilities.Ios.NameValueTypes;
         private static readonly NameValueTypeElementCollection Servers = Config.Servers.NameValueTypes;
-        private static readonly NameValueTypeElementCollection RunSettings = Config.RunSettings.NameValueTypes;
+        private static readonly NameValueTypeElementCollection Run = Config.Run.NameValueTypes;
 
         public static int TimeoutSecs = 30;
         public static int NonexistenceTimeoutSecs = 15;
@@ -29,14 +29,14 @@ namespace Joyride.Specflow.Configuration
         public static string ScreenshotPath { get; private set; }
         public static string LogPath { get; private set; }
         private static string _projectDir;
-        private static ConfigBundler _runSettingsBundler;
-        private static ConfigBundler RunSettingsBundler
+        private static ConfigBundler _runBundler;
+        private static ConfigBundler RunsBundler
         {
             get
             {
-                if (_runSettingsBundler != null) return _runSettingsBundler;
-                _runSettingsBundler = new ConfigBundler().Bundle(RunSettings);
-                return _runSettingsBundler;
+                if (_runBundler != null) return _runBundler;
+                _runBundler = new ConfigBundler().Bundle(Run);
+                return _runBundler;
             } 
         }
 
@@ -44,13 +44,13 @@ namespace Joyride.Specflow.Configuration
         {
             get
             {
-                var platform = RunSettingsBundler.Get<string>(RunsettingsPlatform);
+                var platform = RunsBundler.Get<string>(RunsettingsPlatform);
                 return (Platform) Enum.Parse(typeof (Platform), platform, true);
             }
         }
 
-        public static string TargetDevice { get { return RunSettingsBundler.Get<string>(RunsettingsDevice); } }
-        public static string TargetServer { get { return RunSettingsBundler.Get<string>(RunsettingsServer); } }
+        public static string TargetDevice { get { return RunsBundler.Get<string>(RunsettingsDevice); } }
+        public static string TargetServer { get { return RunsBundler.Get<string>(RunsettingsServer); } }
 
         public static void SetWorkingDirectory(string projectDir)
         {
