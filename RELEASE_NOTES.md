@@ -2,7 +2,7 @@
 # Release History
 
 ### Version 0.0.14
-- changed the way config settings to intiialize with appium server
+- changed the way config settings is used to intiialize with appium server
 - update your *SpecflowHooks.cs* and your *App.config* for compatibility moving forward
 
 Add the *run* element in your *joyride* settings in your *App.config*:

@@ -28,7 +28,7 @@
     <description>$description$</description>
     <releaseNotes>
 0.0.14
-- changed the way config settings to intiialize with appiujm server
+- changed the way config settings is used to intiialize with appiujm server
 - update your SpecflowHooks.cs and your App.config for compatibility moving forward
 - see details here:  https://github.com/glorylo/Joyride/blob/develop/RELEASE_NOTES.md
 
