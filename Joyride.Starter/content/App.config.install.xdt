@@ -48,6 +48,13 @@
       <add name="dev" value="http://127.0.0.1:4723/wd/hub" />
       <add name="ci" value="http://127.0.0.1:4723/wd/hub" />
     </servers>  
+	
+    <run>
+      <add name="server" value="dev" />        <!-- change me to one of your available servers -->
+      <add name="platform" value="android" />  <!-- either 'android' or 'ios' -->
+      <add name="device" value="nexus5" />     <!-- change to target device's name -->
+    </run>
+	
   </joyride>
 
   <specFlow xdt:Transform="Replace">
