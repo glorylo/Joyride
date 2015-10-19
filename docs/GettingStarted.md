@@ -96,6 +96,11 @@ A real device.  If available, we prefer testing a real device over emulator or s
          <add name="dev" value="http://127.0.0.1:4723/wd/hub" />
          <add name="ci" value="http://127.0.0.1:4723/wd/hub" />
         </servers>  
+       <run>
+         <add name="server" value="dev" />        <!-- change me to one of your available servers -->
+         <add name="platform" value="android" />  <!-- either 'android' or 'ios' -->
+         <add name="device" value="nexus5" />     <!-- change to target device's name -->
+       </run>        
     </joyride>
    ```
    All the settings under capabilities map directly to [Appiums Capabilities](http://appium.io/slate/en/master/?csharp#appium-server-capabilities).  The settings are bundled together using [HandyConfig](https://www.nuget.org/packages/HandyConfig/). 
@@ -106,23 +111,9 @@ A real device.  If available, we prefer testing a real device over emulator or s
 
    Similarly, create a *device* target with device specfic capabilities.  If the same capabilitiy is specified here, it will supersede the capability setting before it.  Note the *name* of the device.  
 
-   Lastly, review the *servers*.  The default runs on *dev* for localhost.  However, if you will be running on iOS you will be specifying a separate mac machine running the appium server.  
+   Review the *servers* and *run* section.  The above settings runs on *dev* for localhost, for *platform* using *android* on a *device* target of *nexus5*.  Change your run values accordingly.  For example, on ios, you will be running on remote appium server with a mac, the *platform* of *ios* and your desired device.
 
-7. Modify the config settings in *Steps\SpecflowHooks.cs* file by updating the *TargetPlatform* to either *Platform.Android* or *Platform.Ios*.  Also update the target device and ensure the correct server is used. 
-   ```csharp
-        public const Platform TargetPlatform = Platform.Android;  // update either Platform.Android or Platform.Ios
-
-        [BeforeTestRun]
-        public static void BeforeTestRun()
-        {
-            var projectDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
-            JoyrideConfiguration.SetWorkingDirectory(projectDir);
-            var capabilities = JoyrideConfiguration.BundleCapabilities(TargetPlatform, "nexus5"); // change the device
-            var server = JoyrideConfiguration.GetServer(); // change the server.  default is "dev"
-            RemoteMobileDriver.Initialize(server, TargetPlatform, capabilities);
-        }
-   ```
-8. Define a new app.  In *Steps\SpecflowHooks.cs*, the new app will be used to set Context.MobileApp as below.  
+7. Define a new app.  In *Steps\SpecflowHooks.cs*, the new app will be used to set Context.MobileApp as below.  
    ```csharp
    [BeforeScenario]
    public void BeforeScenario()
@@ -145,7 +136,7 @@ A real device.  If available, we prefer testing a real device over emulator or s
 
    Update SpecflowHooks with the appropriate new app.
 
-9. The first spec is created for you under *Specs\FirstSpec.feature*.  Add the appropriate tag, either *@android* or *@ios*.   
+8. The first spec is created for you under *Specs\FirstSpec.feature*.  Add the appropriate tag, either *@android* or *@ios*.   
    ```gherkin 
    # Comment out and add the appropriate tag for your platform
    # @android or @ios
@@ -162,5 +153,5 @@ A real device.  If available, we prefer testing a real device over emulator or s
 
    ```
    This first spec will simply launch your app and take a screen shot.  
-10.  Build your project and run your first test.  
-11.  If all goes well, you have just ran your first test!
+9.  Build your project and run your first test.  
+10.  If all goes well, you have just ran your first test!
