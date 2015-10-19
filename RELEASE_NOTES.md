@@ -55,14 +55,9 @@ to
 ### Version 0.0.13
 - added step for hasLabel on ios 
 
-
-### Version 0.0.13
-- added step for hasLabel on ios 
-
 ### Version 0.0.12
 - added page indicator step
 - moved a step for getting attributes in collection on ios to be deprecated
-
 
 ### Version 0.0.11
 - added element disable / enabled step
@@ -77,7 +72,6 @@ to
 - verifying element text step can be now use curly braces
 - added slowly scroll screen
 - removed unused steps; old steps are tagged with deprecated
-
 
 ### Version 0.0.8
 - verifying element text step can be now use curly braces
@@ -107,7 +101,6 @@ to
 
 - added EnterTextBySetValue for iOS if you do not wish to use sendKeyStrategy with setValue strategy as the default
 - added more negation steps   
-
 
 ### Version 0.0.1
 
