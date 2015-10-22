@@ -427,5 +427,20 @@ namespace Joyride.Extensions
             SwipeFromEdge(driver, direction, durationMillsecs, scale, offset);
         }
 
+        public static void DragAndDrop(this AppiumDriver driver, IWebElement fromElement, IWebElement toElement, long durationMilliSecs = 1000)
+        {
+            if (fromElement == null || toElement == null)
+                throw new NoSuchElementException("Unable to perform drag action due to missing elements");
+
+             new TouchAction(driver)
+                 .Press(fromElement, 0.5, 0.5)
+                 .Wait(durationMilliSecs)
+                 .MoveTo(toElement, 0.5, 0.5)
+                 .Wait(500)
+                 .Release()
+                 .Perform();                
+
+        }
+
     }
 }

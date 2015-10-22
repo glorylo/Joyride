@@ -145,6 +145,14 @@ namespace Joyride.Specflow.Steps
             }
         }
 
+        [Given(@"I drag the ""([^""]*)"" (?:button|field|label|element|link) to the ""([^""]*)""")]
+        [When(@"I drag the ""([^""]*)"" (?:button|field|label|element|link) to the ""([^""]*)""")]
+        public void GivenIDragAndDrop(string fromElementName, string toElementName)
+        {
+            Context.MobileApp.Do<IGesture>(i => i.DragAndDrop(fromElementName, toElementName));
+        }
+
+
         #endregion
     }
 }

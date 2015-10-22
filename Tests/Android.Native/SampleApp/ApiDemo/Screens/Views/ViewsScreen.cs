@@ -15,6 +15,9 @@ namespace Tests.Android.Native.SampleApp.ApiDemo.Screens.Views
         [FindsBy(How = How.XPath, Using = "//*[@resource-id='android:id/text1' and @text='WebView']")]
         private IWebElement Webview;
 
+        [FindsBy(How = How.XPath, Using = "//*[@resource-id='android:id/text1' and @text='Drag and Drop']")]
+        private IWebElement DragAndDrop;
+
         public override Screen Tap(string elementName, bool precise = false)
         {
             var screen = base.Tap(elementName, precise);
@@ -27,6 +30,8 @@ namespace Tests.Android.Native.SampleApp.ApiDemo.Screens.Views
                 case "Webview":
                     return ScreenFactory.CreateScreen<WebviewScreen>();
 
+                case "Drag And Drop":
+                    return ScreenFactory.CreateScreen<DragAndDropScreen>();
                 default:
                     return screen;
             }

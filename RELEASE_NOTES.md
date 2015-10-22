@@ -1,5 +1,7 @@
 
 # Release History
+### Version 0.0.15
+- added drag and drop step
 
 ### Version 0.0.14
 - changed the way config settings is used to intiialize with appium server

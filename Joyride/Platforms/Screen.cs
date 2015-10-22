@@ -256,6 +256,21 @@ namespace Joyride.Platforms
         {
             return ScrollUntil(elementName, direction, maxRetries, timeoutSecs, (dir, s, duration) => Driver.Scroll(dir, s, duration), scale, durationMilliSecs);
         }
+
+        public virtual Screen DragAndDrop(string fromElementName, string toElementName)
+        {
+            var fromElement = FindElement(fromElementName);
+            if (fromElement == null)
+                throw new NoSuchElementException("Unable to find element: " + fromElementName);
+
+            var toElement = FindElement(toElementName);
+            if (toElement == null)
+                throw new NoSuchElementException("Unable to find element: " + toElementName);
+
+            Driver.DragAndDrop(fromElement, toElement);
+            return this;
+        }
+
         #endregion 
 
         #region UI Controls
