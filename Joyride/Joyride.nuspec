@@ -23,13 +23,11 @@
     <description>$description$</description>
     <releaseNotes>
 
+0.0.18
+- added drag and drop
+
 0.0.17
 - fixed to send keys bug
-
-0.0.16 
-- added hasText method for ios
-
-
 
     </releaseNotes>
     <copyright>Copyright 2015</copyright>
