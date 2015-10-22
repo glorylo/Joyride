@@ -423,6 +423,29 @@ testRunner.When("I swipe the \"Joe Notification\" left", ((string)(null)), ((Tec
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Should drag and drop an element")]
+        public virtual void ShouldDragAndDropAnElement()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should drag and drop an element", ((string[])(null)));
+#line 127
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 128
+testRunner.Given("I scroll the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 129
+testRunner.And("I tap the \"Views\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 130
+testRunner.And("I tap the \"Drag And Drop\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 131
+testRunner.When("I drag the \"Upper Left Dot\" button to the \"Upper Right Dot\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 132
+testRunner.Then("I should see the label \"Drop Result\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
