@@ -419,7 +419,7 @@ testRunner.And("I tap the \"Show App Notification\" button", ((string)(null)), (
 #line 124
 testRunner.And("I pull the screen down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 125
-testRunner.When("I swipe the \"Joe Notification\" left", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.When("I swipe the \"Joe Notification\" right", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             this.ScenarioCleanup();
         }

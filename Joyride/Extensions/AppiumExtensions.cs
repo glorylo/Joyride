@@ -227,23 +227,24 @@ namespace Joyride.Extensions
             {
                 case Direction.Down:
                     startY -= offsetY;
-                    endY = driver.ScreenSize().Height - 1.0;
+                    endY = (driver.ScreenSize().Height * scale) - 1.0;
                     endX = startX;
                     break;
                 case Direction.Up:
                     startY += offsetY;
                     endX = startX;
+                    endY = startY - (scale*(startY)) + 1.0; 
                     break;
 
                 case Direction.Left:
                     startX += offsetX;
-                    endX = 1.0;
+                    endX = startX - (scale*(startX)) + 1.0;
                     endY = startY;
                     break;
                 case Direction.Right:
                     startX -= offsetX;
                     endY = startY;
-                    endX = driver.ScreenSize().Width - 1.0;
+                    endX = (driver.ScreenSize().Width * scale) - 1.0;
                     break;
             }
 
