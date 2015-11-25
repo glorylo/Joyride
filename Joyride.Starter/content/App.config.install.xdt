@@ -8,7 +8,12 @@
   <appSettings>    
   </appSettings>
 
-  <joyride xdt:Transform="Insert">
+  <joyride xdt:Transform="Insert">  
+      <log>
+          <add name="relativeLogPath" value="\..\..\Logs" />
+          <add name="relativeScreenshotPath" value="\..\..\Screenshots" />
+      </log>
+
       <capabilities>
           <add name="autoLaunch" value="false" type="System.Boolean" />
           <add name="fullReset" value="false" type="System.Boolean" />      

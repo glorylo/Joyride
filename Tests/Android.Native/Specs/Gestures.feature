@@ -122,7 +122,7 @@ And I tap the "Notification" button
 And I tap the "Incoming Message" button
 And I tap the "Show App Notification" button
 And I pull the screen down
-When I swipe the "Joe Notification" left
+When I swipe the "Joe Notification" right
 
 Scenario: Should drag and drop an element 
 Given I scroll the screen down

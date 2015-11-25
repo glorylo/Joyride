@@ -14,8 +14,8 @@ namespace Tests.Android.Native.Steps
         [BeforeTestRun]
         public static void BeforeTestRun()
         {
-            var projectDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
-            JoyrideConfiguration.SetWorkingDirectory(projectDir);
+            var workingDir = Directory.GetCurrentDirectory();
+            JoyrideConfiguration.SetLogPaths(workingDir);
             var capabilities = JoyrideConfiguration.BundleCapabilities(); 
             var server = JoyrideConfiguration.GetServerUri(); 
             var targetPlatform = JoyrideConfiguration.TargetPlatform;
