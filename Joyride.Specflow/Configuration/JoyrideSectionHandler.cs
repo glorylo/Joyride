@@ -13,6 +13,10 @@ namespace Joyride.Specflow.Configuration
 
         [ConfigurationProperty("run", IsRequired = true)]
         public HandyConfigElement Run { get { return (HandyConfigElement) base["run"]; } }
+
+        [ConfigurationProperty("log", IsRequired = true)]
+        public HandyConfigElement Log { get { return (HandyConfigElement)base["log"]; } }
+
     }
 
 }
