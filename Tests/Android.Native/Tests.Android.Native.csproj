@@ -35,6 +35,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <NoWarn>649,169</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="appium-dotnet-driver, Version=1.2.0.8, Culture=neutral, processorArchitecture=MSIL">
