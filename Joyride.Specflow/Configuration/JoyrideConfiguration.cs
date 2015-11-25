@@ -8,6 +8,11 @@ namespace Joyride.Specflow.Configuration
 {
     public static class JoyrideConfiguration
     {
+        public static int TimeoutSecs = 30;
+        public static int NonexistenceTimeoutSecs = 15;
+        public static int MaxRetries = 40;
+        public static int QuickInspectTimeoutSecs = 2;
+       
         private static readonly JoyrideSectionHandler Config =
             ConfigurationManager.GetSection("joyride") as JoyrideSectionHandler;
 
@@ -16,21 +21,20 @@ namespace Joyride.Specflow.Configuration
         private static readonly NameValueTypeElementCollection IosCapabilities = Config.Capabilities.Ios.NameValueTypes;
         private static readonly NameValueTypeElementCollection Servers = Config.Servers.NameValueTypes;
         private static readonly NameValueTypeElementCollection Run = Config.Run.NameValueTypes;
+        private static readonly NameValueTypeElementCollection Log = Config.Log.NameValueTypes;
 
-        public static int TimeoutSecs = 30;
-        public static int NonexistenceTimeoutSecs = 15;
-        public static int MaxRetries = 40;
-        public static int QuickInspectTimeoutSecs = 2;
+        private const string RunsettingsServer = "server";
+        private const string RunsettingsPlatform = "platform";
+        private const string RunsettingsDevice = "device";
 
-        public const string RunsettingsServer = "server";
-        public const string RunsettingsPlatform = "platform";
-        public const string RunsettingsDevice = "device";
+        private const string RelativeLogPath = "relativeLogPath";
+        private const string RelativeScreenshotPath = "relativeScreenshotPath";
 
         public static string ScreenshotPath { get; private set; }
         public static string LogPath { get; private set; }
-        private static string _projectDir;
+        private static string _workingDir;
         private static ConfigBundler _runBundler;
-        private static ConfigBundler RunsBundler
+        private static ConfigBundler RunBundler
         {
             get
             {
@@ -44,19 +48,23 @@ namespace Joyride.Specflow.Configuration
         {
             get
             {
-                var platform = RunsBundler.Get<string>(RunsettingsPlatform);
+                var platform = RunBundler.Get<string>(RunsettingsPlatform);
                 return (Platform) Enum.Parse(typeof (Platform), platform, true);
             }
         }
 
-        public static string TargetDevice { get { return RunsBundler.Get<string>(RunsettingsDevice); } }
-        public static string TargetServer { get { return RunsBundler.Get<string>(RunsettingsServer); } }
+        private static string TargetDevice { get { return RunBundler.Get<string>(RunsettingsDevice); } }
+        private static string TargetServer { get { return RunBundler.Get<string>(RunsettingsServer); } }
 
-        public static void SetWorkingDirectory(string projectDir)
+        public static void SetLogPaths(string workingDir)
         {
-            _projectDir = projectDir;
-            LogPath = _projectDir + @"\Logs\";
-            ScreenshotPath = _projectDir + @"\Screenshots\";
+            _workingDir = workingDir;
+            var logBundler = new ConfigBundler().Bundle(Log);
+            LogPath = workingDir + logBundler.Get<string>(RelativeLogPath);
+            ScreenshotPath = workingDir + logBundler.Get<string>(RelativeScreenshotPath);
+
+            System.IO.Directory.CreateDirectory(LogPath);
+            System.IO.Directory.CreateDirectory(ScreenshotPath);
         }
 
         private static NameValueTypeElementCollection GetDeviceCapabilities(Platform platform, string deviceKey)
