@@ -22,11 +22,15 @@
       <dependency id="Selenium.WebDriver" version="2.45.0" />
       <dependency id="SpecFlow" version="1.9.0"  />
       <dependency id="SpecFlow.NUnit" version="1.1.1" />
-	    <dependency id="Joyride" version="0.0.18" />
+	    <dependency id="Joyride" version="0.0.19" />
 	</dependencies>	
 	
     <description>$description$</description>
     <releaseNotes>
+0.0.16 
+- added logging config
+- update SpecflowHooks.cs and your App.config for compatibility:  https://github.com/glorylo/Joyride/blob/develop/RELEASE_NOTES.md
+
 0.0.15
 - added drag and drop step
 
