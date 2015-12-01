@@ -6,8 +6,8 @@
 ```xml
   <joyride>
     <log>
-      <add name="relativeLogPath" value="\..\..\Logs" />
-      <add name="relativeScreenshotPath" value="\..\..\Screenshots" />
+      <add name="relativeLogPath" value="\..\..\Logs\" />
+      <add name="relativeScreenshotPath" value="\..\..\Screenshots\" />
     </log>
     <capabilities> ... </capabilities>
 ```
