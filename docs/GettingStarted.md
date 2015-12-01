@@ -58,25 +58,29 @@ A real device.  If available, we prefer testing a real device over emulator or s
 6. Modify the *App.config* with the appropriate settings under the *joyride* section. The template provides the following:
   ```xml
     <joyride>
+        <log>
+          <add name="relativeLogPath" value="\..\..\Logs\" />
+          <add name="relativeScreenshotPath" value="\..\..\Screenshots\" />
+       </log>
        <capabilities>
           <add name="autoLaunch" value="false" type="System.Boolean" />
           <add name="fullReset" value="false" type="System.Boolean" />      
           <android>
-           <add name="platformName" value="Android" />
-           <add name="appPackage" value="com.my.test.app" />
-           <add name="appActivity" value="activity-change-or-delete-me" />
+            <add name="platformName" value="Android" />
+            <add name="appPackage" value="com.my.test.app" />
+            <add name="appActivity" value="activity-change-or-delete-me" />
 
-           <devices>
+          <devices>
               <device name="nexus5">
               <add name="deviceName" value="device-id-replace-me" />
-            </device>
+              </device>
 
             <device name="nexus5_emulator">            
                <add name="appActivity" value="change-or-delete-me" />
                <add name="appWaitActivity" value="change-or-delete-me" />
             </device>
-           </devices>  
-           </android>
+          </devices>  
+        </android>
 
          <ios>
            <add name="platformName" value="iOS" />
@@ -103,7 +107,9 @@ A real device.  If available, we prefer testing a real device over emulator or s
        </run>        
     </joyride>
    ```
-   All the settings under capabilities map directly to [Appiums Capabilities](http://appium.io/slate/en/master/?csharp#appium-server-capabilities).  The settings are bundled together using [HandyConfig](https://www.nuget.org/packages/HandyConfig/). 
+   The *log* section sets relative paths to the working directory of your binary.  By default, the folders "Log" and "Screenshots" are saved in the same directory as your project directory.
+   
+   All the settings under *capabilities* map directly to [Appiums Capabilities](http://appium.io/slate/en/master/?csharp#appium-server-capabilities).  The settings are bundled together using [HandyConfig](https://www.nuget.org/packages/HandyConfig/). 
 
    The *capabilities* section includes global capabilities.  Joyride prefers to launch the app manually by setting *autoLaunch* to false.  Note the *type="System.Boolean"*.  You have to supply the correct type for the capabilities.  For example, you want the *newCommandTimeout* capability with a value of "70", also include *type="System.Int32"*.  If the *type* is not specified, the *"System.String"* is used as the default.
 
