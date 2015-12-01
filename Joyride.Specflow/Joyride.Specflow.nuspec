@@ -27,6 +27,10 @@
 	
     <description>$description$</description>
     <releaseNotes>
+      
+0.0.17
+- added check for existing log directories
+
 0.0.16 
 - added logging config
 - update SpecflowHooks.cs and your App.config for compatibility:  https://github.com/glorylo/Joyride/blob/develop/RELEASE_NOTES.md
