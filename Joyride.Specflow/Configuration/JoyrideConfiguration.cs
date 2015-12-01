@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using HandyConfig.Configuration;
 using OpenQA.Selenium.Remote;
 
@@ -32,7 +33,7 @@ namespace Joyride.Specflow.Configuration
 
         public static string ScreenshotPath { get; private set; }
         public static string LogPath { get; private set; }
-        private static string _workingDir;
+        public static string WorkingDir;
         private static ConfigBundler _runBundler;
         private static ConfigBundler RunBundler
         {
@@ -58,13 +59,17 @@ namespace Joyride.Specflow.Configuration
 
         public static void SetLogPaths(string workingDir)
         {
-            _workingDir = workingDir;
+            WorkingDir = workingDir;
             var logBundler = new ConfigBundler().Bundle(Log);
             LogPath = workingDir + logBundler.Get<string>(RelativeLogPath);
             ScreenshotPath = workingDir + logBundler.Get<string>(RelativeScreenshotPath);
 
-            System.IO.Directory.CreateDirectory(LogPath);
-            System.IO.Directory.CreateDirectory(ScreenshotPath);
+            // added check if exists for backwards compatitibilty
+            if (!Directory.Exists(LogPath))
+                Directory.CreateDirectory(LogPath);
+            
+            if (!Directory.Exists(ScreenshotPath))
+              Directory.CreateDirectory(ScreenshotPath);
         }
 
         private static NameValueTypeElementCollection GetDeviceCapabilities(Platform platform, string deviceKey)
