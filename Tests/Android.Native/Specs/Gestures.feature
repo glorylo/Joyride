@@ -122,5 +122,11 @@ And I tap the "Notification" button
 And I tap the "Incoming Message" button
 And I tap the "Show App Notification" button
 And I pull the screen down
-When I swipe the "Joe Notification" left
+When I swipe the "Joe Notification" right
 
+Scenario: Should drag and drop an element 
+Given I scroll the screen down
+And I tap the "Views" button
+And I tap the "Drag And Drop" button
+When I drag the "Upper Left Dot" button to the "Upper Right Dot"
+Then I should see the label "Drop Result"

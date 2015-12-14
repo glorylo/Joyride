@@ -58,25 +58,29 @@ A real device.  If available, we prefer testing a real device over emulator or s
 6. Modify the *App.config* with the appropriate settings under the *joyride* section. The template provides the following:
   ```xml
     <joyride>
+        <log>
+          <add name="relativeLogPath" value="\..\..\Logs\" />
+          <add name="relativeScreenshotPath" value="\..\..\Screenshots\" />
+       </log>
        <capabilities>
           <add name="autoLaunch" value="false" type="System.Boolean" />
           <add name="fullReset" value="false" type="System.Boolean" />      
           <android>
-           <add name="platformName" value="Android" />
-           <add name="appPackage" value="com.my.test.app" />
-           <add name="appActivity" value="activity-change-or-delete-me" />
+            <add name="platformName" value="Android" />
+            <add name="appPackage" value="com.my.test.app" />
+            <add name="appActivity" value="activity-change-or-delete-me" />
 
-           <devices>
+          <devices>
               <device name="nexus5">
               <add name="deviceName" value="device-id-replace-me" />
-            </device>
+              </device>
 
             <device name="nexus5_emulator">            
                <add name="appActivity" value="change-or-delete-me" />
                <add name="appWaitActivity" value="change-or-delete-me" />
             </device>
-           </devices>  
-           </android>
+          </devices>  
+        </android>
 
          <ios>
            <add name="platformName" value="iOS" />
@@ -96,9 +100,16 @@ A real device.  If available, we prefer testing a real device over emulator or s
          <add name="dev" value="http://127.0.0.1:4723/wd/hub" />
          <add name="ci" value="http://127.0.0.1:4723/wd/hub" />
         </servers>  
+       <run>
+         <add name="server" value="dev" />        <!-- change me to one of your available servers -->
+         <add name="platform" value="android" />  <!-- either 'android' or 'ios' -->
+         <add name="device" value="nexus5" />     <!-- change to target device's name -->
+       </run>        
     </joyride>
    ```
-   All the settings under capabilities map directly to [Appiums Capabilities](http://appium.io/slate/en/master/?csharp#appium-server-capabilities).  The settings are bundled together using [HandyConfig](https://www.nuget.org/packages/HandyConfig/). 
+   The *log* section sets relative paths to the working directory of your binary.  By default, the folders "Log" and "Screenshots" are saved in the same directory as your project directory.
+   
+   All the settings under *capabilities* map directly to [Appiums Capabilities](http://appium.io/slate/en/master/?csharp#appium-server-capabilities).  The settings are bundled together using [HandyConfig](https://www.nuget.org/packages/HandyConfig/). 
 
    The *capabilities* section includes global capabilities.  Joyride prefers to launch the app manually by setting *autoLaunch* to false.  Note the *type="System.Boolean"*.  You have to supply the correct type for the capabilities.  For example, you want the *newCommandTimeout* capability with a value of "70", also include *type="System.Int32"*.  If the *type* is not specified, the *"System.String"* is used as the default.
 
@@ -106,23 +117,9 @@ A real device.  If available, we prefer testing a real device over emulator or s
 
    Similarly, create a *device* target with device specfic capabilities.  If the same capabilitiy is specified here, it will supersede the capability setting before it.  Note the *name* of the device.  
 
-   Lastly, review the *servers*.  The default runs on *dev* for localhost.  However, if you will be running on iOS you will be specifying a separate mac machine running the appium server.  
+   Review the *servers* and *run* section.  The above settings runs on *dev* for localhost, for *platform* using *android* on a *device* target of *nexus5*.  Change your run values accordingly.  For example, on ios, you will be running on remote appium server with a mac, the *platform* of *ios* and your desired device.
 
-7. Modify the config settings in *Steps\SpecflowHooks.cs* file by updating the *TargetPlatform* to either *Platform.Android* or *Platform.Ios*.  Also update the target device and ensure the correct server is used. 
-   ```csharp
-        public const Platform TargetPlatform = Platform.Android;  // update either Platform.Android or Platform.Ios
-
-        [BeforeTestRun]
-        public static void BeforeTestRun()
-        {
-            var projectDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
-            JoyrideConfiguration.SetWorkingDirectory(projectDir);
-            var capabilities = JoyrideConfiguration.BundleCapabilities(TargetPlatform, "nexus5"); // change the device
-            var server = JoyrideConfiguration.GetServer(); // change the server.  default is "dev"
-            RemoteMobileDriver.Initialize(server, TargetPlatform, capabilities);
-        }
-   ```
-8. Define a new app.  In *Steps\SpecflowHooks.cs*, the new app will be used to set Context.MobileApp as below.  
+7. Define a new app.  In *Steps\SpecflowHooks.cs*, the new app will be used to set Context.MobileApp as below.  
    ```csharp
    [BeforeScenario]
    public void BeforeScenario()
@@ -145,7 +142,7 @@ A real device.  If available, we prefer testing a real device over emulator or s
 
    Update SpecflowHooks with the appropriate new app.
 
-9. The first spec is created for you under *Specs\FirstSpec.feature*.  Add the appropriate tag, either *@android* or *@ios*.   
+8. The first spec is created for you under *Specs\FirstSpec.feature*.  Add the appropriate tag, either *@android* or *@ios*.   
    ```gherkin 
    # Comment out and add the appropriate tag for your platform
    # @android or @ios
@@ -162,5 +159,5 @@ A real device.  If available, we prefer testing a real device over emulator or s
 
    ```
    This first spec will simply launch your app and take a screen shot.  
-10.  Build your project and run your first test.  
-11.  If all goes well, you have just ran your first test!
+9.  Build your project and run your first test.  
+10.  If all goes well, you have just ran your first test!

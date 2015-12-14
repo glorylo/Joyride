@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
 using Joyride.Extensions;
 using Joyride.Platforms;
@@ -44,6 +43,20 @@ namespace Joyride.Specflow.Steps
             else
                 Assert.That(actualText != null && actualText.CompareWith(text, compareType.ToCompareType()), Is.False,
                     "Unexpected text compare for with actual text " + actualText + "' is " + compareType + " '" + text + "'");
+        }
+
+        [Then(@"I (should|should not) see the text of (?:field|element) ""([^""]*)"" cleared")]
+        public void ThenIShouldSeeElementCleared(string shouldOrShouldNot, string elementName)
+        {
+            string actualText = null;
+            Context.MobileApp.Do<Screen>(s => actualText = s.GetText(elementName));
+
+            if (shouldOrShouldNot == "should")
+                Assert.That(String.IsNullOrEmpty(actualText), Is.True,
+                    "Unexpected text should be cleared:  " + actualText);
+            else
+                Assert.That(String.IsNullOrEmpty(actualText), Is.False,
+                    "Unexpected text of '" + elementName + "' should not be cleared");
         }
 
         [Then(@"the (?:button|field|label|element|link|checkbox|switch) ""([^""]*)"" (should|should not) be present")]
@@ -150,6 +163,19 @@ namespace Joyride.Specflow.Steps
                 else
                     Assert.IsFalse(foundElement, "Unexpected element is present: " + elementName);
             }
+        }
+
+        [Then(@"I (should|should not) see the (?:element|button|field|label|link) ""([^""]*)"" (enabled|disabled)")]
+        public void ThenIShouldSeeElementEnabled(string shouldOrShouldNot, string elementName, string enabledOrDisabled)
+        {
+            var enabled = enabledOrDisabled == "enabled";
+            var actualEnabled = false;
+
+            Context.MobileApp.Do<Screen>(s => actualEnabled = s.IsEnabled(elementName, TimeoutSecs));
+            if (shouldOrShouldNot == "should")
+                Assert.IsTrue(actualEnabled == enabled);
+            else
+                Assert.IsFalse(actualEnabled == enabled);
         }
 
         #endregion

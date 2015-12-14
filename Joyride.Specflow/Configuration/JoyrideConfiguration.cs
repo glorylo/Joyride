@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using HandyConfig.Configuration;
 using OpenQA.Selenium.Remote;
 
@@ -8,6 +9,11 @@ namespace Joyride.Specflow.Configuration
 {
     public static class JoyrideConfiguration
     {
+        public static int TimeoutSecs = 30;
+        public static int NonexistenceTimeoutSecs = 15;
+        public static int MaxRetries = 40;
+        public static int QuickInspectTimeoutSecs = 2;
+       
         private static readonly JoyrideSectionHandler Config =
             ConfigurationManager.GetSection("joyride") as JoyrideSectionHandler;
 
@@ -15,28 +21,55 @@ namespace Joyride.Specflow.Configuration
         private static readonly NameValueTypeElementCollection AndroidCapabilities = Config.Capabilities.Android.NameValueTypes;
         private static readonly NameValueTypeElementCollection IosCapabilities = Config.Capabilities.Ios.NameValueTypes;
         private static readonly NameValueTypeElementCollection Servers = Config.Servers.NameValueTypes;
+        private static readonly NameValueTypeElementCollection Run = Config.Run.NameValueTypes;
+        private static readonly NameValueTypeElementCollection Log = Config.Log.NameValueTypes;
 
-        public static int TimeoutSecs = 30;
-        public static int NonexistenceTimeoutSecs = 15;
-        public static int MaxRetries = 40;
-        public static int QuickInspectTimeoutSecs = 2;
+        private const string RunsettingsServer = "server";
+        private const string RunsettingsPlatform = "platform";
+        private const string RunsettingsDevice = "device";
+
+        private const string RelativeLogPath = "relativeLogPath";
+        private const string RelativeScreenshotPath = "relativeScreenshotPath";
 
         public static string ScreenshotPath { get; private set; }
         public static string LogPath { get; private set; }
-        private static string _projectDir;
-
-        public static void SetWorkingDirectory(string projectDir)
+        public static string WorkingDir;
+        private static ConfigBundler _runBundler;
+        private static ConfigBundler RunBundler
         {
-            _projectDir = projectDir;
-            LogPath = _projectDir + @"\Logs\";
-            ScreenshotPath = _projectDir + @"\Screenshots\";
+            get
+            {
+                if (_runBundler != null) return _runBundler;
+                _runBundler = new ConfigBundler().Bundle(Run);
+                return _runBundler;
+            } 
         }
 
-        public static Uri GetServer(string serverName = "dev")
+        public static Platform TargetPlatform
         {
-            var bundler = new ConfigBundler().Bundle(Servers);
-            var serverValue = bundler.Get<string>(serverName);
-            return new Uri(serverValue);
+            get
+            {
+                var platform = RunBundler.Get<string>(RunsettingsPlatform);
+                return (Platform) Enum.Parse(typeof (Platform), platform, true);
+            }
+        }
+
+        private static string TargetDevice { get { return RunBundler.Get<string>(RunsettingsDevice); } }
+        private static string TargetServer { get { return RunBundler.Get<string>(RunsettingsServer); } }
+
+        public static void SetLogPaths(string workingDir)
+        {
+            WorkingDir = workingDir;
+            var logBundler = new ConfigBundler().Bundle(Log);
+            LogPath = workingDir + logBundler.Get<string>(RelativeLogPath);
+            ScreenshotPath = workingDir + logBundler.Get<string>(RelativeScreenshotPath);
+
+            // added check if exists for backwards compatitibilty
+            if (!Directory.Exists(LogPath))
+                Directory.CreateDirectory(LogPath);
+            
+            if (!Directory.Exists(ScreenshotPath))
+              Directory.CreateDirectory(ScreenshotPath);
         }
 
         private static NameValueTypeElementCollection GetDeviceCapabilities(Platform platform, string deviceKey)
@@ -49,7 +82,7 @@ namespace Joyride.Specflow.Configuration
             throw new KeyNotFoundException("Unable to find device on " + platform + " with key: " + deviceKey);
         }
 
-        public static DesiredCapabilities BundleCapabilities(Platform platform, string deviceKey)
+        private static DesiredCapabilities BundleCapabilities(Platform platform, string deviceKey)
         {            
             var configBundler = new ConfigBundler();
             configBundler.Bundle(Capabilities)
@@ -60,5 +93,18 @@ namespace Joyride.Specflow.Configuration
             return capabilities;
 
         }
+
+        public static DesiredCapabilities BundleCapabilities()
+        {
+            return BundleCapabilities(TargetPlatform, TargetDevice);
+        }
+
+        public static Uri GetServerUri()
+        {            
+            var bundler = new ConfigBundler().Bundle(Servers);
+            var serverValue = bundler.Get<string>(TargetServer);
+            return new Uri(serverValue);
+        }
+
     }
 }

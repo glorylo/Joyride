@@ -177,9 +177,10 @@ namespace Joyride.Extensions
             where T: IWebElement
         {
             var center = new Point(originX + dimension.Width / 2, originY + dimension.Height / 2);
-            var startDeltaX = dimension.Width / 5;
+            var startDeltaX = dimension.Width / 3;
             var endDeltaX = dimension.Width / 2;
-            var startDeltaY = dimension.Height / 8;
+            // need to take into account when keyboard is present.
+            var startDeltaY = dimension.Height / 7;
             var endDeltaY = dimension.Height / 2;
 
             switch (direction)
@@ -232,27 +233,37 @@ namespace Joyride.Extensions
         {
             EnsureNotInOutDirection(direction);
             EnsureScaleRange(scale);
-            var center = element.GetCenter();
-            
-            double startX = center.X, startY = center.Y;
+
+            var upperLeft = element.Location;
+            var size = element.Size;
+            var offsetX = size.Width/3.0;
+            var offsetY = size.Height/3.0;
+
+            double startX = upperLeft.X + size.Width / 2, startY = upperLeft.Y + size.Height / 2;
             double endX = 1.0, endY = 1.0;
 
             switch (direction)
             {
                 case Direction.Down:
-                    endY = driver.ScreenSize().Height - 1.0;
+                    startY -= offsetY;
+                    endY = (driver.ScreenSize().Height * scale) - 1.0;
                     endX = startX;
                     break;
                 case Direction.Up:
+                    startY += offsetY;
                     endX = startX;
+                    endY = startY - (scale*(startY)) + 1.0; 
                     break;
 
                 case Direction.Left:
+                    startX += offsetX;
+                    endX = startX - (scale*(startX)) + 1.0;
                     endY = startY;
                     break;
                 case Direction.Right:
+                    startX -= offsetX;
                     endY = startY;
-                    endX = driver.ScreenSize().Width - 1.0;
+                    endX = (driver.ScreenSize().Width * scale) - 1.0;
                     break;
             }
 
@@ -439,6 +450,22 @@ namespace Joyride.Extensions
             if ((direction == Direction.Left) || (direction == Direction.Right))
               throw new ArgumentException("Unexpected direction: " + direction);
             SwipeFromEdge(driver, direction, durationMillsecs, scale, offset);
+        }
+
+        public static void DragAndDrop<T>(this AppiumDriver<T> driver, IWebElement fromElement, IWebElement toElement, long durationMilliSecs = 1000)
+              where T : IWebElement
+        {
+            if (fromElement == null || toElement == null)
+                throw new NoSuchElementException("Unable to perform drag action due to missing elements");
+
+             new TouchAction(driver)
+                 .Press(fromElement, 0.5, 0.5)
+                 .Wait(durationMilliSecs)
+                 .MoveTo(toElement, 0.5, 0.5)
+                 .Wait(500)
+                 .Release()
+                 .Perform();                
+
         }
 
     }

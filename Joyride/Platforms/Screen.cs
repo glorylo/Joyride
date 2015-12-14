@@ -254,9 +254,36 @@ namespace Joyride.Platforms
         {
             return ScrollUntil(elementName, direction, maxRetries, timeoutSecs, (dir, s, duration) => Driver.Scroll(dir, s, duration), scale, durationMilliSecs);
         }
+
+        public virtual Screen DragAndDrop(string fromElementName, string toElementName)
+        {
+            var fromElement = FindElement(fromElementName);
+            if (fromElement == null)
+                throw new NoSuchElementException("Unable to find element: " + fromElementName);
+
+            var toElement = FindElement(toElementName);
+            if (toElement == null)
+                throw new NoSuchElementException("Unable to find element: " + toElementName);
+
+            Driver.DragAndDrop(fromElement, toElement);
+            return this;
+        }
+
         #endregion 
 
         #region UI Controls
+
+        public virtual Screen ClearText(string elementName)
+        {
+            var element = FindElement(elementName);
+
+            if (element == null)
+                throw new NoSuchElementException("Cannot find element:  " + elementName);
+
+            element.Click();
+            element.Clear();
+            return this;
+        }
 
         public virtual Screen EnterText(string elementName, string text)
         {
@@ -265,6 +292,7 @@ namespace Joyride.Platforms
             if (element == null)
                 throw new NoSuchElementException("Cannot find element:  " + elementName);
 
+            element.Click();
             element.Clear();
             element.SendKeys(text);
             return this;

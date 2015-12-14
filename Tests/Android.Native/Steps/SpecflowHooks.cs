@@ -11,16 +11,15 @@ namespace Tests.Android.Native.Steps
     [Binding]
     public class SpecFlowHooks
     {
-        public const Platform TargetPlatform = Platform.Android;  // update either Platform.Android or Platform.Ios
-
         [BeforeTestRun]
         public static void BeforeTestRun()
         {
-            var projectDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
-            JoyrideConfiguration.SetWorkingDirectory(projectDir);
-            var capabilities = JoyrideConfiguration.BundleCapabilities(TargetPlatform, "nexus5"); // change the device
-            var server = JoyrideConfiguration.GetServer(); // change the server.  default is "dev"
-            RemoteMobileDriver.Initialize(server, TargetPlatform, capabilities);
+            var workingDir = Directory.GetCurrentDirectory();
+            JoyrideConfiguration.SetLogPaths(workingDir);
+            var capabilities = JoyrideConfiguration.BundleCapabilities(); 
+            var server = JoyrideConfiguration.GetServerUri(); 
+            var targetPlatform = JoyrideConfiguration.TargetPlatform;
+            RemoteMobileDriver.Initialize(server, targetPlatform, capabilities);
         }
 
         [AfterTestRun]
@@ -34,8 +33,6 @@ namespace Tests.Android.Native.Steps
         {
             Context.Driver = RemoteMobileDriver.GetInstance();
             Context.MobileApp = new ApiDemoApp();
-            // Add your test app here
-            // Context.MobileApp = new ApiDemoApp.ApiDemoApp();
         }
 
         [AfterScenario]
