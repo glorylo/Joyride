@@ -69,22 +69,7 @@ namespace Joyride.Platforms
 //                    : null;
 //            }
 
-            if (element.IsPresent())
-                
-            {
-                Trace.WriteLine("Element: '" + elementName + "' is present");
-/*
-                element = Util.GetMemberValue(element, "WrappedElement", BindingFlags.Public, true) as IWebElement;
-                if (element == null)
-                    Trace.WriteLine("Unexpected retrieval of wrapped element: " + elementName);
-*/
-            }
-            else
-            {
-                Trace.WriteLine("Cannot find element:  '" + elementName + "' due to element not present");
-                element = null;
-            }
-            return element;
+            return (element.IsPresent() ? element.Unpack() : null);
         }
 
 
