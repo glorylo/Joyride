@@ -24,7 +24,7 @@ namespace Tests.Android.Native.SampleApp.ApiDemo.Screens.Views
 
         public override bool IsOnScreen(int timeOutSecs)
         {
-            return Exists("Drag And Drop Title", timeOutSecs);
+            return IsPresent("Drag And Drop Title", timeOutSecs);
         }
 
         

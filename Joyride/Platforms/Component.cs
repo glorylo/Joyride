@@ -258,11 +258,6 @@ namespace Joyride.Platforms
             return element.Displayed;
         }
 
-        public virtual bool Exists(string elementName, int timeoutSecs)
-        {
-            return IsPresent(elementName, timeoutSecs);
-        }
-
         public virtual bool IsPresent(string elementName, int timeoutSecs)
         {
             var element = FindElement(elementName, timeoutSecs);

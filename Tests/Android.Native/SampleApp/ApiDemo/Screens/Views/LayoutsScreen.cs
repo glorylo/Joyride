@@ -26,7 +26,7 @@ namespace Tests.Android.Native.SampleApp.ApiDemo.Screens.Views
 
         public override bool IsOnScreen(int timeOutSecs)
         {
-            return Exists("Scroll View", timeOutSecs);
+            return IsPresent("Scroll View", timeOutSecs);
         }
 
         public override string Name
