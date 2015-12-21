@@ -1,7 +1,6 @@
-﻿
-#### Update your bin folder here ####
+﻿#### This script is to help locate your solution's bin folder ####
 $ROOT_BIN = $PSScriptRoot + "\..\bin"
-#####################################
+##################################################################
 
 $TOOLS_DIR = $PSScriptRoot
 
