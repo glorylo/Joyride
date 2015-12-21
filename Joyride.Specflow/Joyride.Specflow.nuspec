@@ -17,7 +17,6 @@
       <dependency id="SpecFlow" version="1.9.0"  />
       <dependency id="SpecFlow.NUnit" version="1.1.1" />
 	    <dependency id="Joyride" version="0.1.0-alpha2" />
-      <dependency id="NUnit.Runners" version="[2.6.4, 3)" />
 	</dependencies>	
 	
     <description>$description$</description>
@@ -45,7 +44,4 @@
     <copyright>Copyright 2015</copyright>
     <tags>native hybrid mobile bdd behaviour driven development appium selenium ios android automation acceptance specs specflow nunit joyride</tags>
   </metadata>
-  <files>
-    <file src="tools\**\*" target="tools\" />
-  </files>
 </package>
