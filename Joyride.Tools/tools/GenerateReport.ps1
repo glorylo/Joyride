@@ -26,7 +26,7 @@ Param (
 )
 
 ################# Update your paths to access specflow #################
-$SPECFLOW_EXE = $PSScriptRoot + "\..\..\SpecFlow.1.9.0\specflow.exe"
+$SPECFLOW_EXE = $PSScriptRoot + "\..\..\SpecFlow.1.9.0\tools\specflow.exe"
 $NUNITRESULTMERGER_EXE = $PSScriptRoot  + "\NUnitResultMerger.exe"
 ########################################################################
 
