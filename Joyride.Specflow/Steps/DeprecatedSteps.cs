@@ -35,7 +35,7 @@ namespace Joyride.Specflow.Steps
         public void ThenIShouldSeeElementAttributeValueInCollectionCompareWithText(int index, string collectionName, string nameOrValue, string compareType, string text)
         {
             string attributeValue = null;
-            Context.MobileApp.Do<IosScreen>(s => attributeValue = s.GetElementAttribute(collectionName, index, nameOrValue));
+            Context.MobileApp.Do<IosScreen>(s => attributeValue = s.GetAttribute(collectionName, index, nameOrValue));
 
             if (attributeValue == null)
                 Assert.Fail("Unable to find attribute '" + nameOrValue + "' for '" + index + "' item in " + collectionName);

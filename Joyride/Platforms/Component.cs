@@ -215,7 +215,7 @@ namespace Joyride.Platforms
             return (theElement != null);
         }
         
-        public virtual string GetElementAttribute(string collectionName, int index, string attributeName)
+        public virtual string GetAttribute(string collectionName, int index, string attributeName)
         {
             IWebElement element;
             try
