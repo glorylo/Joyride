@@ -42,7 +42,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Joyride.Tools.nuspec" />
+    <None Include="Joyride.Tools.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="tools\CopySpecflowConfig.ps1" />
     <None Include="tools\Env.ps1" />
     <None Include="tools\ExecuteNUnit.ps1" />
