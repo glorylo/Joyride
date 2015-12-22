@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Joyride.Starter")]
-[assembly: AssemblyDescription("A starter package paired with Joyride.Specflow to quickly get you up and running")]
+[assembly: AssemblyTitle("Joyride.Tools")]
+[assembly: AssemblyDescription("Bundled command line tools to assist running your Joyride tests")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Glory Lo")]
-[assembly: AssemblyProduct("Joyride.Starter")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("Joyride.Tools")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("a8c2ee33-732b-4de6-bb30-7f79cf00d2ec")]
+[assembly: Guid("0c37a109-2dda-4f44-a290-73c3779b19f0")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,5 +32,6 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.16.0")]
-[assembly: AssemblyFileVersion("1.0.16.0")]
+[assembly: AssemblyInformationalVersion("1.0.0.0-alpha1")]
+//[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

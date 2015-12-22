@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium.Appium;
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Appium;
 using TechTalk.SpecFlow;
 using Joyride.Platforms;
 
@@ -36,9 +37,9 @@ namespace Joyride.Specflow
             set { ScenarioContext.Current[MobileAppKey] = value; }
         }
 
-        public static AppiumDriver Driver
+        public static AppiumDriver<IWebElement> Driver
         {
-            get { return (AppiumDriver) ScenarioContext.Current[DriverKey]; }
+            get { return (AppiumDriver<IWebElement>) ScenarioContext.Current[DriverKey]; }
             set { ScenarioContext.Current[DriverKey] = value; }
         }
 

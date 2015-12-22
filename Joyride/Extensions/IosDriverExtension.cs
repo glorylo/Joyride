@@ -7,21 +7,21 @@ namespace Joyride.Extensions
 {
     public static class IosDriverExtension
     {
-        public static IWebElement FindElementByIosUIAutomation(this IOSDriver driver, string selector, int timeoutSecs)
+        public static T FindElementByIosUIAutomation<T>(this IOSDriver<T> driver, string selector, int timeoutSecs) where T : IWebElement
         {
             driver.SetTimeout(timeoutSecs);
-            var element = driver.FindElementWithMethod(new Func<string, IWebElement>(driver.FindElementByIosUIAutomation), selector);
+            var element = driver.FindElementWithMethod(new Func<string, T>(driver.FindElementByIosUIAutomation), selector);
             driver.SetDefaultWait();
-            return element;
+            return (T) element;
 
         }
 
-        public static IList<IWebElement> FindElementsByIosUIAutomation(this IOSDriver driver, string selector, int timeoutSecs)
+        public static IList<T> FindElementsByIosUIAutomation<T>(this IOSDriver<T> driver, string selector, int timeoutSecs) where T : IWebElement
         {
             driver.SetTimeout(timeoutSecs);
-            var elements = driver.FindElementsWithMethod(new Func<string, IList<IWebElement>>(driver.FindElementsByIosUIAutomation), selector);
+            var elements = driver.FindElementsWithMethod(new Func<string, IList<T>>(driver.FindElementsByIosUIAutomation), selector);
             driver.SetDefaultWait();
-            return elements;
+            return (IList<T>) elements;
         }
     }
 }

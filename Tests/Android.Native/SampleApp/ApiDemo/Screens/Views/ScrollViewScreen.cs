@@ -10,7 +10,7 @@ namespace Tests.Android.Native.SampleApp.ApiDemo.Screens.Views
 
         public override bool IsOnScreen(int timeOutSecs)
         {
-            return ElementExists("Long", timeOutSecs);
+            return IsPresent("Long", timeOutSecs);
         }
 
         public override Joyride.Platforms.Screen Tap(string elementName, bool precise = false)
