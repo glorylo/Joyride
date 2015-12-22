@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Joyride.Tools</id>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <title>Joyride.Tools</title>
     <authors>Glory Lo</authors>
     <owners>Glory Lo</owners>
@@ -17,7 +17,6 @@
     <dependencies>
       <!-- does not appear to install for some reason :( -->
       <dependency id="NUnit.Runners" version="[2.6.4, 3)" /> 
-      <dependency id="Joyride.Specflow" version="0.1.0" />
     </dependencies>
   </metadata>
   <files>
