@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joyride", "Joyride\Joyride.csproj", "{6D170D85-095C-4BA3-87AB-0410210D3113}"
 EndProject
@@ -17,6 +17,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Android.Native", "Tests\Android.Native\Tests.Android.Native.csproj", "{4C48828E-2D9F-4695-83F5-8B67F0891971}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joyride.Starter", "Joyride.Starter\Joyride.Starter.csproj", "{A4D19E35-D6B4-4DD9-B9EB-4A885B555F75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joyride.Tools", "Joyride.Tools\Joyride.Tools.csproj", "{743E893A-256B-489B-9AD5-D6035CAB9F47}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +42,10 @@ Global
 		{A4D19E35-D6B4-4DD9-B9EB-4A885B555F75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4D19E35-D6B4-4DD9-B9EB-4A885B555F75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4D19E35-D6B4-4DD9-B9EB-4A885B555F75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{743E893A-256B-489B-9AD5-D6035CAB9F47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{743E893A-256B-489B-9AD5-D6035CAB9F47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{743E893A-256B-489B-9AD5-D6035CAB9F47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{743E893A-256B-489B-9AD5-D6035CAB9F47}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
