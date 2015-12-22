@@ -185,6 +185,7 @@ PM> Install-Package Joyride.Starter
 Joyride:  ![#](https://img.shields.io/nuget/v/Joyride.svg?style=flat)</div><br/>
 Joyride.Specflow:  ![#](https://img.shields.io/nuget/v/Joyride.Specflow.svg?style=flat)</div><br/>
 Joyride.Starter:  ![#](https://img.shields.io/nuget/v/Joyride.Starter.svg?style=flat)</div><br/>
+Joyride.Tools:  ![#](https://img.shields.io/nuget/v/Joyride.Tools.svg?style=flat)</div><br/>
 
 ### Dependencies
 
