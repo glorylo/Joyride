@@ -24,17 +24,13 @@
     <description>$description$</description>
     <releaseNotes>
 
-0.1.0-alpha2
-- new driver update
+0.1.0
+- New driver update
+- ElementExists() is removed.  Use IsPresent()
+- GetElementAttribute() renamed to GetAttribute()
 
 0.0.19
 - maintenance update
-
-0.0.18
-- added drag and drop
-
-0.0.17
-- fixed to send keys bug
 
     </releaseNotes>
     <copyright>Copyright 2015</copyright>

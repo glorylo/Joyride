@@ -9,4 +9,6 @@ In order to complete the installation, install the NUnitRunners dependency in ei
 
 The Joyride.Tools encapsulates the Nunit Runner and Specflow to provide helpful tools to run specs and generating the report.  
 
+Create custom powershell scripts using these tools (such as one-click test suites) for executing your tests.
+
 Enjoy!

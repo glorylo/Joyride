@@ -16,14 +16,14 @@
       <dependency id="PredicateParser" version="0.2.3.0" />
       <dependency id="SpecFlow" version="1.9.0"  />
       <dependency id="SpecFlow.NUnit" version="1.1.1" />
-	    <dependency id="Joyride" version="0.1.0-alpha2" />
+	    <dependency id="Joyride" version="0.1.0" />
 	</dependencies>	
 	
     <description>$description$</description>
     <releaseNotes>
 
-0.1.0-alpha2
-- using the new driver
+0.1.0
+- uses the new driver
 
 0.0.17
 - added check for existing log directories
@@ -32,13 +32,6 @@
 - added logging config
 - update SpecflowHooks.cs and your App.config for compatibility:  https://github.com/glorylo/Joyride/blob/develop/RELEASE_NOTES.md
 
-0.0.15
-- added drag and drop step
-
-0.0.14
-- changed the way config settings is used to intiialize with appium server
-- update your SpecflowHooks.cs and your App.config for compatibility moving forward
-- see details here:  https://github.com/glorylo/Joyride/blob/develop/RELEASE_NOTES.md
 
     </releaseNotes>
     <copyright>Copyright 2015</copyright>
