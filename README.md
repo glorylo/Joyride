@@ -174,9 +174,13 @@ PM> Install-Package Joyride
 PM> Install-Package Joyride.Specflow
 ```
 
-You can also install the starter package for your project:
+For new projects, you can install the starter package utilizing the latest stable version:
 ```
 PM> Install-Package Joyride.Starter
+```
+You can also install helpful tools for executing your tests:
+```
+PM> Install-Package Joyride.Tools
 ```
 
 
