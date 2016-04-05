@@ -45,7 +45,7 @@
 
         public override bool IsOnScreen(int timeOutSecs)
         {
-            return ElementExists("Alert Title", timeOutSecs) &&
+            return IsPresent("Alert Title", timeOutSecs) &&
                    AlertTitle.Text.Equals("Confirm sending the message?");
         }
 
