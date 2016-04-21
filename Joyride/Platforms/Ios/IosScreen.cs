@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Text.RegularExpressions;
 using Joyride.Extensions;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.iOS;
 
 namespace Joyride.Platforms.Ios
@@ -38,7 +37,7 @@ namespace Joyride.Platforms.Ios
 
         protected Screen EnterTextBySetValue(string elementName, string text)
         {
-            var element = FindElement(elementName) as AppiumWebElement;
+            var element = FindElement(elementName) as IOSElement;
             if (element == null)
                 throw new NoSuchElementException("Unable to find element " + elementName);
 

@@ -48,7 +48,7 @@ namespace Joyride.Platforms
         {
             var anyScreenOrInterface = CastScreen<T>();
             var beforeTransition = CurrentScreen;
-            CurrentScreen = func(anyScreenOrInterface);
+            CurrentScreen = func(anyScreenOrInterface) ?? beforeTransition;
 
             if (CurrentScreen != beforeTransition)
             {
