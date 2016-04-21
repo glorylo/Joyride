@@ -110,7 +110,9 @@
     <Compile Include="Support\Util.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Joyride.nuspec" />
+    <None Include="Joyride.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

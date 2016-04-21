@@ -12,7 +12,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
 	
 	<dependencies>
-	  <dependency id="Joyride.Specflow" version="0.1.1" />
+	  <dependency id="Joyride.Specflow" version="0.1.2" />
 	</dependencies>	
 	
     <description>$description$</description>
