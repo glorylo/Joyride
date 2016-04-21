@@ -13,24 +13,23 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
 	
 	<dependencies>
-    <dependency id="Appium.WebDriver" version="1.4.1.1"/>
+    <dependency id="Appium.WebDriver" version="1.5.1.1"/>
     <dependency id="Castle.Core" version="3.3.3"/>
     <dependency id="Humanizer" version="1.36.0" />
-    <dependency id="Newtonsoft.Json" version="7.0.1" />
-    <dependency id="Selenium.Support" version="2.48.2" />
-    <dependency id="Selenium.WebDriver" version="2.48.2" />
+    <dependency id="Newtonsoft.Json" version="8.0.2" />
+    <dependency id="Selenium.Support" version="2.53.0" />
+    <dependency id="Selenium.WebDriver" version="2.53.0" />
 	</dependencies>
 	
     <description>$description$</description>
     <releaseNotes>
+0.1.2
+- bumped dependencies with driver 1.5
 
 0.1.1
 - updated with new driver 1.5
 
-0.1.0
-- New driver update
-- ElementExists() is removed.  Use IsPresent()
-- GetElementAttribute() renamed to GetAttribute()
+
 
 
     </releaseNotes>
