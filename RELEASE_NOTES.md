@@ -1,6 +1,9 @@
 
 # Release History
 
+### Version 0.1.1
+- updated new driver 1.5
+
 ### Version 0.1.0
 - updated new appium driver
 - ElementExists is removed.  Use IsPresent()
