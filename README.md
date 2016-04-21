@@ -174,9 +174,13 @@ PM> Install-Package Joyride
 PM> Install-Package Joyride.Specflow
 ```
 
-You can also install the starter package for your project:
+For new projects, you can install the starter package utilizing the latest stable version:
 ```
 PM> Install-Package Joyride.Starter
+```
+You can also install helpful tools for executing your tests:
+```
+PM> Install-Package Joyride.Tools
 ```
 
 
@@ -185,6 +189,7 @@ PM> Install-Package Joyride.Starter
 Joyride:  ![#](https://img.shields.io/nuget/v/Joyride.svg?style=flat)</div><br/>
 Joyride.Specflow:  ![#](https://img.shields.io/nuget/v/Joyride.Specflow.svg?style=flat)</div><br/>
 Joyride.Starter:  ![#](https://img.shields.io/nuget/v/Joyride.Starter.svg?style=flat)</div><br/>
+Joyride.Tools:  ![#](https://img.shields.io/nuget/v/Joyride.Tools.svg?style=flat)</div><br/>
 
 ### Dependencies
 

@@ -31,7 +31,7 @@ namespace Tests.Android.Native.SampleApp.ApiDemo.ModalDialogs
 
         public override bool IsOnScreen(int timeOutSecs)
         {
-            return ElementExists("Something", timeOutSecs) &&
+            return IsPresent("Something", timeOutSecs) &&
                    BodyMessage.Text.StartsWith("Plloaso mako nuto siwuf cakso dodtos anr koop");
         }
 

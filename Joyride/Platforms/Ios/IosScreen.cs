@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Text.RegularExpressions;
 using Joyride.Extensions;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.iOS;
 
 namespace Joyride.Platforms.Ios
@@ -11,7 +10,7 @@ namespace Joyride.Platforms.Ios
     abstract public class IosScreen : Screen
     {
         protected static ScreenFactory ScreenFactory = new IosScreenFactory();
-        protected static new IOSDriver Driver = (IOSDriver) RemoteMobileDriver.GetInstance();
+        protected static new IOSDriver<IWebElement> Driver = (IOSDriver<IWebElement>)RemoteMobileDriver.GetInstance();
 
         public override Screen TapAndHold(string elementName, int seconds)
         {
@@ -38,7 +37,7 @@ namespace Joyride.Platforms.Ios
 
         protected Screen EnterTextBySetValue(string elementName, string text)
         {
-            var element = FindElement(elementName) as AppiumWebElement;
+            var element = FindElement(elementName) as IOSElement;
             if (element == null)
                 throw new NoSuchElementException("Unable to find element " + elementName);
 
@@ -95,7 +94,7 @@ namespace Joyride.Platforms.Ios
 
         public virtual int CurrentPageOnIndictator(string elementName)
         {
-            var value = GetElementAttribute(elementName, "value");
+            var value = GetAttribute(elementName, "value");
             if (value == null)
                 throw new NoSuchElementException("Unable to get value for element:  " + elementName);
 

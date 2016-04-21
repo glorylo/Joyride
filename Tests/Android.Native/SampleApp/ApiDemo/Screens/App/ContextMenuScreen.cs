@@ -15,7 +15,7 @@ namespace Tests.Android.Native.SampleApp.ApiDemo.Screens.App
  
         public override bool IsOnScreen(int timeOutSecs)
         {
-            return ElementExists("Long Press", timeOutSecs);
+            return IsPresent("Long Press", timeOutSecs);
         }
 
         public override string Name

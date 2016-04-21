@@ -1,5 +1,17 @@
 
 # Release History
+
+### Version 0.1.1
+- updated new driver 1.5
+
+### Version 0.1.0
+- updated new appium driver
+- ElementExists is removed.  Use IsPresent()
+- GetElementAttribute() -> GetAttribute()
+
+### Version 0.0.17
+- added check for existing log directories
+
 ### Version 0.0.16
 - added logging configuration
 - update your *SpecflowHooks.cs* and your *App.config* for compatibility

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Internal;
 using OpenQA.Selenium.Remote;
 using Joyride.Support;
 
@@ -170,6 +171,18 @@ namespace Joyride.Extensions
             int x = upperLeft.X + size.Width/2;
             int y = upperLeft.Y + size.Height/2;
             return new Point(x, y);
+        }
+
+        public static IWebElement Unpack(this IWebElement element)
+        {
+            if (element == null)
+                return null;
+
+            var wrapsElement = element as IWrapsElement;
+            if (wrapsElement != null)
+                return wrapsElement.WrappedElement;
+
+            return element;
         }
 
     }

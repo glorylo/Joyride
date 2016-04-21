@@ -7,7 +7,7 @@ namespace Joyride.Extensions
 {
     public static class AndroidDriverExtension
     {
-        public static IWebElement FindElementByAndroidUIAutomator(this AndroidDriver driver, string selector, int timeoutSecs)
+        public static IWebElement FindElementByAndroidUIAutomator(this AndroidDriver<IWebElement> driver, string selector, int timeoutSecs)
         {
             driver.SetTimeout(timeoutSecs);
             var element = driver.FindElementWithMethod(new Func<string, IWebElement>(driver.FindElementByAndroidUIAutomator), selector);
@@ -15,7 +15,7 @@ namespace Joyride.Extensions
             return element;
         }
 
-        public static IList<IWebElement> FindElementsByAndroidUIAutomator(this AndroidDriver driver, string selector, int timeoutSecs)
+        public static IList<IWebElement> FindElementsByAndroidUIAutomator(this AndroidDriver<IWebElement> driver, string selector, int timeoutSecs)
         {
             driver.SetTimeout(timeoutSecs);
             var elements = driver.FindElementsWithMethod(new Func<string, IList<IWebElement>>(driver.FindElementsByAndroidUIAutomator), selector);

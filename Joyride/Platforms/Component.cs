@@ -8,6 +8,7 @@ using Joyride.Extensions;
 using Joyride.Support;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
+using OpenQA.Selenium.Appium.PageObjects;
 using OpenQA.Selenium.Support.PageObjects;
 
 namespace Joyride.Platforms
@@ -16,7 +17,7 @@ namespace Joyride.Platforms
     {
         public const int DefaultWaitSeconds = RemoteMobileDriver.DefaultWaitSeconds;
         abstract public string Name { get; }
-        protected static AppiumDriver Driver { get { return RemoteMobileDriver.GetInstance(); } }
+        protected static AppiumDriver<IWebElement> Driver { get { return RemoteMobileDriver.GetInstance(); } }
 
         internal protected View GetCurrentView()
         {
@@ -46,7 +47,7 @@ namespace Joyride.Platforms
 
         internal protected IWebElement RetrieveElement(string elementName)
         {
-            var element = (IWebElement) Util.GetMemberValue(this, elementName.Dehumanize(), true, BindingFlags.NonPublic);
+            var element = (IWebElement) Util.GetMemberValue(this, elementName.Dehumanize(), BindingFlags.NonPublic);
 
             if (element == null)
                 return null;
@@ -68,18 +69,14 @@ namespace Joyride.Platforms
 //                    : null;
 //            }
 
-            element = (element.IsPresent())
-                ? Util.GetMemberValue(element, "WrappedElement", false) as IWebElement
-                : null;
-
-            return element;
+            return (element.IsPresent() ? element.Unpack() : null);
         }
 
 
         internal protected IList<IWebElement> RetrieveElements(string collectionName)
         {
             var elements =
-                (IList<IWebElement>) Util.GetMemberValue(this, collectionName.Dehumanize(), true, BindingFlags.NonPublic);
+                (IList<IWebElement>) Util.GetMemberValue(this, collectionName.Dehumanize(), BindingFlags.NonPublic);
 
             if (elements == null)
                 return null;
@@ -149,29 +146,16 @@ namespace Joyride.Platforms
             return (SizeOf(collectionName, timeoutSecs) == 0);
         }
 
-        public virtual bool IsSelected(string elementName)
+        public bool IsSelected(string elementName)
         {
             var element = FindElement(elementName);
             if (element == null)
                 throw new NoSuchElementException("Unable to find element: " + elementName);
 
-            var selected = element.Selected;
-            Trace.WriteLine("Element (" + elementName + ") selected:  " + selected);            
-            return selected;
+            return element.Selected;
         }
 
-        public virtual bool IsEnabled(string elementName)
-        {
-            var element = FindElement(elementName);
-            if (element == null)
-                throw new NoSuchElementException("Unable to find element: " + elementName);
-
-            var enabled = element.Enabled;
-            Trace.WriteLine("Element (" + elementName + ") enabled:  " + enabled);
-            return enabled;
-        }
-
-        public virtual string GetElementAttribute(string elementName, string attributeName)
+        public string GetAttribute(string elementName, string attributeName)
         {
 
             var element = FindElement(elementName);
@@ -231,7 +215,7 @@ namespace Joyride.Platforms
             return (theElement != null);
         }
         
-        public virtual string GetElementAttribute(string collectionName, int index, string attributeName)
+        public virtual string GetAttribute(string collectionName, int index, string attributeName)
         {
             IWebElement element;
             try
@@ -246,25 +230,41 @@ namespace Joyride.Platforms
             return element.GetAttribute(attributeName).Trim();
         }
 
-        public virtual bool ElementIsVisible(string elementName, int timeoutSecs)
+        public virtual bool IsSelected(string elementName, int timeoutSecs)
         {
             var element = FindElement(elementName, timeoutSecs);
 
             if (element == null)
                 return false;
-            
-            var visible = element.Displayed;
-            Trace.WriteLine("Element (" + elementName + ") visibility:  " + visible);
-            return visible;
+            return element.Selected;
         }
 
-        public virtual bool ElementIsPresent(string elementName, int timeoutSecs)
+        public virtual bool IsEnabled(string elementName, int timeoutSecs)
+        {
+            var element = FindElement(elementName, timeoutSecs);
+
+            if (element == null)
+                return false;
+            return element.Enabled;
+        }
+
+        public virtual bool IsVisible(string elementName, int timeoutSecs)
+        {
+            var element = FindElement(elementName, timeoutSecs);
+
+            if (element == null)
+                return false;
+
+            return element.Displayed;
+        }
+
+        public virtual bool IsPresent(string elementName, int timeoutSecs)
         {
             var element = FindElement(elementName, timeoutSecs);
             return (element != null);
         }
 
-        internal protected string GetElementFindBySelector(string elementOrCollectionName)
+        internal protected string GetFindBySelector(string elementOrCollectionName)
         {
             var attribute = Util.GetMemberCustomAttribute<FindsByAttribute>(this, elementOrCollectionName.Dehumanize(), BindingFlags.NonPublic);
             if (attribute == null)
@@ -306,20 +306,15 @@ namespace Joyride.Platforms
             return tuple == null ? null : tuple.Item3;
         }
 
-        public virtual string GetElementText(string elementName)
+        public virtual string GetText(string elementName)
         {
             var element = FindElement(elementName);
             return element == null ? null : element.Text;
         }
 
-        internal protected bool ElementExists(string elementName, int timeoutSecs)
-        {            
-            return Driver.ElementExists(timeoutSecs, new Func<string, IWebElement>(FindElement), elementName);
-        }
-
         protected Component()
         {
-            PageFactory.InitElements(Driver, this);
+            PageFactory.InitElements(Driver, this, new AppiumPageObjectMemberDecorator());
         }
 
         //TODO: may remove
