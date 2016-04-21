@@ -24,13 +24,14 @@
     <description>$description$</description>
     <releaseNotes>
 
+0.1.1
+- updated with new driver 1.5
+
 0.1.0
 - New driver update
 - ElementExists() is removed.  Use IsPresent()
 - GetElementAttribute() renamed to GetAttribute()
 
-0.0.19
-- maintenance update
 
     </releaseNotes>
     <copyright>Copyright 2015</copyright>
