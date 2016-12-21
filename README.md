@@ -183,6 +183,9 @@ You can also install helpful tools for executing your tests:
 PM> Install-Package Joyride.Tools
 ```
 
+# Building with Visual Studio 2013 / Visual Studio 2015
+
+The solution will build without issue on Visual Studio 2013 if you enable automatic nuget package restore. If you are running Visual Studio 2015 you will need to migrate from msbuild-integrated package restore to automatic package restore. You can do this manually by following steps documented here [Nuget](https://docs.nuget.org/ndocs/consume-packages/package-restore#migrating-to-automatic-restore), or there is a powershell script you can run to do this for you [AutomaticPackageRestoreMigrationScript](https://github.com/owen2/AutomaticPackageRestoreMigrationScript).
 
 ### Current Versions
 
