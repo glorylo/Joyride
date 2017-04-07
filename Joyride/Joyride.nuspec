@@ -23,12 +23,11 @@
 	
     <description>$description$</description>
     <releaseNotes>
+0.1.3 
+- maintainence update
+      
 0.1.2
 - bumped dependencies with driver 1.5
-
-0.1.1
-- updated with new driver 1.5
-
 
 
 
