@@ -10,6 +10,9 @@ Given I launch the "Api Demo App" mobile application
 Scenario: Launching the app should be on main screen
 Then I should be on the "Main" screen
 
+Scenario: Reset the app
+When I reset the "Api Demo App" mobile application
+
 Scenario: Closing the app
 When I close the mobile application
 

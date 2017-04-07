@@ -44,6 +44,11 @@ namespace Joyride.Platforms
             Driver.CloseApp();
         }
 
+        public void Reset()
+        {
+            Driver.ResetApp();
+        }
+
         public virtual void Do<T>(Func<T, Screen> func) where T : class
         {
             var anyScreenOrInterface = CastScreen<T>();
