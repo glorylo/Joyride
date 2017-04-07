@@ -11,13 +11,6 @@ namespace Joyride.Specflow
         private const string MobileAppKey = "_MobileApp_";
         private const string DriverKey = "_Driver_";
         private const string CurrentUserKey = "_CurrentUser_";
-
-        static Context()
-        {
-            ScenarioContext.Current[MobileAppKey] = null;
-            ScenarioContext.Current[DriverKey] = null;
-            ScenarioContext.Current[CurrentUserKey] = null;
-        }
           
         public static void SetValue(string key, object value)
         {
@@ -26,21 +19,29 @@ namespace Joyride.Specflow
 
         public static object GetValue(string key)
         {
-            return ScenarioContext.Current[key];
+            if (HasKey(key))
+              return ScenarioContext.Current[key];
+            return null;
+        }
+
+        public static bool HasKey(string key)
+        {
+            return ScenarioContext.Current.ContainsKey(key);
         }
 
         public static IMobileApplication MobileApp
         {
-            get {
-                return (IMobileApplication)ScenarioContext.Current[MobileAppKey];
+            get
+            {
+                return (IMobileApplication) GetValue(MobileAppKey);
             }
-            set { ScenarioContext.Current[MobileAppKey] = value; }
+            set { SetValue(MobileAppKey, value); }
         }
 
         public static AppiumDriver<IWebElement> Driver
         {
-            get { return (AppiumDriver<IWebElement>) ScenarioContext.Current[DriverKey]; }
-            set { ScenarioContext.Current[DriverKey] = value; }
+            get { return (AppiumDriver<IWebElement>) GetValue(DriverKey); }
+            set { SetValue(DriverKey, value); }
         }
 
         public static bool HasError
@@ -50,8 +51,8 @@ namespace Joyride.Specflow
         
         public static object CurrentUser
         {
-            get { return ScenarioContext.Current[CurrentUserKey]; }
-            set { ScenarioContext.Current[CurrentUserKey] = value; }
+            get { return GetValue(CurrentUserKey); }
+            set { SetValue(CurrentUserKey, value); }
         }
 
     }
