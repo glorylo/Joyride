@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
@@ -40,9 +41,23 @@ namespace Joyride.Specflow.Support
 
         public static void Capture()
         {
-            var filename = CreateFilename(".png");
-            Context.Driver.CaptureScreenshot(filename, ImageFormat.Png);
-            Trace.WriteLine("Screenshot saved for " + filename);
+            try
+            {
+                if (Context.Driver != null)
+                {
+                    var filename = CreateFilename(".png");
+                    Context.Driver.CaptureScreenshot(filename, ImageFormat.Png);
+                    Trace.WriteLine("Screenshot saved for " + filename);
+                }
+                else
+                    Trace.WriteLine("WARNING:  Skipping screen capture due to driver not initialized");
+
+            }
+            catch(Exception e)
+            {
+                Trace.WriteLine("Unencountered exception taking screen capture");
+                Trace.WriteLine(e);
+            }
         }
 
     }

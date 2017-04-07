@@ -118,6 +118,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModalDialog.feature</DependentUpon>
     </Compile>
+    <Compile Include="Specs\Scratchpad.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Scratchpad.feature</DependentUpon>
+    </Compile>
     <Compile Include="Specs\Screen.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -146,6 +151,10 @@
     <None Include="Specs\Gestures.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Gestures.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Specs\Scratchpad.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Scratchpad.feature.cs</LastGenOutput>
     </None>
     <None Include="Specs\UiControls.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
