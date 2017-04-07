@@ -44,12 +44,26 @@ namespace Joyride
         {
             return _driver;
         }
+
+        public static void Connect(Uri hostUri, Platform platform, DesiredCapabilities capabilities)
+        {
+            Initialize(hostUri, platform, capabilities);
+        }
         
         public static void CleanUp()
         {
-            _driver.Quit();
-            _driver.Dispose();
-            _driver = null;
+            if (_driver != null)
+            {
+                _driver.Quit();
+                _driver.Dispose();
+                _driver = null;                
+            }
+
+        }
+
+        public static void Disconnect()
+        {
+            CleanUp();
         }
 
     }
